@@ -19,6 +19,7 @@ public class SpielerController {
     @GetMapping
     public int getAmount_of_spieler()
     {
+        //spielerService.count_Spieler();
         return 0;
     }
 }
