@@ -2,6 +2,7 @@ package com.fifafinder.fifadb.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import jakarta.persistence.Entity;
 import org.hibernate.Hibernate;
 
 import java.io.Serializable;
@@ -9,27 +10,27 @@ import java.util.Objects;
 
 @Embeddable
 public class IsLocatedAtId implements Serializable {
-    private static final long serialVersionUID = 5315026721526866867L;
-    @Column(name = "countryid", nullable = false)
-    private Integer countryid;
+    private static final long serialVersionUID = 2182429646813622196L;
+    @Column(name = "LeagueID", nullable = false)
+    private Integer leagueID;
 
-    @Column(name = "leagueid", nullable = false)
-    private Integer leagueid;
+    @Column(name = "CountryID", nullable = false)
+    private Integer countryID;
 
-    public Integer getCountryid() {
-        return countryid;
+    public Integer getLeagueID() {
+        return leagueID;
     }
 
-    public void setCountryid(Integer countryid) {
-        this.countryid = countryid;
+    public void setLeagueID(Integer leagueID) {
+        this.leagueID = leagueID;
     }
 
-    public Integer getLeagueid() {
-        return leagueid;
+    public Integer getCountryID() {
+        return countryID;
     }
 
-    public void setLeagueid(Integer leagueid) {
-        this.leagueid = leagueid;
+    public void setCountryID(Integer countryID) {
+        this.countryID = countryID;
     }
 
     @Override
@@ -37,13 +38,13 @@ public class IsLocatedAtId implements Serializable {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         IsLocatedAtId entity = (IsLocatedAtId) o;
-        return Objects.equals(this.leagueid, entity.leagueid) &&
-                Objects.equals(this.countryid, entity.countryid);
+        return Objects.equals(this.leagueID, entity.leagueID) &&
+                Objects.equals(this.countryID, entity.countryID);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(leagueid, countryid);
+        return Objects.hash(leagueID, countryID);
     }
 
 }

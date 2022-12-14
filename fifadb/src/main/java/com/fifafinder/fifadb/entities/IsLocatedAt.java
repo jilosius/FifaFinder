@@ -8,15 +8,15 @@ public class IsLocatedAt {
     @EmbeddedId
     private IsLocatedAtId id;
 
-    @MapsId("countryid")
+    @MapsId("leagueID")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "countryid", nullable = false)
-    private Land countryid;
+    @JoinColumn(name = "LeagueID", nullable = false)
+    private Liga leagueID;
 
-    @MapsId("leagueid")
+    @MapsId("countryID")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "leagueid", nullable = false)
-    private Liga leagueid;
+    @JoinColumn(name = "CountryID", nullable = false)
+    private Land countryID;
 
     public IsLocatedAtId getId() {
         return id;
@@ -26,20 +26,20 @@ public class IsLocatedAt {
         this.id = id;
     }
 
-    public Land getCountryid() {
-        return countryid;
+    public Liga getLeagueID() {
+        return leagueID;
     }
 
-    public void setCountryid(Land countryid) {
-        this.countryid = countryid;
+    public void setLeagueID(Liga leagueID) {
+        this.leagueID = leagueID;
     }
 
-    public Liga getLeagueid() {
-        return leagueid;
+    public Land getCountryID() {
+        return countryID;
     }
 
-    public void setLeagueid(Liga leagueid) {
-        this.leagueid = leagueid;
+    public void setCountryID(Land countryID) {
+        this.countryID = countryID;
     }
 
 }

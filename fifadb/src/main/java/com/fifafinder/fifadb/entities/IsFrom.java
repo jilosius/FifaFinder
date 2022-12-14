@@ -8,15 +8,15 @@ public class IsFrom {
     @EmbeddedId
     private IsFromId id;
 
-    @MapsId("countryid")
+    @MapsId("playerID")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "countryid", nullable = false)
-    private Land countryid;
+    @JoinColumn(name = "PlayerID", nullable = false)
+    private Spieler playerID;
 
-    @MapsId("playerid")
+    @MapsId("countryID")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "playerid", nullable = false)
-    private Spieler playerid;
+    @JoinColumn(name = "CountryID", nullable = false)
+    private Land countryID;
 
     public IsFromId getId() {
         return id;
@@ -26,20 +26,20 @@ public class IsFrom {
         this.id = id;
     }
 
-    public Land getCountryid() {
-        return countryid;
+    public Spieler getPlayerID() {
+        return playerID;
     }
 
-    public void setCountryid(Land countryid) {
-        this.countryid = countryid;
+    public void setPlayerID(Spieler playerID) {
+        this.playerID = playerID;
     }
 
-    public Spieler getPlayerid() {
-        return playerid;
+    public Land getCountryID() {
+        return countryID;
     }
 
-    public void setPlayerid(Spieler playerid) {
-        this.playerid = playerid;
+    public void setCountryID(Land countryID) {
+        this.countryID = countryID;
     }
 
 }

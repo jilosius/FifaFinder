@@ -8,179 +8,184 @@ public class PlaysFor {
     @EmbeddedId
     private PlaysForId id;
 
-    @MapsId("playerid")
+    @MapsId("playerID")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "playerid", nullable = false)
-    private Spieler playerid;
+    @JoinColumn(name = "PlayerID", nullable = false)
+    private Spieler playerID;
 
-    @Column(name = "acceleration")
-    private Integer acceleration;
+    @MapsId("fifaVersion")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "FifaVersion", nullable = false)
+    private FifaVersion fifaVersion;
 
-    @Column(name = "age")
-    private Integer age;
-
-    @Column(name = "aggression")
-    private Integer aggression;
-
-    @Column(name = "agility")
-    private Integer agility;
-
-    @Column(name = "balance")
-    private Integer balance;
-
-    @Column(name = "ball_control")
-    private Integer ballControl;
-
-    @Column(name = "best_position")
-    private String bestPosition;
-
-    @Column(name = "club_number")
-    private Integer clubNumber;
-
-    @Column(name = "club_position")
-    private String clubPosition;
-
-    @Column(name = "composure")
-    private Integer composure;
-
-    @Column(name = "contract_until")
-    private Integer contractUntil;
-
-    @Column(name = "cossing")
-    private Integer cossing;
-
-    @Column(name = "curve")
-    private Integer curve;
-
-    @Column(name = "dribbling")
-    private Integer dribbling;
-
-    @Column(name = "fkaccuracy")
-    private Integer fkaccuracy;
-
-    @Column(name = "finishing")
-    private Integer finishing;
-
-    @Column(name = "gkdiving")
-    private Integer gkdiving;
-
-    @Column(name = "gkhandling")
-    private Integer gkhandling;
-
-    @Column(name = "gkkicking")
-    private Integer gkkicking;
-
-    @Column(name = "gkpositioning")
-    private Integer gkpositioning;
-
-    @Column(name = "gkreflexes")
-    private Integer gkreflexes;
-
-    @Column(name = "heading_accuracy")
-    private Integer headingAccuracy;
-
-    @Column(name = "height")
+    @Column(name = "Height")
     private Integer height;
 
-    @Column(name = "int_reputation")
-    private Integer intReputation;
+    @Column(name = "ClubPosition")
+    private String clubPosition;
 
-    @Column(name = "interceptions")
-    private Integer interceptions;
+    @Column(name = "ClubNumber")
+    private Integer clubNumber;
 
-    @Column(name = "jumping")
-    private Integer jumping;
-
-    @Column(name = "long_passing")
-    private Integer longPassing;
-
-    @Column(name = "long_shots")
-    private Integer longShots;
-
-    @Column(name = "marking")
-    private Integer marking;
-
-    @Column(name = "national_number")
-    private Integer nationalNumber;
-
-    @Column(name = "national_position")
+    @Column(name = "NationalPosition")
     private String nationalPosition;
 
-    @Column(name = "national_team")
-    private String nationalTeam;
+    @Column(name = "NationalNumber")
+    private Integer nationalNumber;
 
-    @Column(name = "on_loan", length = 15)
-    private String onLoan;
-
-    @Column(name = "overall")
-    private Integer overall;
-
-    @Column(name = "penalties")
-    private Integer penalties;
-
-    @Column(name = "photo_url")
-    private String photoUrl;
-
-    @Column(name = "positioning")
-    private Integer positioning;
-
-    @Column(name = "potential")
-    private Integer potential;
-
-    @Column(name = "preferred_foot")
+    @Column(name = "PreferredFoot")
     private String preferredFoot;
 
-    @Column(name = "reaction")
-    private Integer reaction;
+    @Column(name = "ContractUntil")
+    private Integer contractUntil;
 
-    @Column(name = "release_clause")
-    private Long releaseClause;
+    @Column(name = "OnLoan", length = 15)
+    private String onLoan;
 
-    @Column(name = "short_passing")
-    private Integer shortPassing;
+    @Column(name = "NationalTeam")
+    private String nationalTeam;
 
-    @Column(name = "shot_power")
-    private Integer shotPower;
+    @Column(name = "Age")
+    private Integer age;
 
-    @Column(name = "skill_moves")
-    private Integer skillMoves;
-
-    @Column(name = "sliding_tackle")
-    private Integer slidingTackle;
-
-    @Column(name = "sprint_speed")
-    private Integer sprintSpeed;
-
-    @Column(name = "stamina")
-    private Integer stamina;
-
-    @Column(name = "standing_tackle")
-    private Integer standingTackle;
-
-    @Column(name = "strength")
-    private Integer strength;
-
-    @Column(name = "valueeur")
-    private Long valueeur;
-
-    @Column(name = "vision")
-    private Integer vision;
-
-    @Column(name = "volleys")
-    private Integer volleys;
-
-    @Column(name = "wage")
-    private Long wage;
-
-    @Column(name = "weak_foot")
-    private Integer weakFoot;
-
-    @Column(name = "weight")
+    @Column(name = "Weight")
     private Integer weight;
 
+    @Column(name = "Overall")
+    private Integer overall;
+
+    @Column(name = "Potential")
+    private Integer potential;
+
+    @Column(name = "BestPosition")
+    private String bestPosition;
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "clubid")
-    private Mannschaften clubid;
+    @JoinColumn(name = "ClubID")
+    private Mannschaften clubID;
+
+    @Column(name = "ValueEUR")
+    private Long valueEUR;
+
+    @Column(name = "Wage")
+    private Long wage;
+
+    @Column(name = "ReleaseClause")
+    private Long releaseClause;
+
+    @Column(name = "IntReputation")
+    private Integer intReputation;
+
+    @Column(name = "WeakFoot")
+    private Integer weakFoot;
+
+    @Column(name = "SkillMoves")
+    private Integer skillMoves;
+
+    @Column(name = "Cossing")
+    private Integer cossing;
+
+    @Column(name = "Finishing")
+    private Integer finishing;
+
+    @Column(name = "HeadingAccuracy")
+    private Integer headingAccuracy;
+
+    @Column(name = "ShortPassing")
+    private Integer shortPassing;
+
+    @Column(name = "Volleys")
+    private Integer volleys;
+
+    @Column(name = "Dribbling")
+    private Integer dribbling;
+
+    @Column(name = "Curve")
+    private Integer curve;
+
+    @Column(name = "FKAccuracy")
+    private Integer fKAccuracy;
+
+    @Column(name = "LongPassing")
+    private Integer longPassing;
+
+    @Column(name = "BallControl")
+    private Integer ballControl;
+
+    @Column(name = "Acceleration")
+    private Integer acceleration;
+
+    @Column(name = "SprintSpeed")
+    private Integer sprintSpeed;
+
+    @Column(name = "Agility")
+    private Integer agility;
+
+    @Column(name = "Reaction")
+    private Integer reaction;
+
+    @Column(name = "Balance")
+    private Integer balance;
+
+    @Column(name = "ShotPower")
+    private Integer shotPower;
+
+    @Column(name = "Jumping")
+    private Integer jumping;
+
+    @Column(name = "Stamina")
+    private Integer stamina;
+
+    @Column(name = "Strength")
+    private Integer strength;
+
+    @Column(name = "LongShots")
+    private Integer longShots;
+
+    @Column(name = "Aggression")
+    private Integer aggression;
+
+    @Column(name = "Interceptions")
+    private Integer interceptions;
+
+    @Column(name = "Positioning")
+    private Integer positioning;
+
+    @Column(name = "Vision")
+    private Integer vision;
+
+    @Column(name = "Penalties")
+    private Integer penalties;
+
+    @Column(name = "Composure")
+    private Integer composure;
+
+    @Column(name = "Marking")
+    private Integer marking;
+
+    @Column(name = "StandingTackle")
+    private Integer standingTackle;
+
+    @Column(name = "SlidingTackle")
+    private Integer slidingTackle;
+
+    @Column(name = "GKDiving")
+    private Integer gKDiving;
+
+    @Column(name = "GKHandling")
+    private Integer gKHandling;
+
+    @Column(name = "GKKicking")
+    private Integer gKKicking;
+
+    @Column(name = "GKPositioning")
+    private Integer gKPositioning;
+
+    @Column(name = "GKReflexes")
+    private Integer gKReflexes;
+
+    @Column(name = "PhotoUrl")
+    private String photoUrl;
 
     public PlaysForId getId() {
         return id;
@@ -190,188 +195,20 @@ public class PlaysFor {
         this.id = id;
     }
 
-    public Spieler getPlayerid() {
-        return playerid;
+    public Spieler getPlayerID() {
+        return playerID;
     }
 
-    public void setPlayerid(Spieler playerid) {
-        this.playerid = playerid;
+    public void setPlayerID(Spieler playerID) {
+        this.playerID = playerID;
     }
 
-    public Integer getAcceleration() {
-        return acceleration;
+    public FifaVersion getFifaVersion() {
+        return fifaVersion;
     }
 
-    public void setAcceleration(Integer acceleration) {
-        this.acceleration = acceleration;
-    }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    public Integer getAggression() {
-        return aggression;
-    }
-
-    public void setAggression(Integer aggression) {
-        this.aggression = aggression;
-    }
-
-    public Integer getAgility() {
-        return agility;
-    }
-
-    public void setAgility(Integer agility) {
-        this.agility = agility;
-    }
-
-    public Integer getBalance() {
-        return balance;
-    }
-
-    public void setBalance(Integer balance) {
-        this.balance = balance;
-    }
-
-    public Integer getBallControl() {
-        return ballControl;
-    }
-
-    public void setBallControl(Integer ballControl) {
-        this.ballControl = ballControl;
-    }
-
-    public String getBestPosition() {
-        return bestPosition;
-    }
-
-    public void setBestPosition(String bestPosition) {
-        this.bestPosition = bestPosition;
-    }
-
-    public Integer getClubNumber() {
-        return clubNumber;
-    }
-
-    public void setClubNumber(Integer clubNumber) {
-        this.clubNumber = clubNumber;
-    }
-
-    public String getClubPosition() {
-        return clubPosition;
-    }
-
-    public void setClubPosition(String clubPosition) {
-        this.clubPosition = clubPosition;
-    }
-
-    public Integer getComposure() {
-        return composure;
-    }
-
-    public void setComposure(Integer composure) {
-        this.composure = composure;
-    }
-
-    public Integer getContractUntil() {
-        return contractUntil;
-    }
-
-    public void setContractUntil(Integer contractUntil) {
-        this.contractUntil = contractUntil;
-    }
-
-    public Integer getCossing() {
-        return cossing;
-    }
-
-    public void setCossing(Integer cossing) {
-        this.cossing = cossing;
-    }
-
-    public Integer getCurve() {
-        return curve;
-    }
-
-    public void setCurve(Integer curve) {
-        this.curve = curve;
-    }
-
-    public Integer getDribbling() {
-        return dribbling;
-    }
-
-    public void setDribbling(Integer dribbling) {
-        this.dribbling = dribbling;
-    }
-
-    public Integer getFkaccuracy() {
-        return fkaccuracy;
-    }
-
-    public void setFkaccuracy(Integer fkaccuracy) {
-        this.fkaccuracy = fkaccuracy;
-    }
-
-    public Integer getFinishing() {
-        return finishing;
-    }
-
-    public void setFinishing(Integer finishing) {
-        this.finishing = finishing;
-    }
-
-    public Integer getGkdiving() {
-        return gkdiving;
-    }
-
-    public void setGkdiving(Integer gkdiving) {
-        this.gkdiving = gkdiving;
-    }
-
-    public Integer getGkhandling() {
-        return gkhandling;
-    }
-
-    public void setGkhandling(Integer gkhandling) {
-        this.gkhandling = gkhandling;
-    }
-
-    public Integer getGkkicking() {
-        return gkkicking;
-    }
-
-    public void setGkkicking(Integer gkkicking) {
-        this.gkkicking = gkkicking;
-    }
-
-    public Integer getGkpositioning() {
-        return gkpositioning;
-    }
-
-    public void setGkpositioning(Integer gkpositioning) {
-        this.gkpositioning = gkpositioning;
-    }
-
-    public Integer getGkreflexes() {
-        return gkreflexes;
-    }
-
-    public void setGkreflexes(Integer gkreflexes) {
-        this.gkreflexes = gkreflexes;
-    }
-
-    public Integer getHeadingAccuracy() {
-        return headingAccuracy;
-    }
-
-    public void setHeadingAccuracy(Integer headingAccuracy) {
-        this.headingAccuracy = headingAccuracy;
+    public void setFifaVersion(FifaVersion fifaVersion) {
+        this.fifaVersion = fifaVersion;
     }
 
     public Integer getHeight() {
@@ -382,60 +219,20 @@ public class PlaysFor {
         this.height = height;
     }
 
-    public Integer getIntReputation() {
-        return intReputation;
+    public String getClubPosition() {
+        return clubPosition;
     }
 
-    public void setIntReputation(Integer intReputation) {
-        this.intReputation = intReputation;
+    public void setClubPosition(String clubPosition) {
+        this.clubPosition = clubPosition;
     }
 
-    public Integer getInterceptions() {
-        return interceptions;
+    public Integer getClubNumber() {
+        return clubNumber;
     }
 
-    public void setInterceptions(Integer interceptions) {
-        this.interceptions = interceptions;
-    }
-
-    public Integer getJumping() {
-        return jumping;
-    }
-
-    public void setJumping(Integer jumping) {
-        this.jumping = jumping;
-    }
-
-    public Integer getLongPassing() {
-        return longPassing;
-    }
-
-    public void setLongPassing(Integer longPassing) {
-        this.longPassing = longPassing;
-    }
-
-    public Integer getLongShots() {
-        return longShots;
-    }
-
-    public void setLongShots(Integer longShots) {
-        this.longShots = longShots;
-    }
-
-    public Integer getMarking() {
-        return marking;
-    }
-
-    public void setMarking(Integer marking) {
-        this.marking = marking;
-    }
-
-    public Integer getNationalNumber() {
-        return nationalNumber;
-    }
-
-    public void setNationalNumber(Integer nationalNumber) {
-        this.nationalNumber = nationalNumber;
+    public void setClubNumber(Integer clubNumber) {
+        this.clubNumber = clubNumber;
     }
 
     public String getNationalPosition() {
@@ -446,60 +243,12 @@ public class PlaysFor {
         this.nationalPosition = nationalPosition;
     }
 
-    public String getNationalTeam() {
-        return nationalTeam;
+    public Integer getNationalNumber() {
+        return nationalNumber;
     }
 
-    public void setNationalTeam(String nationalTeam) {
-        this.nationalTeam = nationalTeam;
-    }
-
-    public String getOnLoan() {
-        return onLoan;
-    }
-
-    public void setOnLoan(String onLoan) {
-        this.onLoan = onLoan;
-    }
-
-    public Integer getOverall() {
-        return overall;
-    }
-
-    public void setOverall(Integer overall) {
-        this.overall = overall;
-    }
-
-    public Integer getPenalties() {
-        return penalties;
-    }
-
-    public void setPenalties(Integer penalties) {
-        this.penalties = penalties;
-    }
-
-    public String getPhotoUrl() {
-        return photoUrl;
-    }
-
-    public void setPhotoUrl(String photoUrl) {
-        this.photoUrl = photoUrl;
-    }
-
-    public Integer getPositioning() {
-        return positioning;
-    }
-
-    public void setPositioning(Integer positioning) {
-        this.positioning = positioning;
-    }
-
-    public Integer getPotential() {
-        return potential;
-    }
-
-    public void setPotential(Integer potential) {
-        this.potential = potential;
+    public void setNationalNumber(Integer nationalNumber) {
+        this.nationalNumber = nationalNumber;
     }
 
     public String getPreferredFoot() {
@@ -510,124 +259,36 @@ public class PlaysFor {
         this.preferredFoot = preferredFoot;
     }
 
-    public Integer getReaction() {
-        return reaction;
+    public Integer getContractUntil() {
+        return contractUntil;
     }
 
-    public void setReaction(Integer reaction) {
-        this.reaction = reaction;
+    public void setContractUntil(Integer contractUntil) {
+        this.contractUntil = contractUntil;
     }
 
-    public Long getReleaseClause() {
-        return releaseClause;
+    public String getOnLoan() {
+        return onLoan;
     }
 
-    public void setReleaseClause(Long releaseClause) {
-        this.releaseClause = releaseClause;
+    public void setOnLoan(String onLoan) {
+        this.onLoan = onLoan;
     }
 
-    public Integer getShortPassing() {
-        return shortPassing;
+    public String getNationalTeam() {
+        return nationalTeam;
     }
 
-    public void setShortPassing(Integer shortPassing) {
-        this.shortPassing = shortPassing;
+    public void setNationalTeam(String nationalTeam) {
+        this.nationalTeam = nationalTeam;
     }
 
-    public Integer getShotPower() {
-        return shotPower;
+    public Integer getAge() {
+        return age;
     }
 
-    public void setShotPower(Integer shotPower) {
-        this.shotPower = shotPower;
-    }
-
-    public Integer getSkillMoves() {
-        return skillMoves;
-    }
-
-    public void setSkillMoves(Integer skillMoves) {
-        this.skillMoves = skillMoves;
-    }
-
-    public Integer getSlidingTackle() {
-        return slidingTackle;
-    }
-
-    public void setSlidingTackle(Integer slidingTackle) {
-        this.slidingTackle = slidingTackle;
-    }
-
-    public Integer getSprintSpeed() {
-        return sprintSpeed;
-    }
-
-    public void setSprintSpeed(Integer sprintSpeed) {
-        this.sprintSpeed = sprintSpeed;
-    }
-
-    public Integer getStamina() {
-        return stamina;
-    }
-
-    public void setStamina(Integer stamina) {
-        this.stamina = stamina;
-    }
-
-    public Integer getStandingTackle() {
-        return standingTackle;
-    }
-
-    public void setStandingTackle(Integer standingTackle) {
-        this.standingTackle = standingTackle;
-    }
-
-    public Integer getStrength() {
-        return strength;
-    }
-
-    public void setStrength(Integer strength) {
-        this.strength = strength;
-    }
-
-    public Long getValueeur() {
-        return valueeur;
-    }
-
-    public void setValueeur(Long valueeur) {
-        this.valueeur = valueeur;
-    }
-
-    public Integer getVision() {
-        return vision;
-    }
-
-    public void setVision(Integer vision) {
-        this.vision = vision;
-    }
-
-    public Integer getVolleys() {
-        return volleys;
-    }
-
-    public void setVolleys(Integer volleys) {
-        this.volleys = volleys;
-    }
-
-    public Long getWage() {
-        return wage;
-    }
-
-    public void setWage(Long wage) {
-        this.wage = wage;
-    }
-
-    public Integer getWeakFoot() {
-        return weakFoot;
-    }
-
-    public void setWeakFoot(Integer weakFoot) {
-        this.weakFoot = weakFoot;
+    public void setAge(Integer age) {
+        this.age = age;
     }
 
     public Integer getWeight() {
@@ -638,12 +299,364 @@ public class PlaysFor {
         this.weight = weight;
     }
 
-    public Mannschaften getClubid() {
-        return clubid;
+    public Integer getOverall() {
+        return overall;
     }
 
-    public void setClubid(Mannschaften clubid) {
-        this.clubid = clubid;
+    public void setOverall(Integer overall) {
+        this.overall = overall;
+    }
+
+    public Integer getPotential() {
+        return potential;
+    }
+
+    public void setPotential(Integer potential) {
+        this.potential = potential;
+    }
+
+    public String getBestPosition() {
+        return bestPosition;
+    }
+
+    public void setBestPosition(String bestPosition) {
+        this.bestPosition = bestPosition;
+    }
+
+    public Mannschaften getClubID() {
+        return clubID;
+    }
+
+    public void setClubID(Mannschaften clubID) {
+        this.clubID = clubID;
+    }
+
+    public Long getValueEUR() {
+        return valueEUR;
+    }
+
+    public void setValueEUR(Long valueEUR) {
+        this.valueEUR = valueEUR;
+    }
+
+    public Long getWage() {
+        return wage;
+    }
+
+    public void setWage(Long wage) {
+        this.wage = wage;
+    }
+
+    public Long getReleaseClause() {
+        return releaseClause;
+    }
+
+    public void setReleaseClause(Long releaseClause) {
+        this.releaseClause = releaseClause;
+    }
+
+    public Integer getIntReputation() {
+        return intReputation;
+    }
+
+    public void setIntReputation(Integer intReputation) {
+        this.intReputation = intReputation;
+    }
+
+    public Integer getWeakFoot() {
+        return weakFoot;
+    }
+
+    public void setWeakFoot(Integer weakFoot) {
+        this.weakFoot = weakFoot;
+    }
+
+    public Integer getSkillMoves() {
+        return skillMoves;
+    }
+
+    public void setSkillMoves(Integer skillMoves) {
+        this.skillMoves = skillMoves;
+    }
+
+    public Integer getCossing() {
+        return cossing;
+    }
+
+    public void setCossing(Integer cossing) {
+        this.cossing = cossing;
+    }
+
+    public Integer getFinishing() {
+        return finishing;
+    }
+
+    public void setFinishing(Integer finishing) {
+        this.finishing = finishing;
+    }
+
+    public Integer getHeadingAccuracy() {
+        return headingAccuracy;
+    }
+
+    public void setHeadingAccuracy(Integer headingAccuracy) {
+        this.headingAccuracy = headingAccuracy;
+    }
+
+    public Integer getShortPassing() {
+        return shortPassing;
+    }
+
+    public void setShortPassing(Integer shortPassing) {
+        this.shortPassing = shortPassing;
+    }
+
+    public Integer getVolleys() {
+        return volleys;
+    }
+
+    public void setVolleys(Integer volleys) {
+        this.volleys = volleys;
+    }
+
+    public Integer getDribbling() {
+        return dribbling;
+    }
+
+    public void setDribbling(Integer dribbling) {
+        this.dribbling = dribbling;
+    }
+
+    public Integer getCurve() {
+        return curve;
+    }
+
+    public void setCurve(Integer curve) {
+        this.curve = curve;
+    }
+
+    public Integer getFKAccuracy() {
+        return fKAccuracy;
+    }
+
+    public void setFKAccuracy(Integer fKAccuracy) {
+        this.fKAccuracy = fKAccuracy;
+    }
+
+    public Integer getLongPassing() {
+        return longPassing;
+    }
+
+    public void setLongPassing(Integer longPassing) {
+        this.longPassing = longPassing;
+    }
+
+    public Integer getBallControl() {
+        return ballControl;
+    }
+
+    public void setBallControl(Integer ballControl) {
+        this.ballControl = ballControl;
+    }
+
+    public Integer getAcceleration() {
+        return acceleration;
+    }
+
+    public void setAcceleration(Integer acceleration) {
+        this.acceleration = acceleration;
+    }
+
+    public Integer getSprintSpeed() {
+        return sprintSpeed;
+    }
+
+    public void setSprintSpeed(Integer sprintSpeed) {
+        this.sprintSpeed = sprintSpeed;
+    }
+
+    public Integer getAgility() {
+        return agility;
+    }
+
+    public void setAgility(Integer agility) {
+        this.agility = agility;
+    }
+
+    public Integer getReaction() {
+        return reaction;
+    }
+
+    public void setReaction(Integer reaction) {
+        this.reaction = reaction;
+    }
+
+    public Integer getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Integer balance) {
+        this.balance = balance;
+    }
+
+    public Integer getShotPower() {
+        return shotPower;
+    }
+
+    public void setShotPower(Integer shotPower) {
+        this.shotPower = shotPower;
+    }
+
+    public Integer getJumping() {
+        return jumping;
+    }
+
+    public void setJumping(Integer jumping) {
+        this.jumping = jumping;
+    }
+
+    public Integer getStamina() {
+        return stamina;
+    }
+
+    public void setStamina(Integer stamina) {
+        this.stamina = stamina;
+    }
+
+    public Integer getStrength() {
+        return strength;
+    }
+
+    public void setStrength(Integer strength) {
+        this.strength = strength;
+    }
+
+    public Integer getLongShots() {
+        return longShots;
+    }
+
+    public void setLongShots(Integer longShots) {
+        this.longShots = longShots;
+    }
+
+    public Integer getAggression() {
+        return aggression;
+    }
+
+    public void setAggression(Integer aggression) {
+        this.aggression = aggression;
+    }
+
+    public Integer getInterceptions() {
+        return interceptions;
+    }
+
+    public void setInterceptions(Integer interceptions) {
+        this.interceptions = interceptions;
+    }
+
+    public Integer getPositioning() {
+        return positioning;
+    }
+
+    public void setPositioning(Integer positioning) {
+        this.positioning = positioning;
+    }
+
+    public Integer getVision() {
+        return vision;
+    }
+
+    public void setVision(Integer vision) {
+        this.vision = vision;
+    }
+
+    public Integer getPenalties() {
+        return penalties;
+    }
+
+    public void setPenalties(Integer penalties) {
+        this.penalties = penalties;
+    }
+
+    public Integer getComposure() {
+        return composure;
+    }
+
+    public void setComposure(Integer composure) {
+        this.composure = composure;
+    }
+
+    public Integer getMarking() {
+        return marking;
+    }
+
+    public void setMarking(Integer marking) {
+        this.marking = marking;
+    }
+
+    public Integer getStandingTackle() {
+        return standingTackle;
+    }
+
+    public void setStandingTackle(Integer standingTackle) {
+        this.standingTackle = standingTackle;
+    }
+
+    public Integer getSlidingTackle() {
+        return slidingTackle;
+    }
+
+    public void setSlidingTackle(Integer slidingTackle) {
+        this.slidingTackle = slidingTackle;
+    }
+
+    public Integer getGKDiving() {
+        return gKDiving;
+    }
+
+    public void setGKDiving(Integer gKDiving) {
+        this.gKDiving = gKDiving;
+    }
+
+    public Integer getGKHandling() {
+        return gKHandling;
+    }
+
+    public void setGKHandling(Integer gKHandling) {
+        this.gKHandling = gKHandling;
+    }
+
+    public Integer getGKKicking() {
+        return gKKicking;
+    }
+
+    public void setGKKicking(Integer gKKicking) {
+        this.gKKicking = gKKicking;
+    }
+
+    public Integer getGKPositioning() {
+        return gKPositioning;
+    }
+
+    public void setGKPositioning(Integer gKPositioning) {
+        this.gKPositioning = gKPositioning;
+    }
+
+    public Integer getGKReflexes() {
+        return gKReflexes;
+    }
+
+    public void setGKReflexes(Integer gKReflexes) {
+        this.gKReflexes = gKReflexes;
+    }
+
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
     }
 
 }

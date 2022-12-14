@@ -1,27 +1,35 @@
 package com.fifafinder.fifadb.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "spieler")
 public class Spieler {
     @Id
-    @Column(name = "playerid", nullable = false)
+    @Column(name = "PlayerID", nullable = false)
     private Integer id;
 
-    @Column(name = "birth_date")
-    private LocalDate birthDate;
+    @Column(name = "KnownName")
+    private String knownName;
 
-    @Column(name = "full_name")
+    @Column(name = "FullName")
     private String fullName;
 
-    @Column(name = "known_name")
-    private String knownName;
+    @Column(name = "birthDate")
+    private LocalDate birthDate;
+
+    @OneToMany(mappedBy = "playerID")
+    private Set<PlaysFor> playsFors = new LinkedHashSet<>();
+
+    @ManyToMany
+    @JoinTable(name = "is_from",
+            joinColumns = @JoinColumn(name = "PlayerID"),
+            inverseJoinColumns = @JoinColumn(name = "CountryID"))
+    private Set<Land> lands = new LinkedHashSet<>();
 
     public Integer getId() {
         return id;
@@ -31,12 +39,12 @@ public class Spieler {
         this.id = id;
     }
 
-    public LocalDate getBirthDate() {
-        return birthDate;
+    public String getKnownName() {
+        return knownName;
     }
 
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
+    public void setKnownName(String knownName) {
+        this.knownName = knownName;
     }
 
     public String getFullName() {
@@ -47,12 +55,28 @@ public class Spieler {
         this.fullName = fullName;
     }
 
-    public String getKnownName() {
-        return knownName;
+    public LocalDate getBirthDate() {
+        return birthDate;
     }
 
-    public void setKnownName(String knownName) {
-        this.knownName = knownName;
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public Set<PlaysFor> getPlaysFors() {
+        return playsFors;
+    }
+
+    public void setPlaysFors(Set<PlaysFor> playsFors) {
+        this.playsFors = playsFors;
+    }
+
+    public Set<Land> getLands() {
+        return lands;
+    }
+
+    public void setLands(Set<Land> lands) {
+        this.lands = lands;
     }
 
 }

@@ -1,9 +1,9 @@
 package com.fifafinder.fifadb.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "land")
@@ -17,6 +17,18 @@ public class Land {
 
     @Column(name = "Flag")
     private String flag;
+
+    @ManyToMany
+    @JoinTable(name = "is_located_at",
+            joinColumns = @JoinColumn(name = "CountryID"),
+            inverseJoinColumns = @JoinColumn(name = "LeagueID"))
+    private Set<Liga> ligas = new LinkedHashSet<>();
+
+    @ManyToMany
+    @JoinTable(name = "is_from",
+            joinColumns = @JoinColumn(name = "CountryID"),
+            inverseJoinColumns = @JoinColumn(name = "PlayerID"))
+    private Set<Spieler> spielers = new LinkedHashSet<>();
 
     public Integer getId() {
         return id;
@@ -40,6 +52,22 @@ public class Land {
 
     public void setFlag(String flag) {
         this.flag = flag;
+    }
+
+    public Set<Liga> getLigas() {
+        return ligas;
+    }
+
+    public void setLigas(Set<Liga> ligas) {
+        this.ligas = ligas;
+    }
+
+    public Set<Spieler> getSpielers() {
+        return spielers;
+    }
+
+    public void setSpielers(Set<Spieler> spielers) {
+        this.spielers = spielers;
     }
 
 }
