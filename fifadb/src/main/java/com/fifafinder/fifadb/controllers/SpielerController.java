@@ -19,7 +19,7 @@ public class SpielerController {
         }
     */
     @GetMapping
-    public long getAmount_of_spieler()
+    public long countSpieler()
     {
         //return spielerService.countSpieler();
         return 0;
