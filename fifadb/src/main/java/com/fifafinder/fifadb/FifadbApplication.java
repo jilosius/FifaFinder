@@ -9,5 +9,5 @@ public class FifadbApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(FifadbApplication.class, args);
 	}
-
+//welche Java version?
 }
