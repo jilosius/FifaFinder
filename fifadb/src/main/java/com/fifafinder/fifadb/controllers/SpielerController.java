@@ -1,11 +1,13 @@
 package com.fifafinder.fifadb.controllers;
 
+//import com.fifafinder.fifadb.services.SpielerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path = "FifaFinder/v1/player")
+@RequestMapping("/players")
 public class SpielerController {
 /*
     private final SpielerService spielerService;
@@ -17,9 +19,9 @@ public class SpielerController {
     }
 */
     @GetMapping
-    public int getAmount_of_spieler()
+    public long getAmount_of_spieler()
     {
-        //spielerService.count_Spieler();
+        //return spielerService.countSpieler();
         return 0;
     }
 }
