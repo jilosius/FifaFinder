@@ -8,27 +8,32 @@ public class CompetesIn {
     @EmbeddedId
     private CompetesInId id;
 
-    @MapsId("clubid")
+    @MapsId("clubID")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "clubid", nullable = false)
-    private Mannschaften clubid;
+    @JoinColumn(name = "ClubID", nullable = false)
+    private Mannschaften clubID;
 
-    @MapsId("leagueid")
+    @MapsId("fifaVersion")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "leagueid", nullable = false)
-    private Liga leagueid;
+    @JoinColumn(name = "FifaVersion", nullable = false)
+    private FifaVersion fifaVersion;
 
-    @Column(name = "attack")
+    @MapsId("leagueID")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "LeagueID", nullable = false)
+    private Liga leagueID;
+
+    @Column(name = "Overall")
+    private Integer overall;
+
+    @Column(name = "Attack")
     private Integer attack;
 
-    @Column(name = "defence")
-    private Integer defence;
-
-    @Column(name = "midfield")
+    @Column(name = "Midfield")
     private Integer midfield;
 
-    @Column(name = "overall")
-    private Integer overall;
+    @Column(name = "Defence")
+    private Integer defence;
 
     public CompetesInId getId() {
         return id;
@@ -38,20 +43,36 @@ public class CompetesIn {
         this.id = id;
     }
 
-    public Mannschaften getClubid() {
-        return clubid;
+    public Mannschaften getClubID() {
+        return clubID;
     }
 
-    public void setClubid(Mannschaften clubid) {
-        this.clubid = clubid;
+    public void setClubID(Mannschaften clubID) {
+        this.clubID = clubID;
     }
 
-    public Liga getLeagueid() {
-        return leagueid;
+    public FifaVersion getFifaVersion() {
+        return fifaVersion;
     }
 
-    public void setLeagueid(Liga leagueid) {
-        this.leagueid = leagueid;
+    public void setFifaVersion(FifaVersion fifaVersion) {
+        this.fifaVersion = fifaVersion;
+    }
+
+    public Liga getLeagueID() {
+        return leagueID;
+    }
+
+    public void setLeagueID(Liga leagueID) {
+        this.leagueID = leagueID;
+    }
+
+    public Integer getOverall() {
+        return overall;
+    }
+
+    public void setOverall(Integer overall) {
+        this.overall = overall;
     }
 
     public Integer getAttack() {
@@ -62,14 +83,6 @@ public class CompetesIn {
         this.attack = attack;
     }
 
-    public Integer getDefence() {
-        return defence;
-    }
-
-    public void setDefence(Integer defence) {
-        this.defence = defence;
-    }
-
     public Integer getMidfield() {
         return midfield;
     }
@@ -78,12 +91,12 @@ public class CompetesIn {
         this.midfield = midfield;
     }
 
-    public Integer getOverall() {
-        return overall;
+    public Integer getDefence() {
+        return defence;
     }
 
-    public void setOverall(Integer overall) {
-        this.overall = overall;
+    public void setDefence(Integer defence) {
+        this.defence = defence;
     }
 
 }

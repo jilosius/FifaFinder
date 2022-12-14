@@ -2,6 +2,7 @@ package com.fifafinder.fifadb.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import jakarta.persistence.Entity;
 import org.hibernate.Hibernate;
 
 import java.io.Serializable;
@@ -9,27 +10,27 @@ import java.util.Objects;
 
 @Embeddable
 public class IsFromId implements Serializable {
-    private static final long serialVersionUID = 7059235540538173751L;
-    @Column(name = "countryid", nullable = false)
-    private Integer countryid;
+    private static final long serialVersionUID = 146572966704438802L;
+    @Column(name = "PlayerID", nullable = false)
+    private Integer playerID;
 
-    @Column(name = "playerid", nullable = false)
-    private Integer playerid;
+    @Column(name = "CountryID", nullable = false)
+    private Integer countryID;
 
-    public Integer getCountryid() {
-        return countryid;
+    public Integer getPlayerID() {
+        return playerID;
     }
 
-    public void setCountryid(Integer countryid) {
-        this.countryid = countryid;
+    public void setPlayerID(Integer playerID) {
+        this.playerID = playerID;
     }
 
-    public Integer getPlayerid() {
-        return playerid;
+    public Integer getCountryID() {
+        return countryID;
     }
 
-    public void setPlayerid(Integer playerid) {
-        this.playerid = playerid;
+    public void setCountryID(Integer countryID) {
+        this.countryID = countryID;
     }
 
     @Override
@@ -37,13 +38,13 @@ public class IsFromId implements Serializable {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         IsFromId entity = (IsFromId) o;
-        return Objects.equals(this.countryid, entity.countryid) &&
-                Objects.equals(this.playerid, entity.playerid);
+        return Objects.equals(this.countryID, entity.countryID) &&
+                Objects.equals(this.playerID, entity.playerID);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(countryid, playerid);
+        return Objects.hash(countryID, playerID);
     }
 
 }

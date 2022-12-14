@@ -1,9 +1,9 @@
 package com.fifafinder.fifadb.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "mannschaften")
@@ -17,6 +17,12 @@ public class Mannschaften {
 
     @Column(name = "ClubLogo")
     private String clubLogo;
+
+    @OneToMany(mappedBy = "clubID")
+    private Set<PlaysFor> playsFors = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "clubID")
+    private Set<CompetesIn> competesIns = new LinkedHashSet<>();
 
     public Integer getId() {
         return id;
@@ -40,6 +46,22 @@ public class Mannschaften {
 
     public void setClubLogo(String clubLogo) {
         this.clubLogo = clubLogo;
+    }
+
+    public Set<PlaysFor> getPlaysFors() {
+        return playsFors;
+    }
+
+    public void setPlaysFors(Set<PlaysFor> playsFors) {
+        this.playsFors = playsFors;
+    }
+
+    public Set<CompetesIn> getCompetesIns() {
+        return competesIns;
+    }
+
+    public void setCompetesIns(Set<CompetesIn> competesIns) {
+        this.competesIns = competesIns;
     }
 
 }

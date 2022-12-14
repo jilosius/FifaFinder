@@ -2,6 +2,7 @@ package com.fifafinder.fifadb.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import jakarta.persistence.Entity;
 import org.hibernate.Hibernate;
 
 import java.io.Serializable;
@@ -9,22 +10,22 @@ import java.util.Objects;
 
 @Embeddable
 public class CompetesInId implements Serializable {
-    private static final long serialVersionUID = -7942805595577843166L;
-    @Column(name = "clubid", nullable = false)
-    private Integer clubid;
+    private static final long serialVersionUID = 733796807269109658L;
+    @Column(name = "ClubID", nullable = false)
+    private Integer clubID;
 
-    @Column(name = "fifa_version", nullable = false)
+    @Column(name = "FifaVersion", nullable = false)
     private Integer fifaVersion;
 
-    @Column(name = "leagueid", nullable = false)
-    private Integer leagueid;
+    @Column(name = "LeagueID", nullable = false)
+    private Integer leagueID;
 
-    public Integer getClubid() {
-        return clubid;
+    public Integer getClubID() {
+        return clubID;
     }
 
-    public void setClubid(Integer clubid) {
-        this.clubid = clubid;
+    public void setClubID(Integer clubID) {
+        this.clubID = clubID;
     }
 
     public Integer getFifaVersion() {
@@ -35,12 +36,12 @@ public class CompetesInId implements Serializable {
         this.fifaVersion = fifaVersion;
     }
 
-    public Integer getLeagueid() {
-        return leagueid;
+    public Integer getLeagueID() {
+        return leagueID;
     }
 
-    public void setLeagueid(Integer leagueid) {
-        this.leagueid = leagueid;
+    public void setLeagueID(Integer leagueID) {
+        this.leagueID = leagueID;
     }
 
     @Override
@@ -48,14 +49,14 @@ public class CompetesInId implements Serializable {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         CompetesInId entity = (CompetesInId) o;
-        return Objects.equals(this.leagueid, entity.leagueid) &&
+        return Objects.equals(this.leagueID, entity.leagueID) &&
                 Objects.equals(this.fifaVersion, entity.fifaVersion) &&
-                Objects.equals(this.clubid, entity.clubid);
+                Objects.equals(this.clubID, entity.clubID);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(leagueid, fifaVersion, clubid);
+        return Objects.hash(leagueID, fifaVersion, clubID);
     }
 
 }

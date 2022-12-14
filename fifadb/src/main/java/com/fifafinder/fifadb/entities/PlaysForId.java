@@ -2,6 +2,7 @@ package com.fifafinder.fifadb.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import jakarta.persistence.Entity;
 import org.hibernate.Hibernate;
 
 import java.io.Serializable;
@@ -9,12 +10,20 @@ import java.util.Objects;
 
 @Embeddable
 public class PlaysForId implements Serializable {
-    private static final long serialVersionUID = -441280368442777541L;
-    @Column(name = "fifa_version", nullable = false)
+    private static final long serialVersionUID = -3970872167199362146L;
+    @Column(name = "PlayerID", nullable = false)
+    private Integer playerID;
+
+    @Column(name = "FifaVersion", nullable = false)
     private Integer fifaVersion;
 
-    @Column(name = "playerid", nullable = false)
-    private Integer playerid;
+    public Integer getPlayerID() {
+        return playerID;
+    }
+
+    public void setPlayerID(Integer playerID) {
+        this.playerID = playerID;
+    }
 
     public Integer getFifaVersion() {
         return fifaVersion;
@@ -24,26 +33,18 @@ public class PlaysForId implements Serializable {
         this.fifaVersion = fifaVersion;
     }
 
-    public Integer getPlayerid() {
-        return playerid;
-    }
-
-    public void setPlayerid(Integer playerid) {
-        this.playerid = playerid;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         PlaysForId entity = (PlaysForId) o;
         return Objects.equals(this.fifaVersion, entity.fifaVersion) &&
-                Objects.equals(this.playerid, entity.playerid);
+                Objects.equals(this.playerID, entity.playerID);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(fifaVersion, playerid);
+        return Objects.hash(fifaVersion, playerID);
     }
 
 }

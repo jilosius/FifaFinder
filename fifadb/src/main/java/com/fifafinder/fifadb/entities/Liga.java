@@ -2,22 +2,30 @@ package com.fifafinder.fifadb.entities;
 
 import jakarta.persistence.*;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "liga")
 public class Liga {
     @Id
-    @Column(name = "leagueid", nullable = false)
+    @Column(name = "LeagueID", nullable = false)
     private Integer id;
 
-    @Column(name = "league", nullable = false)
+    @Column(name = "League", nullable = false)
     private String league;
 
-    @Column(name = "logo")
+    @Column(name = "Logo")
     private String logo;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "countryid")
-    private Land countryid;
+    @ManyToMany
+    @JoinTable(name = "is_located_at",
+            joinColumns = @JoinColumn(name = "LeagueID"),
+            inverseJoinColumns = @JoinColumn(name = "CountryID"))
+    private Set<Land> lands = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "leagueID")
+    private Set<CompetesIn> competesIns = new LinkedHashSet<>();
 
     public Integer getId() {
         return id;
@@ -43,12 +51,20 @@ public class Liga {
         this.logo = logo;
     }
 
-    public Land getCountryid() {
-        return countryid;
+    public Set<Land> getLands() {
+        return lands;
     }
 
-    public void setCountryid(Land countryid) {
-        this.countryid = countryid;
+    public void setLands(Set<Land> lands) {
+        this.lands = lands;
+    }
+
+    public Set<CompetesIn> getCompetesIns() {
+        return competesIns;
+    }
+
+    public void setCompetesIns(Set<CompetesIn> competesIns) {
+        this.competesIns = competesIns;
     }
 
 }
