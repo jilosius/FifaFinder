@@ -1,4 +1,4 @@
-package com.fifafinder.fifadb.Controller;
+package com.fifafinder.fifadb.controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
