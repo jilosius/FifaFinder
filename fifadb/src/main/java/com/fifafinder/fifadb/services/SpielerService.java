@@ -12,19 +12,16 @@ import java.util.List;
 
 
 @Service
-
 public class SpielerService {
 
     private final SpielerRepository spielerRepository;
 
     @Autowired
-
     public SpielerService(SpielerRepository spielerRepository) {
 
         this.spielerRepository = spielerRepository;
-
     }
-
+/*
     public Spieler addSpieler (Spieler spieler){
 
         return spielerRepository.save(spieler);
@@ -58,12 +55,9 @@ public class SpielerService {
     public void deleteSpieler(Integer ID){
 
         spielerRepository.deleteSpielerById(ID);
-
     }
-
+*/
     public long countSpieler() {
-       return spielerRepository.count();
+        return spielerRepository.count();
     }
-
-
 }

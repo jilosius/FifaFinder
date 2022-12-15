@@ -1,10 +1,13 @@
 package com.fifafinder.fifadb.controllers;
 
+import com.fifafinder.fifadb.entities.Spieler;
 import com.fifafinder.fifadb.services.SpielerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/players")
