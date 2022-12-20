@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.xml.xpath.XPath;
 import java.util.List;
 
 @RestController
@@ -21,10 +22,16 @@ public class SpielerController {
             this.spielerService = spielerService;
         }
 
-    @GetMapping
-    public long countSpieler()
-    {
-        return spielerService.countSpieler();
+        @GetMapping
+        public long countSpieler() {
 
-    }
+            return spielerService.countSpieler();
+        }
+/*
+        @GetMapping
+        public List<Spieler> getAllSpieler() {
+
+            return spielerService.getAllSpieler();
+        }
+        */
 }

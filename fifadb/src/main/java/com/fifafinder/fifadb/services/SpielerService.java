@@ -6,9 +6,7 @@ import com.fifafinder.fifadb.repositories.SpielerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
-
-
-
+import java.util.Optional;
 
 
 @Service
@@ -40,9 +38,9 @@ public class SpielerService {
 
     }
 
-    public Spieler getSpielerById(Integer id){
+    public Optional<Spieler> getSpielerById(Integer id){
 
-        return spielerRepository.findSpielerById(id).orElseThrow(()-> new SpielerNotFoundException("User by id"+id+" was not found"));
+        return spielerRepository.findSpielerById(id);
 
     }
 
@@ -58,6 +56,12 @@ public class SpielerService {
     }
 */
     public long countSpieler() {
+
         return spielerRepository.count();
+    }
+
+    public List<Spieler> getAllSpieler() {
+
+        return spielerRepository.findAll();
     }
 }
