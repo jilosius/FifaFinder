@@ -6,12 +6,12 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 @Repository
 public interface SpielerRepository extends JpaRepository<Spieler, Integer> {
-    /*
+
     Optional<Spieler> findSpielerById(Integer id);
 
-    Optional<Spieler> findSpielerByfullname(String n);
+    Optional<Spieler> findSpielerByFullName(String n);
 
     void deleteSpielerById(Integer id);
-     */
+
 
 }
