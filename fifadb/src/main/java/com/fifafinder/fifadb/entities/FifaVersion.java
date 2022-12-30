@@ -1,5 +1,6 @@
 package com.fifafinder.fifadb.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.LinkedHashSet;
@@ -12,9 +13,11 @@ public class FifaVersion {
     @Column(name = "FifaVersion", nullable = false)
     private Integer id;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "fifaVersion")
     private Set<PlaysFor> playsFors = new LinkedHashSet<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "fifaVersion")
     private Set<CompetesIn> competesIns = new LinkedHashSet<>();
 

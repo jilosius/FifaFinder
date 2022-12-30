@@ -1,5 +1,6 @@
 package com.fifafinder.fifadb.repositories;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fifafinder.fifadb.entities.Spieler;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -15,4 +16,6 @@ public interface SpielerRepository extends JpaRepository<Spieler, Integer> {
 
     void deleteSpielerById(Integer id);
 */
+    Spieler findById(int id);
+    Spieler findSpielerByFullName(String fullName);
 }

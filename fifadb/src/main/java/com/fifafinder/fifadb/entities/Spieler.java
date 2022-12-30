@@ -1,9 +1,11 @@
 package com.fifafinder.fifadb.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -22,6 +24,7 @@ public class Spieler {
     @Column(name = "birthDate")
     private LocalDate birthDate;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "playerID")
     private Set<PlaysFor> playsFors = new LinkedHashSet<>();
 

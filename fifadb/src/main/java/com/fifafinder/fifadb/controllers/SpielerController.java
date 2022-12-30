@@ -7,31 +7,26 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.xml.xpath.XPath;
 import java.util.List;
 
 @RestController
 @RequestMapping("/players")
 public class SpielerController {
 
-        private final SpielerService spielerService;
+    private final SpielerService spielerService;
 
-        @Autowired
-        public SpielerController(SpielerService spielerService)
-        {
-            this.spielerService = spielerService;
-        }
+    @Autowired
+    public SpielerController(SpielerService spielerService) {
+        this.spielerService = spielerService;
+    }
 
-        @GetMapping
-        public long countSpieler() {
+    @GetMapping("/count")
+    public long countSpieler() {
+        return spielerService.countSpieler();
+    }
 
-            return spielerService.countSpieler();
-        }
-/*
-        @GetMapping
-        public List<Spieler> getAllSpieler() {
-
-            return spielerService.getAllSpieler();
-        }
-        */
+    @GetMapping("/all")
+    public List<Spieler> getAll() {
+        return spielerService.getAllSpieler();
+    }
 }
