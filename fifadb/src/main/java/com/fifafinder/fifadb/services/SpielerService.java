@@ -30,8 +30,15 @@ public class SpielerService {
 
 
     public void addPlayer(Spieler spieler) {
-        //spieler.setId(100000);
-     spielerRepository.save(spieler);
+        int i = 1;
+        Optional<Spieler> spielerOptional = spielerRepository.findSpielerById(1);
+        while(spielerOptional.isPresent())
+        {
+          i++;
+          spielerOptional = spielerRepository.findSpielerById(i);
+        }
+        spieler.setId(i);
+        spielerRepository.save(spieler);
     }
 
     public Optional<Spieler> findSpieler() {
