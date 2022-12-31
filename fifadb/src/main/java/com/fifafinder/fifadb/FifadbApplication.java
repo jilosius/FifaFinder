@@ -23,6 +23,8 @@ public class FifadbApplication {
         SpringApplication.run(FifadbApplication.class, args);
     }
 
+
+    //Below code is for CORS Policy: to allow data flow from localhost8080 to localhost4200
     @Bean
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource urlBasedCorsConfigurationSource = new UrlBasedCorsConfigurationSource();

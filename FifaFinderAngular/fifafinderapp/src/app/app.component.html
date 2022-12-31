@@ -1,0 +1,103 @@
+<!-- <ng-container *ngIf="(spielerState$ | async) as state" [ngSwitch]="state.appState">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">FifaFinder</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+        </ul>
+        <form #searchForm="ngForm" (ngSubmit)="gotToPage(searchForm.value.name)" class="d-flex" role="search">
+          <input type="search" name="name" ngModel class="form-control me-2" placeholder="Search players" aria-label="Search">
+          <button class="btn btn-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+     -->
+   
+    <!-- Ignore div Tag <div *ngIf="loadingService.isLoading$ | async" class="spinner-border" role="status" style="color: #0773d0;position: fixed;
+                top: 60px;
+                right: 360px;
+                z-index:1000">
+            <span class="sr-only"></span>
+          </div> -->
+    <!-- <div class="row">
+        <div class="col-md-12 mt-3">
+          <ng-container *ngSwitchCase="'APP_ERROR'">{{ state.error | json }}</ng-container>
+          <ng-container *ngSwitchCase="'APP_LOADING'">
+            <div class="d-flex justify-content-center mt-4">
+              <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          </ng-container>
+          <ng-container *ngSwitchCase="'APP_LOADED'">
+            <h3>Spieler Liste</h3>
+            <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Photo</th>
+                    <th scope="col">Known Name</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Nationality</th>
+                    <th scope="col">Club</th>
+                    <th scope="col">Overall</th>
+                    <th scope="col">Potential</th>
+                    <th scope="col">Best Position</th>
+                    <th scope="col">Value EUR</th>
+                    <th scope="col">Height</th>
+                    <th scope="col">Weight</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let spieler of state.appData.data.page.content; let i = index;">
+                    <th scope="row"><img [src]="spieler.photoURL" width="42" height="42" class="rounded-circle"S></th>
+                    <td>{{ spieler.knownName }}</td>
+                    <td>{{ spieler.age }}</td>
+                    <td><img [src]="spieler.flag" width="42" height="42" class="rounded-circle"></td>
+                    <td><img [src]="spieler.clubLogo" width="42" height="42" class="rounded-circle"></td>
+                    <td>{{ spieler.overall }}</td>
+                    <td>{{ spieler.potential }}</td>
+                    <td>{{ spieler.bestPos }}</td>
+                    <td>{{ spieler.valueEUR }}</td>
+                    <td>{{ spieler.height }}</td>
+                    <td>{{ spieler.weight }}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div *ngIf="state.appData.data.page.content.length < 1" class="alert alert-secondary" role="alert">
+                No players found
+              </div>
+              <nav *ngIf="state.appData.data.page.content.length > 0" aria-label="Page navigation example">
+                <ul class="pagination justify-content-end">
+                  <li class="page-item pointer" [ngClass]="0 == (currentPage$ | async) ? ' disabled' : ''">
+                    <a (click)="goToNextOrPreviousPage('backward', searchForm.value.name)" class="page-link" aria-label="Previous">
+                      <span aria-hidden="true">&laquo; Previous</span>
+                    </a>
+                  </li>
+                  <li *ngFor="let pageNumber of [].constructor(state.appData.data.page.totalPages); let i = index;" 
+                      class="page-item pointer" [ngClass]="i == (currentPage$ | async) ? ' active' : ''">
+                    <a (click)="gotToPage(searchForm.value.name, i)" class="page-link">
+                      {{ i + 1 }}
+                    </a>
+                  </li>
+                  <li class="page-item pointer" [ngClass]="(state.appData.data.page.totalPages - 1) == (currentPage$ | async) ? ' disabled' : ''">
+                    <a (click)="goToNextOrPreviousPage('forward', searchForm.value.name)" class="page-link" aria-label="Next">
+                      <span aria-hidden="true">Next &raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+          </ng-container>
+        </div>
+    </div>
+  </div>
+  </ng-container> -->
+  
+<router-outlet></router-outlet>

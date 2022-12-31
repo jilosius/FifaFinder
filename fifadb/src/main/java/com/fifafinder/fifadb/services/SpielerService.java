@@ -1,5 +1,6 @@
 package com.fifafinder.fifadb.services;
 
+import com.fifafinder.fifadb.DTOs.SpielerDTO;
 import com.fifafinder.fifadb.entities.Spieler;
 import com.fifafinder.fifadb.exceptionhandling.SpielerNotFoundException;
 import com.fifafinder.fifadb.repositories.SpielerRepository;
@@ -8,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -32,10 +34,120 @@ public class SpielerService {
         return spielerRepository.count();
     }
 
-    public Page<Spieler> getSpieler(String name, int page, int size) {
-        log.info("Fetching spieler for page {} of size {}", page, size);
-        return spielerRepository.findByFullNameContaining(name, PageRequest.of(page, size));
+
+    public Page<SpielerDTO> findByFullNameFiltered(String name,
+                                                   String preferredFoot,
+                                                   int minAge,
+                                                   int maxAge,
+                                                   int minOverall,
+                                                   int maxOverall,
+                                                   int minPotential,
+                                                   int maxPotential,
+                                                   int minHeight,
+                                                   int maxHeight,
+                                                   long minValue,
+                                                   long maxValue,
+                                                   long minWage,
+                                                   long maxWage,
+                                                   int minHeadingAccuracy,
+                                                   int maxHeadingAccuracy,
+                                                   int minVolleys,
+                                                   int maxVolleys,
+                                                   int minDribbling,
+                                                   int maxDribbling,
+                                                   int minCurve,
+                                                   int maxCurve,
+                                                   int minFkAccuracy,
+                                                   int maxFkAccuracy,
+                                                   int minAcceleration,
+                                                   int maxAcceleration,
+                                                   int minSprintSpeed,
+                                                   int maxSprintSpeed,
+                                                   int minAgility,
+                                                   int maxAgility,
+                                                   int minReaction,
+                                                   int maxReaction,
+                                                   int minBalance,
+                                                   int maxBalance,
+                                                   int minShotPower,
+                                                   int maxShotPower,
+                                                   int minJumping,
+                                                   int maxJumping,
+                                                   int minStamina,
+                                                   int maxStamina,
+                                                   int minAggression,
+                                                   int maxAggression,
+                                                   int minLongShots,
+                                                   int maxLongShots,
+                                                   int minCrossing,
+                                                   int maxCrossing,
+                                                   int minFinishing,
+                                                   int maxFinishing,
+                                                   int minShortPassing,
+                                                   int maxShortPassing,
+                                                   int page, int size, Sort sort) {
+        return spielerRepository.findByFullNameFiltered(name,
+                preferredFoot,
+                minAge,
+                maxAge,
+                minOverall,
+                maxOverall,
+                minPotential,
+                maxPotential,
+                minHeight,
+                maxHeight,
+                minValue,
+                maxValue,
+                minWage,
+                maxWage,
+                minHeadingAccuracy,
+                maxHeadingAccuracy,
+                minVolleys,
+                maxVolleys,
+                minDribbling,
+                maxDribbling,
+                minCurve,
+                maxCurve,
+                minFkAccuracy,
+                maxFkAccuracy,
+                minAcceleration,
+                maxAcceleration,
+                minSprintSpeed,
+                maxSprintSpeed,
+                minAgility,
+                maxAgility,
+                minReaction,
+                maxReaction,
+                minBalance,
+                maxBalance,
+                minShotPower,
+                maxShotPower,
+                minJumping,
+                maxJumping,
+                minStamina,
+                maxStamina,
+                minAggression,
+                maxAggression,
+                minLongShots,
+                maxLongShots,
+                minCrossing,
+                maxCrossing,
+                minFinishing,
+                maxFinishing,
+                minShortPassing,
+                maxShortPassing,
+                PageRequest.of(page, size, sort));
     }
+
+
+
+//    public List<Spieler> spielerAnzeigen() {
+//        return spielerRepository.findAll();
+//    }
+
+//    public Page<SpielerDTO> listAllSpieler(Pageable pageable){
+//        return spielerRepository.listAllSpieler(pageable);
+//    }
 
     /*
         public Spieler addSpieler (Spieler spieler){
