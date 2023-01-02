@@ -1,276 +1,294 @@
 <!-- Spieler State is used in switch statement: if 'APP_LOADING' -> required action, 'APP_LOADED' -> required action, etc.. -->
 <ng-container *ngIf="(spielerState$ | async) as state" [ngSwitch]="state.appState"> <!--subscribing to the observable with async-->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container">
-        <a class="navbar-brand" href="http://localhost:4200">FifaFinder</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <div class="dropdown">
-              <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-filter" viewBox="0 0 16 16">
-                  <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
-                </svg> Filter
-              </button>
-              <form class="dropdown-menu p-4" style="width: 800px;">
-                <div class="mb-3">
-                  <label for="ageMin">Age </label>
-                  <input [(ngModel)]="ageMin" name="ageMin" type="number" id="ageMin" placeholder="Minimum Age">
-                  <input [(ngModel)]="ageMax" name="ageMax" type="number" id="ageMax" placeholder="Maximum Age">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="http://localhost:4200">FifaFinder</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <div class="dropdown">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-filter" viewBox="0 0 16 16">
+                <path d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
+              </svg> Filter
+            </button>
+            <form class="dropdown-menu p-4" style="width: 700px;">
+              <div class="row g-3">
+                <div class="col-sm-3 col-form-label"><label for="age">Age</label></div>
+                <div class="col-auto"><input [(ngModel)]="ageMin" name="ageMin" type="number" id="ageMin" placeholder="Minimum Age"></div>
+                <div class="col-auto"><input [(ngModel)]="ageMax" name="ageMax" type="number" id="ageMax" placeholder="Maximum Age"></div>
+              </div>
+
+              <div class="row g-3">
+                <div class="col-sm-3 col-form-label"><label for="overall">Overall</label></div>
+                <div class="col-auto"><input [(ngModel)]="overallMin" name="overallMin" type="number" id="overallMin" placeholder="Minimum Overall"></div>
+                <div class="col-auto"><input [(ngModel)]="overallMax" name="overallMax" type="number" id="overallMax" placeholder="Maximum Overall"></div>
+              </div>
+              
+              <div class="row g-3">
+                <div class="col-sm-3 col-form-label"><label for="potential">Potential</label></div>
+                <div class="col-auto"><input [(ngModel)]="potentialMin" name="potentialMin" type="number" id="potentialMin" placeholder="Minimum potential"></div>
+                <div class="col-auto"><input [(ngModel)]="potentialMax" name="potentialMax" type="number" id="potentialMax" placeholder="Maximum potential"></div>
+              </div>
+
+              <div class="row g-3">
+                <div class="col-sm-3 col-form-label"><label for="potential">Height</label></div>
+                <div class="col-auto"><input [(ngModel)]="heightMin" name="heightMin" type="number" id="heightMin" placeholder="Minimum height"></div>
+                <div class="col-auto"><input [(ngModel)]="heightMax" name="heightMax" type="number" id="heightMax" placeholder="Maximum height"></div>
+              </div>
+
+              <div class="row g-3">
+                <div class="col-sm-3 col-form-label"><label for="value">Value</label></div>
+                <div class="col-auto"><input [(ngModel)]="minValue" name="minValue" type="number" id="minValue" placeholder="Minimum value"></div>
+                <div class="col-auto"><input [(ngModel)]="maxValue" name="maxValue" type="number" id="maxValue" placeholder="Maximum value"></div>
+              </div>
+
+
+              <div class="row g-3">
+                <div class="col-sm-3 col-form-label"><label for="wage">Wage</label></div>
+                <div class="col-auto"><input [(ngModel)]="minWage" name="minWage" type="number" id="minWage" placeholder="Minimum wage"></div>
+                <div class="col-auto"><input [(ngModel)]="maxWage" name="maxWage" type="number" id="maxWage" placeholder="Maximum wage"></div>
+              </div>
+
+              <div class="row g-3">
+                <div class="col-sm-3 col-form-label"><label for="headingAccuracy">Heading Accuracy</label></div>
+                <div class="col-auto"><input [(ngModel)]="minHeadingAccuracy" name="minHeadingAccuracy" type="number" id="minHeadingAccuracy" placeholder="Minimum headingAccuracy"></div>
+                <div class="col-auto"><input [(ngModel)]="maxHeadingAccuracy" name="maxHeadingAccuracy" type="number" id="maxHeadingAccuracy" placeholder="Maximum headingAccuracy">
                 </div>
-                <div class="mb-3">
-                  <label for="overall">Overall</label>
-                  <input [(ngModel)]="overallMin" name="overallMin" type="number" id="overallMin" placeholder="Minimum Overall">
-                  <input [(ngModel)]="overallMax" name="overallMax" type="number" id="overallMax" placeholder="Maximum Overall">
+              </div>
+
+              <div class="row g-3">
+                <div class="col-sm-3 col-form-label"><label for="volleys">Volleys</label></div>
+                <div class="col-auto"><input [(ngModel)]="minVolleys" name="minVolleys" type="number" id="minVolleys" placeholder="Minimum volleys"></div>
+                <div class="col-auto"><input [(ngModel)]="maxVolleys" name="maxVolleys" type="number" id="maxVolleys" placeholder="Maximum volleys"></div>
+              </div>
+              
+              <div class="row g-3">
+                <div class="col-sm-3 col-form-label"><label for="dribbling">Dribbling</label></div>
+                <div class="col-auto"><input [(ngModel)]="minDribbling" name="minDribbling" type="number" id="minDribbling" placeholder="Minimum dribbling"></div>
+                <div class="col-auto"><input [(ngModel)]="maxDribbling" name="maxDribbling" type="number" id="maxDribbling" placeholder="Maximum dribbling"></div>
+              </div>
+              <div class="row g-3">
+                <div class="col-sm-3 col-form-label"><label for="curve">Curve</label></div>
+                <div class="col-auto"><input [(ngModel)]="minCurve" name="minCurve" type="number" id="minCurve" placeholder="Minimum curve"></div>
+                <div class="col-auto"><input [(ngModel)]="maxCurve" name="maxCurve" type="number" id="maxCurve" placeholder="Maximum curve"></div>
+              </div>
+              <div class="row g-3">
+                <div class="col-sm-3 col-form-label"><label for="fkAccuracy">FK Accuracy</label></div>
+                <div class="col-auto"><input [(ngModel)]="minFkAccuracy" name="minFkAccuracy" type="number" id="minFkAccuracy" placeholder="Minimum fkAccuracy"></div>
+                <div class="col-auto"><input [(ngModel)]="maxFkAccuracy" name="maxFkAccuracy" type="number" id="maxFkAccuracy" placeholder="Maximum fkAccuracy"></div>
+              </div>
+              <div class="row g-3">
+                <div class="col-sm-3 col-form-label"><label for="acceleration">Acceleration</label></div>
+                <div class="col-auto"><input [(ngModel)]="minAcceleration" name="minAcceleration" type="number" id="minAcceleration" placeholder="Minimum acceleration"></div>
+                <div class="col-auto"><input [(ngModel)]="maxAcceleration" name="maxAcceleration" type="number" id="maxAcceleration" placeholder="Maximum acceleration"></div>
+              </div>
+              <div class="row g-3">
+                <div class="col-sm-3 col-form-label"><label for="sprintSpeed">Sprint Speed</label></div>
+                <div class="col-auto"><input [(ngModel)]="minSprintSpeed" name="minSprintSpeed" type="number" id="minSprintSpeed" placeholder="Minimum sprintSpeed"></div>
+                <div class="col-auto"><input [(ngModel)]="maxSprintSpeed" name="maxSprintSpeed" type="number" id="maxSprintSpeed" placeholder="Maximum sprintSpeed"></div>
+              </div>
+              <div class="row g-3">
+                <div class="col-sm-3 col-form-label"><label for="agility">Agility</label></div>
+                <div class="col-auto"><input [(ngModel)]="minAgility" name="minAgility" type="number" id="minAgility" placeholder="Minimum agility"></div>
+                <div class="col-auto"><input [(ngModel)]="maxAgility" name="maxAgility" type="number" id="maxAgility" placeholder="Maximum agility"></div>
+              </div>
+              <div class="row g-3">
+                <div class="col-sm-3 col-form-label"><label for="reaction">Reaction</label></div>
+                <div class="col-auto"><input [(ngModel)]="minReaction" name="minReaction" type="number" id="minReaction" placeholder="Minimum reaction"></div>
+                <div class="col-auto"><input [(ngModel)]="maxReaction" name="maxReaction" type="number" id="maxReaction" placeholder="Maximum reaction"></div>
+              </div>
+              <div class="row g-3">
+                <div class="col-sm-3 col-form-label"><label for="balance">Balance</label></div>
+                <div class="col-auto"><input [(ngModel)]="minBalance" name="minBalance" type="number" id="minBalance" placeholder="Minimum balance"></div>
+                <div class="col-auto"><input [(ngModel)]="maxBalance" name="maxBalance" type="number" id="maxBalance" placeholder="Maximum balance"></div>
+              </div>
+              <div class="row g-3">
+                <div class="col-sm-3 col-form-label"><label for="shotPower">Shot power</label></div>
+                <div class="col-auto"><input [(ngModel)]="minShotPower" name="minShotPower" type="number" id="minShotPower" placeholder="Minimum shotPower"></div>
+                <div class="col-auto"><input [(ngModel)]="maxShotPower" name="maxShotPower" type="number" id="maxShotPower" placeholder="Maximum shotPower"></div>
+              </div>
+              <div class="row g-3">
+                <div class="col-sm-3 col-form-label"><label for="jumping">Jumping</label></div>
+                <div class="col-auto"><input [(ngModel)]="minJumping" name="minJumping" type="number" id="minJumping" placeholder="Minimum jumping"></div>
+                <div class="col-auto"><input [(ngModel)]="maxJumping" name="maxJumping" type="number" id="maxJumping" placeholder="Maximum jumping"></div>
+              </div>
+              <div class="row g-3">
+                <div class="col-sm-3 col-form-label"><label for="stamina">Stamina</label></div>
+                <div class="col-auto"><input [(ngModel)]="minStamina" name="minStamina" type="number" id="minStamina" placeholder="Minimum stamina"></div>
+                <div class="col-auto"><input [(ngModel)]="maxStamina" name="maxStamina" type="number" id="maxStamina" placeholder="Maximum stamina"></div>
+              </div>
+              <div class="row g-3">
+                <div class="col-sm-3 col-form-label"><label for="aggression">Aggression</label></div>
+                <div class="col-auto"><input [(ngModel)]="minAggression" name="minAggression" type="number" id="minAggression" placeholder="Minimum aggression"></div>
+                <div class="col-auto"><input [(ngModel)]="maxAggression" name="maxAggression" type="number" id="maxAggression" placeholder="Maximum aggression"></div>
+              </div>
+              <div class="row g-3">
+                <div class="col-sm-3 col-form-label"><label for="longShots">Long shots</label></div>
+                <div class="col-auto"><input [(ngModel)]="minLongShots" name="minLongShots" type="number" id="minLongShots" placeholder="Minimum longShots"></div>
+                <div class="col-auto"><input [(ngModel)]="maxLongShots" name="maxLongShots" type="number" id="maxLongShots" placeholder="Maximum longShots"></div>
+              </div>
+              <div class="row g-3">
+                <div class="col-sm-3 col-form-label"><label for="crossing">Crossing</label></div>
+                <div class="col-auto"><input [(ngModel)]="minCrossing" name="minCrossing" type="number" id="minCrossing" placeholder="Minimum crossing"></div>
+                <div class="col-auto"><input [(ngModel)]="maxCrossing" name="maxCrossing" type="number" id="maxCrossing" placeholder="Maximum crossing"></div>
+              </div>
+              <div class="row g-3">
+                <div class="col-sm-3 col-form-label"><label for="finishing">Finishing</label></div>
+                <div class="col-auto"><input [(ngModel)]="minFinishing" name="minFinishing" type="number" id="minFinishing" placeholder="Minimum finishing"></div>
+                <div class="col-auto"><input [(ngModel)]="maxFinishing" name="maxFinishing" type="number" id="maxFinishing" placeholder="Maximum finishing"></div>
+              </div>
+              <div class="row g-3">
+                <div class="col-sm-3 col-form-label"><label for="shortPassing">Short passing</label></div>
+                <div class="col-auto"><input [(ngModel)]="minShortPassing" name="minShortPassing" type="number" id="minShortPassing" placeholder="Minimum shortPassing"></div>
+                <div class="col-auto"><input [(ngModel)]="maxShortPassing" name="maxShortPassing" type="number" id="maxShortPassing" placeholder="Maximum shortPassing"></div>
+              </div>
+              
+              <div class="row g-2">
+                <div class="col-sm-3 col-form-label"><label for="preferredFoot">Preferred foot</label></div>
+
+                <div class="col-auto"><input class="form-check-input" type="radio" name="preferredFootRadios" id="any" value="any" checked>
+                  <label class="form-check-label" for="any">Any</label>
                 </div>
-                <!-- Preferred foot drop down (not yet implemented)-->
-                  <!-- <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Dropdown
-                    </button>
-                      </div> -->
-                <div class="mb-3">
-                  <label for="potential">Potential</label>
-                  <input [(ngModel)]="potentialMin" name="potentialMin" type="number" id="potentialMin" placeholder="Minimum potential">
-                  <input [(ngModel)]="potentialMax" name="potentialMax" type="number" id="potentialMax" placeholder="Maximum potential">
+                <div class="col-auto"><input class="form-check-input" type="radio" name="preferredFootRadios" id="right" value="right">
+                  <label class="form-check-label" for="right">Right</label>
                 </div>
-                <div class="mb-3">
-                  <label for="potential">Height</label>
-                  <input [(ngModel)]="heightMin" name="heightMin" type="number" id="heightMin" placeholder="Minimum height">
-                  <input [(ngModel)]="heightMax" name="heightMax" type="number" id="heightMax" placeholder="Maximum height">
+                <div class="col-auto"><input class="form-check-input" type="radio" name="preferredFootRadios" id="left" value="left">
+                  <label class="form-check-label" for="left">Left</label>
                 </div>
-                <div class="mb-3">
-                  <label for="value">value</label>
-                  <input [(ngModel)]="minValue" name="minValue" type="number" id="minValue" placeholder="Minimum value">
-                  <input [(ngModel)]="maxValue" name="maxValue" type="number" id="maxValue" placeholder="Maximum value">
-                </div>
-                <div class="mb-3">
-                  <label for="wage">wage</label>
-                  <input [(ngModel)]="minWage" name="minWage" type="number" id="minWage" placeholder="Minimum wage">
-                  <input [(ngModel)]="maxWage" name="maxWage" type="number" id="maxWage" placeholder="Maximum wage">
-                </div>
-                <div class="mb-3">
-                  <label for="headingAccuracy">headingAccuracy</label>
-                  <input [(ngModel)]="minHeadingAccuracy" name="minHeadingAccuracy" type="number" id="minHeadingAccuracy" placeholder="Minimum headingAccuracy">
-                  <input [(ngModel)]="maxHeadingAccuracy" name="maxHeadingAccuracy" type="number" id="maxHeadingAccuracy" placeholder="Maximum headingAccuracy">
-                </div>
-                <div class="mb-3">
-                  <label for="volleys">volleys</label>
-                  <input [(ngModel)]="minVolleys" name="minVolleys" type="number" id="minVolleys" placeholder="Minimum volleys">
-                  <input [(ngModel)]="maxVolleys" name="maxVolleys" type="number" id="maxVolleys" placeholder="Maximum volleys">
-                </div>
-                
-                <div class="mb-3">
-                  <label for="dribbling">dribbling</label>
-                  <input [(ngModel)]="minDribbling" name="minDribbling" type="number" id="minDribbling" placeholder="Minimum dribbling">
-                  <input [(ngModel)]="maxDribbling" name="maxDribbling" type="number" id="maxDribbling" placeholder="Maximum dribbling">
-                </div>
-                <div class="mb-3">
-                  <label for="curve">curve</label>
-                  <input [(ngModel)]="minCurve" name="minCurve" type="number" id="minCurve" placeholder="Minimum curve">
-                  <input [(ngModel)]="maxCurve" name="maxCurve" type="number" id="maxCurve" placeholder="Maximum curve">
-                </div>
-                <div class="mb-3">
-                  <label for="fkAccuracy">fkAccuracy</label>
-                  <input [(ngModel)]="minFkAccuracy" name="minFkAccuracy" type="number" id="minFkAccuracy" placeholder="Minimum fkAccuracy">
-                  <input [(ngModel)]="maxFkAccuracy" name="maxFkAccuracy" type="number" id="maxFkAccuracy" placeholder="Maximum fkAccuracy">
-                </div>
-                <div class="mb-3">
-                  <label for="acceleration">acceleration</label>
-                  <input [(ngModel)]="minAcceleration" name="minAcceleration" type="number" id="minAcceleration" placeholder="Minimum acceleration">
-                  <input [(ngModel)]="maxAcceleration" name="maxAcceleration" type="number" id="maxAcceleration" placeholder="Maximum acceleration">
-                </div>
-                <div class="mb-3">
-                  <label for="sprintSpeed">sprintSpeed</label>
-                  <input [(ngModel)]="minSprintSpeed" name="minSprintSpeed" type="number" id="minSprintSpeed" placeholder="Minimum sprintSpeed">
-                  <input [(ngModel)]="maxSprintSpeed" name="maxSprintSpeed" type="number" id="maxSprintSpeed" placeholder="Maximum sprintSpeed">
-                </div>
-                <div class="mb-3">
-                  <label for="agility">agility</label>
-                  <input [(ngModel)]="minAgility" name="minAgility" type="number" id="minAgility" placeholder="Minimum agility">
-                  <input [(ngModel)]="maxAgility" name="maxAgility" type="number" id="maxAgility" placeholder="Maximum agility">
-                </div>
-                <div class="mb-3">
-                  <label for="reaction">reaction</label>
-                  <input [(ngModel)]="minReaction" name="minReaction" type="number" id="minReaction" placeholder="Minimum reaction">
-                  <input [(ngModel)]="maxReaction" name="maxReaction" type="number" id="maxReaction" placeholder="Maximum reaction">
-                </div>
-                <div class="mb-3">
-                  <label for="balance">balance</label>
-                  <input [(ngModel)]="minBalance" name="minBalance" type="number" id="minBalance" placeholder="Minimum balance">
-                  <input [(ngModel)]="maxBalance" name="maxBalance" type="number" id="maxBalance" placeholder="Maximum balance">
-                </div>
-                <div class="mb-3">
-                  <label for="shotPower">shotPower</label>
-                  <input [(ngModel)]="minShotPower" name="minShotPower" type="number" id="minShotPower" placeholder="Minimum shotPower">
-                  <input [(ngModel)]="maxShotPower" name="maxShotPower" type="number" id="maxShotPower" placeholder="Maximum shotPower">
-                </div>
-                <div class="mb-3">
-                  <label for="jumping">jumping</label>
-                  <input [(ngModel)]="minJumping" name="minJumping" type="number" id="minJumping" placeholder="Minimum jumping">
-                  <input [(ngModel)]="maxJumping" name="maxJumping" type="number" id="maxJumping" placeholder="Maximum jumping">
-                </div>
-                <div class="mb-3">
-                  <label for="stamina">stamina</label>
-                  <input [(ngModel)]="minStamina" name="minStamina" type="number" id="minStamina" placeholder="Minimum stamina">
-                  <input [(ngModel)]="maxStamina" name="maxStamina" type="number" id="maxStamina" placeholder="Maximum stamina">
-                </div>
-                <div class="mb-3">
-                  <label for="aggression">aggression</label>
-                  <input [(ngModel)]="minAggression" name="minAggression" type="number" id="minAggression" placeholder="Minimum aggression">
-                  <input [(ngModel)]="maxAggression" name="maxAggression" type="number" id="maxAggression" placeholder="Maximum aggression">
-                </div>
-                <div class="mb-3">
-                  <label for="longShots">longShots</label>
-                  <input [(ngModel)]="minLongShots" name="minLongShots" type="number" id="minLongShots" placeholder="Minimum longShots">
-                  <input [(ngModel)]="maxLongShots" name="maxLongShots" type="number" id="maxLongShots" placeholder="Maximum longShots">
-                </div>
-                <div class="mb-3">
-                  <label for="crossing">crossing</label>
-                  <input [(ngModel)]="minCrossing" name="minCrossing" type="number" id="minCrossing" placeholder="Minimum crossing">
-                  <input [(ngModel)]="maxCrossing" name="maxCrossing" type="number" id="maxCrossing" placeholder="Maximum crossing">
-                </div>
-                <div class="mb-3">
-                  <label for="finishing">finishing</label>
-                  <input [(ngModel)]="minFinishing" name="minFinishing" type="number" id="minFinishing" placeholder="Minimum finishing">
-                  <input [(ngModel)]="maxFinishing" name="maxFinishing" type="number" id="maxFinishing" placeholder="Maximum finishing">
-                </div>
-                <div class="mb-3">
-                  <label for="shortPassing">shortPassing</label>
-                  <input [(ngModel)]="minShortPassing" name="minShortPassing" type="number" id="minShortPassing" placeholder="Minimum shortPassing">
-                  <input [(ngModel)]="maxShortPassing" name="maxShortPassing" type="number" id="maxShortPassing" placeholder="Maximum shortPassing">
-                </div>
+              </div>
+
                 
 
                 
-              <button type="submit" class="btn btn-primary" (click)="goToPage(searchForm.value.name,ageMin,ageMax,overallMin,overallMax,potentialMin,potentialMax,heightMin,heightMax,minValue,maxValue,minWage,maxWage,minHeadingAccuracy,maxHeadingAccuracy,minVolleys,maxVolleys,minDribbling,maxDribbling,minCurve,maxCurve,minFkAccuracy,maxFkAccuracy,minAcceleration,maxAcceleration,minSprintSpeed,maxSprintSpeed,minAgility,maxAgility,minReaction,maxReaction,minBalance,maxBalance,minShotPower,maxShotPower,minJumping,maxJumping,minStamina,maxStamina,minAggression,maxAggression,minLongShots,maxLongShots,minCrossing,maxCrossing,minFinishing,maxFinishing,minShortPassing,maxShortPassing)">Filter</button>
-              
-              </form>
+
+            <div class="row g-2">
+              <div class="col-auto"><button type="submit" class="btn btn-primary" (click)="goToPage(searchForm.value.name,ageMin,ageMax,overallMin,overallMax,potentialMin,potentialMax,heightMin,heightMax,minValue,maxValue,minWage,maxWage,minHeadingAccuracy,maxHeadingAccuracy,minVolleys,maxVolleys,minDribbling,maxDribbling,minCurve,maxCurve,minFkAccuracy,maxFkAccuracy,minAcceleration,maxAcceleration,minSprintSpeed,maxSprintSpeed,minAgility,maxAgility,minReaction,maxReaction,minBalance,maxBalance,minShotPower,maxShotPower,minJumping,maxJumping,minStamina,maxStamina,minAggression,maxAggression,minLongShots,maxLongShots,minCrossing,maxCrossing,minFinishing,maxFinishing,minShortPassing,maxShortPassing)">Filter</button></div>
+              <div class="col-auto"><button type="button" class="btn btn-primary" (click)="resetValues(searchForm.value.name)">Clear filters</button></div>
             </div>
-          </ul>
-          <form #searchForm="ngForm" (ngSubmit)="goToPage(searchForm.value.name,ageMin,ageMax,overallMin,overallMax,potentialMin,potentialMax,heightMin,heightMax,minValue,maxValue,minWage,maxWage,minHeadingAccuracy,maxHeadingAccuracy,minVolleys,maxVolleys,minDribbling,maxDribbling,minCurve,maxCurve,minFkAccuracy,maxFkAccuracy,minAcceleration,maxAcceleration,minSprintSpeed,maxSprintSpeed,minAgility,maxAgility,minReaction,maxReaction,minBalance,maxBalance,minShotPower,maxShotPower,minJumping,maxJumping,minStamina,maxStamina,minAggression,maxAggression,minLongShots,maxLongShots,minCrossing,maxCrossing,minFinishing,maxFinishing,minShortPassing,maxShortPassing)" class="d-flex" role="search">
-            <input type="search" name="name" ngModel class="form-control me-2" placeholder="Search players" aria-label="Search">
-            <button class="btn btn-success" type="submit">Search</button>
-          </form>
-        </div>
-      </div>
-    </nav>
-    <div class="container">
-      
-      
-      <div class="row">
-          <div class="col-md-12 mt-3">
-            <ng-container *ngSwitchCase="'APP_ERROR'">{{ state.error | json }}</ng-container>
-            <ng-container *ngSwitchCase="'APP_LOADING'">
-              <div class="d-flex justify-content-center mt-4">
-                <div class="spinner-border" role="status">
-                  <span class="visually-hidden">Loading...</span>
-                </div>
-              </div>
-            </ng-container>
-            <ng-container *ngSwitchCase="'APP_LOADED'">
-              <h3>Spieler Liste</h3>
-              <table class="table table-striped">
-                  <thead>
-                    <tr>
-                      <th scope="col">Photo</th>
-                      <th scope="col">Known Name</th>
-                      <th scope="col">Age</th>
-                      <th scope="col">Nationality</th>
-                      <th scope="col">Club</th>
-                      <th scope="col">Overall</th>
-                      <th scope="col">Potential</th>
-                      <th scope="col">Best Position</th>
-                      <th scope="col">Value EUR</th>
-                      <th scope="col">Height</th>
-                      <th scope="col">Weight</th>
-                      <th scope="col" [hidden]="condArray[0]">Heading Accuracy</th>
-                      <th scope="col" [hidden]="condArray[1]">Volleys</th>
-                      <th scope="col" [hidden]="condArray[2]">Dribbling</th>
-                      <th scope="col" [hidden]="condArray[3]">Curve</th>
-                      <th scope="col" [hidden]="condArray[4]">FK Accuracy</th>
-                      <th scope="col" [hidden]="condArray[5]">Acceleration</th>
-                      <th scope="col" [hidden]="condArray[6]">Sprint Speed</th>
-                      <th scope="col" [hidden]="condArray[7]">Agility</th>
-                      <th scope="col" [hidden]="condArray[8]">Reaction</th>
-                      <th scope="col" [hidden]="condArray[9]">Balance</th>
-                      <th scope="col" [hidden]="condArray[10]">Shot Power</th>
-                      <th scope="col" [hidden]="condArray[11]">Jumping</th>
-                      <th scope="col" [hidden]="condArray[12]">Stamina</th>
-                      <th scope="col" [hidden]="condArray[13]">Aggression</th>
-                      <th scope="col" [hidden]="condArray[14]">Long Shots</th>
-                      <th scope="col" [hidden]="condArray[15]">Crossing</th>
-                      <th scope="col" [hidden]="condArray[16]">Finishing</th>
-                      <th scope="col" [hidden]="condArray[17]">Short Passing</th>
-                      <th scope="col" [hidden]="condArray[18]">Wage</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let spieler of state.appData.data.page.content; let i = index;">
-                      <th scope="row"><img [src]="spieler.photoURL" width="42" height="42" class="rounded-circle"S></th>
-                      <td>{{ spieler.knownName }}</td>
-                      <td>{{ spieler.age }}</td>
-                      <td><img [src]="spieler.flag" width="42" height="42" class="rounded-circle"></td>
-                      <td><img [src]="spieler.clubLogo" width="42" height="42" class="rounded-circle"></td>
-                      <td>{{ spieler.overall }}</td>
-                      <td>{{ spieler.potential }}</td>
-                      <td>{{ spieler.bestPos }}</td>
-                      <td>{{ spieler.valueEUR }}</td>
-                      <td>{{ spieler.height }}</td>
-                      <td>{{ spieler.weight }}</td>
-                      <!-- -------------------- -->
-                      <td [hidden]="condArray[0]">{{ spieler.headingAccuracy }}</td>
-                      <td [hidden]="condArray[1]">{{ spieler.volleys }}</td>
-                      <td [hidden]="condArray[2]">{{ spieler.dribbling }}</td>
-                      <td [hidden]="condArray[3]">{{ spieler.curve }}</td>
-                      <td [hidden]="condArray[4]">{{ spieler.fKAccuracy }}</td>
-                      <td [hidden]="condArray[5]">{{ spieler.acceleration }}</td>
-                      <td [hidden]="condArray[6]">{{ spieler.sprintSpeed }}</td>
-                      <td [hidden]="condArray[7]">{{ spieler.agility }}</td>
-                      <td [hidden]="condArray[8]">{{ spieler.reaction }}</td>
-                      <td [hidden]="condArray[9]">{{ spieler.balance }}</td>
-                      <td [hidden]="condArray[10]">{{ spieler.shotPower }}</td>
-                      <td [hidden]="condArray[11]">{{ spieler.jumping }}</td>
-                      <td [hidden]="condArray[12]">{{ spieler.stamina }}</td>
-                      <td [hidden]="condArray[13]">{{ spieler.aggression }}</td>
-                      <td [hidden]="condArray[14]">{{ spieler.longShots }}</td>
-                      <td [hidden]="condArray[15]">{{ spieler.crossing }}</td>
-                      <td [hidden]="condArray[16]">{{ spieler.finishing }}</td>
-                      <td [hidden]="condArray[17]">{{ spieler.shortPassing }}</td>
-                      <td [hidden]="condArray[18]">{{ spieler.wage }}</td>
-                    </tr>
-                  </tbody>
-                </table>
-                <div *ngIf="state.appData.data.page.content.length < 1" class="alert alert-secondary" role="alert">
-                  No players found
-                </div>
-                <nav *ngIf="state.appData.data.page.content.length > 0" aria-label="Page navigation example">
-                  <ul class="pagination justify-content-end">
-                    <li class="page-item pointer" [ngClass]="0 == (currentPage$ | async) ? ' disabled' : ''">
-                      <a (click)="goToNextOrPreviousPage('backward', searchForm.value.name)" class="page-link" aria-label="Previous">
-                        <span aria-hidden="true">&laquo; Previous</span>
-                      </a>
-                    </li>
-                    <li *ngFor="let pageNumber of [].constructor(state.appData.data.page.totalPages); let i = index;" 
-                        class="page-item pointer" [ngClass]="i == (currentPage$ | async) ? ' active' : ''">
-                      <a (click)="goToPage(searchForm.value.name, ageMin,ageMax,overallMin,overallMax,potentialMin,potentialMax,heightMin,heightMax,minValue,maxValue,minWage,maxWage,minHeadingAccuracy,maxHeadingAccuracy,minVolleys,maxVolleys,minDribbling,maxDribbling,minCurve,maxCurve,minFkAccuracy,maxFkAccuracy,minAcceleration,maxAcceleration,minSprintSpeed,maxSprintSpeed,minAgility,maxAgility,minReaction,maxReaction,minBalance,maxBalance,minShotPower,maxShotPower,minJumping,maxJumping,minStamina,maxStamina,minAggression,maxAggression,minLongShots,maxLongShots,minCrossing,maxCrossing,minFinishing,maxFinishing,minShortPassing,maxShortPassing, i)" class="page-link">
-                        {{ i + 1 }}
-                      </a>
-                    </li>
-                    <li class="page-item pointer" [ngClass]="(state.appData.data.page.totalPages - 1) == (currentPage$ | async) ? ' disabled' : ''">
-                      <a (click)="goToNextOrPreviousPage('forward', searchForm.value.name)" class="page-link" aria-label="Next">
-                        <span aria-hidden="true">Next &raquo;</span>
-                      </a>
-                    </li>
-                  </ul>
-                </nav>
-            </ng-container>
+            </form>
           </div>
+        </ul>
+        <form #searchForm="ngForm" (ngSubmit)="goToPage(searchForm.value.name,ageMin,ageMax,overallMin,overallMax,potentialMin,potentialMax,heightMin,heightMax,minValue,maxValue,minWage,maxWage,minHeadingAccuracy,maxHeadingAccuracy,minVolleys,maxVolleys,minDribbling,maxDribbling,minCurve,maxCurve,minFkAccuracy,maxFkAccuracy,minAcceleration,maxAcceleration,minSprintSpeed,maxSprintSpeed,minAgility,maxAgility,minReaction,maxReaction,minBalance,maxBalance,minShotPower,maxShotPower,minJumping,maxJumping,minStamina,maxStamina,minAggression,maxAggression,minLongShots,maxLongShots,minCrossing,maxCrossing,minFinishing,maxFinishing,minShortPassing,maxShortPassing)" class="d-flex" role="search">
+          <input type="search" name="name" ngModel class="form-control me-2" placeholder="Search players" aria-label="Search">
+          <button class="btn btn-success" type="submit">Search</button>
+        </form>
       </div>
     </div>
-    </ng-container>
-    
-  <router-outlet></router-outlet>
+  </nav>
+  <div class="container">
+    <div class="row">
+        <div class="col-md-12 mt-3">
+          <ng-container *ngSwitchCase="'APP_ERROR'">{{ state.error | json }}</ng-container>
+          <ng-container *ngSwitchCase="'APP_LOADING'">
+            <div class="d-flex justify-content-center mt-4">
+              <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          </ng-container>
+          <ng-container *ngSwitchCase="'APP_LOADED'">
+            <h3>Spieler Liste</h3>
+            <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Photo</th>
+                    <th scope="col">Known Name</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Nationality</th>
+                    <th scope="col">Club</th>
+                    <th scope="col">Overall</th>
+                    <th scope="col">Potential</th>
+                    <th scope="col">Best Position</th>
+                    <th scope="col">Value EUR</th>
+                    <th scope="col">Height</th>
+                    <th scope="col">Weight</th>
+                    <th scope="col" [hidden]="condArray[0]">Heading Accuracy</th>
+                    <th scope="col" [hidden]="condArray[1]">Volleys</th>
+                    <th scope="col" [hidden]="condArray[2]">Dribbling</th>
+                    <th scope="col" [hidden]="condArray[3]">Curve</th>
+                    <th scope="col" [hidden]="condArray[4]">FK Accuracy</th>
+                    <th scope="col" [hidden]="condArray[5]">Acceleration</th>
+                    <th scope="col" [hidden]="condArray[6]">Sprint Speed</th>
+                    <th scope="col" [hidden]="condArray[7]">Agility</th>
+                    <th scope="col" [hidden]="condArray[8]">Reaction</th>
+                    <th scope="col" [hidden]="condArray[9]">Balance</th>
+                    <th scope="col" [hidden]="condArray[10]">Shot Power</th>
+                    <th scope="col" [hidden]="condArray[11]">Jumping</th>
+                    <th scope="col" [hidden]="condArray[12]">Stamina</th>
+                    <th scope="col" [hidden]="condArray[13]">Aggression</th>
+                    <th scope="col" [hidden]="condArray[14]">Long Shots</th>
+                    <th scope="col" [hidden]="condArray[15]">Crossing</th>
+                    <th scope="col" [hidden]="condArray[16]">Finishing</th>
+                    <th scope="col" [hidden]="condArray[17]">Short Passing</th>
+                    <th scope="col" [hidden]="condArray[18]">Wage</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let spieler of state.appData.data.page.content; let i = index;">
+                    <th scope="row"><img [src]="spieler.photoURL" width="42" height="42" class="rounded-circle"S></th>
+                    <td>{{ spieler.knownName }}</td>
+                    <td>{{ spieler.age }}</td>
+                    <td><img [src]="spieler.flag" width="42" height="42" class="rounded-circle"></td>
+                    <td><img [src]="spieler.clubLogo" width="42" height="42" class="rounded-circle"></td>
+                    <td>{{ spieler.overall }}</td>
+                    <td>{{ spieler.potential }}</td>
+                    <td>{{ spieler.bestPos }}</td>
+                    <td>{{ spieler.valueEUR }}</td>
+                    <td>{{ spieler.height }}</td>
+                    <td>{{ spieler.weight }}</td>
+                    <!-- -------------------- -->
+                    <td [hidden]="condArray[0]">{{ spieler.headingAccuracy }}</td>
+                    <td [hidden]="condArray[1]">{{ spieler.volleys }}</td>
+                    <td [hidden]="condArray[2]">{{ spieler.dribbling }}</td>
+                    <td [hidden]="condArray[3]">{{ spieler.curve }}</td>
+                    <td [hidden]="condArray[4]">{{ spieler.fKAccuracy }}</td>
+                    <td [hidden]="condArray[5]">{{ spieler.acceleration }}</td>
+                    <td [hidden]="condArray[6]">{{ spieler.sprintSpeed }}</td>
+                    <td [hidden]="condArray[7]">{{ spieler.agility }}</td>
+                    <td [hidden]="condArray[8]">{{ spieler.reaction }}</td>
+                    <td [hidden]="condArray[9]">{{ spieler.balance }}</td>
+                    <td [hidden]="condArray[10]">{{ spieler.shotPower }}</td>
+                    <td [hidden]="condArray[11]">{{ spieler.jumping }}</td>
+                    <td [hidden]="condArray[12]">{{ spieler.stamina }}</td>
+                    <td [hidden]="condArray[13]">{{ spieler.aggression }}</td>
+                    <td [hidden]="condArray[14]">{{ spieler.longShots }}</td>
+                    <td [hidden]="condArray[15]">{{ spieler.crossing }}</td>
+                    <td [hidden]="condArray[16]">{{ spieler.finishing }}</td>
+                    <td [hidden]="condArray[17]">{{ spieler.shortPassing }}</td>
+                    <td [hidden]="condArray[18]">{{ spieler.wage }}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div *ngIf="state.appData.data.page.content.length < 1" class="alert alert-secondary" role="alert">
+                No players found
+              </div>
+              <nav *ngIf="state.appData.data.page.content.length > 0" aria-label="Page navigation example">
+                <ul class="pagination justify-content-end">
+                  <li class="page-item pointer" [ngClass]="0 == (currentPage$ | async) ? ' disabled' : ''">
+                    <a (click)="goToNextOrPreviousPage('backward', searchForm.value.name)" class="page-link" aria-label="Previous">
+                      <span aria-hidden="true">&laquo; Previous</span>
+                    </a>
+                  </li>
+                  <li *ngFor="let pageNumber of [].constructor(state.appData.data.page.totalPages); let i = index;" 
+                      class="page-item pointer" [ngClass]="i == (currentPage$ | async) ? ' active' : ''">
+                    <a (click)="goToPage(searchForm.value.name, ageMin,ageMax,overallMin,overallMax,potentialMin,potentialMax,heightMin,heightMax,minValue,maxValue,minWage,maxWage,minHeadingAccuracy,maxHeadingAccuracy,minVolleys,maxVolleys,minDribbling,maxDribbling,minCurve,maxCurve,minFkAccuracy,maxFkAccuracy,minAcceleration,maxAcceleration,minSprintSpeed,maxSprintSpeed,minAgility,maxAgility,minReaction,maxReaction,minBalance,maxBalance,minShotPower,maxShotPower,minJumping,maxJumping,minStamina,maxStamina,minAggression,maxAggression,minLongShots,maxLongShots,minCrossing,maxCrossing,minFinishing,maxFinishing,minShortPassing,maxShortPassing, i)" class="page-link">
+                      {{ i + 1 }}
+                    </a>
+                  </li>
+                  <li class="page-item pointer" [ngClass]="(state.appData.data.page.totalPages - 1) == (currentPage$ | async) ? ' disabled' : ''">
+                    <a (click)="goToNextOrPreviousPage('forward', searchForm.value.name)" class="page-link" aria-label="Next">
+                      <span aria-hidden="true">Next &raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+          </ng-container>
+        </div>
+    </div>
+  </div>
+  </ng-container>
   
+<router-outlet></router-outlet>
