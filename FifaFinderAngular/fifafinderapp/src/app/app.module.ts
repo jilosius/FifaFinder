@@ -6,7 +6,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StartComponent } from './start/start.component';
-// import { MatMenuModule } from '@angular/material/menu'; 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatSortModule} from '@angular/material/sort'; 
 
 @NgModule({
   declarations: [
@@ -18,7 +19,9 @@ import { StartComponent } from './start/start.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatSortModule
     // MatMenuModule
   ],
   providers: [],
