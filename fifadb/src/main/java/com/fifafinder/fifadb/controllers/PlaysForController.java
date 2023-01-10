@@ -1,6 +1,7 @@
 package com.fifafinder.fifadb.controllers;
 
-import com.fifafinder.fifadb.entities.PlaysFor;
+import com.fifafinder.fifadb.entities.FifaVersion;
+import com.fifafinder.fifadb.entities.Spieler;
 import com.fifafinder.fifadb.services.PlaysForService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,8 +20,8 @@ public class PlaysForController {
     }
 
     @PostMapping("/add")
-    public void addPlayer(@RequestBody PlaysFor playsFor){
-        playsForService.addPlayer(playsFor);
+    public void addPlayer(@RequestBody Spieler spieler, @RequestBody FifaVersion fifaversion){
+        playsForService.addPlayer(spieler, fifaversion);
     }
 
 }
