@@ -1,5 +1,6 @@
 package com.fifafinder.fifadb.repositories;
 
+import ch.qos.logback.core.pattern.PatternLayoutEncoderBase;
 import com.fifafinder.fifadb.dto.SpielerDetailDTO;
 import com.fifafinder.fifadb.entities.FifaVersion;
 import com.fifafinder.fifadb.entities.PlaysFor;
@@ -16,4 +17,5 @@ public interface PlaysForRepository extends JpaRepository<PlaysFor, PlaysForId> 
 
     SpielerDetailDTO findById(PlaysFor id);
     PlaysFor findByPlayerIDAndFifaVersion(Spieler spieler, FifaVersion fifaVersion);
+    PlaysFor findPlaysForById(PlaysForId playsForId);
 }
