@@ -23,89 +23,111 @@
             <form class="dropdown-menu p-4" style="width: 700px;">
               <div class="row g-3">
                 <div class="col-sm-3 col-form-label"><label for="fifaVersion">Fifa version</label></div>
-                <div class="col-auto"><input [(ngModel)]="fifaVersion" name="fifaVersion" type="number" id="fifaVersion"
-                    placeholder="Year"></div>
+                <div class="col-auto"><input [(ngModel)]="fifaVersion" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="fifaVersion = fifaVersion || 23" name="fifaVersion" type="number" id="fifaVersion"
+                  placeholder="Year"></div>
               </div>
 
               <div class="row g-3">
                 <div class="col-sm-3 col-form-label"><label for="age">Age</label></div>
-                <div class="col-auto"><input [(ngModel)]="ageMin" name="ageMin" type="number" id="ageMin"
-                    placeholder="Minimum Age"></div>
-                <div class="col-auto"><input [(ngModel)]="ageMax" name="ageMax" type="number" id="ageMax"
-                    placeholder="Maximum Age"></div>
+                <div class="col-auto"><input [(ngModel)]="ageMin" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="ageMin = ageMin || 0" name="ageMin" type="number" id="ageMin"
+                  placeholder="Minimum Age"></div>
+                <div class="col-auto"><input [(ngModel)]="ageMax" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="ageMax = ageMax || 100" name="ageMax" type="number" id="ageMax"
+                  placeholder="Maximum Age"></div>
               </div>
 
               <div class="row g-3">
                 <div class="col-sm-3 col-form-label"><label for="overall">Overall</label></div>
-                <div class="col-auto"><input [(ngModel)]="overallMin" name="overallMin" type="number" id="overallMin"
-                    placeholder="Minimum Overall"></div>
-                <div class="col-auto"><input [(ngModel)]="overallMax" name="overallMax" type="number" id="overallMax"
-                    placeholder="Maximum Overall"></div>
+                <div class="col-auto"><input [(ngModel)]="overallMin" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="overallMin = overallMin || 0" name="overallMin" type="number" id="overallMin"
+                  placeholder="Minimum Overall"></div>
+                <div class="col-auto"><input [(ngModel)]="overallMax" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="overallMax = overallMax || 100" name="overallMax" type="number" id="overallMax"
+                  placeholder="Maximum Overall"></div>
               </div>
 
               <div class="row g-3">
                 <div class="col-sm-3 col-form-label"><label for="potential">Potential</label></div>
-                <div class="col-auto"><input [(ngModel)]="potentialMin" name="potentialMin" type="number"
-                    id="potentialMin" placeholder="Minimum potential"></div>
-                <div class="col-auto"><input [(ngModel)]="potentialMax" name="potentialMax" type="number"
-                    id="potentialMax" placeholder="Maximum potential"></div>
+                <div class="col-auto"><input [(ngModel)]="potentialMin" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="potentialMin = potentialMin || 0" name="potentialMin" type="number" id="potentialMin"
+                  placeholder="Minimum Potential"></div>
+                <div class="col-auto"><input [(ngModel)]="potentialMax" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="potentialMax = potentialMax || 100" name="potentialMax" type="number" id="potentialMax"
+                  placeholder="Maximum Potential"></div>
               </div>
 
               <div class="row g-3">
                 <div class="col-sm-3 col-form-label"><label for="potential">Height</label></div>
-                <div class="col-auto"><input [(ngModel)]="heightMin" name="heightMin" type="number" id="heightMin"
-                    placeholder="Minimum height"></div>
-                <div class="col-auto"><input [(ngModel)]="heightMax" name="heightMax" type="number" id="heightMax"
-                    placeholder="Maximum height"></div>
+                <div class="col-auto"><input [(ngModel)]="heightMin" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="heightMin = heightMin || 0" name="heightMin" type="number" id="heightMin"
+                  placeholder="Minimum Height"></div>
+                <div class="col-auto"><input [(ngModel)]="heightMax" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="heightMax = heightMax || 300" name="heightMax" type="number" id="heightMax"
+                  placeholder="Maximum Height"></div>
               </div>
 
               <div class="row g-3">
                 <div class="col-sm-3 col-form-label"><label for="value">Value</label></div>
-                <div class="col-auto"><input [(ngModel)]="minValue" name="minValue" type="number" id="minValue"
-                    placeholder="Minimum value"></div>
-                <div class="col-auto"><input [(ngModel)]="maxValue" name="maxValue" type="number" id="maxValue"
-                    placeholder="Maximum value"></div>
+                <div class="col-auto"><input [(ngModel)]="minValue" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="minValue = minValue || 0" name="minValue" type="number" id="minValue"
+                  placeholder="Minimum Value"></div>
+                <div class="col-auto"><input [(ngModel)]="maxValue" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="maxValue = maxValue || 1000000000" name="maxValue" type="number" id="maxValue"
+                  placeholder="Maximum Value"></div>
               </div>
 
 
               <div class="row g-3">
                 <div class="col-sm-3 col-form-label"><label for="wage">Wage</label></div>
-                <div class="col-auto"><input [(ngModel)]="minWage" name="minWage" type="number" id="minWage"
-                    placeholder="Minimum wage"></div>
-                <div class="col-auto"><input [(ngModel)]="maxWage" name="maxWage" type="number" id="maxWage"
-                    placeholder="Maximum wage"></div>
+                <div class="col-auto"><input [(ngModel)]="minWage" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="minWage = minWage || 0" name="minWage" type="number" id="minWage"
+                  placeholder="Minimum Wage"></div>
+                <div class="col-auto"><input [(ngModel)]="maxWage" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="maxWage = maxWage || 1000000000" name="maxWage" type="number" id="maxWage"
+                  placeholder="Maximum Wage"></div>
               </div>
 
               <div class="row g-3">
                 <div class="col-sm-3 col-form-label"><label for="headingAccuracy">Heading Accuracy</label></div>
-                <div class="col-auto"><input [(ngModel)]="minHeadingAccuracy" name="minHeadingAccuracy" type="number"
-                    id="minHeadingAccuracy" placeholder="Minimum headingAccuracy"></div>
-                <div class="col-auto"><input [(ngModel)]="maxHeadingAccuracy" name="maxHeadingAccuracy" type="number"
-                    id="maxHeadingAccuracy" placeholder="Maximum headingAccuracy">
+                <div class="col-auto"><input [(ngModel)]="minHeadingAccuracy" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="minHeadingAccuracy = minHeadingAccuracy || 0" name="minHeadingAccuracy" type="number" id="minHeadingAccuracy"
+                  placeholder="Minimum HeadingAccuracy"></div>
+                <div class="col-auto"><input [(ngModel)]="maxHeadingAccuracy" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="maxHeadingAccuracy = maxHeadingAccuracy || 100" name="maxHeadingAccuracy" type="number" id="maxHeadingAccuracy"
+                  placeholder="Maximum HeadingAccuracy">
                 </div>
               </div>
 
               <div class="row g-3">
                 <div class="col-sm-3 col-form-label"><label for="volleys">Volleys</label></div>
-                <div class="col-auto"><input [(ngModel)]="minVolleys" name="minVolleys" type="number" id="minVolleys"
-                    placeholder="Minimum volleys"></div>
-                <div class="col-auto"><input [(ngModel)]="maxVolleys" name="maxVolleys" type="number" id="maxVolleys"
-                    placeholder="Maximum volleys"></div>
+                <div class="col-auto"><input [(ngModel)]="minVolleys" [ngModelOptions]="{standalone: true}"
+                    (ngModelChange)="minVolleys = minVolleys || 0" name="minVolleys" type="number" id="minVolleys"
+                    placeholder="Minimum Volleys"></div>
+                    <div class="col-auto"><input [(ngModel)]="maxVolleys" [ngModelOptions]="{standalone: true}"
+                      (ngModelChange)="maxVolleys = maxVolleys || 100" name="maxVolleys" type="number" id="maxVolleys"
+                      placeholder="Minimum Volleys"></div>
               </div>
 
               <div class="row g-3">
                 <div class="col-sm-3 col-form-label"><label for="dribbling">Dribbling</label></div>
-                <div class="col-auto"><input [(ngModel)]="minDribbling" name="minDribbling" type="number"
-                    id="minDribbling" placeholder="Minimum dribbling"></div>
-                <div class="col-auto"><input [(ngModel)]="maxDribbling" name="maxDribbling" type="number"
-                    id="maxDribbling" placeholder="Maximum dribbling"></div>
+                <div class="col-auto"><input [(ngModel)]="minDribbling" [ngModelOptions]="{standalone: true}"
+                    (ngModelChange)="minDribbling = minDribbling || 0" name="minDribbling" type="number"
+                    id="minDribbling" placeholder="Minimum Dribbling"></div>
+                <div class="col-auto"><input [(ngModel)]="maxDribbling" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="maxDribbling = maxDribbling || 100" name="maxDribbling" type="number"
+                  id="maxDribbling" placeholder="Maximum Dribbling"></div>
               </div>
+
               <div class="row g-3">
                 <div class="col-sm-3 col-form-label"><label for="curve">Curve</label></div>
-                <div class="col-auto"><input [(ngModel)]="minCurve" name="minCurve" type="number" id="minCurve"
-                    placeholder="Minimum curve"></div>
-                <div class="col-auto"><input [(ngModel)]="maxCurve" name="maxCurve" type="number" id="maxCurve"
-                    placeholder="Maximum curve"></div>
+                <div class="col-auto"><input [(ngModel)]="minCurve" [ngModelOptions]="{standalone: true}"
+                    (ngModelChange)="minCurve = minCurve || 0" name="minCurve" type="number" id="minCurve"
+                    placeholder="Minimum Curve"></div>
+                <div class="col-auto"><input [(ngModel)]="maxCurve" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="maxCurve = maxCurve || 100" name="maxCurve" type="number" id="maxCurve"
+                  placeholder="Maximum Curve"></div>
               </div>
               <!-- <div class="row g-3">
                   <div class="col-sm-3 col-form-label"><label for="fkAccuracy">FK Accuracy</label></div>
@@ -114,109 +136,135 @@
                 </div> -->
               <div class="row g-3">
                 <div class="col-sm-3 col-form-label"><label for="acceleration">Acceleration</label></div>
-                <div class="col-auto"><input [(ngModel)]="minAcceleration" name="minAcceleration" type="number"
-                    id="minAcceleration" placeholder="Minimum acceleration"></div>
-                <div class="col-auto"><input [(ngModel)]="maxAcceleration" name="maxAcceleration" type="number"
-                    id="maxAcceleration" placeholder="Maximum acceleration"></div>
+                <div class="col-auto"><input [(ngModel)]="minAcceleration" [ngModelOptions]="{standalone: true}"
+                    (ngModelChange)="minAcceleration = minAcceleration || 0" name="minAcceleration" type="number"
+                    id="minAcceleration" placeholder="Minimum Acceleration"></div>
+                <div class="col-auto"><input [(ngModel)]="maxAcceleration" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="maxAcceleration = maxAcceleration || 100" name="maxAcceleration" type="number"
+                  id="maxAcceleration" placeholder="Maximum Acceleration"></div>
               </div>
               <div class="row g-3">
                 <div class="col-sm-3 col-form-label"><label for="sprintSpeed">Sprint Speed</label></div>
-                <div class="col-auto"><input [(ngModel)]="minSprintSpeed" name="minSprintSpeed" type="number"
-                    id="minSprintSpeed" placeholder="Minimum sprintSpeed"></div>
-                <div class="col-auto"><input [(ngModel)]="maxSprintSpeed" name="maxSprintSpeed" type="number"
-                    id="maxSprintSpeed" placeholder="Maximum sprintSpeed"></div>
+                <div class="col-auto"><input [(ngModel)]="minSprintSpeed" [ngModelOptions]="{standalone: true}"
+                    (ngModelChange)="minSprintSpeed = minSprintSpeed || 0" name="minSprintSpeed" type="number"
+                    id="minSprintSpeed" placeholder="Minimum Sprint Speed"></div>
+                <div class="col-auto"><input [(ngModel)]="maxSprintSpeed" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="maxSprintSpeed = maxSprintSpeed || 100" name="maxSprintSpeed" type="number"
+                  id="maxSprintSpeed" placeholder="Maximum Sprint Speed"></div>
               </div>
               <div class="row g-3">
                 <div class="col-sm-3 col-form-label"><label for="agility">Agility</label></div>
-                <div class="col-auto"><input [(ngModel)]="minAgility" name="minAgility" type="number" id="minAgility"
-                    placeholder="Minimum agility"></div>
-                <div class="col-auto"><input [(ngModel)]="maxAgility" name="maxAgility" type="number" id="maxAgility"
-                    placeholder="Maximum agility"></div>
+                <div class="col-auto"><input [(ngModel)]="minAgility" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="minAgility = minAgility || 0" name="minAgility" type="number"
+                  id="minAgility" placeholder="Minimum Agility"></div>
+                <div class="col-auto"><input [(ngModel)]="maxAgility" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="maxAgility = maxAgility || 100" name="maxAgility" type="number"
+                  id="maxAgility" placeholder="Maximum Agility"></div>
               </div>
               <div class="row g-3">
                 <div class="col-sm-3 col-form-label"><label for="reaction">Reaction</label></div>
-                <div class="col-auto"><input [(ngModel)]="minReaction" name="minReaction" type="number" id="minReaction"
-                    placeholder="Minimum reaction"></div>
-                <div class="col-auto"><input [(ngModel)]="maxReaction" name="maxReaction" type="number" id="maxReaction"
-                    placeholder="Maximum reaction"></div>
+                <div class="col-auto"><input [(ngModel)]="minReaction" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="minReaction = minReaction || 0" name="minReaction" type="number"
+                  id="minReaction" placeholder="Minimum Reaction"></div>
+                <div class="col-auto"><input [(ngModel)]="maxReaction" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="maxReaction = maxReaction || 100" name="maxReaction" type="number"
+                  id="maxReaction" placeholder="Maximum Reaction"></div>
               </div>
               <div class="row g-3">
                 <div class="col-sm-3 col-form-label"><label for="balance">Balance</label></div>
-                <div class="col-auto"><input [(ngModel)]="minBalance" name="minBalance" type="number" id="minBalance"
-                    placeholder="Minimum balance"></div>
-                <div class="col-auto"><input [(ngModel)]="maxBalance" name="maxBalance" type="number" id="maxBalance"
-                    placeholder="Maximum balance"></div>
+                <div class="col-auto"><input [(ngModel)]="minBalance" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="minBalance = minBalance || 0" name="minBalance" type="number"
+                  id="minBalance" placeholder="Minimum Balance"></div>
+                <div class="col-auto"><input [(ngModel)]="maxBalance" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="maxBalance = maxBalance || 100" name="maxBalance" type="number"
+                  id="maxBalance" placeholder="Maximum Balance"></div>
               </div>
               <div class="row g-3">
                 <div class="col-sm-3 col-form-label"><label for="shotPower">Shot power</label></div>
-                <div class="col-auto"><input [(ngModel)]="minShotPower" name="minShotPower" type="number"
-                    id="minShotPower" placeholder="Minimum shotPower"></div>
-                <div class="col-auto"><input [(ngModel)]="maxShotPower" name="maxShotPower" type="number"
-                    id="maxShotPower" placeholder="Maximum shotPower"></div>
+                <div class="col-auto"><input [(ngModel)]="minShotPower" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="minShotPower = minShotPower || 0" name="minShotPower" type="number"
+                  id="minShotPower" placeholder="Minimum ShotPower"></div>
+                <div class="col-auto"><input [(ngModel)]="maxShotPower" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="maxShotPower = maxShotPower || 100" name="maxShotPower" type="number"
+                  id="maxShotPower" placeholder="Maximum ShotPower"></div>
               </div>
               <div class="row g-3">
                 <div class="col-sm-3 col-form-label"><label for="jumping">Jumping</label></div>
-                <div class="col-auto"><input [(ngModel)]="minJumping" name="minJumping" type="number" id="minJumping"
-                    placeholder="Minimum jumping"></div>
-                <div class="col-auto"><input [(ngModel)]="maxJumping" name="maxJumping" type="number" id="maxJumping"
-                    placeholder="Maximum jumping"></div>
+                <div class="col-auto"><input [(ngModel)]="minJumping" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="minJumping = minJumping || 0" name="minJumping" type="number"
+                  id="minJumping" placeholder="Minimum Jumping"></div>
+                <div class="col-auto"><input [(ngModel)]="maxJumping" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="maxJumping = maxJumping || 100" name="maxJumping" type="number"
+                  id="maxJumping" placeholder="Maximum Jumping"></div>
               </div>
               <div class="row g-3">
                 <div class="col-sm-3 col-form-label"><label for="stamina">Stamina</label></div>
-                <div class="col-auto"><input [(ngModel)]="minStamina" name="minStamina" type="number" id="minStamina"
-                    placeholder="Minimum stamina"></div>
-                <div class="col-auto"><input [(ngModel)]="maxStamina" name="maxStamina" type="number" id="maxStamina"
-                    placeholder="Maximum stamina"></div>
+                <div class="col-auto"><input [(ngModel)]="minStamina" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="minStamina = minStamina || 0" name="minStamina" type="number"
+                  id="minStamina" placeholder="Minimum Stamina"></div>
+                <div class="col-auto"><input [(ngModel)]="maxStamina" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="maxStamina = maxStamina || 100" name="maxStamina" type="number"
+                  id="maxStamina" placeholder="Maximum Stamina"></div>
               </div>
               <div class="row g-3">
                 <div class="col-sm-3 col-form-label"><label for="aggression">Aggression</label></div>
-                <div class="col-auto"><input [(ngModel)]="minAggression" name="minAggression" type="number"
-                    id="minAggression" placeholder="Minimum aggression"></div>
-                <div class="col-auto"><input [(ngModel)]="maxAggression" name="maxAggression" type="number"
-                    id="maxAggression" placeholder="Maximum aggression"></div>
+                <div class="col-auto"><input [(ngModel)]="minAggression" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="minAggression = minAggression || 0" name="minAggression" type="number"
+                  id="minAggression" placeholder="Minimum Aggression"></div>
+                <div class="col-auto"><input [(ngModel)]="maxAggression" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="maxAggression = maxAggression || 100" name="maxAggression" type="number"
+                  id="maxAggression" placeholder="Maximum Aggression"></div>
               </div>
               <div class="row g-3">
                 <div class="col-sm-3 col-form-label"><label for="longShots">Long shots</label></div>
-                <div class="col-auto"><input [(ngModel)]="minLongShots" name="minLongShots" type="number"
-                    id="minLongShots" placeholder="Minimum longShots"></div>
-                <div class="col-auto"><input [(ngModel)]="maxLongShots" name="maxLongShots" type="number"
-                    id="maxLongShots" placeholder="Maximum longShots"></div>
+                <div class="col-auto"><input [(ngModel)]="minLongShots" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="minLongShots = minLongShots || 0" name="minLongShots" type="number"
+                  id="minLongShots" placeholder="Minimum LongShots"></div>
+                <div class="col-auto"><input [(ngModel)]="maxLongShots" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="maxLongShots = maxLongShots || 100" name="maxLongShots" type="number"
+                  id="maxLongShots" placeholder="Maximum LongShots"></div>
               </div>
               <div class="row g-3">
                 <div class="col-sm-3 col-form-label"><label for="crossing">Crossing</label></div>
-                <div class="col-auto"><input [(ngModel)]="minCrossing" name="minCrossing" type="number" id="minCrossing"
-                    placeholder="Minimum crossing"></div>
-                <div class="col-auto"><input [(ngModel)]="maxCrossing" name="maxCrossing" type="number" id="maxCrossing"
-                    placeholder="Maximum crossing"></div>
+                <div class="col-auto"><input [(ngModel)]="minCrossing" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="minCrossing = minCrossing || 0" name="minCrossing" type="number"
+                  id="minCrossing" placeholder="Minimum Crossing"></div>
+                <div class="col-auto"><input [(ngModel)]="maxCrossing" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="maxCrossing = maxCrossing || 100" name="maxCrossing" type="number"
+                  id="maxCrossing" placeholder="Maximum Crossing"></div>
               </div>
               <div class="row g-3">
                 <div class="col-sm-3 col-form-label"><label for="finishing">Finishing</label></div>
-                <div class="col-auto"><input [(ngModel)]="minFinishing" name="minFinishing" type="number"
-                    id="minFinishing" placeholder="Minimum finishing"></div>
-                <div class="col-auto"><input [(ngModel)]="maxFinishing" name="maxFinishing" type="number"
-                    id="maxFinishing" placeholder="Maximum finishing"></div>
+                <div class="col-auto"><input [(ngModel)]="minFinishing" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="minFinishing = minFinishing || 0" name="minFinishing" type="number"
+                  id="minFinishing" placeholder="Minimum Finishing"></div>
+                <div class="col-auto"><input [(ngModel)]="maxFinishing" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="maxFinishing = maxFinishing || 100" name="maxFinishing" type="number"
+                  id="maxFinishing" placeholder="Maximum Finishing"></div>
               </div>
               <div class="row g-3">
                 <div class="col-sm-3 col-form-label"><label for="shortPassing">Short passing</label></div>
-                <div class="col-auto"><input [(ngModel)]="minShortPassing" name="minShortPassing" type="number"
-                    id="minShortPassing" placeholder="Minimum shortPassing"></div>
-                <div class="col-auto"><input [(ngModel)]="maxShortPassing" name="maxShortPassing" type="number"
-                    id="maxShortPassing" placeholder="Maximum shortPassing"></div>
+                <div class="col-auto"><input [(ngModel)]="minShortPassing" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="minShortPassing = minShortPassing || 0" name="minShortPassing" type="number"
+                  id="minShortPassing" placeholder="Minimum ShortPassing"></div>
+                <div class="col-auto"><input [(ngModel)]="maxShortPassing" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="maxShortPassing = maxShortPassing || 100" name="maxShortPassing" type="number"
+                  id="maxShortPassing" placeholder="Maximum ShortPassing"></div>
               </div>
 
               <div class="row g-2">
                 <div class="col-sm-3 col-form-label"><label for="preferredFoot">Preferred foot</label></div>
 
-                <div class="col-auto"><input [(ngModel)]="preferredFoot" class="form-check-input" type="radio" name="preferredFootRadios" id="any"
-                    value="" checked>
+                <div class="col-auto"><input [(ngModel)]="preferredFoot" class="form-check-input" type="radio"
+                    name="preferredFootRadios" id="any" value="" checked>
                   <label class="form-check-label" for="any">Any</label>
                 </div>
-                <div class="col-auto"><input [(ngModel)]="preferredFoot" class="form-check-input" type="radio" name="preferredFootRadios" id="right"
-                    value="Right">
+                <div class="col-auto"><input [(ngModel)]="preferredFoot" class="form-check-input" type="radio"
+                    name="preferredFootRadios" id="right" value="Right">
                   <label class="form-check-label" for="right">Right</label>
                 </div>
-                <div class="col-auto"><input [(ngModel)]="preferredFoot" class="form-check-input" type="radio" name="preferredFootRadios" id="left"
-                    value="left">
+                <div class="col-auto"><input [(ngModel)]="preferredFoot" class="form-check-input" type="radio"
+                    name="preferredFootRadios" id="left" value="left">
                   <label class="form-check-label" for="left">Left</label>
                 </div>
               </div>
@@ -346,12 +394,12 @@
                 <a (click)="goToPage(searchForm.value.name,fifaVersion, preferredFoot,ageMin,ageMax,overallMin,overallMax,potentialMin,potentialMax,heightMin,heightMax,minValue,maxValue,minWage,maxWage,minHeadingAccuracy,maxHeadingAccuracy,minVolleys,maxVolleys,minDribbling,maxDribbling,minCurve,maxCurve,minFkAccuracy,maxFkAccuracy,minAcceleration,maxAcceleration,minSprintSpeed,maxSprintSpeed,minAgility,maxAgility,minReaction,maxReaction,minBalance,maxBalance,minShotPower,maxShotPower,minJumping,maxJumping,minStamina,maxStamina,minAggression,maxAggression,minLongShots,maxLongShots,minCrossing,maxCrossing,minFinishing,maxFinishing,minShortPassing,maxShortPassing, i)"
                   class="page-link">
                   {{ i == 0 ? 1 : i + 1}}
-                  
+
                 </a>
               </li>
 
-              
-            
+
+
 
               <!-- [ngClass]="i == (currentPage$ | async) ? ' active' : ''" -->
               <!-- <li *ngFor="let pageNumber of [].constructor(6); let i = index;" 
