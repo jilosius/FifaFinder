@@ -90,6 +90,7 @@ public class SpielerController {
         //Final implementation: We get all the attributes that we want to show on the starting page, also the attributes that may be used for filtering.
     @GetMapping("/start/filtered")
     public ResponseEntity<HttpResponse> getSpieler(@RequestParam Optional<String> fullName,
+                                                   @RequestParam Optional<Integer> fifaVersion,
                                                    @RequestParam Optional<String> preferredFoot,
                                                    @RequestParam Optional<Integer> minAge,
                                                    @RequestParam Optional<Integer> maxAge,
@@ -153,6 +154,7 @@ public class SpielerController {
                         .timeStamp(now().toString())
                         .data(of("page", spielerService.findByFullNameFiltered(
                                 fullName.orElse(""),
+                                fifaVersion.orElse(23),
                                 preferredFoot.orElse(""),
                                 minAge.orElse(0),
                                 maxAge.orElse(100),
