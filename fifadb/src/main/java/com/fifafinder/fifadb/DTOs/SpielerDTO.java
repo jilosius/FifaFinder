@@ -24,6 +24,7 @@ public class SpielerDTO {
 
     //    -------------------------------
     private String preferredFoot;
+
     private Integer headingAccuracy;
     private Integer volleys;
     private Integer dribbling;

@@ -1,6 +1,5 @@
 export interface Spieler {
     photoURL: string;
-    fifaVersion: number;
     knownName: string;
     age: number;
     flag: string;

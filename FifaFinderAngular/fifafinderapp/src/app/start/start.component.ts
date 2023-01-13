@@ -4,6 +4,8 @@ import { Observable, BehaviorSubject, map, startWith, catchError, of } from 'rxj
 import { ApiResponse } from '../interface/api-response';
 import { Page } from '../interface/page';
 import { SpielerService } from '../service/start.service';
+import { CustomSortingService } from "../service/custom-sorting.service";
+import {SortableColumn} from "../sorting/sortable-column";
 
 @Component({
   selector: 'app-start',
@@ -13,71 +15,109 @@ import { SpielerService } from '../service/start.service';
 
 //We are working with states: this means when the appState == 'APP_LOADING', the html elements and functions used are different to when it is 'APP_LOADED' or 'APP_ERROR'
 export class StartComponent implements OnInit {
-  spielerState$: Observable<{ appState: string, appData?: ApiResponse<Page>, error?: HttpErrorResponse }>; //Example: {'APP_LOADED', ApiResponse<Spieler>, error(optional} 
+  spielerState$: Observable<{ appState: string, appData?: ApiResponse<Page>, error?: HttpErrorResponse }>; //Example: {'APP_LOADED', ApiResponse<Spieler>, error(optional}
   responseSubject = new BehaviorSubject<ApiResponse<Page>>(null); //Save the response to use out of map() function
   private currentPageSubject = new BehaviorSubject<number>(0); //Save observable at current page
   currentPage$ = this.currentPageSubject.asObservable();
-  
-  //defining variables that are used in the dropdown filter 
-  fifaVersion: number;
-  preferredFoot: string = "";
-  ageMin: number;
-  ageMax: number;
-  overallMin: number;
-  overallMax: number;
-  potentialMin: number;
-  potentialMax: number;
-  heightMin: number;
-  heightMax: number;
-  minValue: number;
-  maxValue: number;
-  minWage: number;
-  maxWage: number;
-  minHeadingAccuracy: number;
-  maxHeadingAccuracy: number;
-  minVolleys: number;
-  maxVolleys: number;
-  minDribbling: number;
-  maxDribbling: number;
-  minCurve: number;
-  maxCurve: number;
-  minFkAccuracy: number;
-  maxFkAccuracy: number;
-  minAcceleration: number;
-  maxAcceleration: number;
-  minSprintSpeed: number;
-  maxSprintSpeed: number;
-  minAgility: number;
-  maxAgility: number;
-  minReaction: number;
-  maxReaction:number;
-  minBalance: number;
-  maxBalance: number;
-  minShotPower: number;
-  maxShotPower: number;
-  minJumping: number;
-  maxJumping: number;
-  minStamina: number;
-  maxStamina: number;
-  minAggression: number;
-  maxAggression: number;
-  minLongShots: number;
-  maxLongShots: number;
-  minCrossing: number;
-  maxCrossing: number;
-  minFinishing: number;
-  maxFinishing: number;
-  minShortPassing: number;
-  maxShortPassing: number;
+  apiResponse: ApiResponse<Page> = new ApiResponse();
+
+  name: string;
+  //defining variables that are used in the dropdown filter
+  ageMin: number = 0;
+  ageMax: number = 100;
+  overallMin: number = 0;
+  overallMax: number = 100;
+  potentialMin: number= 0;
+  potentialMax: number= 100;
+  heightMin: number= 0;
+  heightMax: number= 300;
+  minValue: number= 0;
+  maxValue: number= 1000000000;
+  minWage: number= 0;
+  maxWage: number= 1000000000;
+  minHeadingAccuracy: number = 0;
+  maxHeadingAccuracy: number = 100;
+  minVolleys: number= 0;
+  maxVolleys: number= 100;
+  minDribbling: number= 0;
+  maxDribbling: number= 100;
+  minCurve: number= 0;
+  maxCurve: number= 100;
+  minFkAccuracy: number= 0;
+  maxFkAccuracy: number= 100;
+  minAcceleration: number= 0;
+  maxAcceleration: number= 100;
+  minSprintSpeed: number= 0;
+  maxSprintSpeed: number= 100;
+  minAgility: number= 0;
+  maxAgility: number= 100;
+  minReaction: number= 0;
+  maxReaction:number= 100;
+  minBalance: number= 0;
+  maxBalance: number= 100;
+  minShotPower: number= 0;
+  maxShotPower: number= 100;
+  minJumping: number= 0;
+  maxJumping: number= 100;
+  minStamina: number= 0;
+  maxStamina: number= 100;
+  minAggression: number= 0;
+  maxAggression: number= 100;
+  minLongShots: number= 0;
+  maxLongShots: number= 100;
+  minCrossing: number= 0;
+  maxCrossing: number= 100;
+  minFinishing: number= 0;
+  maxFinishing: number= 100;
+  minShortPassing: number= 0;
+  maxShortPassing: number= 100;
+  pageNumber: number= 0;
+  size: number= 20;
 
   //Array to set the "hidden" attribute of each column to either true or false
-  condArray:boolean[] = [true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true]
+  condArray:boolean[] = [true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true];
 
-  constructor(private spielerService: SpielerService) { }
+  //Array that defines sortable Columns in our table
+    sortableColumns: Array<SortableColumn> = [
+        new SortableColumn('age', 'Age', null),
+        new SortableColumn('overall', 'Overall', 'desc'),
+        new SortableColumn('potential', 'Potential', null),
+        new SortableColumn('valueEUR', 'Value', null),
+        new SortableColumn('height', 'Height', null),
+        new SortableColumn('weight', 'Weight', null),
+        new SortableColumn('headingAccuracy', 'Heading Accuracy', null),
+        new SortableColumn('volleys', 'Volleys', null),
+        new SortableColumn('dribbling', 'Dribbling', null),
+        new SortableColumn('curve', 'Curve', null),
+        new SortableColumn('fkAccuracy', 'FK Accuracy', null),
+        new SortableColumn('acceleration', 'Acceleration', null),
+        new SortableColumn('sprintSpeed', 'Sprint Speed', null),
+        new SortableColumn('agility', 'Agility', null),
+        new SortableColumn('reaction', 'Reaction', null),
+        new SortableColumn('balance', 'Balance', null),
+        new SortableColumn('shotPower', 'Shot Power', null),
+        new SortableColumn('jumping', 'Jumping', null),
+        new SortableColumn('stamina', 'Stamina', null),
+        new SortableColumn('aggression', 'Aggression', null),
+        new SortableColumn('longShots', 'Long Shots', null),
+        new SortableColumn('crossing', 'Crossing', null),
+        new SortableColumn('finishing', 'Finishing', null),
+        new SortableColumn('shortPassing', 'Short Passing', null),
+        new SortableColumn('wage', 'Wage', null)
+];
+
+
+
+  constructor(
+    private spielerService: SpielerService,
+    private sortingService: CustomSortingService
+  ) {
+  }
 
   //on app initialisation: start with: 'APP LOADING', then 'APP_LOADED', and if error return 'APP_ERROR'
   ngOnInit(): void {
-    this.spielerState$ = this.spielerService.spieler$().pipe(
+    this.getData();
+    this.spielerState$ = this.spielerService.spieler$(this.name, this.ageMin, this.ageMax, this.overallMin, this.overallMax, this.potentialMin, this.potentialMax,this.heightMin,this.heightMax,this.minValue,this.maxValue,this.minWage, this.maxWage,this.minHeadingAccuracy,this.maxHeadingAccuracy,this.minVolleys, this.maxVolleys,this.minDribbling,this.maxDribbling, this.minCurve, this.maxCurve,this.minFkAccuracy, this.maxFkAccuracy,this.minAcceleration,this.maxAcceleration,this.minSprintSpeed,this.maxSprintSpeed,this.minAgility, this.maxAgility, this.minReaction,this.maxReaction,this.minBalance,this.maxBalance,this.minShotPower,this.maxShotPower,this.minJumping,this.maxJumping,this.minStamina,this.maxStamina, this.minAggression,this.maxAggression, this.minLongShots, this.maxLongShots,this.minCrossing,this.maxCrossing,this.minFinishing,this.maxFinishing,this.minShortPassing, this.maxShortPassing, this.pageNumber, this.size, this.sortingService.getSortableColumn(this.sortableColumns)).pipe(
       map((response: ApiResponse<Page>) => {
         this.responseSubject.next(response);  //response subject contains response for later use
         this.currentPageSubject.next(response.data.page.number);
@@ -92,11 +132,10 @@ export class StartComponent implements OnInit {
     )
   }
 
+
   //the method that does all the magic: boolean Array is checked to hide/unhide columns, then spielerService is used to return the data/page as required
-  goToPage(name?: string,fifaVersion?:number,preferredFoot?:string,minAge?: number,maxAge?: number,minOverall?: number, maxOverall?: number, minPotential?: number,maxPotential?: number,minHeight?: number,maxHeight?: number,minValue?: number,maxValue?: number,minWage?: number,maxWage?: number,minHeadingAccuracy?: number,maxHeadingAccuracy?: number,minVolleys?: number,maxVolleys?: number,minDribbling?: number, maxDribbling?: number,minCurve?: number,maxCurve?: number, minFkAccuracy?: number,maxFkAccuracy?: number,minAcceleration?: number,maxAcceleration?: number, minSprintSpeed?: number,maxSprintSpeed?: number,minAgility?: number, maxAgility?: number,minReaction?: number,maxReaction?:number,minBalance?: number,maxBalance?: number,minShotPower?: number,maxShotPower?: number, minJumping?: number,maxJumping?: number,minStamina?: number,maxStamina?: number,minAggression?: number,maxAggression?: number,minLongShots?: number,maxLongShots?: number,minCrossing?: number,maxCrossing?: number,minFinishing?: number,maxFinishing?: number,minShortPassing?: number,maxShortPassing?: number,
-            pageNumber: number = 0): void {
-    fifaVersion = this.fifaVersion;
-    preferredFoot = this.preferredFoot;
+  goToPage(name?: string, minAge?: number,maxAge?: number,minOverall?: number, maxOverall?: number, minPotential?: number,maxPotential?: number,minHeight?: number,maxHeight?: number,minValue?: number,maxValue?: number,minWage?: number,maxWage?: number,minHeadingAccuracy?: number,maxHeadingAccuracy?: number,minVolleys?: number,maxVolleys?: number,minDribbling?: number, maxDribbling?: number,minCurve?: number,maxCurve?: number, minFkAccuracy?: number,maxFkAccuracy?: number,minAcceleration?: number,maxAcceleration?: number, minSprintSpeed?: number,maxSprintSpeed?: number,minAgility?: number, maxAgility?: number,minReaction?: number,maxReaction?:number,minBalance?: number,maxBalance?: number,minShotPower?: number,maxShotPower?: number, minJumping?: number,maxJumping?: number,minStamina?: number,maxStamina?: number,minAggression?: number,maxAggression?: number,minLongShots?: number,maxLongShots?: number,minCrossing?: number,maxCrossing?: number,minFinishing?: number,maxFinishing?: number,minShortPassing?: number,maxShortPassing?: number,
+            pageNumber: number = 0, size: number = 20): void {
     minAge = this.ageMin;
     maxAge = this.ageMax;
     minOverall = this.overallMin;
@@ -145,11 +184,12 @@ export class StartComponent implements OnInit {
     maxFinishing=this.maxFinishing;
     minShortPassing=this.minShortPassing;
     maxShortPassing=this.maxShortPassing;
-    
+
+
     var checkConditionMinArray:number[] = [minHeadingAccuracy,minVolleys,minDribbling,minCurve,minFkAccuracy,minAcceleration,minSprintSpeed,minAgility,minReaction,minBalance,minShotPower,minJumping,minStamina,minAggression,minLongShots,minCrossing,minFinishing,minShortPassing,minWage]
     var checkConditionMaxArray:number[] = [maxHeadingAccuracy,maxVolleys,maxDribbling,maxCurve,maxFkAccuracy,maxAcceleration,maxSprintSpeed,maxAgility,maxReaction,maxBalance,maxShotPower,maxJumping,maxStamina,maxAggression,maxLongShots,maxCrossing,maxFinishing,maxShortPassing,maxWage]
-    
-    
+
+
     for(let i=0; i < checkConditionMinArray.length; i++){
       if(checkConditionMinArray[i] != 0){
         this.condArray[i]=false;
@@ -163,11 +203,11 @@ export class StartComponent implements OnInit {
         this.condArray[i]=true;
       }
     }
-    
 
-    this.spielerState$ = this.spielerService.spieler$(name, fifaVersion,preferredFoot, minAge, maxAge, minOverall, maxOverall, minPotential,maxPotential,minHeight,maxHeight,minValue,maxValue,minWage,maxWage,minHeadingAccuracy,maxHeadingAccuracy,minVolleys, maxVolleys,minDribbling,maxDribbling, minCurve, maxCurve,minFkAccuracy, maxFkAccuracy,minAcceleration,maxAcceleration,minSprintSpeed,maxSprintSpeed,minAgility, maxAgility, minReaction,maxReaction,minBalance,maxBalance,minShotPower,maxShotPower,minJumping,maxJumping,minStamina,maxStamina, minAggression,maxAggression, minLongShots, maxLongShots,minCrossing,maxCrossing,minFinishing,maxFinishing,minShortPassing, maxShortPassing,
-      pageNumber).pipe(
+
+    this.spielerState$ = this.spielerService.spieler$(name, minAge, maxAge, minOverall, maxOverall, minPotential,maxPotential,minHeight,maxHeight,minValue,maxValue,minWage,maxWage,minHeadingAccuracy,maxHeadingAccuracy,minVolleys, maxVolleys,minDribbling,maxDribbling, minCurve, maxCurve,minFkAccuracy, maxFkAccuracy,minAcceleration,maxAcceleration,minSprintSpeed,maxSprintSpeed,minAgility, maxAgility, minReaction,maxReaction,minBalance,maxBalance,minShotPower,maxShotPower,minJumping,maxJumping,minStamina,maxStamina, minAggression,maxAggression, minLongShots, maxLongShots,minCrossing,maxCrossing,minFinishing,maxFinishing,minShortPassing, maxShortPassing, pageNumber, size, this.sortingService.getSortableColumn(this.sortableColumns)).pipe(
       map((response: ApiResponse<Page>) => {
+        // this.loadingService.loadingOff();
         this.responseSubject.next(response);
         this.currentPageSubject.next(pageNumber);
         console.log(response);
@@ -175,6 +215,7 @@ export class StartComponent implements OnInit {
       }),
       startWith({ appState: 'APP_LOADED', appData: this.responseSubject.value }),  //start with current reponse value
       catchError((error: HttpErrorResponse) => {
+        // this.loadingService.loadingOff();
         return of({ appState: 'APP_ERROR', error })
       }
       )
@@ -184,12 +225,10 @@ export class StartComponent implements OnInit {
   //Method responsible for next/prev page
   goToNextOrPreviousPage(
     direction?: string,
-    fifaVersion?:number,
-    name?: string, 
-    preferredFoot?: string,
-    minAge?: number, 
-    maxAge?: number, 
-    minOverall?: number, 
+    name?: string,
+    minAge?: number,
+    maxAge?: number,
+    minOverall?: number,
     maxOverall?: number,
     minPotential?: number,
     maxPotential?: number,
@@ -235,13 +274,11 @@ export class StartComponent implements OnInit {
     maxFinishing?: number,
     minShortPassing?: number,
     maxShortPassing?: number): void {
-    this.goToPage(name, fifaVersion, preferredFoot,minAge, maxAge, minOverall, maxOverall, minPotential,maxPotential,minHeight,maxHeight,minValue,maxValue,minWage,maxWage,minHeadingAccuracy,maxHeadingAccuracy,minVolleys, maxVolleys,minDribbling,maxDribbling, minCurve, maxCurve,minFkAccuracy, maxFkAccuracy,minAcceleration,maxAcceleration,minSprintSpeed,maxSprintSpeed,minAgility, maxAgility, minReaction,maxReaction,minBalance,maxBalance,minShotPower,maxShotPower,minJumping,maxJumping,minStamina,maxStamina, minAggression,maxAggression, minLongShots, maxLongShots,minCrossing,maxCrossing,minFinishing,maxFinishing,minShortPassing, maxShortPassing,
+    this.goToPage(name, minAge, maxAge, minOverall, maxOverall, minPotential,maxPotential,minHeight,maxHeight,minValue,maxValue,minWage,maxWage,minHeadingAccuracy,maxHeadingAccuracy,minVolleys, maxVolleys,minDribbling,maxDribbling, minCurve, maxCurve,minFkAccuracy, maxFkAccuracy,minAcceleration,maxAcceleration,minSprintSpeed,maxSprintSpeed,minAgility, maxAgility, minReaction,maxReaction,minBalance,maxBalance,minShotPower,maxShotPower,minJumping,maxJumping,minStamina,maxStamina, minAggression,maxAggression, minLongShots, maxLongShots,minCrossing,maxCrossing,minFinishing,maxFinishing,minShortPassing, maxShortPassing,
                   direction === 'forward' ? this.currentPageSubject.value + 1 : this.currentPageSubject.value - 1);
   }
 
   resetValues(name?:string):void{
-    this.fifaVersion = 23;
-    this.preferredFoot = '';
     this.ageMin = 0;
     this.ageMax = 100;
     this.overallMin = 0;
@@ -292,5 +329,18 @@ export class StartComponent implements OnInit {
     this.maxShortPassing= 100;
     this.goToPage(name);
   }
+
+  public sort(sortableColumn: SortableColumn): void {
+    this.sortingService.clearPreviousSorting(sortableColumn, this.sortableColumns);
+    this.getData();
+  }
+
+  private getData(): void {
+    let column = this.sortingService.getSortableColumn(this.sortableColumns);
+    // this.spielerService.spieler$(this.name, this.ageMin, this.ageMax, this.overallMin, this.overallMax, this.potentialMin, this.potentialMax,this.heightMin,this.heightMax,this.minValue,this.maxValue,this.minWage, this.maxWage,this.minHeadingAccuracy,this.maxHeadingAccuracy,this.minVolleys, this.maxVolleys,this.minDribbling,this.maxDribbling, this.minCurve, this.maxCurve,this.minFkAccuracy, this.maxFkAccuracy,this.minAcceleration,this.maxAcceleration,this.minSprintSpeed,this.maxSprintSpeed,this.minAgility, this.maxAgility, this.minReaction,this.maxReaction,this.minBalance,this.maxBalance,this.minShotPower,this.maxShotPower,this.minJumping,this.maxJumping,this.minStamina,this.maxStamina, this.minAggression,this.maxAggression, this.minLongShots, this.maxLongShots,this.minCrossing,this.maxCrossing,this.minFinishing,this.maxFinishing,this.minShortPassing, this.maxShortPassing, this.pageNumber, this.size, this.sortableColumns)
+    this.spielerService.spieler$(this.name, this.ageMin, this.ageMax, this.overallMin, this.overallMax, this.potentialMin, this.potentialMax,this.heightMin,this.heightMax,this.minValue,this.maxValue,this.minWage, this.maxWage,this.minHeadingAccuracy,this.maxHeadingAccuracy,this.minVolleys, this.maxVolleys,this.minDribbling,this.maxDribbling, this.minCurve, this.maxCurve,this.minFkAccuracy, this.maxFkAccuracy,this.minAcceleration,this.maxAcceleration,this.minSprintSpeed,this.maxSprintSpeed,this.minAgility, this.maxAgility, this.minReaction,this.maxReaction,this.minBalance,this.maxBalance,this.minShotPower,this.maxShotPower,this.minJumping,this.maxJumping,this.minStamina,this.maxStamina, this.minAggression,this.maxAggression, this.minLongShots, this.maxLongShots,this.minCrossing,this.maxCrossing,this.minFinishing,this.maxFinishing,this.minShortPassing, this.maxShortPassing, this.pageNumber, this.size, column)
+      .subscribe(apiResponse => this.apiResponse = apiResponse);
+  }
+
 }
 

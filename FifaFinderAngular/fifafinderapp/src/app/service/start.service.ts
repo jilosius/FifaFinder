@@ -3,9 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ApiResponse } from '../interface/api-response';
 import { Page } from '../interface/page'
+import {SortableColumn} from "../sorting/sortable-column";
+import {sortTasksByPriority} from "@angular/compiler-cli/ngcc/src/execution/tasks/utils";
+import {Spieler} from "../interface/spieler";
 
 @Injectable({ providedIn: 'root' })
 export class SpielerService {
+  page: Page = new Page();
+
   private readonly serverUrl: string = 'http://localhost:8080/players/start/filtered';
 
   constructor(private http: HttpClient) { }
@@ -13,8 +18,7 @@ export class SpielerService {
   // Make call to the back end API to retrieve page of spieler
   spieler$ = (
     name: string = '',
-    fifaVersion: number = 23,
-    preferredFoot: string = "",
+    // preferredFoot = '',
     minAge: number = 0,
     maxAge: number = 100,
     minOverall: number = 0,
@@ -64,8 +68,17 @@ export class SpielerService {
     minShortPassing: number=0,
     maxShortPassing: number=100,
     page: number = 0,
-    size: number = 20): Observable<ApiResponse<Page>> =>
+    size: number = 20,
+    sortableColumn: SortableColumn
+  ): Observable<ApiResponse<Page>> =>
     this.http.get<ApiResponse<Page>>(
-      `${this.serverUrl}?fullName=${name}&fifaVersion=${fifaVersion}&preferredFoot=${preferredFoot}&minAge=${minAge}&maxAge=${maxAge}&minOverall=${minOverall}&maxOverall=${maxOverall}&maxShortPassing=${maxShortPassing}&minShortPassing=${minShortPassing}&maxFinishing=${maxFinishing}&minFinishing=${minFinishing}&maxCrossing=${maxCrossing}&minCrossing=${minCrossing}&maxLongShots=${maxLongShots}&minLongShots=${minLongShots}&maxAggression=${maxAggression}&minAggression=${minAggression}&maxStamina=${maxStamina}&minStamina=${minStamina}&maxJumping=${maxJumping}&minJumping=${minJumping}&maxShotPower=${maxShotPower}&minShotPower=${minShotPower}&maxBalance=${maxBalance}&minBalance=${minBalance}&maxReaction=${maxReaction}&minReaction=${minReaction}&maxAgility=${maxAgility}&minAgility=${minAgility}&maxSprintSpeed=${maxSprintSpeed}&minSprintSpeed=${minSprintSpeed}&maxAcceleration=${maxAcceleration}&minAcceleration=${minAcceleration}&maxFkAccuracy=${maxFkAccuracy}&minFkAccuracy=${minFkAccuracy}&maxCurve=${maxCurve}&minCurve=${minCurve}&maxDribbling=${maxDribbling}&minDribbling=${minDribbling}&maxVolleys=${maxVolleys}&minVolleys=${minVolleys}&maxHeadingAccuracy=${maxHeadingAccuracy}&minHeadingAccuracy=${minHeadingAccuracy}&maxWage=${maxWage}&minWage=${minWage}&maxValue=${maxValue}&minValue=${minValue}&heightMax=${heightMax}&heightMin=${heightMin}&potentialMax=${potentialMax}&potentialMin=${potentialMin}&page=${page}&size=${size}`);
+      `${this.serverUrl}?fullName=${name}&minAge=${minAge}&maxAge=${maxAge}&minOverall=${minOverall}&maxOverall=${maxOverall}&maxShortPassing=${maxShortPassing}&minShortPassing=${minShortPassing}&maxFinishing=${maxFinishing}&minFinishing=${minFinishing}&maxCrossing=${maxCrossing}&minCrossing=${minCrossing}&maxLongShots=${maxLongShots}&minLongShots=${minLongShots}&maxAggression=${maxAggression}&minAggression=${minAggression}&maxStamina=${maxStamina}&minStamina=${minStamina}&maxJumping=${maxJumping}&minJumping=${minJumping}&maxShotPower=${maxShotPower}&minShotPower=${minShotPower}&maxBalance=${maxBalance}&minBalance=${minBalance}&maxReaction=${maxReaction}&minReaction=${minReaction}&maxAgility=${maxAgility}&minAgility=${minAgility}&maxSprintSpeed=${maxSprintSpeed}&minSprintSpeed=${minSprintSpeed}&maxAcceleration=${maxAcceleration}&minAcceleration=${minAcceleration}&maxFkAccuracy=${maxFkAccuracy}&minFkAccuracy=${minFkAccuracy}&maxCurve=${maxCurve}&minCurve=${minCurve}&maxDribbling=${maxDribbling}&minDribbling=${minDribbling}&maxVolleys=${maxVolleys}&minVolleys=${minVolleys}&maxHeadingAccuracy=${maxHeadingAccuracy}&minHeadingAccuracy=${minHeadingAccuracy}&maxWage=${maxWage}&minWage=${minWage}&maxValue=${maxValue}&minValue=${minValue}&heightMax=${heightMax}&heightMin=${heightMin}&potentialMax=${potentialMax}&potentialMin=${potentialMin}&page=${page}&size=${size}` + this.getSortParameters(sortableColumn));
+
+  private getSortParameters(sortableColumn: SortableColumn): string {
+    if(sortableColumn == null) {
+      return '';
+    }
+    return '&sort=' + sortableColumn.name + ',' + sortableColumn.direction;
+  }
 }
 // &preferredFoot=${preferredFoot}

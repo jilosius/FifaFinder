@@ -1,31 +1,21 @@
 import { Spieler } from './spieler';
+import { Sort } from './sort';
+import { Pageable } from './pageable';
 
-export interface Page{
-    content: Spieler[],
-    pageable: {
-        sort: {
-            empty: boolean,
-            sorted: boolean,
-            unsorted: boolean
-        },
-        offset: number,
-        pageSize: number,
-        pageNumber: number,
-        paged: boolean,
-        unpaged: boolean
-    },
-    last: boolean,
-    totalPages: number,
-    totalElements: number,
-    size: number,
-    number: number,
-    sort: {
-        empty: boolean,
-        sorted: boolean,
-        unsorted: boolean
-        
-    },
-    numberOfElements: number,
-    first: boolean,
+export class Page{
+    content: Spieler[];
+    pageable: Pageable;
+    last: boolean;
+    totalPages: number;
+    totalElements: number;
+    size: number;
+    number: number;
+    sort: Sort;
+    numberOfElements: number;
+    first: boolean;
     empty: boolean
+
+    public constructor() {
+      this.pageable = new Pageable();
+    }
 }
