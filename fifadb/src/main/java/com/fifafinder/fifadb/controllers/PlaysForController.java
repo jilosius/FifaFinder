@@ -4,12 +4,14 @@ import com.fifafinder.fifadb.entities.FifaVersion;
 import com.fifafinder.fifadb.entities.Mannschaften;
 import com.fifafinder.fifadb.entities.Spieler;
 import com.fifafinder.fifadb.services.PlaysForService;
+import com.fifafinder.fifadb.services.SpielerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 @RestController
@@ -17,13 +19,16 @@ import java.util.Optional;
 public class PlaysForController {
 
     private final PlaysForService playsForService;
+    private final SpielerService spielerService;
     @Autowired
-    public PlaysForController(PlaysForService playsForService){
-        this.playsForService = playsForService;
+    public PlaysForController(PlaysForService playsForService, SpielerService spielerService){
+        this.playsForService = playsForService;this.spielerService = spielerService;
     }
 
     @PostMapping("/add")
-    public void addPlayer(@RequestBody Spieler spieler,
+    public void addPlayer(@RequestBody String knownName,
+                          @RequestBody String fullName,
+                          @RequestBody LocalDate birthDate,
                           @RequestBody FifaVersion fifaversion,
                           @RequestBody Integer height,
                           @RequestBody String clubPosition,
@@ -82,6 +87,13 @@ public class PlaysForController {
                           @RequestBody Integer gKReflexes,
                           @RequestBody String photoUrl
                           ){
+
+        Spieler spieler = new Spieler();
+        spieler.setKnownName(knownName);
+        spieler.setFullName(fullName);
+        spieler.setBirthDate(birthDate);
+        spielerService.addPlayer(spieler);
+
         playsForService.addPlayer(spieler, fifaversion, height,clubPosition, clubNumber,nationalPosition, nationalNumber,
                 preferredFoot, contractUntil, onLoan, nationalTeam, age, weight, overall, potential, bestPosition, clubID, valueEUR, wage, releaseClause,
                 intReputation, weakFoot, skillMoves, cossing, finishing, headingAccuracy, shortPassing, volleys, dribbling, curve, fKAccuracy, longPassing,

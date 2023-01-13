@@ -9,6 +9,7 @@ import com.fifafinder.fifadb.repositories.SpielerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Optional;
 
 @Service
@@ -39,6 +40,8 @@ public class PlaysForService {
                           Integer interceptions, Integer positioning, Integer vision, Integer penalties, Integer composure, Integer marking,
                           Integer standingTackle, Integer slidingTackle, Integer gKDiving, Integer gKHandling,
                           Integer gKKicking, Integer gKPositioning, Integer gKReflexes, String photoUrl) {
+
+
 
         PlaysFor playsFor = new PlaysFor();
         playsFor.setPlayerID(spieler);
