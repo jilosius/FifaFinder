@@ -4,8 +4,7 @@ import { Observable, BehaviorSubject, map, startWith, catchError, of } from 'rxj
 import { ApiResponse } from '../interface/api-response';
 import { Page } from '../interface/page';
 import { SpielerService } from '../service/start.service';
-import { CustomSortingService } from "../service/custom-sorting.service";
-import {SortableColumn} from "../sorting/sortable-column";
+import { SortableColumn } from "../sorting/sortable-column";
 
 @Component({
   selector: 'app-start',
@@ -19,7 +18,6 @@ export class StartComponent implements OnInit {
   responseSubject = new BehaviorSubject<ApiResponse<Page>>(null); //Save the response to use out of map() function
   private currentPageSubject = new BehaviorSubject<number>(0); //Save observable at current page
   currentPage$ = this.currentPageSubject.asObservable();
-  apiResponse: ApiResponse<Page> = new ApiResponse();
 
   name: string;
   //defining variables that are used in the dropdown filter
@@ -71,53 +69,47 @@ export class StartComponent implements OnInit {
   maxFinishing: number= 100;
   minShortPassing: number= 0;
   maxShortPassing: number= 100;
+
   pageNumber: number= 0;
   size: number= 20;
+
+  //Array to set names and default sort direction of columns
+  sortableColumns: Array<SortableColumn> = [
+    new SortableColumn('age'),
+    new SortableColumn('overall', 'desc'),
+    new SortableColumn('potential'),
+    new SortableColumn('value'),
+    new SortableColumn('height'),
+    new SortableColumn('weight'),
+    new SortableColumn('headingAccuracy'),
+    new SortableColumn('volleys'),
+    new SortableColumn('dribbling'),
+    new SortableColumn('curve'),
+    new SortableColumn('fkAccuracy'),
+    new SortableColumn('acceleration'),
+    new SortableColumn('sprintSpeed'),
+    new SortableColumn('agility'),
+    new SortableColumn('reaction'),
+    new SortableColumn('balance'),
+    new SortableColumn('shotPower'),
+    new SortableColumn('jumping'),
+    new SortableColumn('stamina'),
+    new SortableColumn('aggression'),
+    new SortableColumn('longShots'),
+    new SortableColumn('crossing'),
+    new SortableColumn('finishing'),
+    new SortableColumn('shortPassing'),
+    new SortableColumn('wage')
+  ];
 
   //Array to set the "hidden" attribute of each column to either true or false
   condArray:boolean[] = [true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true];
 
-  //Array that defines sortable Columns in our table
-    sortableColumns: Array<SortableColumn> = [
-        new SortableColumn('age', 'Age', null),
-        new SortableColumn('overall', 'Overall', 'desc'),
-        new SortableColumn('potential', 'Potential', null),
-        new SortableColumn('valueEUR', 'Value', null),
-        new SortableColumn('height', 'Height', null),
-        new SortableColumn('weight', 'Weight', null),
-        new SortableColumn('headingAccuracy', 'Heading Accuracy', null),
-        new SortableColumn('volleys', 'Volleys', null),
-        new SortableColumn('dribbling', 'Dribbling', null),
-        new SortableColumn('curve', 'Curve', null),
-        new SortableColumn('fkAccuracy', 'FK Accuracy', null),
-        new SortableColumn('acceleration', 'Acceleration', null),
-        new SortableColumn('sprintSpeed', 'Sprint Speed', null),
-        new SortableColumn('agility', 'Agility', null),
-        new SortableColumn('reaction', 'Reaction', null),
-        new SortableColumn('balance', 'Balance', null),
-        new SortableColumn('shotPower', 'Shot Power', null),
-        new SortableColumn('jumping', 'Jumping', null),
-        new SortableColumn('stamina', 'Stamina', null),
-        new SortableColumn('aggression', 'Aggression', null),
-        new SortableColumn('longShots', 'Long Shots', null),
-        new SortableColumn('crossing', 'Crossing', null),
-        new SortableColumn('finishing', 'Finishing', null),
-        new SortableColumn('shortPassing', 'Short Passing', null),
-        new SortableColumn('wage', 'Wage', null)
-];
-
-
-
-  constructor(
-    private spielerService: SpielerService,
-    private sortingService: CustomSortingService
-  ) {
-  }
+  constructor( private spielerService: SpielerService) {}
 
   //on app initialisation: start with: 'APP LOADING', then 'APP_LOADED', and if error return 'APP_ERROR'
   ngOnInit(): void {
-    this.getData();
-    this.spielerState$ = this.spielerService.spieler$(this.name, this.ageMin, this.ageMax, this.overallMin, this.overallMax, this.potentialMin, this.potentialMax,this.heightMin,this.heightMax,this.minValue,this.maxValue,this.minWage, this.maxWage,this.minHeadingAccuracy,this.maxHeadingAccuracy,this.minVolleys, this.maxVolleys,this.minDribbling,this.maxDribbling, this.minCurve, this.maxCurve,this.minFkAccuracy, this.maxFkAccuracy,this.minAcceleration,this.maxAcceleration,this.minSprintSpeed,this.maxSprintSpeed,this.minAgility, this.maxAgility, this.minReaction,this.maxReaction,this.minBalance,this.maxBalance,this.minShotPower,this.maxShotPower,this.minJumping,this.maxJumping,this.minStamina,this.maxStamina, this.minAggression,this.maxAggression, this.minLongShots, this.maxLongShots,this.minCrossing,this.maxCrossing,this.minFinishing,this.maxFinishing,this.minShortPassing, this.maxShortPassing, this.pageNumber, this.size, this.sortingService.getSortableColumn(this.sortableColumns)).pipe(
+    this.spielerState$ = this.spielerService.spieler$(this.name, this.ageMin, this.ageMax, this.overallMin, this.overallMax, this.potentialMin, this.potentialMax,this.heightMin,this.heightMax,this.minValue,this.maxValue,this.minWage, this.maxWage,this.minHeadingAccuracy,this.maxHeadingAccuracy,this.minVolleys, this.maxVolleys,this.minDribbling,this.maxDribbling, this.minCurve, this.maxCurve,this.minFkAccuracy, this.maxFkAccuracy,this.minAcceleration,this.maxAcceleration,this.minSprintSpeed,this.maxSprintSpeed,this.minAgility, this.maxAgility, this.minReaction,this.maxReaction,this.minBalance,this.maxBalance,this.minShotPower,this.maxShotPower,this.minJumping,this.maxJumping,this.minStamina,this.maxStamina, this.minAggression,this.maxAggression, this.minLongShots, this.maxLongShots,this.minCrossing,this.maxCrossing,this.minFinishing,this.maxFinishing,this.minShortPassing, this.maxShortPassing, this.pageNumber, this.size,).pipe(
       map((response: ApiResponse<Page>) => {
         this.responseSubject.next(response);  //response subject contains response for later use
         this.currentPageSubject.next(response.data.page.number);
@@ -135,7 +127,7 @@ export class StartComponent implements OnInit {
 
   //the method that does all the magic: boolean Array is checked to hide/unhide columns, then spielerService is used to return the data/page as required
   goToPage(name?: string, minAge?: number,maxAge?: number,minOverall?: number, maxOverall?: number, minPotential?: number,maxPotential?: number,minHeight?: number,maxHeight?: number,minValue?: number,maxValue?: number,minWage?: number,maxWage?: number,minHeadingAccuracy?: number,maxHeadingAccuracy?: number,minVolleys?: number,maxVolleys?: number,minDribbling?: number, maxDribbling?: number,minCurve?: number,maxCurve?: number, minFkAccuracy?: number,maxFkAccuracy?: number,minAcceleration?: number,maxAcceleration?: number, minSprintSpeed?: number,maxSprintSpeed?: number,minAgility?: number, maxAgility?: number,minReaction?: number,maxReaction?:number,minBalance?: number,maxBalance?: number,minShotPower?: number,maxShotPower?: number, minJumping?: number,maxJumping?: number,minStamina?: number,maxStamina?: number,minAggression?: number,maxAggression?: number,minLongShots?: number,maxLongShots?: number,minCrossing?: number,maxCrossing?: number,minFinishing?: number,maxFinishing?: number,minShortPassing?: number,maxShortPassing?: number,
-            pageNumber: number = 0, size: number = 20): void {
+            pageNumber: number = 0, size: number = 20, sort?: string, order?: string): void {
     minAge = this.ageMin;
     maxAge = this.ageMax;
     minOverall = this.overallMin;
@@ -205,7 +197,7 @@ export class StartComponent implements OnInit {
     }
 
 
-    this.spielerState$ = this.spielerService.spieler$(name, minAge, maxAge, minOverall, maxOverall, minPotential,maxPotential,minHeight,maxHeight,minValue,maxValue,minWage,maxWage,minHeadingAccuracy,maxHeadingAccuracy,minVolleys, maxVolleys,minDribbling,maxDribbling, minCurve, maxCurve,minFkAccuracy, maxFkAccuracy,minAcceleration,maxAcceleration,minSprintSpeed,maxSprintSpeed,minAgility, maxAgility, minReaction,maxReaction,minBalance,maxBalance,minShotPower,maxShotPower,minJumping,maxJumping,minStamina,maxStamina, minAggression,maxAggression, minLongShots, maxLongShots,minCrossing,maxCrossing,minFinishing,maxFinishing,minShortPassing, maxShortPassing, pageNumber, size, this.sortingService.getSortableColumn(this.sortableColumns)).pipe(
+    this.spielerState$ = this.spielerService.spieler$(name, minAge, maxAge, minOverall, maxOverall, minPotential,maxPotential,minHeight,maxHeight,minValue,maxValue,minWage,maxWage,minHeadingAccuracy,maxHeadingAccuracy,minVolleys, maxVolleys,minDribbling,maxDribbling, minCurve, maxCurve,minFkAccuracy, maxFkAccuracy,minAcceleration,maxAcceleration,minSprintSpeed,maxSprintSpeed,minAgility, maxAgility, minReaction,maxReaction,minBalance,maxBalance,minShotPower,maxShotPower,minJumping,maxJumping,minStamina,maxStamina, minAggression,maxAggression, minLongShots, maxLongShots,minCrossing,maxCrossing,minFinishing,maxFinishing,minShortPassing, maxShortPassing, pageNumber, size, sort, order).pipe(
       map((response: ApiResponse<Page>) => {
         // this.loadingService.loadingOff();
         this.responseSubject.next(response);
@@ -330,16 +322,87 @@ export class StartComponent implements OnInit {
     this.goToPage(name);
   }
 
-  public sort(sortableColumn: SortableColumn): void {
-    this.sortingService.clearPreviousSorting(sortableColumn, this.sortableColumns);
-    this.getData();
+  sortByColumn(
+    sort: SortableColumn
+  ): void {
+    sort.toggleDirection();
+    if(sort.direction == null){
+      this.resetSort();
+      sort = this.sortableColumns[1];
+    }
+    this.clearPreviousSorting(sort);
+    this.goToPage(
+      this.name,
+      this.ageMin,
+      this.ageMax,
+      this.overallMin,
+      this.overallMax,
+      this.potentialMin,
+      this.potentialMax,
+      this.heightMin,
+      this.heightMax,
+      this.minValue,
+      this.maxValue,
+      this.minWage,
+      this.maxWage,
+      this.minHeadingAccuracy,
+      this.maxHeadingAccuracy,
+      this.minVolleys,
+      this.maxVolleys,
+      this.minDribbling,
+      this.maxDribbling,
+      this.minCurve,
+      this.maxCurve,
+      this.minFkAccuracy,
+      this.maxFkAccuracy,
+      this.minAcceleration,
+      this.maxAcceleration,
+      this.minSprintSpeed,
+      this.maxSprintSpeed,
+      this.minAgility,
+      this.maxAgility,
+      this.minReaction,
+      this.maxReaction,
+      this.minBalance,
+      this.maxBalance,
+      this.minShotPower,
+      this.maxShotPower,
+      this.minJumping,
+      this.maxJumping,
+      this.minStamina,
+      this.maxStamina,
+      this.minAggression,
+      this.maxAggression,
+      this.minLongShots,
+      this.maxLongShots,
+      this.minCrossing,
+      this.maxCrossing,
+      this.minFinishing,
+      this.maxFinishing,
+      this.minShortPassing,
+      this.maxShortPassing,
+      0,
+      20,
+      sort.column,
+      sort.direction
+    );
   }
 
-  private getData(): void {
-    let column = this.sortingService.getSortableColumn(this.sortableColumns);
-    // this.spielerService.spieler$(this.name, this.ageMin, this.ageMax, this.overallMin, this.overallMax, this.potentialMin, this.potentialMax,this.heightMin,this.heightMax,this.minValue,this.maxValue,this.minWage, this.maxWage,this.minHeadingAccuracy,this.maxHeadingAccuracy,this.minVolleys, this.maxVolleys,this.minDribbling,this.maxDribbling, this.minCurve, this.maxCurve,this.minFkAccuracy, this.maxFkAccuracy,this.minAcceleration,this.maxAcceleration,this.minSprintSpeed,this.maxSprintSpeed,this.minAgility, this.maxAgility, this.minReaction,this.maxReaction,this.minBalance,this.maxBalance,this.minShotPower,this.maxShotPower,this.minJumping,this.maxJumping,this.minStamina,this.maxStamina, this.minAggression,this.maxAggression, this.minLongShots, this.maxLongShots,this.minCrossing,this.maxCrossing,this.minFinishing,this.maxFinishing,this.minShortPassing, this.maxShortPassing, this.pageNumber, this.size, this.sortableColumns)
-    this.spielerService.spieler$(this.name, this.ageMin, this.ageMax, this.overallMin, this.overallMax, this.potentialMin, this.potentialMax,this.heightMin,this.heightMax,this.minValue,this.maxValue,this.minWage, this.maxWage,this.minHeadingAccuracy,this.maxHeadingAccuracy,this.minVolleys, this.maxVolleys,this.minDribbling,this.maxDribbling, this.minCurve, this.maxCurve,this.minFkAccuracy, this.maxFkAccuracy,this.minAcceleration,this.maxAcceleration,this.minSprintSpeed,this.maxSprintSpeed,this.minAgility, this.maxAgility, this.minReaction,this.maxReaction,this.minBalance,this.maxBalance,this.minShotPower,this.maxShotPower,this.minJumping,this.maxJumping,this.minStamina,this.maxStamina, this.minAggression,this.maxAggression, this.minLongShots, this.maxLongShots,this.minCrossing,this.maxCrossing,this.minFinishing,this.maxFinishing,this.minShortPassing, this.maxShortPassing, this.pageNumber, this.size, column)
-      .subscribe(apiResponse => this.apiResponse = apiResponse);
+  public clearPreviousSorting(chosenColumn: SortableColumn) {
+    this.sortableColumns.filter(
+      column => column != chosenColumn
+    ).forEach(
+      column => column.direction = null
+    );
+  }
+
+  public resetSort(){
+    this.sortableColumns.filter(
+      checkColumn => checkColumn.column != 'overall'
+    ).forEach(
+      checkColumn => checkColumn.direction = null
+    );
+    this.sortableColumns[1].direction = 'desc';
   }
 
 }

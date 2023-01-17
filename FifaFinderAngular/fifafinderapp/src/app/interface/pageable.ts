@@ -1,4 +1,4 @@
-import  { Sort } from './sort';
+import { Sort } from "@angular/material/sort";
 
 export class Pageable {
   sort: Sort;

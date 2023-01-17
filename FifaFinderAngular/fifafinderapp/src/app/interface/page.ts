@@ -1,6 +1,6 @@
 import { Spieler } from './spieler';
-import { Sort } from './sort';
 import { Pageable } from './pageable';
+import { Sort } from "@angular/material/sort";
 
 export class Page{
     content: Spieler[];

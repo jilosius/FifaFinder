@@ -195,41 +195,39 @@
                   <tr>
                     <th scope="col">Photo</th>
                     <th scope="col">Known Name</th>
-                    <app-sortable-headers
-                        [sortableColumns]="sortableColumns"
-                        (sortEvent)="sort($event) "></app-sortable-headers>
+                    <th class="sortable" scope="col" (click)="sortByColumn(sortableColumns[0])">Age</th>
                     <th scope="col">Nationality</th>
                     <th scope="col">Club</th>
-<!--                    <th class="sortable" scope="col">Overall</th>-->
-<!--                    <th class="sortable" scope="col">Potential</th>-->
+                    <th class="sortable" scope="col" (click)="sortByColumn(sortableColumns[1])">Overall</th>
+                    <th class="sortable" scope="col" (click)="sortByColumn(sortableColumns[2])">Potential</th>
                     <th scope="col">Best Position</th>
-<!--                    <th class="sortable" scope="col">Value EUR</th>-->
-<!--                    <th class="sortable" scope="col">Height</th>-->
-<!--                    <th class="sortable" scope="col">Weight</th>-->
-<!--                    <th class="sortable" scope="col" [hidden]="condArray[0]">Heading Accuracy</th>-->
-<!--                    <th class="sortable" scope="col" [hidden]="condArray[1]">Volleys</th>-->
-<!--                    <th class="sortable" scope="col" [hidden]="condArray[2]">Dribbling</th>-->
-<!--                    <th class="sortable" scope="col" [hidden]="condArray[3]">Curve</th>-->
-<!--                    <th class="sortable" scope="col" [hidden]="condArray[4]">FK Accuracy</th>-->
-<!--                    <th class="sortable" scope="col" [hidden]="condArray[5]">Acceleration</th>-->
-<!--                    <th class="sortable" scope="col" [hidden]="condArray[6]">Sprint Speed</th>-->
-<!--                    <th class="sortable" scope="col" [hidden]="condArray[7]">Agility</th>-->
-<!--                    <th class="sortable" scope="col" [hidden]="condArray[8]">Reaction</th>-->
-<!--                    <th class="sortable" scope="col" [hidden]="condArray[9]">Balance</th>-->
-<!--                    <th class="sortable" scope="col" [hidden]="condArray[10]">Shot Power</th>-->
-<!--                    <th class="sortable" scope="col" [hidden]="condArray[11]">Jumping</th>-->
-<!--                    <th class="sortable" scope="col" [hidden]="condArray[12]">Stamina</th>-->
-<!--                    <th class="sortable" scope="col" [hidden]="condArray[13]">Aggression</th>-->
-<!--                    <th class="sortable" scope="col" [hidden]="condArray[14]">Long Shots</th>-->
-<!--                    <th class="sortable" scope="col" [hidden]="condArray[15]">Crossing</th>-->
-<!--                    <th class="sortable" scope="col" [hidden]="condArray[16]">Finishing</th>-->
-<!--                    <th class="sortable" scope="col" [hidden]="condArray[17]">Short Passing</th>-->
-<!--                    <th class="sortable" scope="col" [hidden]="condArray[18]">Wage</th>-->
+                    <th class="sortable" scope="col" (click)="sortByColumn(sortableColumns[3])">Value EUR</th>
+                    <th class="sortable" scope="col" (click)="sortByColumn(sortableColumns[4])">Height</th>
+                    <th class="sortable" scope="col" (click)="sortByColumn(sortableColumns[5])">Weight</th>
+                    <th class="sortable" scope="col" [hidden]="condArray[0]" (click)="sortByColumn(sortableColumns[6])">Heading Accuracy</th>
+                    <th class="sortable" scope="col" [hidden]="condArray[1]" (click)="sortByColumn(sortableColumns[7])">Volleys</th>
+                    <th class="sortable" scope="col" [hidden]="condArray[2]" (click)="sortByColumn(sortableColumns[8])">Dribbling</th>
+                    <th class="sortable" scope="col" [hidden]="condArray[3]" (click)="sortByColumn(sortableColumns[9])">Curve</th>
+                    <th class="sortable" scope="col" [hidden]="condArray[4]" (click)="sortByColumn(sortableColumns[10])">FK Accuracy</th>
+                    <th class="sortable" scope="col" [hidden]="condArray[5]" (click)="sortByColumn(sortableColumns[11])">Acceleration</th>
+                    <th class="sortable" scope="col" [hidden]="condArray[6]" (click)="sortByColumn(sortableColumns[12])">Sprint Speed</th>
+                    <th class="sortable" scope="col" [hidden]="condArray[7]" (click)="sortByColumn(sortableColumns[13])">Agility</th>
+                    <th class="sortable" scope="col" [hidden]="condArray[8]" (click)="sortByColumn(sortableColumns[14])">Reaction</th>
+                    <th class="sortable" scope="col" [hidden]="condArray[9]" (click)="sortByColumn(sortableColumns[15])">Balance</th>
+                    <th class="sortable" scope="col" [hidden]="condArray[10]" (click)="sortByColumn(sortableColumns[16])">Shot Power</th>
+                    <th class="sortable" scope="col" [hidden]="condArray[11]" (click)="sortByColumn(sortableColumns[17])">Jumping</th>
+                    <th class="sortable" scope="col" [hidden]="condArray[12]" (click)="sortByColumn(sortableColumns[18])">Stamina</th>
+                    <th class="sortable" scope="col" [hidden]="condArray[13]" (click)="sortByColumn(sortableColumns[19])">Aggression</th>
+                    <th class="sortable" scope="col" [hidden]="condArray[14]" (click)="sortByColumn(sortableColumns[20])">Long Shots</th>
+                    <th class="sortable" scope="col" [hidden]="condArray[15]" (click)="sortByColumn(sortableColumns[21])">Crossing</th>
+                    <th class="sortable" scope="col" [hidden]="condArray[16]" (click)="sortByColumn(sortableColumns[22])">Finishing</th>
+                    <th class="sortable" scope="col" [hidden]="condArray[17]" (click)="sortByColumn(sortableColumns[23])">Short Passing</th>
+                    <th class="sortable" scope="col" [hidden]="condArray[18]" (click)="sortByColumn(sortableColumns[24])">Wage</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let spieler of state.appData.data.page.content; let i = index;">
-                    <td><img [src]="spieler.photoURL" width="42" height="42" class="rounded-circle"S></td>
+                    <td><img [src]="spieler.photoURL" width="42" height="42" class="rounded-circle"></td>
                     <td>{{ spieler.knownName }}</td>
                     <td>{{ spieler.age }}</td>
                     <td><img [src]="spieler.flag" width="42" height="42" class="rounded-circle"></td>
@@ -291,5 +289,17 @@
     </div>
   </div>
   </ng-container>
+
+<ng-template #sortDescending>
+  <i class="material-icons">
+    arrow_drop_down
+  </i>
+</ng-template>
+
+<ng-template #sortAscending>
+  <i class="material-icons">
+    arrow_drop_up
+  </i>
+</ng-template>
 
 <router-outlet></router-outlet>

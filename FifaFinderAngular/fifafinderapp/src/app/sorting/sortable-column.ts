@@ -1,21 +1,20 @@
 export class SortableColumn{
-    name: String;
-    title: String;
-    direction: string;
+  column: string;
+  direction: string = null;
 
-    public constructor(name: string, title: string, direction: string) {
-        this.name = name;
-        this.title = title;
-        this.direction = direction;
-    }
 
-    public toggleDirection(){
-        if(this.direction == 'asc'){
-            this.direction = null;
-        } else if(this.direction == 'desc'){
-            this.direction = 'asc';
-        } else {
-            this.direction = 'desc';
-        }
+  public constructor(column: string, direction?: string) {
+    this.column = column;
+    this.direction = direction;
+  }
+
+  public toggleDirection() {
+    if(this.direction == 'asc') {
+      this.direction = null;
+    } else if(this.direction == 'desc') {
+      this.direction = 'asc';
+    } else {
+      this.direction = 'desc';
     }
+  }
 }
