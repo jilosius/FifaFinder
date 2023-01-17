@@ -5,6 +5,7 @@ import { ApiResponse } from '../interface/api-response';
 import { Page } from '../interface/page';
 import { SpielerService } from '../service/start.service';
 import { SortableColumn } from "../sorting/sortable-column";
+import {Sort} from "@angular/material/sort";
 
 @Component({
   selector: 'app-start',
@@ -72,6 +73,8 @@ export class StartComponent implements OnInit {
 
   pageNumber: number= 0;
   size: number= 20;
+
+  currentSort: SortableColumn = new SortableColumn(null, null);
 
   //Array to set names and default sort direction of columns
   sortableColumns: Array<SortableColumn> = [
@@ -176,7 +179,8 @@ export class StartComponent implements OnInit {
     maxFinishing=this.maxFinishing;
     minShortPassing=this.minShortPassing;
     maxShortPassing=this.maxShortPassing;
-
+    sort = this.currentSort.column;
+    order = this.currentSort.direction;
 
     var checkConditionMinArray:number[] = [minHeadingAccuracy,minVolleys,minDribbling,minCurve,minFkAccuracy,minAcceleration,minSprintSpeed,minAgility,minReaction,minBalance,minShotPower,minJumping,minStamina,minAggression,minLongShots,minCrossing,minFinishing,minShortPassing,minWage]
     var checkConditionMaxArray:number[] = [maxHeadingAccuracy,maxVolleys,maxDribbling,maxCurve,maxFkAccuracy,maxAcceleration,maxSprintSpeed,maxAgility,maxReaction,maxBalance,maxShotPower,maxJumping,maxStamina,maxAggression,maxLongShots,maxCrossing,maxFinishing,maxShortPassing,maxWage]
@@ -265,9 +269,10 @@ export class StartComponent implements OnInit {
     minFinishing?: number,
     maxFinishing?: number,
     minShortPassing?: number,
-    maxShortPassing?: number): void {
+    maxShortPassing?: number
+    ): void {
     this.goToPage(name, minAge, maxAge, minOverall, maxOverall, minPotential,maxPotential,minHeight,maxHeight,minValue,maxValue,minWage,maxWage,minHeadingAccuracy,maxHeadingAccuracy,minVolleys, maxVolleys,minDribbling,maxDribbling, minCurve, maxCurve,minFkAccuracy, maxFkAccuracy,minAcceleration,maxAcceleration,minSprintSpeed,maxSprintSpeed,minAgility, maxAgility, minReaction,maxReaction,minBalance,maxBalance,minShotPower,maxShotPower,minJumping,maxJumping,minStamina,maxStamina, minAggression,maxAggression, minLongShots, maxLongShots,minCrossing,maxCrossing,minFinishing,maxFinishing,minShortPassing, maxShortPassing,
-                  direction === 'forward' ? this.currentPageSubject.value + 1 : this.currentPageSubject.value - 1);
+                  direction === 'forward' ? this.currentPageSubject.value + 1 : this.currentPageSubject.value - 1, 20);
   }
 
   resetValues(name?:string):void{
@@ -331,6 +336,7 @@ export class StartComponent implements OnInit {
       sort = this.sortableColumns[1];
     }
     this.clearPreviousSorting(sort);
+    this.currentSort = sort;
     this.goToPage(
       this.name,
       this.ageMin,
@@ -382,9 +388,7 @@ export class StartComponent implements OnInit {
       this.minShortPassing,
       this.maxShortPassing,
       0,
-      20,
-      sort.column,
-      sort.direction
+      20
     );
   }
 

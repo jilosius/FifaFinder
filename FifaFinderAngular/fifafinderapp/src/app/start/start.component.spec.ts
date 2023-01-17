@@ -20,5 +20,6 @@ describe('StartComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });
 
