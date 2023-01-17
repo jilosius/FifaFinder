@@ -161,7 +161,7 @@ public class SpielerController {
             case "wage":
                 sortAttribute = "pf.wage";
                 break;
-            case "headaccuracy":
+            case "headingAccuracy":
                 sortAttribute = "pf.headingAccuracy";
                 break;
             case "volleys":
@@ -173,13 +173,13 @@ public class SpielerController {
             case "curve":
                 sortAttribute = "pf.curve";
                 break;
-            case "fkaccuracy":
+            case "fkAccuracy":
                 sortAttribute = "pf.fkAccuracy";
                 break;
-            case "accel":
+            case "acceleration":
                 sortAttribute = "pf.acceleration";
                 break;
-            case "sprintspeed":
+            case "sprintSpeed":
                 sortAttribute = "pf.sprintSpeed";
                 break;
             case "agility":
@@ -191,7 +191,7 @@ public class SpielerController {
             case "balance":
                 sortAttribute = "pf.balance";
                 break;
-            case "shotpower":
+            case "shotPower":
                 sortAttribute = "pf.shotPower";
                 break;
             case "jumping":
@@ -203,7 +203,7 @@ public class SpielerController {
             case "aggression":
                 sortAttribute = "pf.aggression";
                 break;
-            case "longshots":
+            case "longShots":
                 sortAttribute = "pf.longShots";
                 break;
             case "crossing":
@@ -212,7 +212,7 @@ public class SpielerController {
             case "finishing":
                 sortAttribute = "pf.finishing";
                 break;
-            case "shortpassing":
+            case "shortPassing":
                 sortAttribute = "pf.shortPassing";
                 break;
             default:
