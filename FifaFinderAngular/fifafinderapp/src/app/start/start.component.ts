@@ -74,7 +74,7 @@ export class StartComponent implements OnInit {
   pageNumber: number= 0;
   size: number= 20;
 
-  currentSort: SortableColumn = new SortableColumn(null, null);
+  currentSort: SortableColumn = new SortableColumn('overall', 'desc');
 
   //Array to set names and default sort direction of columns
   sortableColumns: Array<SortableColumn> = [
@@ -131,6 +131,7 @@ export class StartComponent implements OnInit {
   //the method that does all the magic: boolean Array is checked to hide/unhide columns, then spielerService is used to return the data/page as required
   goToPage(name?: string, minAge?: number,maxAge?: number,minOverall?: number, maxOverall?: number, minPotential?: number,maxPotential?: number,minHeight?: number,maxHeight?: number,minValue?: number,maxValue?: number,minWage?: number,maxWage?: number,minHeadingAccuracy?: number,maxHeadingAccuracy?: number,minVolleys?: number,maxVolleys?: number,minDribbling?: number, maxDribbling?: number,minCurve?: number,maxCurve?: number, minFkAccuracy?: number,maxFkAccuracy?: number,minAcceleration?: number,maxAcceleration?: number, minSprintSpeed?: number,maxSprintSpeed?: number,minAgility?: number, maxAgility?: number,minReaction?: number,maxReaction?:number,minBalance?: number,maxBalance?: number,minShotPower?: number,maxShotPower?: number, minJumping?: number,maxJumping?: number,minStamina?: number,maxStamina?: number,minAggression?: number,maxAggression?: number,minLongShots?: number,maxLongShots?: number,minCrossing?: number,maxCrossing?: number,minFinishing?: number,maxFinishing?: number,minShortPassing?: number,maxShortPassing?: number,
             pageNumber: number = 0, size: number = 20, sort?: string, order?: string): void {
+    this.name = name;
     minAge = this.ageMin;
     maxAge = this.ageMax;
     minOverall = this.overallMin;
@@ -335,7 +336,7 @@ export class StartComponent implements OnInit {
       this.resetSort();
       sort = this.sortableColumns[1];
     }
-    this.clearPreviousSorting(sort);
+    this.clearPreviousSorting(sort); // Make sortableColumns array not "remember" previous sorting of other columns
     this.currentSort = sort;
     this.goToPage(
       this.name,
@@ -392,7 +393,7 @@ export class StartComponent implements OnInit {
     );
   }
 
-  public clearPreviousSorting(chosenColumn: SortableColumn) {
+  clearPreviousSorting(chosenColumn: SortableColumn) {
     this.sortableColumns.filter(
       column => column != chosenColumn
     ).forEach(
@@ -400,7 +401,7 @@ export class StartComponent implements OnInit {
     );
   }
 
-  public resetSort(){
+  resetSort(){
     this.sortableColumns.filter(
       checkColumn => checkColumn.column != 'overall'
     ).forEach(
@@ -409,5 +410,20 @@ export class StartComponent implements OnInit {
     this.sortableColumns[1].direction = 'desc';
   }
 
+  sortArrow(columnName: string) {
+    if (this.currentSort.column === columnName) {
+      switch (this.currentSort.direction) {
+        case 'desc':
+          return '&#9660;';
+          break;
+        case 'asc':
+          return '&#9650;';
+          break;
+        default:
+          break;
+      }
+    }
+    return '';
+  }
 }
 
