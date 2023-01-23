@@ -1,14 +1,29 @@
 package com.fifafinder.fifadb.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
+import org.hibernate.id.factory.spi.GenerationTypeStrategy;
 
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_DEFAULT;
+
 @Entity
+@SuperBuilder
+@JsonInclude(NON_DEFAULT)
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 @Table(name = "spieler")
 public class Spieler {
     @Id
@@ -28,6 +43,7 @@ public class Spieler {
     @OneToMany(mappedBy = "playerID")
     private Set<PlaysFor> playsFors = new LinkedHashSet<>();
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "is_from",
             joinColumns = @JoinColumn(name = "PlayerID"),

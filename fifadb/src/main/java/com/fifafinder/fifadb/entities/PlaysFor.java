@@ -86,7 +86,11 @@ public class PlaysFor {
     @Column(name = "SkillMoves")
     private Integer skillMoves;
 
+<<<<<<< HEAD
     @Column(name = "Cossing")
+=======
+    @Column(name = "Crossing")
+>>>>>>> f9a6ad74eec0de9ced645899d96789f5e4f3bf8e
     private Integer crossing;
 
     @Column(name = "Finishing")
@@ -387,8 +391,13 @@ public class PlaysFor {
         return crossing;
     }
 
+<<<<<<< HEAD
     public void setCrossing(Integer crossing) {
         this.crossing = crossing;
+=======
+    public void setCossing(Integer cossing) {
+        this.crossing = cossing;
+>>>>>>> f9a6ad74eec0de9ced645899d96789f5e4f3bf8e
     }
 
     public Integer getFinishing() {
