@@ -82,8 +82,8 @@ public class PlaysFor {
     @Column(name = "SkillMoves")
     private Integer skillMoves;
 
-    @Column(name = "Cossing")
-    private Integer cossing;
+    @Column(name = "Crossing")
+    private Integer crossing;
 
     @Column(name = "Finishing")
     private Integer finishing;
@@ -379,12 +379,12 @@ public class PlaysFor {
         this.skillMoves = skillMoves;
     }
 
-    public Integer getCossing() {
-        return cossing;
+    public Integer getCrossing() {
+        return crossing;
     }
 
-    public void setCossing(Integer cossing) {
-        this.cossing = cossing;
+    public void setCrossing(Integer crossing) {
+        this.crossing = crossing;
     }
 
     public Integer getFinishing() {

@@ -51,7 +51,7 @@ public class PlaysForController {
                           @RequestBody Integer intReputation,
                           @RequestBody Integer weakFoot,
                           @RequestBody Integer skillMoves,
-                          @RequestBody Integer cossing,
+                          @RequestBody Integer crossing,
                           @RequestBody Integer finishing,
                           @RequestBody Integer headingAccuracy,
                           @RequestBody Integer shortPassing,
@@ -96,7 +96,7 @@ public class PlaysForController {
 
         playsForService.addPlayer(spieler, fifaversion, height,clubPosition, clubNumber,nationalPosition, nationalNumber,
                 preferredFoot, contractUntil, onLoan, nationalTeam, age, weight, overall, potential, bestPosition, clubID, valueEUR, wage, releaseClause,
-                intReputation, weakFoot, skillMoves, cossing, finishing, headingAccuracy, shortPassing, volleys, dribbling, curve, fKAccuracy, longPassing,
+                intReputation, weakFoot, skillMoves, crossing, finishing, headingAccuracy, shortPassing, volleys, dribbling, curve, fKAccuracy, longPassing,
                 ballControl, acceleration, sprintSpeed, agility, reaction, balance, shotPower, jumping, stamina, strength, longShots, aggression, interceptions,
                 positioning, vision, penalties, composure, marking, standingTackle, slidingTackle, gKDiving, gKHandling, gKKicking, gKPositioning, gKReflexes, photoUrl);
     }

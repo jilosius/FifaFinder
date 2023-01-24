@@ -33,7 +33,7 @@ public class PlaysForService {
     public void addPlayer(Spieler spieler, FifaVersion fifaversion, Integer height, String clubPosition, Integer clubNumber, String nationalPosition,
                           Integer nationalNumber, String preferredFoot, Integer contractUntil, String onLoan, String nationalTeam, Integer age,
                           Integer weight, Integer overall, Integer potential, String bestPosition, Mannschaften clubID, Long valueEUR, Long wage,
-                          Long releaseClause, Integer intReputation, Integer weakFoot, Integer skillMoves, Integer cossing, Integer finishing,
+                          Long releaseClause, Integer intReputation, Integer weakFoot, Integer skillMoves, Integer crossing, Integer finishing,
                           Integer headingAccuracy, Integer shortPassing, Integer volleys, Integer dribbling, Integer curve, Integer fKAccuracy,
                           Integer longPassing, Integer ballControl, Integer acceleration, Integer sprintSpeed, Integer agility, Integer reaction,
                           Integer balance, Integer shotPower, Integer jumping, Integer stamina, Integer strength, Integer longShots, Integer aggression,
@@ -68,7 +68,7 @@ public class PlaysForService {
         playsFor.setIntReputation(intReputation);
         playsFor.setWeakFoot(weakFoot);
         playsFor.setSkillMoves(skillMoves);
-        playsFor.setCossing(cossing);
+        playsFor.setCrossing(crossing);
         playsFor.setFinishing(finishing);
         playsFor.setHeadingAccuracy(headingAccuracy);
         playsFor.setShortPassing(shortPassing);
