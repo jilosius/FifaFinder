@@ -10,6 +10,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 @Transactional
@@ -82,7 +84,8 @@ public class SpielerService {
                                                    int minShortPassing,
                                                    int maxShortPassing,
                                                    int page, int size, Sort sort) {
-        return spielerRepository.findByFullNameFiltered(name,
+        return spielerRepository.findByFullNameFiltered(
+                name,
                 fifaVersion,
                 preferredFoot,
                 minAge,
@@ -136,6 +139,10 @@ public class SpielerService {
                 PageRequest.of(page, size, sort));
     }
 
+
+    public List<SpielerDTO> getSpielerToCompare(int player1Id, int player2Id, int player3Id, int player4Id, int player5Id){
+        return spielerRepository.getSpielerToCompare(player1Id, player2Id,player3Id,player4Id,player5Id);
+    }
 
 
 //    public List<Spieler> spielerAnzeigen() {

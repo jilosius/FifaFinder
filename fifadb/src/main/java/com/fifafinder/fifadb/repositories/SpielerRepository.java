@@ -9,7 +9,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.swing.text.html.Option;
+import java.util.List;
 import java.util.Optional;
+
 
 @Repository
 public interface SpielerRepository extends JpaRepository<Spieler, Integer> {
@@ -30,10 +33,11 @@ public interface SpielerRepository extends JpaRepository<Spieler, Integer> {
 //
 
     //     ----- final implementation: full search algorithm. Search by name, filter by below attributes.
-    @Query("SELECT NEW com.fifafinder.fifadb.DTOs.SpielerDTO(pf.photoUrl, s.knownName, pf.age, nat.countryID.flag, pf.clubID.clubLogo, pf.overall, pf.potential, pf.bestPosition, pf.valueEUR, pf.height, pf.weight,pf.preferredFoot,pf.headingAccuracy,pf.volleys,pf.dribbling, pf.curve,pf.fKAccuracy,pf.acceleration,pf.sprintSpeed,pf.agility,pf.reaction,pf.balance,pf.shotPower,pf.jumping,pf.stamina,pf.aggression,pf.longShots,pf.crossing,pf.finishing,pf.shortPassing,pf.wage) " +
+
+    @Query("SELECT NEW com.fifafinder.fifadb.DTOs.SpielerDTO(pf.id.playerID, pf.photoUrl, s.knownName, pf.age, nat.countryID.flag, pf.clubID.clubLogo, pf.overall, pf.potential, pf.bestPosition, pf.valueEUR, pf.height, pf.weight,pf.preferredFoot,pf.headingAccuracy,pf.volleys,pf.dribbling, pf.curve,pf.fKAccuracy,pf.acceleration,pf.sprintSpeed,pf.agility,pf.reaction,pf.balance,pf.shotPower,pf.jumping,pf.stamina,pf.aggression,pf.longShots,pf.crossing,pf.finishing,pf.shortPassing,pf.wage) " +
             "FROM Spieler s INNER JOIN PlaysFor pf ON s.id = pf.id.playerID JOIN IsFrom nat ON s.id = nat.id.playerID " +
             "WHERE pf.id.fifaVersion = :fifaVersion " +
-            "AND s.fullName LIKE %:searchTerm% " +
+            "AND (s.fullName LIKE %:searchTerm% " +
             "AND pf.age >= :minAge AND pf.age <= :maxAge " +
             "AND pf.overall >= :minOverall AND pf.overall <= :maxOverall " +
             "AND pf.preferredFoot LIKE %:preferredFoot% " +
@@ -58,8 +62,10 @@ public interface SpielerRepository extends JpaRepository<Spieler, Integer> {
             "AND pf.longShots >= :minLongShots AND pf.longShots <= :maxLongShots " +
             "AND pf.crossing >= :minCrossing AND pf.crossing <= :maxCrossing " +
             "AND pf.finishing >= :minFinishing AND pf.finishing <= :maxFinishing " +
-            "AND pf.shortPassing >= :minShortPassing AND pf.shortPassing <= :maxShortPassing"
+            "AND pf.shortPassing >= :minShortPassing AND pf.shortPassing <= :maxShortPassing)"
     )
+
+
     //applying filter
     Page<SpielerDTO> findByFullNameFiltered(@Param("searchTerm") String searchTerm,
                                             @Param("fifaVersion") int fifaVersion,
@@ -113,6 +119,17 @@ public interface SpielerRepository extends JpaRepository<Spieler, Integer> {
                                             @Param("minShortPassing") int minShortPassing,
                                             @Param("maxShortPassing") int maxShortPassing,
                                             Pageable pageable);
+
+    @Query("SELECT NEW com.fifafinder.fifadb.DTOs.SpielerDTO(pf.id.playerID,pf.photoUrl, s.knownName, pf.age, nat.countryID.flag, pf.clubID.clubLogo, pf.overall, pf.potential, pf.bestPosition, pf.valueEUR, pf.height, pf.weight,pf.preferredFoot,pf.headingAccuracy,pf.volleys,pf.dribbling, pf.curve,pf.fKAccuracy,pf.acceleration,pf.sprintSpeed,pf.agility,pf.reaction,pf.balance,pf.shotPower,pf.jumping,pf.stamina,pf.aggression,pf.longShots,pf.crossing,pf.finishing,pf.shortPassing,pf.wage) " +
+            "FROM Spieler s INNER JOIN PlaysFor pf ON s.id = pf.id.playerID JOIN IsFrom nat ON s.id = nat.id.playerID " +
+            "WHERE pf.id.fifaVersion = 23" +
+            "AND (pf.id.playerID = :player1Id OR pf.id.playerID = :player2Id  OR pf.id.playerID = :player3Id OR pf.id.playerID = :player4Id OR pf.id.playerID = :player5Id)")
+    List<SpielerDTO> getSpielerToCompare(@Param("player1Id") int player1Id,
+                                         @Param("player2Id") int player2Id,
+                                         @Param("player3Id") int player3Id,
+                                         @Param("player4Id") int player4Id,
+                                         @Param("player5Id") int player5Id);
+
 
 
 //    Optional<Spieler> findSpielerById(Integer id);

@@ -11,7 +11,7 @@ export class SpielerService {
   constructor(private http: HttpClient) { }
 
   // Make call to the back end API to retrieve page of spieler
-  spieler$ = (
+spieler$ = (
     name: string = '',
     fifaVersion: number = 23,
     preferredFoot: string = "",

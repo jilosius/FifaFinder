@@ -7,12 +7,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StartComponent } from './start/start.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatSortModule} from '@angular/material/sort'; 
+import { MatSortModule } from '@angular/material/sort';
+import { VergleichComponent } from './vergleich/vergleich.component'; 
+import { MatCheckboxModule } from '@angular/material/checkbox'; 
 
 @NgModule({
   declarations: [
     AppComponent,
-    StartComponent
+    StartComponent,
+    VergleichComponent
   ],
   imports: [
     BrowserModule,
@@ -21,7 +24,8 @@ import {MatSortModule} from '@angular/material/sort';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    MatSortModule
+    MatSortModule,
+    MatCheckboxModule
     // MatMenuModule
   ],
   providers: [],

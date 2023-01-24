@@ -208,4 +208,17 @@ public class SpielerController {
                         .build());
     }
 
+    @GetMapping("/start/vergleich")
+    public List<SpielerDTO> getSpielerToCompare(@RequestParam Optional<Integer> player1Id,
+                                                @RequestParam Optional<Integer> player2Id,
+                                                @RequestParam Optional<Integer> player3Id,
+                                                @RequestParam Optional<Integer> player4Id,
+                                                @RequestParam Optional<Integer> player5Id) {
+        return spielerService.getSpielerToCompare(
+                player1Id.orElse(0),
+                player2Id.orElse(0),
+                player3Id.orElse(0),
+                player4Id.orElse(0),
+                player5Id.orElse(0));
+    }
 }

@@ -3,7 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, BehaviorSubject, map, startWith, catchError, of } from 'rxjs';
 import { ApiResponse } from '../interface/api-response';
 import { Page } from '../interface/page';
-import { SpielerService } from '../service/start.service';
+import { Spieler } from '../interface/spieler';
+import { SelectedPlayerService } from '../services/selected-player.service';
+import { SpielerService } from '../services/start.service';
 
 @Component({
   selector: 'app-start',
@@ -17,70 +19,78 @@ export class StartComponent implements OnInit {
   responseSubject = new BehaviorSubject<ApiResponse<Page>>(null); //Save the response to use out of map() function
   private currentPageSubject = new BehaviorSubject<number>(0); //Save observable at current page
   currentPage$ = this.currentPageSubject.asObservable();
+
+  players: Spieler[];
+  selectedPlayerIds: number[];
   
   //defining variables that are used in the dropdown filter 
-  fifaVersion: number;
+  playerId: number;
+  fifaVersion: number =  23;
   preferredFoot: string = "";
-  ageMin: number;
-  ageMax: number;
-  overallMin: number;
-  overallMax: number;
-  potentialMin: number;
-  potentialMax: number;
-  heightMin: number;
-  heightMax: number;
-  minValue: number;
-  maxValue: number;
-  minWage: number;
-  maxWage: number;
-  minHeadingAccuracy: number;
-  maxHeadingAccuracy: number;
-  minVolleys: number;
-  maxVolleys: number;
-  minDribbling: number;
-  maxDribbling: number;
-  minCurve: number;
-  maxCurve: number;
-  minFkAccuracy: number;
-  maxFkAccuracy: number;
-  minAcceleration: number;
-  maxAcceleration: number;
-  minSprintSpeed: number;
-  maxSprintSpeed: number;
-  minAgility: number;
-  maxAgility: number;
-  minReaction: number;
-  maxReaction:number;
-  minBalance: number;
-  maxBalance: number;
-  minShotPower: number;
-  maxShotPower: number;
-  minJumping: number;
-  maxJumping: number;
-  minStamina: number;
-  maxStamina: number;
-  minAggression: number;
-  maxAggression: number;
-  minLongShots: number;
-  maxLongShots: number;
-  minCrossing: number;
-  maxCrossing: number;
-  minFinishing: number;
-  maxFinishing: number;
-  minShortPassing: number;
-  maxShortPassing: number;
+  ageMin: number = 0;
+  ageMax: number= 100;
+  overallMin: number=0;
+  overallMax: number=100;
+  potentialMin: number=0;
+  potentialMax: number=100;
+  heightMin: number=0;
+  heightMax: number=300;
+  minValue: number=0;
+  maxValue: number=1000000000;
+  minWage: number=0;
+  maxWage: number=1000000000;
+  minHeadingAccuracy: number=0;
+  maxHeadingAccuracy: number=100;
+  minVolleys: number=0;
+  maxVolleys: number=100;
+  minDribbling: number=0;
+  maxDribbling: number=100;
+  minCurve: number=0;
+  maxCurve: number=100;
+  minFkAccuracy: number=0;
+  maxFkAccuracy: number=100;
+  minAcceleration: number=0;
+  maxAcceleration: number=100;
+  minSprintSpeed: number=0;
+  maxSprintSpeed: number=100;
+  minAgility: number=0;
+  maxAgility: number=100;
+  minReaction: number=0;
+  maxReaction:number=100;
+  minBalance: number=0;
+  maxBalance: number=100;
+  minShotPower: number=0;
+  maxShotPower: number=100;
+  minJumping: number=0;
+  maxJumping: number=100;
+  minStamina: number=0;
+  maxStamina: number=100;
+  minAggression: number=0;
+  maxAggression: number=100;
+  minLongShots: number=0;
+  maxLongShots: number=100;
+  minCrossing: number=0;
+  maxCrossing: number=100;
+  minFinishing: number=0;
+  maxFinishing: number=100;
+  minShortPassing: number=0;
+  maxShortPassing: number=100;
+
+
+
 
   //Array to set the "hidden" attribute of each column to either true or false
   condArray:boolean[] = [true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true]
 
-  constructor(private spielerService: SpielerService) { }
+  constructor(private spielerService: SpielerService, private selectedPlayerService: SelectedPlayerService) { }
 
   //on app initialisation: start with: 'APP LOADING', then 'APP_LOADED', and if error return 'APP_ERROR'
   ngOnInit(): void {
     this.spielerState$ = this.spielerService.spieler$().pipe(
       map((response: ApiResponse<Page>) => {
-        this.responseSubject.next(response);  //response subject contains response for later use
+        this.responseSubject.next(response);
         this.currentPageSubject.next(response.data.page.number);
+        this.players = response.data.page.content;
         console.log(response);
         return ({ appState: 'APP_LOADED', appData: response });
       }),
@@ -91,6 +101,7 @@ export class StartComponent implements OnInit {
       )
     )
   }
+
 
   //the method that does all the magic: boolean Array is checked to hide/unhide columns, then spielerService is used to return the data/page as required
   goToPage(name?: string,fifaVersion?:number,preferredFoot?:string,minAge?: number,maxAge?: number,minOverall?: number, maxOverall?: number, minPotential?: number,maxPotential?: number,minHeight?: number,maxHeight?: number,minValue?: number,maxValue?: number,minWage?: number,maxWage?: number,minHeadingAccuracy?: number,maxHeadingAccuracy?: number,minVolleys?: number,maxVolleys?: number,minDribbling?: number, maxDribbling?: number,minCurve?: number,maxCurve?: number, minFkAccuracy?: number,maxFkAccuracy?: number,minAcceleration?: number,maxAcceleration?: number, minSprintSpeed?: number,maxSprintSpeed?: number,minAgility?: number, maxAgility?: number,minReaction?: number,maxReaction?:number,minBalance?: number,maxBalance?: number,minShotPower?: number,maxShotPower?: number, minJumping?: number,maxJumping?: number,minStamina?: number,maxStamina?: number,minAggression?: number,maxAggression?: number,minLongShots?: number,maxLongShots?: number,minCrossing?: number,maxCrossing?: number,minFinishing?: number,maxFinishing?: number,minShortPassing?: number,maxShortPassing?: number,
@@ -292,5 +303,24 @@ export class StartComponent implements OnInit {
     this.maxShortPassing= 100;
     this.goToPage(name);
   }
+
+  toggleSelection(spieler: Spieler) {
+    spieler.selected = !spieler.selected;
+  }
+
+
+  getSelectedPlayerIds() {
+    this.selectedPlayerIds = this.players
+      .filter(spieler => spieler.selected)
+      .map(spieler => spieler.playerId);
+    console.log(this.selectedPlayerIds);
+    this.selectedPlayerService.setSelectedPlayerIds(this.selectedPlayerIds);
+    return this.selectedPlayerIds;
+  }
+
+  
+
+
+
 }
 

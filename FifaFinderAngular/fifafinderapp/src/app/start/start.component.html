@@ -20,6 +20,10 @@
                   d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z" />
               </svg> Filter
             </button>
+
+            <button [routerLink]="['/vergleich']" class="btn btn-secondary my-button" (click)="getSelectedPlayerIds()">Vergleich</button>
+
+
             <form class="dropdown-menu p-4" style="width: 700px;">
               <div class="row g-3">
                 <div class="col-sm-3 col-form-label"><label for="fifaVersion">Fifa version</label></div>
@@ -309,6 +313,7 @@
           <table class="table table-striped">
             <thead>
               <tr>
+                <th scope="col"></th>
                 <th scope="col">Photo</th>
                 <th scope="col">Known Name</th>
                 <th scope="col">Age</th>
@@ -343,7 +348,8 @@
             </thead>
             <tbody>
               <tr *ngFor="let spieler of state.appData.data.page.content; let i = index;">
-                <th scope="row"><img [src]="spieler.photoURL" width="42" height="42" class="rounded-circle" S></th>
+                <th><mat-checkbox (change)="toggleSelection(spieler)"></mat-checkbox></th>
+                <td scope="row"><img [src]="spieler.photoURL" width="42" height="42" class="rounded-circle" S></td>
                 <td>{{ spieler.knownName }}</td>
                 <td>{{ spieler.age }}</td>
                 <td><img [src]="spieler.flag" width="42" height="42" class="rounded-circle"></td>

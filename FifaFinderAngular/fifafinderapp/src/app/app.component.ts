@@ -4,7 +4,7 @@ import { map, startWith, catchError } from 'rxjs/operators';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { ApiResponse } from './interface/api-response';
 import { Page } from './interface/page';
-import { SpielerService } from './service/start.service';
+import { SpielerService } from './services/start.service';
 
 @Component({
   selector: 'app-root',
