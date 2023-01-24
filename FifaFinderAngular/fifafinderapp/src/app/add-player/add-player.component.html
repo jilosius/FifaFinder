@@ -1,1 +1,490 @@
-<p>add-player works!</p>
+
+<!--<div class="input-group mb-3">
+    <label class="input-group-text" for="inputGroupSelect01">Version</label>
+    <select class="form-select" id="inputGroupSelect01">
+      <option selected>Choose...</option>
+      <option value="18">18</option>
+      <option value="19">19</option>
+      <option value="20">20</option>
+      <option value="21">21</option>
+      <option value="22">22</option>
+      <option value="23">23</option>
+    </select>
+  </div>
+  
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="inputGroup-sizing-sm">Small</span>
+    <input type="String" class="form-control" placeholder="Name" aria-label="Name" aria-describedby="basic-addon1">
+  </div>
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">@</span>
+    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+  </div>
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">@</span>
+    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+  </div>
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">@</span>
+    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+  </div>
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">@</span>
+    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+  </div>
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">@</span>
+    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+  </div>
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">@</span>
+    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+  </div>
+  <div class="input-group mb-3">
+    <span class="input-group-text" id="basic-addon1">@</span>
+    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+  </div>
+-->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="http://localhost:4200">FifaFinder</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+</nav>
+<form class="row g-3 needs-validation" novalidate>
+    <div class="col-md-4">
+        <label for="validationCustom04" class="form-label">knownName</label>
+      <input type="text" class="form-control" id="validationKnownName" required>
+      <div class="invalid-feedback">
+        Please choose a username.
+      </div>
+    </div>
+    <div class="col-md-4">
+        <label for="validationCustom04" class="form-label">fullName</label>
+      <input type="text" class="form-control" id="validationFullName" required>
+      <div class="invalid-feedback">
+        Please choose a username.
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="input-group has-validation">
+        <label for="validationCustom04" class="form-label">DateOfBirth</label>
+        <input type="date" class="form-control" id="validationDateOfBirth" aria-describedby="inputGroupPrepend" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <label for="validationCustom03" class="form-label">fifaVersion</label>
+      <input type="number" class="form-control" id="validationFifaVersion" min="18" max="23" required>
+      <div class="invalid-feedback">
+        Please choose a username.
+      </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">height</label>
+        <input type="number" class="form-control" id="validationHeight" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">clubPosition</label>
+        <input type="text" class="form-control" id="validationClubPosition" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">clubNumber</label>
+        <input type="number" class="form-control" id="validationClubNumber" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">clubID</label>
+        <input type="number" class="form-control" id="validationClubID" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">nationalPosition</label>
+        <input type="text" class="form-control" id="validationNationalPosition" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">nationalNumber</label>
+        <input type="number" class="form-control" id="validationNationalNumber" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">nationalTeam</label>
+        <input type="text" class="form-control" id="validationNationalTeam" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="validationCustom03" class="form-label">preferredFoot</label>
+        <select class="form-select" required aria-label="select example">
+          <option value="">Click!</option>
+          <option value="Left">Left</option>
+          <option value="Right">Right</option>          
+        </select>
+        <div class="invalid-feedback">Example invalid select feedback</div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">contractUntil</label>
+        <input type="number" class="form-control" id="validationContractUntil" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="validationCustom03" class="form-label">onLoan</label>
+        <select class="form-select" required aria-label="select example">
+          <option value="">Click!</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>          
+        </select>
+        <div class="invalid-feedback">Example invalid select feedback</div>
+    </div>    
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">Age</label>
+        <input type="number" class="form-control" id="validationAge" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">weight</label>
+        <input type="number" class="form-control" id="validationWeight" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">Overall</label>
+        <input type="number" class="form-control" id="validationOverall" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">Potential</label>
+        <input type="number" class="form-control" id="validationPotential" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">bestPosition</label>
+        <input type="text" class="form-control" id="validationBestPosition" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">valueEUR</label>
+        <input type="number" class="form-control" id="validationValueEUR" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">wage</label>
+        <input type="number" class="form-control" id="validationWage" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">releaseClause</label>
+        <input type="number" class="form-control" id="validationReleaseClause" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">Reputation</label>
+        <input type="number" class="form-control" id="validationReputation" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">weakFoot</label>
+        <input type="number" class="form-control" id="validationWeakFoot" min="1" max="5" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">skillMoves</label>
+        <input type="number" class="form-control" id="validationSkillMoves" min="1" max="5" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">Crossing</label>
+        <input type="number" class="form-control" id="validationCrossing" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">Finishing</label>
+        <input type="number" class="form-control" id="validationFinishing" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">HeadingAccuracy</label>
+        <input type="number" class="form-control" id="validationHeadingAccuracy" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">ShortPassing</label>
+        <input type="number" class="form-control" id="validationShortPassing" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">Volleys</label>
+        <input type="number" class="form-control" id="validationVolleys" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">Dribbling</label>
+        <input type="number" class="form-control" id="validationDribbling" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">Curve</label>
+        <input type="number" class="form-control" id="validationCurve" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">FKAccuracy</label>
+        <input type="number" class="form-control" id="validationFKAccuracy" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">LongPassing</label>
+        <input type="number" class="form-control" id="validationLongPassing" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">BallControl</label>
+        <input type="number" class="form-control" id="validationBallControl" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">Acceleration</label>
+        <input type="number" class="form-control" id="validationAcceleration" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">Sprintspeed</label>
+        <input type="number" class="form-control" id="validationSprintspeed" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">Agility</label>
+        <input type="number" class="form-control" id="validationAgility" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">Reaction</label>
+        <input type="number" class="form-control" id="validationReaction" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">Balance</label>
+        <input type="number" class="form-control" id="validationBalance" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">ShotPower</label>
+        <input type="number" class="form-control" id="validationShotPower" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">Jumping</label>
+        <input type="number" class="form-control" id="validationJumping" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">Stamina</label>
+        <input type="number" class="form-control" id="validationStamina" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">Strength</label>
+        <input type="number" class="form-control" id="validationStrength" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">LongShots</label>
+        <input type="number" class="form-control" id="validationLongShots" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">Aggression</label>
+        <input type="number" class="form-control" id="validationAgression" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">Interception</label>
+        <input type="number" class="form-control" id="validationInterception" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">Positioning</label>
+        <input type="number" class="form-control" id="validationPositioning" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">Vision</label>
+        <input type="number" class="form-control" id="validationVision" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">Penalties</label>
+        <input type="number" class="form-control" id="validationPenalties" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">Composure</label>
+        <input type="number" class="form-control" id="validationComposure" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">Marking</label>
+        <input type="number" class="form-control" id="validationMarking" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">StandingTackle</label>
+        <input type="number" class="form-control" id="validationStandingTackle" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">SlidingTackle</label>
+        <input type="number" class="form-control" id="validationSlidingTackle" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">GKDiving</label>
+        <input type="number" class="form-control" id="validationGKDiving" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">GKHandling</label>
+        <input type="number" class="form-control" id="validationGKHandling" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">GKKicking</label>
+        <input type="number" class="form-control" id="validationGKKicking" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">GKPositioning</label>
+        <input type="number" class="form-control" id="validationGKPositioning" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">GKReflexes</label>
+        <input type="number" class="form-control" id="validationGKReflexes" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="validationCustom03" class="form-label">PhotoURL</label>
+        <input type="text" class="form-control" id="validationPhotoURL" required>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
+    </div>
+    <div class="col-12">
+      <button class="btn btn-primary" type="submit">Submit Player</button>
+    </div>
+  </form>       
+         
