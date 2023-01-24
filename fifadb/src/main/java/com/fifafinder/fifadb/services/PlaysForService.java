@@ -2,6 +2,7 @@ package com.fifafinder.fifadb.services;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fifafinder.fifadb.dto.SpielerDetailDTO;
+import com.fifafinder.fifadb.dto.UpdateDTO;
 import com.fifafinder.fifadb.entities.*;
 import com.fifafinder.fifadb.repositories.FifaVersionRepository;
 import com.fifafinder.fifadb.repositories.PlaysForRepository;
@@ -52,70 +53,62 @@ public class PlaysForService {
         return details;
     }
 
-    public void editDetails(PlaysForId playsForId, Integer height, String clubPosition, Integer clubNumber, String nationalPosition, Integer nationalNumber, String preferredFoot,
-                            Integer contractUntil, String onLoan, String nationalTeam, Integer age, Integer weight, Integer overall, Integer potential, String bestPosition,
-                            Long valueEUR, Long wage, Long releaseClause, Integer intReputation, Integer weakFoot, Integer skillMoves, Integer crossing, Integer finishing,
-                            Integer headingAccuracy, Integer shortPassing, Integer volleys, Integer dribbling, Integer curve, Integer fKAccuracy, Integer longPassing,
-                            Integer ballControl, Integer acceleration, Integer sprintSpeed, Integer agility, Integer reaction, Integer balance, Integer shotPower, Integer jumping,
-                            Integer stamina, Integer strength, Integer longShots, Integer aggression, Integer interceptions, Integer positioning, Integer vision, Integer penalties,
-                            Integer composure, Integer marking, Integer standingTackle, Integer slidingTackle, Integer gKDiving, Integer gKHandling, Integer gKKicking, Integer gKPositioning,
-                            Integer gKReflexes, String photoUrl) {
+    public void editDetails(PlaysForId playsForId, UpdateDTO updateDTO) {
         PlaysFor details = playsForRepository.findPlaysForById(playsForId);
-        details.setHeight(height);
-        details.setClubPosition(clubPosition);
-        details.setClubNumber(clubNumber);
-        details.setNationalPosition(nationalPosition);
-        details.setNationalNumber(nationalNumber);
-        details.setPreferredFoot(preferredFoot);
-        details.setContractUntil(contractUntil);
-        details.setOnLoan(onLoan);
-        details.setNationalTeam(nationalTeam);
-        details.setAge(age);
-        details.setWeight(weight);
-        details.setOverall(overall);
-        details.setPotential(potential);
-        details.setBestPosition(bestPosition);
-        details.setValueEUR(valueEUR);
-        details.setWage(wage);
-        details.setReleaseClause(releaseClause);
-        details.setIntReputation(intReputation);
-        details.setWeakFoot(weakFoot);
-        details.setSkillMoves(skillMoves);
-        details.setCrossing(crossing);
-        details.setFinishing(finishing);
-        details.setHeadingAccuracy(headingAccuracy);
-        details.setShortPassing(shortPassing);
-        details.setVolleys(volleys);
-        details.setDribbling(dribbling);
-        details.setCurve(curve);
-        details.setFKAccuracy(fKAccuracy);
-        details.setLongPassing(longPassing);
-        details.setBallControl(ballControl);
-        details.setAcceleration(acceleration);
-        details.setSprintSpeed(sprintSpeed);
-        details.setAgility(agility);
-        details.setReaction(reaction);
-        details.setBalance(balance);
-        details.setShotPower(shotPower);
-        details.setJumping(jumping);
-        details.setStamina(stamina);
-        details.setStrength(strength);
-        details.setLongShots(longShots);
-        details.setAggression(aggression);
-        details.setInterceptions(interceptions);
-        details.setPositioning(positioning);
-        details.setVision(vision);
-        details.setPenalties(penalties);
-        details.setComposure(composure);
-        details.setMarking(marking);
-        details.setStandingTackle(standingTackle);
-        details.setSlidingTackle(slidingTackle);
-        details.setGKDiving(gKDiving);
-        details.setGKHandling(gKHandling);
-        details.setGKKicking(gKKicking);
-        details.setGKPositioning(gKPositioning);
-        details.setGKReflexes(gKReflexes);
-        details.setPhotoUrl(photoUrl);
+        details.setHeight(updateDTO.getHeight());
+        details.setClubPosition(updateDTO.getClubPosition());
+        details.setClubNumber(updateDTO.getClubNumber());
+        details.setNationalPosition(updateDTO.getNationalPosition());
+        details.setNationalNumber(updateDTO.getNationalNumber());
+        details.setPreferredFoot(updateDTO.getPreferredFoot());
+        details.setContractUntil(updateDTO.getContractUntil());
+        details.setOnLoan(updateDTO.getOnLoan());
+        details.setNationalTeam(updateDTO.getNationalTeam());
+        details.setWeight(updateDTO.getWeight());
+        details.setOverall(updateDTO.getOverall());
+        details.setPotential(updateDTO.getPotential());
+        details.setBestPosition(updateDTO.getBestPosition());
+        details.setValueEUR(updateDTO.getValueEUR());
+        details.setWage(updateDTO.getWage());
+        details.setReleaseClause(updateDTO.getReleaseClause());
+        details.setIntReputation(updateDTO.getIntReputation());
+        details.setWeakFoot(updateDTO.getWeakFoot());
+        details.setSkillMoves(updateDTO.getSkillMoves());
+        details.setCrossing(updateDTO.getCrossing());
+        details.setFinishing(updateDTO.getFinishing());
+        details.setHeadingAccuracy(updateDTO.getHeadingAccuracy());
+        details.setShortPassing(updateDTO.getShortPassing());
+        details.setVolleys(updateDTO.getVolleys());
+        details.setDribbling(updateDTO.getDribbling());
+        details.setCurve(updateDTO.getCurve());
+        details.setFKAccuracy(updateDTO.getFKAccuracy());
+        details.setLongPassing(updateDTO.getLongPassing());
+        details.setBallControl(updateDTO.getBallControl());
+        details.setAcceleration(updateDTO.getAcceleration());
+        details.setSprintSpeed(updateDTO.getSprintSpeed());
+        details.setAgility(updateDTO.getAgility());
+        details.setReaction(updateDTO.getReaction());
+        details.setBalance(updateDTO.getBalance());
+        details.setShotPower(updateDTO.getShotPower());
+        details.setJumping(updateDTO.getJumping());
+        details.setStamina(updateDTO.getStamina());
+        details.setStrength(updateDTO.getStrength());
+        details.setLongShots(updateDTO.getLongShots());
+        details.setAggression(updateDTO.getAggression());
+        details.setInterceptions(updateDTO.getInterceptions());
+        details.setPositioning(updateDTO.getPositioning());
+        details.setVision(updateDTO.getVision());
+        details.setPenalties(updateDTO.getPenalties());
+        details.setComposure(updateDTO.getComposure());
+        details.setMarking(updateDTO.getMarking());
+        details.setStandingTackle(updateDTO.getStandingTackle());
+        details.setSlidingTackle(updateDTO.getSlidingTackle());
+        details.setGKDiving(updateDTO.getGKDiving());
+        details.setGKHandling(updateDTO.getGKHandling());
+        details.setGKKicking(updateDTO.getGKKicking());
+        details.setGKPositioning(updateDTO.getGKPositioning());
+        details.setGKReflexes(updateDTO.getGKReflexes());
+        details.setPhotoUrl(updateDTO.getPhotoUrl());
         playsForRepository.save(details);
     }
 }
