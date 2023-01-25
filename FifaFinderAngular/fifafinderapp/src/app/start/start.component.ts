@@ -5,7 +5,6 @@ import { ApiResponse } from '../interface/api-response';
 import { Page } from '../interface/page';
 import { SpielerService } from '../service/start.service';
 import { SortableColumn } from "../sorting/sortable-column";
-import {Sort} from "@angular/material/sort";
 
 @Component({
   selector: 'app-start',
