@@ -347,6 +347,8 @@
               </tr>
             </thead>
             <tbody>
+              <tr *ngFor="let spieler of state.appData.data.page.content; let i = index;" [class.selected]="spieler.selected">
+
               <!-- <mat-checkbox (change)="toggleSelection(spieler)"></mat-checkbox> -->
               <tr *ngFor="let spieler of state.appData.data.page.content; let i = index;">
                 <th scope="row">

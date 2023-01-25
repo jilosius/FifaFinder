@@ -88,6 +88,19 @@ export class StartComponent implements OnInit {
 
   //on app initialisation: start with: 'APP LOADING', then 'APP_LOADED', and if error return 'APP_ERROR'
   ngOnInit(): void {
+    this.selectedPlayerService.selectedPlayerIds$.subscribe(
+      selectedPlayerIds => {
+        this.selectedPlayerIds = selectedPlayerIds;
+        if (this.players){
+          this.players.forEach(player => {
+            if(this.selectedPlayerIds.includes(player.playerId)) {
+              player.selected = true;
+              this.selectedPlayers.push(player);
+            }
+          })
+        };
+      }
+    );
     this.spielerState$ = this.spielerService.spieler$().pipe(
       map((response: ApiResponse<Page>) => {
         this.responseSubject.next(response);
@@ -101,8 +114,9 @@ export class StartComponent implements OnInit {
         return of({ appState: 'APP_ERROR', error })
       }
       )
-    )
+    );
   }
+
 
 
   //the method that does all the magic: boolean Array is checked to hide/unhide columns, then spielerService is used to return the data/page as required
@@ -314,16 +328,23 @@ export class StartComponent implements OnInit {
       this.selectedPlayers.push(spieler);
     } else {
       this.selectedPlayers = this.selectedPlayers.filter(s => s.playerId !== spieler.playerId);
+      this.selectedPlayerIds = this.selectedPlayerIds.filter(id => id !== spieler.playerId);
     }
+    this.selectedPlayerService.setSelectedPlayerIds(this.selectedPlayerIds);
   }
 
+
+
   getSelectedPlayerIds() {
-    this.selectedPlayerIds = this.selectedPlayers.map(spieler => spieler.playerId);
-    console.log(this.selectedPlayerIds);
-    this.selectedPlayerService.setSelectedPlayerIds(this.selectedPlayerIds);
+    if(this.selectedPlayers.length > 0) {
+      this.selectedPlayerIds = this.selectedPlayers.map(spieler => spieler.playerId);
+      this.selectedPlayerService.setSelectedPlayerIds(this.selectedPlayerIds);
+    }
     this.selectedPlayerService.setSelectedFifaVersion(this.selectedFifaVersion);
     return this.selectedPlayerIds;
   }
+
+
   
   onFifaVersionChange(fifaVersion: number) {
     this.selectedFifaVersion = fifaVersion;

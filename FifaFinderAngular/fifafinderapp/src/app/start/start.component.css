@@ -11,6 +11,10 @@
     margin-left: 10px; /* add 10px of space on the left */
   }
 
+  .selected {
+    background-color: #005438;
+}
+
 
 
 
