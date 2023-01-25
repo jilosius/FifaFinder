@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface FifaVersionRepository extends JpaRepository<FifaVersion, Integer> {
+    FifaVersion findById(int id);
 }

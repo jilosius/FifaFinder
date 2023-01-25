@@ -1,5 +1,7 @@
 package com.fifafinder.fifadb.repositories;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fifafinder.fifadb.DTOs.SpielerDTO;
 import com.fifafinder.fifadb.entities.Spieler;
 import org.springframework.data.domain.Page;
@@ -9,6 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -32,7 +35,7 @@ public interface SpielerRepository extends JpaRepository<Spieler, Integer> {
     //     ----- final implementation: full search algorithm. Search by name, filter by below attributes.
     @Query("SELECT NEW com.fifafinder.fifadb.DTOs.SpielerDTO(pf.photoUrl, s.knownName, pf.age, nat.countryID.flag, pf.clubID.clubLogo, pf.overall, pf.potential, pf.bestPosition, pf.valueEUR, pf.height, pf.weight,pf.preferredFoot,pf.headingAccuracy,pf.volleys,pf.dribbling, pf.curve,pf.fkAccuracy,pf.acceleration,pf.sprintSpeed,pf.agility,pf.reaction,pf.balance,pf.shotPower,pf.jumping,pf.stamina,pf.aggression,pf.longShots,pf.crossing,pf.finishing,pf.shortPassing,pf.wage) " +
             "FROM Spieler s INNER JOIN PlaysFor pf ON s.id = pf.id.playerID JOIN IsFrom nat ON s.id = nat.id.playerID " +
-            "WHERE pf.id.fifaVersion = 23 " +
+            "WHERE pf.id.fifaVersion = :fifaVersion " +
             "AND s.fullName LIKE %:searchTerm% " +
             "AND pf.age >= :minAge AND pf.age <= :maxAge " +
             "AND pf.overall >= :minOverall AND pf.overall <= :maxOverall " +
@@ -62,6 +65,7 @@ public interface SpielerRepository extends JpaRepository<Spieler, Integer> {
     )
     //applying filter
     Page<SpielerDTO> findByFullNameFiltered(@Param("searchTerm") String searchTerm,
+                                            @Param("fifaVersion") int fifaVersion,
                                             @Param("preferredFoot") String preferredFoot,
                                             @Param("minAge") int minAge,
                                             @Param("maxAge") int maxAge,
@@ -115,11 +119,8 @@ public interface SpielerRepository extends JpaRepository<Spieler, Integer> {
 
 
 
-//    Optional<Spieler> findSpielerById(Integer id);
-//
-//    Optional<Spieler> findSpielerByfullname(String n);
-//
-//    void deleteSpielerById(Integer id);
 
+    Spieler findById(int id);
+    Spieler findSpielerByFullName(String fullName);
 
 }
