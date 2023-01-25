@@ -140,8 +140,8 @@ public class SpielerService {
     }
 
 
-    public List<SpielerDTO> getSpielerToCompare(int player1Id, int player2Id, int player3Id, int player4Id, int player5Id){
-        return spielerRepository.getSpielerToCompare(player1Id, player2Id,player3Id,player4Id,player5Id);
+    public List<SpielerDTO> getSpielerToCompare(int player1Id, int player2Id, int player3Id, int player4Id, int player5Id, int fifaVersion){
+        return spielerRepository.getSpielerToCompare(player1Id, player2Id,player3Id,player4Id,player5Id, fifaVersion);
     }
 
 

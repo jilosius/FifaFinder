@@ -122,13 +122,14 @@ public interface SpielerRepository extends JpaRepository<Spieler, Integer> {
 
     @Query("SELECT NEW com.fifafinder.fifadb.DTOs.SpielerDTO(pf.id.playerID,pf.photoUrl, s.knownName, pf.age, nat.countryID.flag, pf.clubID.clubLogo, pf.overall, pf.potential, pf.bestPosition, pf.valueEUR, pf.height, pf.weight,pf.preferredFoot,pf.headingAccuracy,pf.volleys,pf.dribbling, pf.curve,pf.fKAccuracy,pf.acceleration,pf.sprintSpeed,pf.agility,pf.reaction,pf.balance,pf.shotPower,pf.jumping,pf.stamina,pf.aggression,pf.longShots,pf.crossing,pf.finishing,pf.shortPassing,pf.wage) " +
             "FROM Spieler s INNER JOIN PlaysFor pf ON s.id = pf.id.playerID JOIN IsFrom nat ON s.id = nat.id.playerID " +
-            "WHERE pf.id.fifaVersion = 23" +
+            "WHERE pf.id.fifaVersion = :fifaVersion " +
             "AND (pf.id.playerID = :player1Id OR pf.id.playerID = :player2Id  OR pf.id.playerID = :player3Id OR pf.id.playerID = :player4Id OR pf.id.playerID = :player5Id)")
     List<SpielerDTO> getSpielerToCompare(@Param("player1Id") int player1Id,
                                          @Param("player2Id") int player2Id,
                                          @Param("player3Id") int player3Id,
                                          @Param("player4Id") int player4Id,
-                                         @Param("player5Id") int player5Id);
+                                         @Param("player5Id") int player5Id,
+                                         @Param("fifaVersion") int fifaVersion);
 
 
 

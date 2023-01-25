@@ -21,25 +21,25 @@
               </svg> Filter
             </button>
 
-            <button [routerLink]="['/vergleich']" class="btn btn-secondary my-button" (click)="getSelectedPlayerIds()">Vergleich</button>
+            <button [routerLink]="['/vergleich']" class="btn btn-secondary my-button" (click)="getSelectedPlayerIds()">Vergleichen</button>
 
 
             <form class="dropdown-menu p-4" style="width: 700px;">
               <div class="row g-3">
                 <div class="col-sm-3 col-form-label"><label for="fifaVersion">Fifa version</label></div>
                 <div class="col-auto"><input [(ngModel)]="fifaVersion" [ngModelOptions]="{standalone: true}"
-                  (ngModelChange)="fifaVersion = fifaVersion || 23" name="fifaVersion" type="number" id="fifaVersion"
+                  (ngModelChange)="onFifaVersionChange(fifaVersion)" name="fifaVersion" type="number" id="fifaVersion"
                   placeholder="Year"></div>
               </div>
 
-              <div class="row g-3">
-                <div class="col-sm-3 col-form-label"><label for="age">Age</label></div>
+              <div class="row g-3"> 
+                <div class="col-sm-3 col-form-label"><label for="age">Age</label></div> 
                 <div class="col-auto"><input [(ngModel)]="ageMin" [ngModelOptions]="{standalone: true}"
                   (ngModelChange)="ageMin = ageMin || 0" name="ageMin" type="number" id="ageMin"
-                  placeholder="Minimum Age"></div>
+                  placeholder="Minimum Age"></div> 
                 <div class="col-auto"><input [(ngModel)]="ageMax" [ngModelOptions]="{standalone: true}"
                   (ngModelChange)="ageMax = ageMax || 100" name="ageMax" type="number" id="ageMax"
-                  placeholder="Maximum Age"></div>
+                  placeholder="Maximum Age"></div> 
               </div>
 
               <div class="row g-3">
@@ -347,8 +347,15 @@
               </tr>
             </thead>
             <tbody>
+              <!-- <mat-checkbox (change)="toggleSelection(spieler)"></mat-checkbox> -->
               <tr *ngFor="let spieler of state.appData.data.page.content; let i = index;">
-                <th><mat-checkbox (change)="toggleSelection(spieler)"></mat-checkbox></th>
+                <th scope="row">
+                  <input
+                  class="form-check-input"
+                  type="checkbox"
+                  [value]="spieler.playerId"
+                  (change)="toggleSelection(spieler)" />
+                </th>
                 <td scope="row"><img [src]="spieler.photoURL" width="42" height="42" class="rounded-circle" S></td>
                 <td>{{ spieler.knownName }}</td>
                 <td>{{ spieler.age }}</td>

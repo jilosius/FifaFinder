@@ -22,6 +22,8 @@ export class StartComponent implements OnInit {
 
   players: Spieler[];
   selectedPlayerIds: number[];
+  selectedPlayers: Spieler[] = [];
+  selectedFifaVersion: number;
   
   //defining variables that are used in the dropdown filter 
   playerId: number;
@@ -304,22 +306,28 @@ export class StartComponent implements OnInit {
     this.goToPage(name);
   }
 
-  toggleSelection(spieler: Spieler) {
-    spieler.selected = !spieler.selected;
-  }
-
-
-  getSelectedPlayerIds() {
-    this.selectedPlayerIds = this.players
-      .filter(spieler => spieler.selected)
-      .map(spieler => spieler.playerId);
-    console.log(this.selectedPlayerIds);
-    this.selectedPlayerService.setSelectedPlayerIds(this.selectedPlayerIds);
-    return this.selectedPlayerIds;
-  }
 
   
+  toggleSelection(spieler: Spieler) {
+    spieler.selected = !spieler.selected;
+    if (spieler.selected) {
+      this.selectedPlayers.push(spieler);
+    } else {
+      this.selectedPlayers = this.selectedPlayers.filter(s => s.playerId !== spieler.playerId);
+    }
+  }
 
+  getSelectedPlayerIds() {
+    this.selectedPlayerIds = this.selectedPlayers.map(spieler => spieler.playerId);
+    console.log(this.selectedPlayerIds);
+    this.selectedPlayerService.setSelectedPlayerIds(this.selectedPlayerIds);
+    this.selectedPlayerService.setSelectedFifaVersion(this.selectedFifaVersion);
+    return this.selectedPlayerIds;
+  }
+  
+  onFifaVersionChange(fifaVersion: number) {
+    this.selectedFifaVersion = fifaVersion;
+  }
 
 
 }

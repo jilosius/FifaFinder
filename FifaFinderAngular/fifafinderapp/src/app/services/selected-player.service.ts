@@ -1,20 +1,30 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SelectedPlayerService {
 
-  private selectedPlayerIds: number[] = [];
+  private selectedPlayerIdsSubject = new BehaviorSubject<number[]>([]);
+  private selectedFifaVersion: number;
 
   constructor() { }
 
-  setSelectedPlayerIds(ids: number[]) {
-    this.selectedPlayerIds = ids;
+  get selectedPlayerIds$() {
+    return this.selectedPlayerIdsSubject.asObservable();
   }
 
-  getSelectedPlayerIds(): number[] {
-    return this.selectedPlayerIds;
+  setSelectedPlayerIds(ids: number[]) {
+    this.selectedPlayerIdsSubject.next(ids);
+  }
+
+  setSelectedFifaVersion(fifaVersion: number) {
+    this.selectedFifaVersion = fifaVersion;
+  }
+
+  getSelectedFifaVersion(): number {
+    return this.selectedFifaVersion;
   }
 
 }

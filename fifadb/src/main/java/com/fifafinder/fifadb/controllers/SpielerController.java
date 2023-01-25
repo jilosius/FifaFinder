@@ -213,12 +213,14 @@ public class SpielerController {
                                                 @RequestParam Optional<Integer> player2Id,
                                                 @RequestParam Optional<Integer> player3Id,
                                                 @RequestParam Optional<Integer> player4Id,
-                                                @RequestParam Optional<Integer> player5Id) {
+                                                @RequestParam Optional<Integer> player5Id,
+                                                @RequestParam Optional<Integer> fifaVersion) {
         return spielerService.getSpielerToCompare(
                 player1Id.orElse(0),
                 player2Id.orElse(0),
                 player3Id.orElse(0),
                 player4Id.orElse(0),
-                player5Id.orElse(0));
+                player5Id.orElse(0),
+                fifaVersion.orElse(23));
     }
 }

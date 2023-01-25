@@ -16,10 +16,11 @@ export class VergleichService {
     player2Id:number = 0,
     player3Id:number = 0,
     player4Id:number = 0,
-    player5Id:number = 0
+    player5Id:number = 0,
+    fifaVersion:number = 23
 
 
-  ) : Observable<Spieler[]> => this.http.get<Spieler[]>(`${this.serverUrl}?player1Id=${player1Id}&player2Id=${player2Id}&player3Id=${player3Id}&player4Id=${player4Id}&player5Id=${player5Id}`);
+  ) : Observable<Spieler[]> => this.http.get<Spieler[]>(`${this.serverUrl}?player1Id=${player1Id}&player2Id=${player2Id}&player3Id=${player3Id}&player4Id=${player4Id}&player5Id=${player5Id}&fifaVersion=${fifaVersion}`);
 
   constructor(private http: HttpClient) { }
 
