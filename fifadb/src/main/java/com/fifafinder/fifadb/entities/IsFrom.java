@@ -1,5 +1,6 @@
 package com.fifafinder.fifadb.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -8,11 +9,13 @@ public class IsFrom {
     @EmbeddedId
     private IsFromId id;
 
+    @JsonIgnore
     @MapsId("playerID")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "PlayerID", nullable = false)
     private Spieler playerID;
 
+    @JsonIgnore
     @MapsId("countryID")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "CountryID", nullable = false)

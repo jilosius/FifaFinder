@@ -1,5 +1,6 @@
 package com.fifafinder.fifadb.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -8,11 +9,13 @@ public class CompetesIn {
     @EmbeddedId
     private CompetesInId id;
 
+    @JsonIgnore
     @MapsId("clubID")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "ClubID", nullable = false)
     private Mannschaften clubID;
 
+    @JsonIgnore
     @MapsId("fifaVersion")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "FifaVersion", nullable = false)
