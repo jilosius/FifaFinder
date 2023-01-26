@@ -61,25 +61,26 @@ public class PlaysForService {
         PlaysFor playsFor = playsForRepository.findPlaysForById(playsForId);
         SpielerDetailDTO details = modelMapper.map(playsFor, SpielerDetailDTO.class);
         return details;
+    }
 
 
-    public void addPlayer(Spieler spieler, FifaVersion fifaversion) {
+    /*public void addPlayer(Spieler spieler, FifaVersion fifaversion) {
         PlaysFor playsFor = new PlaysFor();
         playsFor.setPlayerID(spieler);
         playsFor.setFifaVersion(fifaversion);
         playsForRepository.save(playsFor);
-    }
+    } */
 
     public void addPlayer(Spieler spieler, FifaVersion fifaversion, Integer height, String clubPosition, Integer clubNumber, String nationalPosition,
-                          Integer nationalNumber, String preferredFoot, Integer contractUntil, String onLoan, String nationalTeam, Integer age,
-                          Integer weight, Integer overall, Integer potential, String bestPosition, Mannschaften clubID, Long valueEUR, Long wage,
-                          Long releaseClause, Integer intReputation, Integer weakFoot, Integer skillMoves, Integer crossing, Integer finishing,
-                          Integer headingAccuracy, Integer shortPassing, Integer volleys, Integer dribbling, Integer curve, Integer fKAccuracy,
-                          Integer longPassing, Integer ballControl, Integer acceleration, Integer sprintSpeed, Integer agility, Integer reaction,
-                          Integer balance, Integer shotPower, Integer jumping, Integer stamina, Integer strength, Integer longShots, Integer aggression,
-                          Integer interceptions, Integer positioning, Integer vision, Integer penalties, Integer composure, Integer marking,
-                          Integer standingTackle, Integer slidingTackle, Integer gKDiving, Integer gKHandling,
-                          Integer gKKicking, Integer gKPositioning, Integer gKReflexes, String photoUrl) {
+                Integer nationalNumber, String preferredFoot, Integer contractUntil, String onLoan, String nationalTeam, Integer age,
+                Integer weight, Integer overall, Integer potential, String bestPosition, Mannschaften clubID, Long valueEUR, Long wage,
+                Long releaseClause, Integer intReputation, Integer weakFoot, Integer skillMoves, Integer crossing, Integer finishing,
+                Integer headingAccuracy, Integer shortPassing, Integer volleys, Integer dribbling, Integer curve, Integer fKAccuracy,
+                Integer longPassing, Integer ballControl, Integer acceleration, Integer sprintSpeed, Integer agility, Integer reaction,
+                Integer balance, Integer shotPower, Integer jumping, Integer stamina, Integer strength, Integer longShots, Integer aggression,
+                Integer interceptions, Integer positioning, Integer vision, Integer penalties, Integer composure, Integer marking,
+                Integer standingTackle, Integer slidingTackle, Integer gKDiving, Integer gKHandling,
+                Integer gKKicking, Integer gKPositioning, Integer gKReflexes, String photoUrl) {
 
 
 

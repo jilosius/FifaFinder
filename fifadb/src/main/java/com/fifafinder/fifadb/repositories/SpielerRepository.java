@@ -118,7 +118,7 @@ public interface SpielerRepository extends JpaRepository<Spieler, Integer> {
                                             @Param("minShortPassing") int minShortPassing,
                                             @Param("maxShortPassing") int maxShortPassing,
                                             Pageable pageable);
-    Optional<Spieler> findSpielerByFullName(String n);
+
 
 
 

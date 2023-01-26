@@ -86,7 +86,7 @@ public class PlaysFor {
     @Column(name = "SkillMoves")
     private Integer skillMoves;
 
-    @Column(name = "Cossing")
+    @Column(name = "Crossing")
     private Integer crossing;
 
     @Column(name = "Finishing")
