@@ -4,19 +4,14 @@
   <!--subscribing to the observable with async-->
   
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div  class="content">
-      <button (click)="gotoPage('addPlayer')">
-        addPlayer
-      </button>
     
-    
-    </div>
     <div class="container">
       <a class="navbar-brand" href="http://localhost:4200">FifaFinder</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+      
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <div class="dropdown">
@@ -291,6 +286,9 @@
             </form>
           </div>
         </ul>
+        <button type ="button"  (click)="gotoPage('addPlayer')" class="btn btn-secondary">
+          addPlayer
+        </button>
         <form #searchForm="ngForm"
           (ngSubmit)="goToPage(searchForm.value.name,fifaVersion,preferredFoot,ageMin,ageMax,overallMin,overallMax,potentialMin,potentialMax,heightMin,heightMax,minValue,maxValue,minWage,maxWage,minHeadingAccuracy,maxHeadingAccuracy,minVolleys,maxVolleys,minDribbling,maxDribbling,minCurve,maxCurve,minFkAccuracy,maxFkAccuracy,minAcceleration,maxAcceleration,minSprintSpeed,maxSprintSpeed,minAgility,maxAgility,minReaction,maxReaction,minBalance,maxBalance,minShotPower,maxShotPower,minJumping,maxJumping,minStamina,maxStamina,minAggression,maxAggression,minLongShots,maxLongShots,minCrossing,maxCrossing,minFinishing,maxFinishing,minShortPassing,maxShortPassing)"
           class="d-flex" role="search">
@@ -299,7 +297,7 @@
           <button class="btn btn-success" type="submit">Search</button>
         </form>
       </div>
-    </div>
+    </div>  
   </nav>
   <div class="container">
     <div class="row">
