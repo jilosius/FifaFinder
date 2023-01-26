@@ -64,13 +64,6 @@ public class PlaysForService {
     }
 
 
-    /*public void addPlayer(Spieler spieler, FifaVersion fifaversion) {
-        PlaysFor playsFor = new PlaysFor();
-        playsFor.setPlayerID(spieler);
-        playsFor.setFifaVersion(fifaversion);
-        playsForRepository.save(playsFor);
-    } */
-
     public void addPlayer(Spieler spieler, FifaVersion fifaversion, Integer height, String clubPosition, Integer clubNumber, String nationalPosition,
                 Integer nationalNumber, String preferredFoot, Integer contractUntil, String onLoan, String nationalTeam, Integer age,
                 Integer weight, Integer overall, Integer potential, String bestPosition, Mannschaften clubID, Long valueEUR, Long wage,
