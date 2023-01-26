@@ -1,5 +1,6 @@
 package com.fifafinder.fifadb.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -8,11 +9,13 @@ public class PlaysFor {
     @EmbeddedId
     private PlaysForId id;
 
+    @JsonIgnore
     @MapsId("playerID")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "PlayerID", nullable = false)
     private Spieler playerID;
 
+    @JsonIgnore
     @MapsId("fifaVersion")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "FifaVersion", nullable = false)
@@ -60,6 +63,7 @@ public class PlaysFor {
     @Column(name = "BestPosition")
     private String bestPosition;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ClubID")
     private Mannschaften clubID;
@@ -82,7 +86,7 @@ public class PlaysFor {
     @Column(name = "SkillMoves")
     private Integer skillMoves;
 
-    @Column(name = "Crossing")
+    @Column(name = "Cossing")
     private Integer crossing;
 
     @Column(name = "Finishing")
