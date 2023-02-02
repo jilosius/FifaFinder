@@ -4,6 +4,7 @@ import { Observable, BehaviorSubject, map, startWith, catchError, of } from 'rxj
 import { ApiResponse } from '../interface/api-response';
 import { Page } from '../interface/page';
 import { SpielerService } from '../service/start.service';
+import { SortableColumn } from "../sorting/sortable-column";
 
 @Component({
   selector: 'app-start',
@@ -13,65 +14,100 @@ import { SpielerService } from '../service/start.service';
 
 //We are working with states: this means when the appState == 'APP_LOADING', the html elements and functions used are different to when it is 'APP_LOADED' or 'APP_ERROR'
 export class StartComponent implements OnInit {
-  spielerState$: Observable<{ appState: string, appData?: ApiResponse<Page>, error?: HttpErrorResponse }>; //Example: {'APP_LOADED', ApiResponse<Spieler>, error(optional} 
+  spielerState$: Observable<{ appState: string, appData?: ApiResponse<Page>, error?: HttpErrorResponse }>; //Example: {'APP_LOADED', ApiResponse<Spieler>, error(optional}
   responseSubject = new BehaviorSubject<ApiResponse<Page>>(null); //Save the response to use out of map() function
   private currentPageSubject = new BehaviorSubject<number>(0); //Save observable at current page
   currentPage$ = this.currentPageSubject.asObservable();
-  
-  //defining variables that are used in the dropdown filter 
+
+  name: string;
+  //defining variables that are used in the dropdown filter
   fifaVersion: number;
   preferredFoot: string = "";
-  ageMin: number;
-  ageMax: number;
-  overallMin: number;
-  overallMax: number;
-  potentialMin: number;
-  potentialMax: number;
-  heightMin: number;
-  heightMax: number;
-  minValue: number;
-  maxValue: number;
-  minWage: number;
-  maxWage: number;
-  minHeadingAccuracy: number;
-  maxHeadingAccuracy: number;
-  minVolleys: number;
-  maxVolleys: number;
-  minDribbling: number;
-  maxDribbling: number;
-  minCurve: number;
-  maxCurve: number;
-  minFkAccuracy: number;
-  maxFkAccuracy: number;
-  minAcceleration: number;
-  maxAcceleration: number;
-  minSprintSpeed: number;
-  maxSprintSpeed: number;
-  minAgility: number;
-  maxAgility: number;
-  minReaction: number;
-  maxReaction:number;
-  minBalance: number;
-  maxBalance: number;
-  minShotPower: number;
-  maxShotPower: number;
-  minJumping: number;
-  maxJumping: number;
-  minStamina: number;
-  maxStamina: number;
-  minAggression: number;
-  maxAggression: number;
-  minLongShots: number;
-  maxLongShots: number;
-  minCrossing: number;
-  maxCrossing: number;
-  minFinishing: number;
-  maxFinishing: number;
-  minShortPassing: number;
-  maxShortPassing: number;
+  ageMin: number = 0;
+  ageMax: number = 100;
+  overallMin: number = 0;
+  overallMax: number = 100;
+  potentialMin: number= 0;
+  potentialMax: number= 100;
+  heightMin: number= 0;
+  heightMax: number= 300;
+  minValue: number= 0;
+  maxValue: number= 1000000000;
+  minWage: number= 0;
+  maxWage: number= 1000000000;
+  minHeadingAccuracy: number = 0;
+  maxHeadingAccuracy: number = 100;
+  minVolleys: number= 0;
+  maxVolleys: number= 100;
+  minDribbling: number= 0;
+  maxDribbling: number= 100;
+  minCurve: number= 0;
+  maxCurve: number= 100;
+  minFkAccuracy: number= 0;
+  maxFkAccuracy: number= 100;
+  minAcceleration: number= 0;
+  maxAcceleration: number= 100;
+  minSprintSpeed: number= 0;
+  maxSprintSpeed: number= 100;
+  minAgility: number= 0;
+  maxAgility: number= 100;
+  minReaction: number= 0;
+  maxReaction:number= 100;
+  minBalance: number= 0;
+  maxBalance: number= 100;
+  minShotPower: number= 0;
+  maxShotPower: number= 100;
+  minJumping: number= 0;
+  maxJumping: number= 100;
+  minStamina: number= 0;
+  maxStamina: number= 100;
+  minAggression: number= 0;
+  maxAggression: number= 100;
+  minLongShots: number= 0;
+  maxLongShots: number= 100;
+  minCrossing: number= 0;
+  maxCrossing: number= 100;
+  minFinishing: number= 0;
+  maxFinishing: number= 100;
+  minShortPassing: number= 0;
+  maxShortPassing: number= 100;
+
+  pageNumber: number= 0;
+  size: number= 20;
+
+  currentSort: SortableColumn = new SortableColumn('overall', 'desc');
+
+  //Array to set names and default sort direction of columns
+  sortableColumns: Array<SortableColumn> = [
+    new SortableColumn('age'),
+    new SortableColumn('overall', 'desc'),
+    new SortableColumn('potential'),
+    new SortableColumn('value'),
+    new SortableColumn('height'),
+    new SortableColumn('weight'),
+    new SortableColumn('headingAccuracy'),
+    new SortableColumn('volleys'),
+    new SortableColumn('dribbling'),
+    new SortableColumn('curve'),
+    new SortableColumn('fkAccuracy'),
+    new SortableColumn('acceleration'),
+    new SortableColumn('sprintSpeed'),
+    new SortableColumn('agility'),
+    new SortableColumn('reaction'),
+    new SortableColumn('balance'),
+    new SortableColumn('shotPower'),
+    new SortableColumn('jumping'),
+    new SortableColumn('stamina'),
+    new SortableColumn('aggression'),
+    new SortableColumn('longShots'),
+    new SortableColumn('crossing'),
+    new SortableColumn('finishing'),
+    new SortableColumn('shortPassing'),
+    new SortableColumn('wage')
+  ];
 
   //Array to set the "hidden" attribute of each column to either true or false
-  condArray:boolean[] = [true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true]
+  condArray:boolean[] = [true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true];
 
   constructor(private spielerService: SpielerService) { }
 
@@ -92,9 +128,11 @@ export class StartComponent implements OnInit {
     )
   }
 
+
   //the method that does all the magic: boolean Array is checked to hide/unhide columns, then spielerService is used to return the data/page as required
   goToPage(name?: string,fifaVersion?:number,preferredFoot?:string,minAge?: number,maxAge?: number,minOverall?: number, maxOverall?: number, minPotential?: number,maxPotential?: number,minHeight?: number,maxHeight?: number,minValue?: number,maxValue?: number,minWage?: number,maxWage?: number,minHeadingAccuracy?: number,maxHeadingAccuracy?: number,minVolleys?: number,maxVolleys?: number,minDribbling?: number, maxDribbling?: number,minCurve?: number,maxCurve?: number, minFkAccuracy?: number,maxFkAccuracy?: number,minAcceleration?: number,maxAcceleration?: number, minSprintSpeed?: number,maxSprintSpeed?: number,minAgility?: number, maxAgility?: number,minReaction?: number,maxReaction?:number,minBalance?: number,maxBalance?: number,minShotPower?: number,maxShotPower?: number, minJumping?: number,maxJumping?: number,minStamina?: number,maxStamina?: number,minAggression?: number,maxAggression?: number,minLongShots?: number,maxLongShots?: number,minCrossing?: number,maxCrossing?: number,minFinishing?: number,maxFinishing?: number,minShortPassing?: number,maxShortPassing?: number,
-            pageNumber: number = 0): void {
+            pageNumber: number = 0, size: number = 20, sort?: string, order?: string): void {
+    this.name = name;
     fifaVersion = this.fifaVersion;
     preferredFoot = this.preferredFoot;
     minAge = this.ageMin;
@@ -145,11 +183,13 @@ export class StartComponent implements OnInit {
     maxFinishing=this.maxFinishing;
     minShortPassing=this.minShortPassing;
     maxShortPassing=this.maxShortPassing;
-    
+    sort = this.currentSort.column;
+    order = this.currentSort.direction;
+
     var checkConditionMinArray:number[] = [minHeadingAccuracy,minVolleys,minDribbling,minCurve,minFkAccuracy,minAcceleration,minSprintSpeed,minAgility,minReaction,minBalance,minShotPower,minJumping,minStamina,minAggression,minLongShots,minCrossing,minFinishing,minShortPassing,minWage]
     var checkConditionMaxArray:number[] = [maxHeadingAccuracy,maxVolleys,maxDribbling,maxCurve,maxFkAccuracy,maxAcceleration,maxSprintSpeed,maxAgility,maxReaction,maxBalance,maxShotPower,maxJumping,maxStamina,maxAggression,maxLongShots,maxCrossing,maxFinishing,maxShortPassing,maxWage]
-    
-    
+
+
     for(let i=0; i < checkConditionMinArray.length; i++){
       if(checkConditionMinArray[i] != 0){
         this.condArray[i]=false;
@@ -163,11 +203,11 @@ export class StartComponent implements OnInit {
         this.condArray[i]=true;
       }
     }
-    
 
-    this.spielerState$ = this.spielerService.spieler$(name, fifaVersion,preferredFoot, minAge, maxAge, minOverall, maxOverall, minPotential,maxPotential,minHeight,maxHeight,minValue,maxValue,minWage,maxWage,minHeadingAccuracy,maxHeadingAccuracy,minVolleys, maxVolleys,minDribbling,maxDribbling, minCurve, maxCurve,minFkAccuracy, maxFkAccuracy,minAcceleration,maxAcceleration,minSprintSpeed,maxSprintSpeed,minAgility, maxAgility, minReaction,maxReaction,minBalance,maxBalance,minShotPower,maxShotPower,minJumping,maxJumping,minStamina,maxStamina, minAggression,maxAggression, minLongShots, maxLongShots,minCrossing,maxCrossing,minFinishing,maxFinishing,minShortPassing, maxShortPassing,
-      pageNumber).pipe(
+
+    this.spielerState$ = this.spielerService.spieler$(name, fifaVersion, preferredFoot, minAge, maxAge, minOverall, maxOverall, minPotential,maxPotential,minHeight,maxHeight,minValue,maxValue,minWage,maxWage,minHeadingAccuracy,maxHeadingAccuracy,minVolleys, maxVolleys,minDribbling,maxDribbling, minCurve, maxCurve,minFkAccuracy, maxFkAccuracy,minAcceleration,maxAcceleration,minSprintSpeed,maxSprintSpeed,minAgility, maxAgility, minReaction,maxReaction,minBalance,maxBalance,minShotPower,maxShotPower,minJumping,maxJumping,minStamina,maxStamina, minAggression,maxAggression, minLongShots, maxLongShots,minCrossing,maxCrossing,minFinishing,maxFinishing,minShortPassing, maxShortPassing, pageNumber, size, sort, order).pipe(
       map((response: ApiResponse<Page>) => {
+        // this.loadingService.loadingOff();
         this.responseSubject.next(response);
         this.currentPageSubject.next(pageNumber);
         console.log(response);
@@ -185,11 +225,11 @@ export class StartComponent implements OnInit {
   goToNextOrPreviousPage(
     direction?: string,
     fifaVersion?:number,
-    name?: string, 
+    name?: string,
     preferredFoot?: string,
-    minAge?: number, 
-    maxAge?: number, 
-    minOverall?: number, 
+    minAge?: number,
+    maxAge?: number,
+    minOverall?: number,
     maxOverall?: number,
     minPotential?: number,
     maxPotential?: number,
@@ -236,7 +276,7 @@ export class StartComponent implements OnInit {
     minShortPassing?: number,
     maxShortPassing?: number): void {
     this.goToPage(name, fifaVersion, preferredFoot,minAge, maxAge, minOverall, maxOverall, minPotential,maxPotential,minHeight,maxHeight,minValue,maxValue,minWage,maxWage,minHeadingAccuracy,maxHeadingAccuracy,minVolleys, maxVolleys,minDribbling,maxDribbling, minCurve, maxCurve,minFkAccuracy, maxFkAccuracy,minAcceleration,maxAcceleration,minSprintSpeed,maxSprintSpeed,minAgility, maxAgility, minReaction,maxReaction,minBalance,maxBalance,minShotPower,maxShotPower,minJumping,maxJumping,minStamina,maxStamina, minAggression,maxAggression, minLongShots, maxLongShots,minCrossing,maxCrossing,minFinishing,maxFinishing,minShortPassing, maxShortPassing,
-                  direction === 'forward' ? this.currentPageSubject.value + 1 : this.currentPageSubject.value - 1);
+                  direction === 'forward' ? this.currentPageSubject.value + 1 : this.currentPageSubject.value - 1, 20);
   }
 
   resetValues(name?:string):void{
@@ -291,6 +331,106 @@ export class StartComponent implements OnInit {
     this.minShortPassing= 0;
     this.maxShortPassing= 100;
     this.goToPage(name);
+  }
+
+  sortByColumn(
+    sort: SortableColumn
+  ): void {
+    sort.toggleDirection();
+    if(sort.direction == null){
+      this.resetSort();
+      sort = this.sortableColumns[1];
+    }
+    this.clearPreviousSorting(sort); // Make sortableColumns array not "remember" previous sorting of other columns
+    this.currentSort = sort;
+    this.goToPage(
+      this.name,
+      this.fifaVersion,
+      this.preferredFoot,
+      this.ageMin,
+      this.ageMax,
+      this.overallMin,
+      this.overallMax,
+      this.potentialMin,
+      this.potentialMax,
+      this.heightMin,
+      this.heightMax,
+      this.minValue,
+      this.maxValue,
+      this.minWage,
+      this.maxWage,
+      this.minHeadingAccuracy,
+      this.maxHeadingAccuracy,
+      this.minVolleys,
+      this.maxVolleys,
+      this.minDribbling,
+      this.maxDribbling,
+      this.minCurve,
+      this.maxCurve,
+      this.minFkAccuracy,
+      this.maxFkAccuracy,
+      this.minAcceleration,
+      this.maxAcceleration,
+      this.minSprintSpeed,
+      this.maxSprintSpeed,
+      this.minAgility,
+      this.maxAgility,
+      this.minReaction,
+      this.maxReaction,
+      this.minBalance,
+      this.maxBalance,
+      this.minShotPower,
+      this.maxShotPower,
+      this.minJumping,
+      this.maxJumping,
+      this.minStamina,
+      this.maxStamina,
+      this.minAggression,
+      this.maxAggression,
+      this.minLongShots,
+      this.maxLongShots,
+      this.minCrossing,
+      this.maxCrossing,
+      this.minFinishing,
+      this.maxFinishing,
+      this.minShortPassing,
+      this.maxShortPassing,
+      0,
+      20
+    );
+  }
+
+  clearPreviousSorting(chosenColumn: SortableColumn) {
+    this.sortableColumns.filter(
+      column => column != chosenColumn
+    ).forEach(
+      column => column.direction = null
+    );
+  }
+
+  resetSort(){
+    this.sortableColumns.filter(
+      checkColumn => checkColumn.column != 'overall'
+    ).forEach(
+      checkColumn => checkColumn.direction = null
+    );
+    this.sortableColumns[1].direction = 'desc';
+  }
+
+  sortArrow(columnName: string) {
+    if (this.currentSort.column === columnName) {
+      switch (this.currentSort.direction) {
+        case 'desc':
+          return '&#9660;';
+          break;
+        case 'asc':
+          return '&#9650;';
+          break;
+        default:
+          break;
+      }
+    }
+    return '';
   }
 }
 

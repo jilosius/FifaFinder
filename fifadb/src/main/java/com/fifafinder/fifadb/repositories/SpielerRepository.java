@@ -33,7 +33,7 @@ public interface SpielerRepository extends JpaRepository<Spieler, Integer> {
 //
 
     //     ----- final implementation: full search algorithm. Search by name, filter by below attributes.
-    @Query("SELECT NEW com.fifafinder.fifadb.DTOs.SpielerDTO(pf.photoUrl, s.knownName, pf.age, nat.countryID.flag, pf.clubID.clubLogo, pf.overall, pf.potential, pf.bestPosition, pf.valueEUR, pf.height, pf.weight,pf.preferredFoot,pf.headingAccuracy,pf.volleys,pf.dribbling, pf.curve,pf.fKAccuracy,pf.acceleration,pf.sprintSpeed,pf.agility,pf.reaction,pf.balance,pf.shotPower,pf.jumping,pf.stamina,pf.aggression,pf.longShots,pf.crossing,pf.finishing,pf.shortPassing,pf.wage) " +
+    @Query("SELECT NEW com.fifafinder.fifadb.DTOs.SpielerDTO(pf.photoUrl, s.knownName, pf.age, nat.countryID.flag, pf.clubID.clubLogo, pf.overall, pf.potential, pf.bestPosition, pf.valueEUR, pf.height, pf.weight,pf.preferredFoot,pf.headingAccuracy,pf.volleys,pf.dribbling, pf.curve,pf.fkAccuracy,pf.acceleration,pf.sprintSpeed,pf.agility,pf.reaction,pf.balance,pf.shotPower,pf.jumping,pf.stamina,pf.aggression,pf.longShots,pf.crossing,pf.finishing,pf.shortPassing,pf.wage) " +
             "FROM Spieler s INNER JOIN PlaysFor pf ON s.id = pf.id.playerID JOIN IsFrom nat ON s.id = nat.id.playerID " +
             "WHERE pf.id.fifaVersion = :fifaVersion " +
             "AND s.fullName LIKE %:searchTerm% " +
@@ -48,7 +48,7 @@ public interface SpielerRepository extends JpaRepository<Spieler, Integer> {
             "AND pf.volleys >= :minVolleys AND pf.volleys <= :maxVolleys " +
             "AND pf.dribbling >= :minDribbling AND pf.dribbling <= :maxDribbling " +
             "AND pf.curve >= :minCurve AND pf.curve <= :maxCurve " +
-            "AND pf.fKAccuracy >= :minFkAccuracy AND pf.fKAccuracy <= :maxFkAccuracy " +
+            "AND pf.fkAccuracy >= :minFkAccuracy AND pf.fkAccuracy <= :maxFkAccuracy " +
             "AND pf.acceleration >= :minAcceleration AND pf.acceleration <= :maxAcceleration " +
             "AND pf.sprintSpeed >= :minSprintSpeed AND pf.sprintSpeed <= :maxSprintSpeed " +
             "AND pf.agility >= :minAgility AND pf.agility <= :maxAgility " +

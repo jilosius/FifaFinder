@@ -18,7 +18,7 @@ export interface Spieler {
     volleys: number;
     dribbling: number;
     curve: number;
-    fKAccuracy: number;
+    fkAccuracy: number;
     acceleration: number;
     sprintSpeed: number;
     agility: number;

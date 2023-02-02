@@ -7,7 +7,9 @@
     cursor: pointer;
 }
 
+.sortable:hover{
+    cursor: pointer;
+    background-color: #e0e0e0;
+}
 
 
-
- 
