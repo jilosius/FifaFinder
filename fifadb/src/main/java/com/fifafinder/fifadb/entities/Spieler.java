@@ -27,8 +27,12 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_DEFAULT;
 @Table(name = "spieler")
 public class Spieler {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PlayerID", nullable = false)
     private Integer id;
+
+    @Column(name = "FifaID")
+    private Integer fifaID;
 
     @Column(name = "KnownName")
     private String knownName;
@@ -56,6 +60,14 @@ public class Spieler {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getFifaID(){
+        return fifaID;
+    }
+
+    public void setFifaID(Integer fifaID){
+        this.fifaID = fifaID;
     }
 
     public String getKnownName() {
