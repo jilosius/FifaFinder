@@ -24,12 +24,14 @@ export class StartComponent implements OnInit {
   selectedPlayerIds: number[];
   selectedPlayers: Spieler[] = [];
   selectedFifaVersion: number;
+  pagesToDisplay: number = 10;
+  
   
   //defining variables that are used in the dropdown filter 
   playerId: number;
   fifaVersion: number =  23;
   preferredFoot: string = "";
-  ageMin: number = 0;
+  ageMin: number= 0;
   ageMax: number= 100;
   overallMin: number=0;
   overallMax: number=100;
@@ -38,9 +40,9 @@ export class StartComponent implements OnInit {
   heightMin: number=0;
   heightMax: number=300;
   minValue: number=0;
-  maxValue: number=1000000000;
+  maxValue: number=100000000000;
   minWage: number=0;
-  maxWage: number=1000000000;
+  maxWage: number=100000000000;
   minHeadingAccuracy: number=0;
   maxHeadingAccuracy: number=100;
   minVolleys: number=0;
@@ -115,6 +117,8 @@ export class StartComponent implements OnInit {
       }
       )
     );
+
+    
   }
 
 
@@ -278,9 +282,9 @@ export class StartComponent implements OnInit {
     this.heightMin= 0;
     this.heightMax= 300;
     this.minValue= 0;
-    this.maxValue= 1000000000;
+    this.maxValue= 100000000000;
     this.minWage= 0;
-    this.maxWage= 1000000000;
+    this.maxWage= 100000000000;
     this.minHeadingAccuracy = 0;
     this.maxHeadingAccuracy = 100;
     this.minVolleys= 0;
@@ -350,6 +354,12 @@ export class StartComponent implements OnInit {
     this.selectedFifaVersion = fifaVersion;
   }
 
-
+  shouldShowPage(index:number, currentPage:number) {
+    
+      const start = currentPage - 5;
+      const end = currentPage + 5;
+      return index >= start && index <= end;
+  
+  
 }
-
+}

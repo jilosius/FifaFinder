@@ -1,5 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StartComponent } from './start/start.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
 import { MatSortModule } from '@angular/material/sort';
 import { VergleichComponent } from './vergleich/vergleich.component'; 
 import { MatCheckboxModule } from '@angular/material/checkbox'; 
@@ -25,10 +26,12 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatSortModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    RouterModule
     // MatMenuModule
   ],
   providers: [],
+  schemas:[CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -404,43 +404,34 @@
                 </a>
               </li>
 
-              <li *ngFor="let pageNumber of [].constructor(state.appData.data.page.totalPages); let i = index;"
-                class="page-item pointer" [ngClass]="i == (currentPage$ | async) ? ' active' : ''">
-                <a (click)="goToPage(searchForm.value.name,fifaVersion, preferredFoot,ageMin,ageMax,overallMin,overallMax,potentialMin,potentialMax,heightMin,heightMax,minValue,maxValue,minWage,maxWage,minHeadingAccuracy,maxHeadingAccuracy,minVolleys,maxVolleys,minDribbling,maxDribbling,minCurve,maxCurve,minFkAccuracy,maxFkAccuracy,minAcceleration,maxAcceleration,minSprintSpeed,maxSprintSpeed,minAgility,maxAgility,minReaction,maxReaction,minBalance,maxBalance,minShotPower,maxShotPower,minJumping,maxJumping,minStamina,maxStamina,minAggression,maxAggression,minLongShots,maxLongShots,minCrossing,maxCrossing,minFinishing,maxFinishing,minShortPassing,maxShortPassing, i)"
-                  class="page-link">
-                  {{ i == 0 ? 1 : i + 1}}
+              <!-- <li class="page-item pointer" [ngClass]="0 == (currentPage$ | async) ? ' disabled' : ''">
+                <a (click)="goToPage(searchForm.value.name,fifaVersion, preferredFoot,ageMin,ageMax,overallMin,overallMax,potentialMin,potentialMax,heightMin,heightMax,minValue,maxValue,minWage,maxWage,minHeadingAccuracy,maxHeadingAccuracy,minVolleys,maxVolleys,minDribbling,maxDribbling,minCurve,maxCurve,minFkAccuracy,maxFkAccuracy,minAcceleration,maxAcceleration,minSprintSpeed,maxSprintSpeed,minAgility,maxAgility,minReaction,maxReaction,minBalance,maxBalance,minShotPower,maxShotPower,minJumping,maxJumping,minStamina,maxStamina,minAggression,maxAggression,minLongShots,maxLongShots,minCrossing,maxCrossing,minFinishing,maxFinishing,minShortPassing,maxShortPassing, 0)" class="page-link">First</a>
+              </li> -->
+              
 
-                </a>
-              </li>
-
-
-
-
-              <!-- [ngClass]="i == (currentPage$ | async) ? ' active' : ''" -->
-              <!-- <li *ngFor="let pageNumber of [].constructor(6); let i = index;" 
-                    class="page-item pointer" >
-                    <a (click)="goToPage(searchForm.value.name,fifaVersion, ageMin,ageMax,overallMin,overallMax,potentialMin,potentialMax,heightMin,heightMax,minValue,maxValue,minWage,maxWage,minHeadingAccuracy,maxHeadingAccuracy,minVolleys,maxVolleys,minDribbling,maxDribbling,minCurve,maxCurve,minFkAccuracy,maxFkAccuracy,minAcceleration,maxAcceleration,minSprintSpeed,maxSprintSpeed,minAgility,maxAgility,minReaction,maxReaction,minBalance,maxBalance,minShotPower,maxShotPower,minJumping,maxJumping,minStamina,maxStamina,minAggression,maxAggression,minLongShots,maxLongShots,minCrossing,maxCrossing,minFinishing,maxFinishing,minShortPassing,maxShortPassing, i)" 
-                        class="page-link">
-                        {{ i == 0 ? 1 : (i == 1 ? (currentPage$ | async) : state.appData.data.page.totalPages) }}
+              <!-- <ng-container *ngIf="(currentPage$ | async) < 5">
+                <li *ngFor="let pageNumber of [].constructor(10); let i = index;" class="page-item pointer" [ngClass]="i == (currentPage$ | async) ? ' active' : ''">
+                  <a (click)="goToPage(searchForm.value.name,fifaVersion, preferredFoot,ageMin,ageMax,overallMin,overallMax,potentialMin,potentialMax,heightMin,heightMax,minValue,maxValue,minWage,maxWage,minHeadingAccuracy,maxHeadingAccuracy,minVolleys,maxVolleys,minDribbling,maxDribbling,minCurve,maxCurve,minFkAccuracy,maxFkAccuracy,minAcceleration,maxAcceleration,minSprintSpeed,maxSprintSpeed,minAgility,maxAgility,minReaction,maxReaction,minBalance,maxBalance,minShotPower,maxShotPower,minJumping,maxJumping,minStamina,maxStamina,minAggression,maxAggression,minLongShots,maxLongShots,minCrossing,maxCrossing,minFinishing,maxFinishing,minShortPassing,maxShortPassing, i)" class="page-link">
+                    {{ i == 0 ? 1 : i + 1 }}
+                  </a>
+                </li>
+              </ng-container> -->
+              
+              <!-- <ng-container *ngIf="(currentPage$ | async) >= 5"> -->
+                <ng-container *ngFor="let pageNumber of [].constructor(state.appData.data.page.totalPages); let i = index;">
+                  <li *ngIf="shouldShowPage(i, currentPage$ | async)"
+                    class="page-item pointer" [ngClass]="i == (currentPage$ | async) ? ' active' : ''">
+                    <a (click)="goToPage(searchForm.value.name,fifaVersion, preferredFoot,ageMin,ageMax,overallMin,overallMax,potentialMin,potentialMax,heightMin,heightMax,minValue,maxValue,minWage,maxWage,minHeadingAccuracy,maxHeadingAccuracy,minVolleys,maxVolleys,minDribbling,maxDribbling,minCurve,maxCurve,minFkAccuracy,maxFkAccuracy,minAcceleration,maxAcceleration,minSprintSpeed,maxSprintSpeed,minAgility,maxAgility,minReaction,maxReaction,minBalance,maxBalance,minShotPower,maxShotPower,minJumping,maxJumping,minStamina,maxStamina,minAggression,maxAggression,minLongShots,maxLongShots,minCrossing,maxCrossing,minFinishing,maxFinishing,minShortPassing,maxShortPassing, i)"
+                      class="page-link">
+                      {{ i == 0 ? 1 : i + 1}}
                     </a>
-                    
-                </li> -->
-              <!-- <span class="dots" *ngIf="(currentPage$ | async) != 1 && (currentPage$ | async) != state.appData.data.page.totalPages" >...</span> -->
-
-              <!-- <ng-container *ngIf="currentPage$ | async as currentPage">
-                  <li *ngFor="let pageNumber of [].constructor(state.appData.data.page.totalPages); let i = index;" class="page-item pointer" [ngClass]="i == currentPage ? ' active' : ''">
-                    <a (click)="goToPage(searchForm.value.name,fifaVersion, ageMin,ageMax,overallMin,overallMax,potentialMin,potentialMax,heightMin,heightMax,minValue,maxValue,minWage,maxWage,minHeadingAccuracy,maxHeadingAccuracy,minVolleys,maxVolleys,minDribbling,maxDribbling,minCurve,maxCurve,minFkAccuracy,maxFkAccuracy,minAcceleration,maxAcceleration,minSprintSpeed,maxSprintSpeed,minAgility,maxAgility,minReaction,maxReaction,minBalance,maxBalance,minShotPower,maxShotPower,minJumping,maxJumping,minStamina,maxStamina,minAggression,maxAggression,minLongShots,maxLongShots,minCrossing,maxCrossing,minFinishing,maxFinishing,minShortPassing,maxShortPassing,i)" class="page-link" *ngIf="i === 0 || i === (state.appData.data.page.totalPages - 1) || (i >= currentPage - 2 && i <= currentPage + 2)">
-                      {{ i + 1 }}
-                    </a>
-                    <span *ngIf="i !== 0 && i !== (state.appData.data.page.totalPages - 1) && (i < currentPage - 2 || i > currentPage + 2)">...</span>
                   </li>
-                  
-                  </ng-container>
-                   -->
+                </ng-container>
+              <!-- </ng-container> -->
 
-
-
-
+              <!-- <li class="page-item pointer" [ngClass]="(state.appData.data.page.totalPages - 1) == (currentPage$ | async) ? ' disabled' : ''">
+                <a (click)="goToPage(searchForm.value.name,fifaVersion, preferredFoot,ageMin,ageMax,overallMin,overallMax,potentialMin,potentialMax,heightMin,heightMax,minValue,maxValue,minWage,maxWage,minHeadingAccuracy,maxHeadingAccuracy,minVolleys,maxVolleys,minDribbling,maxDribbling,minCurve,maxCurve,minFkAccuracy,maxFkAccuracy,minAcceleration,maxAcceleration,minSprintSpeed,maxSprintSpeed,minAgility,maxAgility,minReaction,maxReaction,minBalance,maxBalance,minShotPower,maxShotPower,minJumping,maxJumping,minStamina,maxStamina,minAggression,maxAggression,minLongShots,maxLongShots,minCrossing,maxCrossing,minFinishing,maxFinishing,minShortPassing,maxShortPassing, (state.appData.data.page.totalPages - 6))" class="page-link">Last</a>
+              </li> -->
 
 
               <li class="page-item pointer"
