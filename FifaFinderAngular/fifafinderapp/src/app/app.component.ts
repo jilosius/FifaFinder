@@ -1,3 +1,4 @@
+
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -5,7 +6,7 @@ import { map, startWith, catchError } from 'rxjs/operators';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { ApiResponse } from './interface/api-response';
 import { Page } from './interface/page';
-import { SpielerService } from './services/start.service';
+import { SpielerService } from './service/start.service';
 
 @Component({
   selector: 'app-root',
@@ -13,5 +14,5 @@ import { SpielerService } from './services/start.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent  {
-  
+
 }

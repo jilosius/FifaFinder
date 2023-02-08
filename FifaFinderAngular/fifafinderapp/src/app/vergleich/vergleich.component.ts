@@ -2,8 +2,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Spieler } from '../interface/spieler';
-import { SelectedPlayerService } from '../services/selected-player.service';
-import { VergleichService } from '../services/vergleich.service';
+import { SelectedPlayerService } from '../service/selected-player.service';
+import { VergleichService } from '../service/vergleich.service';
 import { StartComponent } from '../start/start.component';
 
 @Component({

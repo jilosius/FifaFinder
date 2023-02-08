@@ -29,7 +29,7 @@ public class SpielerDTO {
     private Integer volleys;
     private Integer dribbling;
     private Integer curve;
-    private Integer fKAccuracy;
+    private Integer fkAccuracy;
     private Integer acceleration;
     private Integer sprintSpeed;
     private Integer agility;
