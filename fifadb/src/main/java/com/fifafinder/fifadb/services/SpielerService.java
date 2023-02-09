@@ -157,51 +157,6 @@ public class SpielerService {
     }
 
 
-//    public List<Spieler> spielerAnzeigen() {
-//        return spielerRepository.findAll();
-//    }
-
-//    public Page<SpielerDTO> listAllSpieler(Pageable pageable){
-//        return spielerRepository.listAllSpieler(pageable);
-//    }
-
-    /*
-        public Spieler addSpieler (Spieler spieler){
-
-            return spielerRepository.save(spieler);
-
-        }
-
-        public List<Spieler> findAllSpieler(){
-
-            return spielerRepository.findAll();
-
-        }
-
-        public Spieler updateSpieler(Spieler spieler){
-
-            return spielerRepository.save(spieler);
-
-        }
-
-        public Spieler getSpielerById(Integer id){
-
-            return spielerRepository.findSpielerById(id).orElseThrow(()-> new SpielerNotFoundException("User by id"+id+" was not found"));
-
-        }
-
-        public Spieler getSpielerByfullname(String n){
-
-            return spielerRepository.findSpielerByfullname(n).orElseThrow(()->new SpielerNotFoundException("User by name"+n+" not found"));
-
-        }
-
-        public void deleteSpieler(Integer ID){
-
-            spielerRepository.deleteSpielerById(ID);
-        }
-    */
-
 
 
     public void addPlayer(Spieler spieler) {

@@ -142,4 +142,10 @@ public class PlaysForService {
 
         playsForRepository.save(playsFor);
     }
+
+    public void addPlaysFor(PlaysFor playsFor)
+    {
+
+        playsForRepository.save(playsFor);
+    }
 }
