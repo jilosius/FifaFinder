@@ -253,9 +253,9 @@ public class SpielerController {
                                 minHeight.orElse(0),
                                 maxHeight.orElse(300),
                                 minValue.orElse(0L),
-                                maxValue.orElse(1000000000L),
+                                maxValue.orElse(100000000000L),
                                 minWage.orElse(0L),
-                                maxWage.orElse(1000000000L),
+                                maxWage.orElse(100000000000L),
                                 minHeadingAccuracy.orElse(0),
                                 maxHeadingAccuracy.orElse(100),
                                 minVolleys.orElse(0),
@@ -301,4 +301,19 @@ public class SpielerController {
                         .build());
     }
 
+    @GetMapping("/start/vergleich")
+    public List<SpielerDTO> getSpielerToCompare(@RequestParam Optional<Integer> player1Id,
+                                                @RequestParam Optional<Integer> player2Id,
+                                                @RequestParam Optional<Integer> player3Id,
+                                                @RequestParam Optional<Integer> player4Id,
+                                                @RequestParam Optional<Integer> player5Id,
+                                                @RequestParam Optional<Integer> fifaVersion) {
+        return spielerService.getSpielerToCompare(
+                player1Id.orElse(0),
+                player2Id.orElse(0),
+                player3Id.orElse(0),
+                player4Id.orElse(0),
+                player5Id.orElse(0),
+                fifaVersion.orElse(23));
+    }
 }

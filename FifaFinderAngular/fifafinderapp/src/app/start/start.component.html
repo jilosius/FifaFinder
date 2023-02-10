@@ -20,11 +20,15 @@
                   d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z" />
               </svg> Filter
             </button>
+
+            <button [routerLink]="['/vergleich']" class="btn btn-secondary my-button" (click)="getSelectedPlayerIds()">Vergleichen</button>
+
+
             <form class="dropdown-menu p-4" style="width: 700px;">
               <div class="row g-3">
                 <div class="col-sm-3 col-form-label"><label for="fifaVersion">Fifa version</label></div>
                 <div class="col-auto"><input [(ngModel)]="fifaVersion" [ngModelOptions]="{standalone: true}"
-                  (ngModelChange)="fifaVersion = fifaVersion || 23" name="fifaVersion" type="number" id="fifaVersion"
+                  (ngModelChange)="onFifaVersionChange(fifaVersion)" name="fifaVersion" type="number" id="fifaVersion"
                   placeholder="Year"></div>
               </div>
 
@@ -295,183 +299,188 @@
   </nav>
   <div class="container">
     <div class="row">
-        <div class="col-md-12 mt-3">
-          <ng-container *ngSwitchCase="'APP_ERROR'">{{ state.error | json }}</ng-container>
-          <ng-container *ngSwitchCase="'APP_LOADING'">
-            <div class="d-flex justify-content-center mt-4">
-              <div class="spinner-border" role="status">
-                <span class="visually-hidden">Loading...</span>
-              </div>
+      <div class="col-md-12 mt-3">
+        <ng-container *ngSwitchCase="'APP_ERROR'">{{ state.error | json }}</ng-container>
+        <ng-container *ngSwitchCase="'APP_LOADING'">
+          <div class="d-flex justify-content-center mt-4">
+            <div class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
             </div>
-          </ng-container>
-          <ng-container *ngSwitchCase="'APP_LOADED'">
-            <h3>Spieler Liste</h3>
-            <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th scope="col">Photo</th>
-                    <th scope="col">Known Name</th>
-                    <th class="sortable" scope="col" (click)="sortByColumn(sortableColumns[0])">Age
-                      <span [innerHTML]="sortArrow(sortableColumns[0].column)"></span>
-                    </th>
-                    <th scope="col">Nationality</th>
-                    <th scope="col">Club</th>
-                    <th class="sortable" scope="col" (click)="sortByColumn(sortableColumns[1])">Overall
-                      <span [innerHTML]="sortArrow(sortableColumns[1].column)"></span>
-                    </th>
-                    <th class="sortable" scope="col" (click)="sortByColumn(sortableColumns[2])">Potential
-                      <span [innerHTML]="sortArrow(sortableColumns[2].column)"></span>
-                    </th>
-                    <th scope="col">Best Position</th>
-                    <th class="sortable" scope="col" (click)="sortByColumn(sortableColumns[3])">Value EUR
-                      <span [innerHTML]="sortArrow(sortableColumns[3].column)"></span>
-                    </th>
-                    <th class="sortable" scope="col" (click)="sortByColumn(sortableColumns[4])">Height
-                      <span [innerHTML]="sortArrow(sortableColumns[4].column)"></span>
-                    </th>
-                    <th class="sortable" scope="col" (click)="sortByColumn(sortableColumns[5])">Weight
-                      <span [innerHTML]="sortArrow(sortableColumns[5].column)"></span>
-                    </th>
-                    <th class="sortable" scope="col" [hidden]="condArray[0]" (click)="sortByColumn(sortableColumns[6])">Heading Accuracy
-                      <span [innerHTML]="sortArrow(sortableColumns[6].column)"></span>
-                    </th>
-                    <th class="sortable" scope="col" [hidden]="condArray[1]" (click)="sortByColumn(sortableColumns[7])">Volleys
-                      <span [innerHTML]="sortArrow(sortableColumns[7].column)"></span>
-                    </th>
-                    <th class="sortable" scope="col" [hidden]="condArray[2]" (click)="sortByColumn(sortableColumns[8])">Dribbling
-                      <span [innerHTML]="sortArrow(sortableColumns[8].column)"></span>
-                    </th>
-                    <th class="sortable" scope="col" [hidden]="condArray[3]" (click)="sortByColumn(sortableColumns[9])">Curve
-                      <span [innerHTML]="sortArrow(sortableColumns[9].column)"></span>
-                    </th>
-                    <th class="sortable" scope="col" [hidden]="condArray[4]" (click)="sortByColumn(sortableColumns[10])">FK Accuracy
-                      <span [innerHTML]="sortArrow(sortableColumns[10].column)"></span>
-                    </th>
-                    <th class="sortable" scope="col" [hidden]="condArray[5]" (click)="sortByColumn(sortableColumns[11])">Acceleration
-                      <span [innerHTML]="sortArrow(sortableColumns[11].column)"></span>
-                    </th>
-                    <th class="sortable" scope="col" [hidden]="condArray[6]" (click)="sortByColumn(sortableColumns[12])">Sprint Speed
-                      <span [innerHTML]="sortArrow(sortableColumns[12].column)"></span>
-                    </th>
-                    <th class="sortable" scope="col" [hidden]="condArray[7]" (click)="sortByColumn(sortableColumns[13])">Agility
-                      <span [innerHTML]="sortArrow(sortableColumns[13].column)"></span>
-                    </th>
-                    <th class="sortable" scope="col" [hidden]="condArray[8]" (click)="sortByColumn(sortableColumns[14])">Reaction
-                      <span [innerHTML]="sortArrow(sortableColumns[14].column)"></span>
-                    </th>
-                    <th class="sortable" scope="col" [hidden]="condArray[9]" (click)="sortByColumn(sortableColumns[15])">Balance
-                      <span [innerHTML]="sortArrow(sortableColumns[15].column)"></span>
-                    </th>
-                    <th class="sortable" scope="col" [hidden]="condArray[10]" (click)="sortByColumn(sortableColumns[16])">Shot Power
-                      <span [innerHTML]="sortArrow(sortableColumns[16].column)"></span>
-                    </th>
-                    <th class="sortable" scope="col" [hidden]="condArray[11]" (click)="sortByColumn(sortableColumns[17])">Jumping
-                      <span [innerHTML]="sortArrow(sortableColumns[17].column)"></span>
-                    </th>
-                    <th class="sortable" scope="col" [hidden]="condArray[12]" (click)="sortByColumn(sortableColumns[18])">Stamina
-                      <span [innerHTML]="sortArrow(sortableColumns[18].column)"></span>
-                    </th>
-                    <th class="sortable" scope="col" [hidden]="condArray[13]" (click)="sortByColumn(sortableColumns[19])">Aggression
-                      <span [innerHTML]="sortArrow(sortableColumns[19].column)"></span>
-                    </th>
-                    <th class="sortable" scope="col" [hidden]="condArray[14]" (click)="sortByColumn(sortableColumns[20])">Long Shots
-                      <span [innerHTML]="sortArrow(sortableColumns[20].column)"></span>
-                    </th>
-                    <th class="sortable" scope="col" [hidden]="condArray[15]" (click)="sortByColumn(sortableColumns[21])">Crossing
-                      <span [innerHTML]="sortArrow(sortableColumns[21].column)"></span>
-                    </th>
-                    <th class="sortable" scope="col" [hidden]="condArray[16]" (click)="sortByColumn(sortableColumns[22])">Finishing
-                      <span [innerHTML]="sortArrow(sortableColumns[22].column)"></span>
-                    </th>
-                    <th class="sortable" scope="col" [hidden]="condArray[17]" (click)="sortByColumn(sortableColumns[23])">Short Passing
-                      <span [innerHTML]="sortArrow(sortableColumns[23].column)"></span>
-                    </th>
-                    <th class="sortable" scope="col" [hidden]="condArray[18]" (click)="sortByColumn(sortableColumns[24])">Wage
-                      <span [innerHTML]="sortArrow(sortableColumns[24].column)"></span>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let spieler of state.appData.data.page.content; let i = index;">
-                    <td><img [src]="spieler.photoURL" width="42" height="42" class="rounded-circle"></td>
-                    <td>{{ spieler.knownName }}</td>
-                    <td>{{ spieler.age }}</td>
-                    <td><img [src]="spieler.flag" width="42" height="42" class="rounded-circle"></td>
-                    <td><img [src]="spieler.clubLogo" width="42" height="42" class="rounded-circle"></td>
-                    <td>{{ spieler.overall }}</td>
-                    <td>{{ spieler.potential }}</td>
-                    <td>{{ spieler.bestPos }}</td>
-                    <td>{{ spieler.valueEUR }}</td>
-                    <td>{{ spieler.height }}</td>
-                    <td>{{ spieler.weight }}</td>
-                    <!-- -------------------- -->
-                    <td [hidden]="condArray[0]">{{ spieler.headingAccuracy }}</td>
-                    <td [hidden]="condArray[1]">{{ spieler.volleys }}</td>
-                    <td [hidden]="condArray[2]">{{ spieler.dribbling }}</td>
-                    <td [hidden]="condArray[3]">{{ spieler.curve }}</td>
-                    <td [hidden]="condArray[4]">{{ spieler.fkAccuracy }}</td>
-                    <td [hidden]="condArray[5]">{{ spieler.acceleration }}</td>
-                    <td [hidden]="condArray[6]">{{ spieler.sprintSpeed }}</td>
-                    <td [hidden]="condArray[7]">{{ spieler.agility }}</td>
-                    <td [hidden]="condArray[8]">{{ spieler.reaction }}</td>
-                    <td [hidden]="condArray[9]">{{ spieler.balance }}</td>
-                    <td [hidden]="condArray[10]">{{ spieler.shotPower }}</td>
-                    <td [hidden]="condArray[11]">{{ spieler.jumping }}</td>
-                    <td [hidden]="condArray[12]">{{ spieler.stamina }}</td>
-                    <td [hidden]="condArray[13]">{{ spieler.aggression }}</td>
-                    <td [hidden]="condArray[14]">{{ spieler.longShots }}</td>
-                    <td [hidden]="condArray[15]">{{ spieler.crossing }}</td>
-                    <td [hidden]="condArray[16]">{{ spieler.finishing }}</td>
-                    <td [hidden]="condArray[17]">{{ spieler.shortPassing }}</td>
-                    <td [hidden]="condArray[18]">{{ spieler.wage }}</td>
-                  </tr>
-                </tbody>
-              </table>
-              <div *ngIf="state.appData.data.page.content.length < 1" class="alert alert-secondary" role="alert">
-                No players found
-              </div>
-            <nav *ngIf="state.appData.data.page.content.length > 0" aria-label="Page navigation example">
-              <ul class="pagination justify-content-end">
-                <li class="page-item pointer" [ngClass]="0 == (currentPage$ | async) ? ' disabled' : ''">
-                  <a (click)="goToNextOrPreviousPage('backward', searchForm.value.name)" class="page-link"
-                     aria-label="Previous">
-                    <span aria-hidden="true">&laquo; Previous</span>
-                  </a>
-                </li>
-
-              <li *ngFor="let pageNumber of [].constructor(state.appData.data.page.totalPages); let i = index;"
-                class="page-item pointer" [ngClass]="i == (currentPage$ | async) ? ' active' : ''">
-                <a (click)="goToPage(searchForm.value.name,fifaVersion, preferredFoot,ageMin,ageMax,overallMin,overallMax,potentialMin,potentialMax,heightMin,heightMax,minValue,maxValue,minWage,maxWage,minHeadingAccuracy,maxHeadingAccuracy,minVolleys,maxVolleys,minDribbling,maxDribbling,minCurve,maxCurve,minFkAccuracy,maxFkAccuracy,minAcceleration,maxAcceleration,minSprintSpeed,maxSprintSpeed,minAgility,maxAgility,minReaction,maxReaction,minBalance,maxBalance,minShotPower,maxShotPower,minJumping,maxJumping,minStamina,maxStamina,minAggression,maxAggression,minLongShots,maxLongShots,minCrossing,maxCrossing,minFinishing,maxFinishing,minShortPassing,maxShortPassing, i)"
-                  class="page-link">
-                  {{ i == 0 ? 1 : i + 1}}
-
+          </div>
+        </ng-container>
+        <ng-container *ngSwitchCase="'APP_LOADED'">
+          <h3>Spieler Liste</h3>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">Photo</th>
+                <th scope="col">Known Name</th>
+                <th class="sortable" scope="col" (click)="sortByColumn(sortableColumns[0])">Age
+                  <span [innerHTML]="sortArrow(sortableColumns[0].column)"></span>
+                </th>
+                <th scope="col">Nationality</th>
+                <th scope="col">Club</th>
+                <th class="sortable" scope="col" (click)="sortByColumn(sortableColumns[1])">Overall
+                  <span [innerHTML]="sortArrow(sortableColumns[1].column)"></span>
+                </th>
+                <th class="sortable" scope="col" (click)="sortByColumn(sortableColumns[2])">Potential
+                  <span [innerHTML]="sortArrow(sortableColumns[2].column)"></span>
+                </th>
+                <th scope="col">Best Position</th>
+                <th class="sortable" scope="col" (click)="sortByColumn(sortableColumns[3])">Value EUR
+                  <span [innerHTML]="sortArrow(sortableColumns[3].column)"></span>
+                </th>
+                <th class="sortable" scope="col" (click)="sortByColumn(sortableColumns[4])">Height
+                  <span [innerHTML]="sortArrow(sortableColumns[4].column)"></span>
+                </th>
+                <th class="sortable" scope="col" (click)="sortByColumn(sortableColumns[5])">Weight
+                  <span [innerHTML]="sortArrow(sortableColumns[5].column)"></span>
+                </th>
+                <th class="sortable" scope="col" [hidden]="condArray[0]" (click)="sortByColumn(sortableColumns[6])">Heading Accuracy
+                  <span [innerHTML]="sortArrow(sortableColumns[6].column)"></span>
+                </th>
+                <th class="sortable" scope="col" [hidden]="condArray[1]" (click)="sortByColumn(sortableColumns[7])">Volleys
+                  <span [innerHTML]="sortArrow(sortableColumns[7].column)"></span>
+                </th>
+                <th class="sortable" scope="col" [hidden]="condArray[2]" (click)="sortByColumn(sortableColumns[8])">Dribbling
+                  <span [innerHTML]="sortArrow(sortableColumns[8].column)"></span>
+                </th>
+                <th class="sortable" scope="col" [hidden]="condArray[3]" (click)="sortByColumn(sortableColumns[9])">Curve
+                  <span [innerHTML]="sortArrow(sortableColumns[9].column)"></span>
+                </th>
+                <th class="sortable" scope="col" [hidden]="condArray[4]" (click)="sortByColumn(sortableColumns[10])">FK Accuracy
+                  <span [innerHTML]="sortArrow(sortableColumns[10].column)"></span>
+                </th>
+                <th class="sortable" scope="col" [hidden]="condArray[5]" (click)="sortByColumn(sortableColumns[11])">Acceleration
+                  <span [innerHTML]="sortArrow(sortableColumns[11].column)"></span>
+                </th>
+                <th class="sortable" scope="col" [hidden]="condArray[6]" (click)="sortByColumn(sortableColumns[12])">Sprint Speed
+                  <span [innerHTML]="sortArrow(sortableColumns[12].column)"></span>
+                </th>
+                <th class="sortable" scope="col" [hidden]="condArray[7]" (click)="sortByColumn(sortableColumns[13])">Agility
+                  <span [innerHTML]="sortArrow(sortableColumns[13].column)"></span>
+                </th>
+                <th class="sortable" scope="col" [hidden]="condArray[8]" (click)="sortByColumn(sortableColumns[14])">Reaction
+                  <span [innerHTML]="sortArrow(sortableColumns[14].column)"></span>
+                </th>
+                <th class="sortable" scope="col" [hidden]="condArray[9]" (click)="sortByColumn(sortableColumns[15])">Balance
+                  <span [innerHTML]="sortArrow(sortableColumns[15].column)"></span>
+                </th>
+                <th class="sortable" scope="col" [hidden]="condArray[10]" (click)="sortByColumn(sortableColumns[16])">Shot Power
+                  <span [innerHTML]="sortArrow(sortableColumns[16].column)"></span>
+                </th>
+                <th class="sortable" scope="col" [hidden]="condArray[11]" (click)="sortByColumn(sortableColumns[17])">Jumping
+                  <span [innerHTML]="sortArrow(sortableColumns[17].column)"></span>
+                </th>
+                <th class="sortable" scope="col" [hidden]="condArray[12]" (click)="sortByColumn(sortableColumns[18])">Stamina
+                  <span [innerHTML]="sortArrow(sortableColumns[18].column)"></span>
+                </th>
+                <th class="sortable" scope="col" [hidden]="condArray[13]" (click)="sortByColumn(sortableColumns[19])">Aggression
+                  <span [innerHTML]="sortArrow(sortableColumns[19].column)"></span>
+                </th>
+                <th class="sortable" scope="col" [hidden]="condArray[14]" (click)="sortByColumn(sortableColumns[20])">Long Shots
+                  <span [innerHTML]="sortArrow(sortableColumns[20].column)"></span>
+                </th>
+                <th class="sortable" scope="col" [hidden]="condArray[15]" (click)="sortByColumn(sortableColumns[21])">Crossing
+                  <span [innerHTML]="sortArrow(sortableColumns[21].column)"></span>
+                </th>
+                <th class="sortable" scope="col" [hidden]="condArray[16]" (click)="sortByColumn(sortableColumns[22])">Finishing
+                  <span [innerHTML]="sortArrow(sortableColumns[22].column)"></span>
+                </th>
+                <th class="sortable" scope="col" [hidden]="condArray[17]" (click)="sortByColumn(sortableColumns[23])">Short Passing
+                  <span [innerHTML]="sortArrow(sortableColumns[23].column)"></span>
+                </th>
+                <th class="sortable" scope="col" [hidden]="condArray[18]" (click)="sortByColumn(sortableColumns[24])">Wage
+                  <span [innerHTML]="sortArrow(sortableColumns[24].column)"></span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let spieler of state.appData.data.page.content; let i = index;">
+                <!-- <mat-checkbox (change)="toggleSelection(spieler)"></mat-checkbox> -->
+              <tr *ngFor="let spieler of state.appData.data.page.content; let i = index;">
+                <th scope="row">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    [value]="spieler.playerId"
+                    (change)="toggleSelection(spieler)" />
+                </th>
+                <th scope="row"><img [src]="spieler.photoURL" width="42" height="42" class="rounded-circle" S></th>
+                <td>{{ spieler.knownName }}</td>
+                <td>{{ spieler.age }}</td>
+                <td><img [src]="spieler.flag" width="42" height="42" class="rounded-circle"></td>
+                <td><img [src]="spieler.clubLogo" width="42" height="42" class="rounded-circle"></td>
+                <td>{{ spieler.overall }}</td>
+                <td>{{ spieler.potential }}</td>
+                <td>{{ spieler.bestPos }}</td>
+                <td>{{ spieler.valueEUR }}</td>
+                <td>{{ spieler.height }}</td>
+                <td>{{ spieler.weight }}</td>
+                <!-- -------------------- -->
+                <td [hidden]="condArray[0]">{{ spieler.headingAccuracy }}</td>
+                <td [hidden]="condArray[1]">{{ spieler.volleys }}</td>
+                <td [hidden]="condArray[2]">{{ spieler.dribbling }}</td>
+                <td [hidden]="condArray[3]">{{ spieler.curve }}</td>
+                <td [hidden]="condArray[4]">{{ spieler.fkAccuracy }}</td>
+                <td [hidden]="condArray[5]">{{ spieler.acceleration }}</td>
+                <td [hidden]="condArray[6]">{{ spieler.sprintSpeed }}</td>
+                <td [hidden]="condArray[7]">{{ spieler.agility }}</td>
+                <td [hidden]="condArray[8]">{{ spieler.reaction }}</td>
+                <td [hidden]="condArray[9]">{{ spieler.balance }}</td>
+                <td [hidden]="condArray[10]">{{ spieler.shotPower }}</td>
+                <td [hidden]="condArray[11]">{{ spieler.jumping }}</td>
+                <td [hidden]="condArray[12]">{{ spieler.stamina }}</td>
+                <td [hidden]="condArray[13]">{{ spieler.aggression }}</td>
+                <td [hidden]="condArray[14]">{{ spieler.longShots }}</td>
+                <td [hidden]="condArray[15]">{{ spieler.crossing }}</td>
+                <td [hidden]="condArray[16]">{{ spieler.finishing }}</td>
+                <td [hidden]="condArray[17]">{{ spieler.shortPassing }}</td>
+                <td [hidden]="condArray[18]">{{ spieler.wage }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div *ngIf="state.appData.data.page.content.length < 1" class="alert alert-secondary" role="alert">
+            No players found
+          </div>
+          <nav *ngIf="state.appData.data.page.content.length > 0" aria-label="Page navigation example">
+            <ul class="pagination justify-content-end">
+              <li class="page-item pointer" [ngClass]="0 == (currentPage$ | async) ? ' disabled' : ''">
+                <a (click)="goToNextOrPreviousPage('backward', searchForm.value.name)" class="page-link"
+                  aria-label="Previous">
+                  <span aria-hidden="true">&laquo; Previous</span>
                 </a>
               </li>
 
+              <!-- <li class="page-item pointer" [ngClass]="0 == (currentPage$ | async) ? ' disabled' : ''">
+                <a (click)="goToPage(searchForm.value.name,fifaVersion, preferredFoot,ageMin,ageMax,overallMin,overallMax,potentialMin,potentialMax,heightMin,heightMax,minValue,maxValue,minWage,maxWage,minHeadingAccuracy,maxHeadingAccuracy,minVolleys,maxVolleys,minDribbling,maxDribbling,minCurve,maxCurve,minFkAccuracy,maxFkAccuracy,minAcceleration,maxAcceleration,minSprintSpeed,maxSprintSpeed,minAgility,maxAgility,minReaction,maxReaction,minBalance,maxBalance,minShotPower,maxShotPower,minJumping,maxJumping,minStamina,maxStamina,minAggression,maxAggression,minLongShots,maxLongShots,minCrossing,maxCrossing,minFinishing,maxFinishing,minShortPassing,maxShortPassing, 0)" class="page-link">First</a>
+              </li> -->
 
 
+              <!-- <ng-container *ngIf="(currentPage$ | async) < 5">
+                <li *ngFor="let pageNumber of [].constructor(10); let i = index;" class="page-item pointer" [ngClass]="i == (currentPage$ | async) ? ' active' : ''">
+                  <a (click)="goToPage(searchForm.value.name,fifaVersion, preferredFoot,ageMin,ageMax,overallMin,overallMax,potentialMin,potentialMax,heightMin,heightMax,minValue,maxValue,minWage,maxWage,minHeadingAccuracy,maxHeadingAccuracy,minVolleys,maxVolleys,minDribbling,maxDribbling,minCurve,maxCurve,minFkAccuracy,maxFkAccuracy,minAcceleration,maxAcceleration,minSprintSpeed,maxSprintSpeed,minAgility,maxAgility,minReaction,maxReaction,minBalance,maxBalance,minShotPower,maxShotPower,minJumping,maxJumping,minStamina,maxStamina,minAggression,maxAggression,minLongShots,maxLongShots,minCrossing,maxCrossing,minFinishing,maxFinishing,minShortPassing,maxShortPassing, i)" class="page-link">
+                    {{ i == 0 ? 1 : i + 1 }}
+                  </a>
+                </li>
+              </ng-container> -->
 
-              <!-- [ngClass]="i == (currentPage$ | async) ? ' active' : ''" -->
-              <!-- <li *ngFor="let pageNumber of [].constructor(6); let i = index;"
-                    class="page-item pointer" >
-                    <a (click)="goToPage(searchForm.value.name,fifaVersion, ageMin,ageMax,overallMin,overallMax,potentialMin,potentialMax,heightMin,heightMax,minValue,maxValue,minWage,maxWage,minHeadingAccuracy,maxHeadingAccuracy,minVolleys,maxVolleys,minDribbling,maxDribbling,minCurve,maxCurve,minFkAccuracy,maxFkAccuracy,minAcceleration,maxAcceleration,minSprintSpeed,maxSprintSpeed,minAgility,maxAgility,minReaction,maxReaction,minBalance,maxBalance,minShotPower,maxShotPower,minJumping,maxJumping,minStamina,maxStamina,minAggression,maxAggression,minLongShots,maxLongShots,minCrossing,maxCrossing,minFinishing,maxFinishing,minShortPassing,maxShortPassing, i)"
-                        class="page-link">
-                        {{ i == 0 ? 1 : (i == 1 ? (currentPage$ | async) : state.appData.data.page.totalPages) }}
-                    </a>
+              <!-- <ng-container *ngIf="(currentPage$ | async) >= 5"> -->
+              <ng-container *ngFor="let pageNumber of [].constructor(state.appData.data.page.totalPages); let i = index;">
+                <li *ngIf="shouldShowPage(i, currentPage$ | async)"
+                    class="page-item pointer" [ngClass]="i == (currentPage$ | async) ? ' active' : ''">
+                  <a (click)="goToPage(searchForm.value.name,fifaVersion, preferredFoot,ageMin,ageMax,overallMin,overallMax,potentialMin,potentialMax,heightMin,heightMax,minValue,maxValue,minWage,maxWage,minHeadingAccuracy,maxHeadingAccuracy,minVolleys,maxVolleys,minDribbling,maxDribbling,minCurve,maxCurve,minFkAccuracy,maxFkAccuracy,minAcceleration,maxAcceleration,minSprintSpeed,maxSprintSpeed,minAgility,maxAgility,minReaction,maxReaction,minBalance,maxBalance,minShotPower,maxShotPower,minJumping,maxJumping,minStamina,maxStamina,minAggression,maxAggression,minLongShots,maxLongShots,minCrossing,maxCrossing,minFinishing,maxFinishing,minShortPassing,maxShortPassing, i)"
+                     class="page-link">
+                    {{ i == 0 ? 1 : i + 1}}
+                  </a>
+                </li>
+              </ng-container>
+              <!-- </ng-container> -->
 
-                </li> -->
-              <!-- <span class="dots" *ngIf="(currentPage$ | async) != 1 && (currentPage$ | async) != state.appData.data.page.totalPages" >...</span> -->
-
-              <!-- <ng-container *ngIf="currentPage$ | async as currentPage">
-                  <li *ngFor="let pageNumber of [].constructor(state.appData.data.page.totalPages); let i = index;" class="page-item pointer" [ngClass]="i == currentPage ? ' active' : ''">
-                    <a (click)="goToPage(searchForm.value.name,fifaVersion, ageMin,ageMax,overallMin,overallMax,potentialMin,potentialMax,heightMin,heightMax,minValue,maxValue,minWage,maxWage,minHeadingAccuracy,maxHeadingAccuracy,minVolleys,maxVolleys,minDribbling,maxDribbling,minCurve,maxCurve,minFkAccuracy,maxFkAccuracy,minAcceleration,maxAcceleration,minSprintSpeed,maxSprintSpeed,minAgility,maxAgility,minReaction,maxReaction,minBalance,maxBalance,minShotPower,maxShotPower,minJumping,maxJumping,minStamina,maxStamina,minAggression,maxAggression,minLongShots,maxLongShots,minCrossing,maxCrossing,minFinishing,maxFinishing,minShortPassing,maxShortPassing,i)" class="page-link" *ngIf="i === 0 || i === (state.appData.data.page.totalPages - 1) || (i >= currentPage - 2 && i <= currentPage + 2)">
-                      {{ i + 1 }}
-                    </a>
-                    <span *ngIf="i !== 0 && i !== (state.appData.data.page.totalPages - 1) && (i < currentPage - 2 || i > currentPage + 2)">...</span>
-                  </li>
-
-                  </ng-container>
-                   -->
+              <!-- <li class="page-item pointer" [ngClass]="(state.appData.data.page.totalPages - 1) == (currentPage$ | async) ? ' disabled' : ''">
+                <a (click)="goToPage(searchForm.value.name,fifaVersion, preferredFoot,ageMin,ageMax,overallMin,overallMax,potentialMin,potentialMax,heightMin,heightMax,minValue,maxValue,minWage,maxWage,minHeadingAccuracy,maxHeadingAccuracy,minVolleys,maxVolleys,minDribbling,maxDribbling,minCurve,maxCurve,minFkAccuracy,maxFkAccuracy,minAcceleration,maxAcceleration,minSprintSpeed,maxSprintSpeed,minAgility,maxAgility,minReaction,maxReaction,minBalance,maxBalance,minShotPower,maxShotPower,minJumping,maxJumping,minStamina,maxStamina,minAggression,maxAggression,minLongShots,maxLongShots,minCrossing,maxCrossing,minFinishing,maxFinishing,minShortPassing,maxShortPassing, (state.appData.data.page.totalPages - 6))" class="page-link">Last</a>
+              </li> -->
 
 
 

@@ -1,4 +1,5 @@
 export interface Spieler {
+    playerId: number;
     photoURL: string;
     fifaVersion: number;
     knownName: string;
@@ -33,4 +34,8 @@ export interface Spieler {
     finishing: number;
     shortPassing: number;
     wage: number;
+
+    selected: boolean;
+
 }
+

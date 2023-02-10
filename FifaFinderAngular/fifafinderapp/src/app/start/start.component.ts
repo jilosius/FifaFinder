@@ -5,6 +5,9 @@ import { ApiResponse } from '../interface/api-response';
 import { Page } from '../interface/page';
 import { SpielerService } from '../service/start.service';
 import { SortableColumn } from "../sorting/sortable-column";
+import { Spieler } from '../interface/spieler';
+import { SelectedPlayerService } from '../service/selected-player.service';
+
 
 @Component({
   selector: 'app-start',
@@ -19,58 +22,65 @@ export class StartComponent implements OnInit {
   private currentPageSubject = new BehaviorSubject<number>(0); //Save observable at current page
   currentPage$ = this.currentPageSubject.asObservable();
 
+  players: Spieler[];
+  selectedPlayerIds: number[];
+  selectedPlayers: Spieler[] = [];
+  selectedFifaVersion: number;
+  pagesToDisplay: number = 10;
+
   name: string;
   //defining variables that are used in the dropdown filter
-  fifaVersion: number;
+  playerId: number;
+  fifaVersion: number =  23;
   preferredFoot: string = "";
-  ageMin: number = 0;
-  ageMax: number = 100;
-  overallMin: number = 0;
-  overallMax: number = 100;
-  potentialMin: number= 0;
-  potentialMax: number= 100;
-  heightMin: number= 0;
-  heightMax: number= 300;
-  minValue: number= 0;
-  maxValue: number= 1000000000;
-  minWage: number= 0;
-  maxWage: number= 1000000000;
-  minHeadingAccuracy: number = 0;
-  maxHeadingAccuracy: number = 100;
-  minVolleys: number= 0;
-  maxVolleys: number= 100;
-  minDribbling: number= 0;
-  maxDribbling: number= 100;
-  minCurve: number= 0;
-  maxCurve: number= 100;
-  minFkAccuracy: number= 0;
-  maxFkAccuracy: number= 100;
-  minAcceleration: number= 0;
-  maxAcceleration: number= 100;
-  minSprintSpeed: number= 0;
-  maxSprintSpeed: number= 100;
-  minAgility: number= 0;
-  maxAgility: number= 100;
-  minReaction: number= 0;
-  maxReaction:number= 100;
-  minBalance: number= 0;
-  maxBalance: number= 100;
-  minShotPower: number= 0;
-  maxShotPower: number= 100;
-  minJumping: number= 0;
-  maxJumping: number= 100;
-  minStamina: number= 0;
-  maxStamina: number= 100;
-  minAggression: number= 0;
-  maxAggression: number= 100;
-  minLongShots: number= 0;
-  maxLongShots: number= 100;
-  minCrossing: number= 0;
-  maxCrossing: number= 100;
-  minFinishing: number= 0;
-  maxFinishing: number= 100;
-  minShortPassing: number= 0;
-  maxShortPassing: number= 100;
+  ageMin: number= 0;
+  ageMax: number= 100;
+  overallMin: number=0;
+  overallMax: number=100;
+  potentialMin: number=0;
+  potentialMax: number=100;
+  heightMin: number=0;
+  heightMax: number=300;
+  minValue: number=0;
+  maxValue: number=100000000000;
+  minWage: number=0;
+  maxWage: number=100000000000;
+  minHeadingAccuracy: number=0;
+  maxHeadingAccuracy: number=100;
+  minVolleys: number=0;
+  maxVolleys: number=100;
+  minDribbling: number=0;
+  maxDribbling: number=100;
+  minCurve: number=0;
+  maxCurve: number=100;
+  minFkAccuracy: number=0;
+  maxFkAccuracy: number=100;
+  minAcceleration: number=0;
+  maxAcceleration: number=100;
+  minSprintSpeed: number=0;
+  maxSprintSpeed: number=100;
+  minAgility: number=0;
+  maxAgility: number=100;
+  minReaction: number=0;
+  maxReaction:number=100;
+  minBalance: number=0;
+  maxBalance: number=100;
+  minShotPower: number=0;
+  maxShotPower: number=100;
+  minJumping: number=0;
+  maxJumping: number=100;
+  minStamina: number=0;
+  maxStamina: number=100;
+  minAggression: number=0;
+  maxAggression: number=100;
+  minLongShots: number=0;
+  maxLongShots: number=100;
+  minCrossing: number=0;
+  maxCrossing: number=100;
+  minFinishing: number=0;
+  maxFinishing: number=100;
+  minShortPassing: number=0;
+  maxShortPassing: number=100;
 
   pageNumber: number= 0;
   size: number= 20;
@@ -105,18 +115,31 @@ export class StartComponent implements OnInit {
     new SortableColumn('shortPassing'),
     new SortableColumn('wage')
   ];
-
   //Array to set the "hidden" attribute of each column to either true or false
   condArray:boolean[] = [true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true];
 
-  constructor(private spielerService: SpielerService) { }
+  constructor(private spielerService: SpielerService, private selectedPlayerService: SelectedPlayerService) { }
 
   //on app initialisation: start with: 'APP LOADING', then 'APP_LOADED', and if error return 'APP_ERROR'
   ngOnInit(): void {
+    this.selectedPlayerService.selectedPlayerIds$.subscribe(
+      selectedPlayerIds => {
+        this.selectedPlayerIds = selectedPlayerIds;
+        if (this.players){
+          this.players.forEach(player => {
+            if(this.selectedPlayerIds.includes(player.playerId)) {
+              player.selected = true;
+              this.selectedPlayers.push(player);
+            }
+          })
+        };
+      }
+    );
     this.spielerState$ = this.spielerService.spieler$().pipe(
       map((response: ApiResponse<Page>) => {
-        this.responseSubject.next(response);  //response subject contains response for later use
+        this.responseSubject.next(response);
         this.currentPageSubject.next(response.data.page.number);
+        this.players = response.data.page.content;
         console.log(response);
         return ({ appState: 'APP_LOADED', appData: response });
       }),
@@ -125,8 +148,12 @@ export class StartComponent implements OnInit {
         return of({ appState: 'APP_ERROR', error })
       }
       )
-    )
+    );
+
+
   }
+
+
 
 
   //the method that does all the magic: boolean Array is checked to hide/unhide columns, then spielerService is used to return the data/page as required
@@ -291,9 +318,9 @@ export class StartComponent implements OnInit {
     this.heightMin= 0;
     this.heightMax= 300;
     this.minValue= 0;
-    this.maxValue= 1000000000;
+    this.maxValue= 100000000000;
     this.minWage= 0;
-    this.maxWage= 1000000000;
+    this.maxWage= 100000000000;
     this.minHeadingAccuracy = 0;
     this.maxHeadingAccuracy = 100;
     this.minVolleys= 0;
@@ -331,6 +358,30 @@ export class StartComponent implements OnInit {
     this.minShortPassing= 0;
     this.maxShortPassing= 100;
     this.goToPage(name);
+  }
+
+
+
+  toggleSelection(spieler: Spieler) {
+    spieler.selected = !spieler.selected;
+    if (spieler.selected) {
+      this.selectedPlayers.push(spieler);
+    } else {
+      this.selectedPlayers = this.selectedPlayers.filter(s => s.playerId !== spieler.playerId);
+      this.selectedPlayerIds = this.selectedPlayerIds.filter(id => id !== spieler.playerId);
+    }
+    this.selectedPlayerService.setSelectedPlayerIds(this.selectedPlayerIds);
+  }
+
+
+
+  getSelectedPlayerIds() {
+    if(this.selectedPlayers.length > 0) {
+      this.selectedPlayerIds = this.selectedPlayers.map(spieler => spieler.playerId);
+      this.selectedPlayerService.setSelectedPlayerIds(this.selectedPlayerIds);
+    }
+    this.selectedPlayerService.setSelectedFifaVersion(this.selectedFifaVersion);
+    return this.selectedPlayerIds;
   }
 
   sortByColumn(
@@ -432,5 +483,20 @@ export class StartComponent implements OnInit {
     }
     return '';
   }
-}
 
+
+
+
+  onFifaVersionChange(fifaVersion: number) {
+    this.selectedFifaVersion = fifaVersion;
+  }
+
+  shouldShowPage(index:number, currentPage:number) {
+
+      const start = currentPage - 5;
+      const end = currentPage + 5;
+      return index >= start && index <= end;
+
+
+}
+}

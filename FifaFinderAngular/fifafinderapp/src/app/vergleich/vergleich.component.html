@@ -1,0 +1,149 @@
+<meta name="referrer" content="no-referrer"/>
+<ng-container>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="http://localhost:4200">FifaFinder</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <button [routerLink]="['/start']" class="btn btn-secondary my-button">+</button>
+    </div>
+</nav>
+</ng-container>
+    <div class="container">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 mt-3">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <td scope="col"></td>
+                  <td  scope="col" *ngFor="let spieler of spieler">
+                    {{ spieler.playerId }}
+                  </td>
+                </tr>
+                <tr>
+                  <td scope="col"></td>
+                  <td  scope="col" *ngFor="let spieler of spieler">
+                    <img [src]="spieler.photoURL" width="150" height="150" class="rounded-circle">
+                  </td>
+                </tr>
+                <tr>
+                  <th></th>
+                  <th *ngFor="let spieler of spieler">{{ spieler.knownName }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                
+                <tr>
+                  <td>Nationality</td>
+                  <td *ngFor="let spieler of spieler">
+                    <img [src]="spieler.flag" width="42" height="42" class="rounded-circle"></td>
+                </tr>
+  
+                <tr>
+                  <td>Club</td>
+                  <td *ngFor="let spieler of spieler"><img [src]="spieler.clubLogo" width="42" height="42" class="rounded-circle"></td>
+                </tr>
+                <tr>
+                  <td>Overall</td>
+                  <td *ngFor="let spieler of spieler">{{ spieler.overall }}</td>
+                </tr>
+                <tr>
+                  <td>Potential</td>
+                  <td *ngFor="let spieler of spieler">{{ spieler.potential }}</td>
+                </tr>
+                <tr>
+                  <td>Best Position</td>
+                  <td *ngFor="let spieler of spieler">{{ spieler.bestPos }}</td>
+                </tr>
+                <tr>
+                  <td>ValueEUR</td>
+                  <td *ngFor="let spieler of spieler">{{ spieler.valueEUR }}</td>
+                </tr>
+                <tr>
+                  <td>Height</td>
+                  <td *ngFor="let spieler of spieler">{{ spieler.height }}</td>
+                </tr>
+                <tr>
+                  <td>Weight</td>
+                  <td *ngFor="let spieler of spieler">{{ spieler.weight }}</td>
+                </tr>
+                <tr>
+                  <td>Heading Accuracy</td>
+                  <td *ngFor="let spieler of spieler">{{ spieler.headingAccuracy }}</td>
+                </tr>
+                <tr>
+                  <td>Volleys</td>
+                  <td *ngFor="let spieler of spieler">{{ spieler.volleys }}</td>
+                </tr>
+                <tr>
+                  <td>Dribbling</td>
+                  <td *ngFor="let spieler of spieler">{{ spieler.dribbling }}</td>
+                </tr>
+                <tr>
+                  <td>Curve</td>
+                  <td *ngFor="let spieler of spieler">{{ spieler.curve }}</td>
+                </tr>
+                <tr>
+                  <td>Acceleration</td>
+                  <td *ngFor="let spieler of spieler">{{ spieler.acceleration }}</td>
+                </tr>
+                <tr>
+                  <td>Sprint Speed</td>
+                  <td *ngFor="let spieler of spieler">{{ spieler.sprintSpeed }}</td>
+                </tr>
+                <tr>
+                  <td>Agility</td>
+                  <td *ngFor="let spieler of spieler">{{ spieler.agility }}</td>
+                </tr>
+                <tr>
+                  <td>Reaction</td>
+                  <td *ngFor="let spieler of spieler">{{ spieler.reaction }}</td>
+                </tr>
+                <tr>
+                  <td>Shot Power</td>
+                  <td *ngFor="let spieler of spieler">{{ spieler.shotPower }}</td>
+                </tr>
+                <tr>
+                  <td>Jumping</td>
+                  <td *ngFor="let spieler of spieler">{{ spieler.jumping }}</td>
+                </tr>
+                <tr>
+                  <td>Stamina</td>
+                  <td *ngFor="let spieler of spieler">{{ spieler.stamina }}</td>
+                </tr>
+                <tr>
+                  <td>Aggression</td>
+                  <td *ngFor="let spieler of spieler">{{ spieler.aggression }}</td>
+                </tr>
+                <tr>
+                  <td>Long Shots</td>
+                  <td *ngFor="let spieler of spieler">{{ spieler.longShots }}</td>
+                </tr>
+                <tr>
+                  <td>Crossing</td>
+                  <td *ngFor="let spieler of spieler">{{ spieler.crossing }}</td>
+                </tr>
+                <tr>
+                  <td>Finishing</td>
+                  <td *ngFor="let spieler of spieler">{{ spieler.finishing }}</td>
+                </tr>
+                <tr>
+                  <td>Short Passing</td>
+                  <td *ngFor="let spieler of spieler">{{ spieler.shortPassing }}</td>
+                </tr>
+                <tr>
+                  <td>Wage</td>
+                  <td *ngFor="let spieler of spieler">{{ spieler.wage }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
