@@ -64,7 +64,7 @@ public class PlaysForService {
     }
 
 
-    public void addPlayer(Spieler spieler, FifaVersion fifaversion, Integer height, String clubPosition, Integer clubNumber, String nationalPosition,
+    public void addPlayer(Spieler spieler, FifaVersion fifaversion,PlaysForId playsForId, Integer height, String clubPosition, Integer clubNumber, String nationalPosition,
                 Integer nationalNumber, String preferredFoot, Integer contractUntil, String onLoan, String nationalTeam, Integer age,
                 Integer weight, Integer overall, Integer potential, String bestPosition, Mannschaften clubID, Long valueEUR, Long wage,
                 Long releaseClause, Integer intReputation, Integer weakFoot, Integer skillMoves, Integer crossing, Integer finishing,
@@ -80,6 +80,8 @@ public class PlaysForService {
         PlaysFor playsFor = new PlaysFor();
         playsFor.setPlayerID(spieler);
         playsFor.setFifaVersion(fifaversion);
+        playsFor.setId(playsForId);
+
 
         playsFor.setHeight(height);
         playsFor.setClubPosition(clubPosition);
@@ -139,13 +141,9 @@ public class PlaysForService {
         playsFor.setGKReflexes(gKReflexes);
         playsFor.setPhotoUrl(photoUrl);
 
-
+        System.out.println(playsFor.getFifaVersion());
         playsForRepository.save(playsFor);
     }
 
-    public void addPlaysFor(PlaysFor playsFor)
-    {
 
-        playsForRepository.save(playsFor);
-    }
 }
