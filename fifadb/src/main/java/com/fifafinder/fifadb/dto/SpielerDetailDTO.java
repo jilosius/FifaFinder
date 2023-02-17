@@ -37,7 +37,7 @@ public class SpielerDetailDTO {
     private Integer intReputation;
     private Integer weakFoot;
     private Integer skillMoves;
-    private Integer cossing;
+    private Integer crossing;
     private Integer finishing;
     private Integer headingAccuracy;
     private Integer shortPassing;
