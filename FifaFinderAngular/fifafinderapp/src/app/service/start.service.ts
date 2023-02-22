@@ -7,6 +7,9 @@ import { Page } from '../interface/page'
 @Injectable({ providedIn: 'root' })
 export class SpielerService {
   private readonly serverUrl: string = 'http://localhost:8080/players/start/filtered';
+  public getServerUrl(): string {
+    return this.serverUrl;
+  }
 
   constructor(private http: HttpClient) { }
 
