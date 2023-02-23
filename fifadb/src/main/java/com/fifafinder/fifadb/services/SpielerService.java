@@ -16,8 +16,9 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.List;
 import java.util.Optional;
+
+
 
 
 @Service
@@ -102,7 +103,8 @@ public class SpielerService {
                                                    int minShortPassing,
                                                    int maxShortPassing,
                                                    int page, int size, Sort sort) {
-        return spielerRepository.findByFullNameFiltered(name,
+        return spielerRepository.findByFullNameFiltered(
+                name,
                 fifaVersion,
                 preferredFoot,
                 minAge,
@@ -157,17 +159,39 @@ public class SpielerService {
     }
 
 
+    public List<SpielerDTO> getSpielerToCompare(int player1Id, int player2Id, int player3Id, int player4Id, int player5Id, int fifaVersion){
+        return spielerRepository.getSpielerToCompare(player1Id, player2Id,player3Id,player4Id,player5Id, fifaVersion);
+    }
 
+
+//    public List<Spieler> spielerAnzeigen() {
+//        return spielerRepository.findAll();
+//    }
+
+//    public Page<SpielerDTO> listAllSpieler(Pageable pageable){
+//        return spielerRepository.listAllSpieler(pageable);
+//    }
+
+
+        public Spieler addSpieler (Spieler spieler){
+
+            return spielerRepository.save(spieler);
+
+        }
+
+        public List<Spieler> findAllSpieler(){
+
+            return spielerRepository.findAll();
+
+        }
+
+        public Spieler updateSpieler(Spieler spieler){
+
+            return spielerRepository.save(spieler); }
 
     public void addPlayer(Spieler spieler) {
-        int i = 1;
-        Optional<Spieler> spielerOptional = spielerRepository.findSpielerById(1);
-        while(spielerOptional.isPresent())
-        {
-          i++;
-          spielerOptional = spielerRepository.findSpielerById(i);
-        }
-        spieler.setId(i);
+
+        spieler.setFifaID(null);
         spielerRepository.save(spieler);
     }
 
@@ -179,7 +203,7 @@ public class SpielerService {
         return null;
     }
 
-    public void deleteSpieler() {
+    public void deleteSpieler(){
         spielerRepository.deleteSpielerById(100000);
     }
 }

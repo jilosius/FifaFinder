@@ -10,6 +10,7 @@ import lombok.Data;
 @NoArgsConstructor
 @ToString
 public class SpielerDTO {
+    private Integer playerId;
     private String photoURL;
     private String knownName;
     private Integer age;
@@ -28,7 +29,7 @@ public class SpielerDTO {
     private Integer volleys;
     private Integer dribbling;
     private Integer curve;
-    private Integer fKAccuracy;
+    private Integer fkAccuracy;
     private Integer acceleration;
     private Integer sprintSpeed;
     private Integer agility;
@@ -43,5 +44,6 @@ public class SpielerDTO {
     private Integer finishing;
     private Integer shortPassing;
     private Long wage;
+
 
 }

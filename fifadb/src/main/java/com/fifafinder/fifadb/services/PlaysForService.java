@@ -111,7 +111,7 @@ public class PlaysForService {
         playsFor.setVolleys(volleys);
         playsFor.setDribbling(dribbling);
         playsFor.setCurve(curve);
-        playsFor.setFKAccuracy(fKAccuracy);
+        playsFor.setFkAccuracy(fKAccuracy);
         playsFor.setLongPassing(longPassing);
         playsFor.setBallControl(ballControl);
         playsFor.setAcceleration(acceleration);

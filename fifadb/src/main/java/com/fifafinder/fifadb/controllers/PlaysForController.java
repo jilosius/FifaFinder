@@ -61,97 +61,22 @@ public class PlaysForController {
         int spielerId = spieler.getId();
         return ResponseEntity.ok().body(playsForService.getDetails(spielerId, fifaVersion));
     }
-    /*
-    @PostMapping("/add")
-    public void addPlayer(@RequestParam String knownName,
-                          @RequestParam String fullName,
-                          @RequestParam LocalDate birthDate,
-                          @RequestParam FifaVersion fifaversion,
-                          @RequestParam Integer height,
-                          @RequestParam String clubPosition,
-                          @RequestParam Integer clubNumber,
-                          @RequestParam String nationalPosition,
-                          @RequestParam Integer nationalNumber,
-                          @RequestParam String preferredFoot,
-                          @RequestParam Integer contractUntil,
-                          @RequestParam String onLoan,
-                          @RequestParam String nationalTeam,
-                          @RequestParam Integer age,
-                          @RequestParam Integer weight,
-                          @RequestParam Integer overall,
-                          @RequestParam Integer potential,
-                          @RequestParam String bestPosition,
-                          @RequestParam Mannschaften clubID,
-                          @RequestParam Long valueEUR,
-                          @RequestParam Long wage,
-                          @RequestParam Long releaseClause,
-                          @RequestParam Integer intReputation,
-                          @RequestParam Integer weakFoot,
-                          @RequestParam Integer skillMoves,
-                          @RequestParam Integer crossing,
-                          @RequestParam Integer finishing,
-                          @RequestParam Integer headingAccuracy,
-                          @RequestParam Integer shortPassing,
-                          @RequestParam Integer volleys,
-                          @RequestParam Integer dribbling,
-                          @RequestParam Integer curve,
-                          @RequestParam Integer fKAccuracy,
-                          @RequestParam Integer longPassing,
-                          @RequestParam Integer ballControl,
-                          @RequestParam Integer acceleration,
-                          @RequestParam Integer sprintSpeed,
-                          @RequestParam Integer agility,
-                          @RequestParam Integer reaction,
-                          @RequestParam Integer balance,
-                          @RequestParam Integer shotPower,
-                          @RequestParam Integer jumping,
-                          @RequestParam Integer stamina,
-                          @RequestParam Integer strength,
-                          @RequestParam Integer longShots,
-                          @RequestParam Integer aggression,
-                          @RequestParam Integer interceptions,
-                          @RequestParam Integer positioning,
-                          @RequestParam Integer vision,
-                          @RequestParam Integer penalties,
-                          @RequestParam Integer composure,
-                          @RequestParam Integer marking,
-                          @RequestParam Integer standingTackle,
-                          @RequestParam Integer slidingTackle,
-                          @RequestParam Integer gKDiving,
-                          @RequestParam Integer gKHandling,
-                          @RequestParam Integer gKKicking,
-                          @RequestParam Integer gKPositioning,
-                          @RequestParam Integer gKReflexes,
-                          @RequestParam String photoUrl
-                          ){
 
-        Spieler spieler = new Spieler();
-        spieler.setKnownName(knownName);
-        spieler.setFullName(fullName);
-        spieler.setBirthDate(birthDate);
-        spielerService.addPlayer(spieler);
-
-        playsForService.addPlayer(spieler, fifaversion, height,clubPosition, clubNumber,nationalPosition, nationalNumber,
-                preferredFoot, contractUntil, onLoan, nationalTeam, age, weight, overall, potential, bestPosition, clubID, valueEUR, wage, releaseClause,
-                intReputation, weakFoot, skillMoves, crossing, finishing, headingAccuracy, shortPassing, volleys, dribbling, curve, fKAccuracy, longPassing,
-                ballControl, acceleration, sprintSpeed, agility, reaction, balance, shotPower, jumping, stamina, strength, longShots, aggression, interceptions,
-                positioning, vision, penalties, composure, marking, standingTackle, slidingTackle, gKDiving, gKHandling, gKKicking, gKPositioning, gKReflexes, photoUrl);
-    }
- */
     @PostMapping("/add")
     public void addPlayer(@RequestBody AddPlaysForDTO playsForDTO )
     {
 
-        System.out.println(playsForDTO);
+
         Spieler spieler = new Spieler();
         spieler.setKnownName(playsForDTO.getKnownName());
         spieler.setFullName(playsForDTO.getFullName());
         spieler.setBirthDate(playsForDTO.getDateOfBirth().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
         spielerService.addPlayer(spieler);
+
         FifaVersion fifaVersion;
         fifaVersion =  fifaController.getVersionByID(playsForDTO.getFifaVersion());
-        System.out.println(fifaVersion.getId());
-        System.out.println(fifaVersion);
+
+
         PlaysForId playsForId = new PlaysForId();
         playsForId.setFifaVersion(playsForDTO.getFifaVersion());
         playsForId.setPlayerID(spieler.getId());

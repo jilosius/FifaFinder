@@ -11,7 +11,7 @@ export class SpielerService {
   constructor(private http: HttpClient) { }
 
   // Make call to the back end API to retrieve page of spieler
-  spieler$ = (
+spieler$ = (
     name: string = '',
     fifaVersion: number = 23,
     preferredFoot: string = "",
@@ -64,8 +64,11 @@ export class SpielerService {
     minShortPassing: number=0,
     maxShortPassing: number=100,
     page: number = 0,
-    size: number = 20): Observable<ApiResponse<Page>> =>
+    size: number = 20,
+    sort: string = 'overall',
+    order: string = 'desc'
+  ): Observable<ApiResponse<Page>> =>
     this.http.get<ApiResponse<Page>>(
-      `${this.serverUrl}?fullName=${name}&fifaVersion=${fifaVersion}&preferredFoot=${preferredFoot}&minAge=${minAge}&maxAge=${maxAge}&minOverall=${minOverall}&maxOverall=${maxOverall}&maxShortPassing=${maxShortPassing}&minShortPassing=${minShortPassing}&maxFinishing=${maxFinishing}&minFinishing=${minFinishing}&maxCrossing=${maxCrossing}&minCrossing=${minCrossing}&maxLongShots=${maxLongShots}&minLongShots=${minLongShots}&maxAggression=${maxAggression}&minAggression=${minAggression}&maxStamina=${maxStamina}&minStamina=${minStamina}&maxJumping=${maxJumping}&minJumping=${minJumping}&maxShotPower=${maxShotPower}&minShotPower=${minShotPower}&maxBalance=${maxBalance}&minBalance=${minBalance}&maxReaction=${maxReaction}&minReaction=${minReaction}&maxAgility=${maxAgility}&minAgility=${minAgility}&maxSprintSpeed=${maxSprintSpeed}&minSprintSpeed=${minSprintSpeed}&maxAcceleration=${maxAcceleration}&minAcceleration=${minAcceleration}&maxFkAccuracy=${maxFkAccuracy}&minFkAccuracy=${minFkAccuracy}&maxCurve=${maxCurve}&minCurve=${minCurve}&maxDribbling=${maxDribbling}&minDribbling=${minDribbling}&maxVolleys=${maxVolleys}&minVolleys=${minVolleys}&maxHeadingAccuracy=${maxHeadingAccuracy}&minHeadingAccuracy=${minHeadingAccuracy}&maxWage=${maxWage}&minWage=${minWage}&maxValue=${maxValue}&minValue=${minValue}&heightMax=${heightMax}&heightMin=${heightMin}&potentialMax=${potentialMax}&potentialMin=${potentialMin}&page=${page}&size=${size}`);
+      `${this.serverUrl}?fullName=${name}&fifaVersion=${fifaVersion}&preferredFoot=${preferredFoot}&minAge=${minAge}&maxAge=${maxAge}&minOverall=${minOverall}&maxOverall=${maxOverall}&maxShortPassing=${maxShortPassing}&minShortPassing=${minShortPassing}&maxFinishing=${maxFinishing}&minFinishing=${minFinishing}&maxCrossing=${maxCrossing}&minCrossing=${minCrossing}&maxLongShots=${maxLongShots}&minLongShots=${minLongShots}&maxAggression=${maxAggression}&minAggression=${minAggression}&maxStamina=${maxStamina}&minStamina=${minStamina}&maxJumping=${maxJumping}&minJumping=${minJumping}&maxShotPower=${maxShotPower}&minShotPower=${minShotPower}&maxBalance=${maxBalance}&minBalance=${minBalance}&maxReaction=${maxReaction}&minReaction=${minReaction}&maxAgility=${maxAgility}&minAgility=${minAgility}&maxSprintSpeed=${maxSprintSpeed}&minSprintSpeed=${minSprintSpeed}&maxAcceleration=${maxAcceleration}&minAcceleration=${minAcceleration}&maxFkAccuracy=${maxFkAccuracy}&minFkAccuracy=${minFkAccuracy}&maxCurve=${maxCurve}&minCurve=${minCurve}&maxDribbling=${maxDribbling}&minDribbling=${minDribbling}&maxVolleys=${maxVolleys}&minVolleys=${minVolleys}&maxHeadingAccuracy=${maxHeadingAccuracy}&minHeadingAccuracy=${minHeadingAccuracy}&maxWage=${maxWage}&minWage=${minWage}&maxValue=${maxValue}&minValue=${minValue}&heightMax=${heightMax}&heightMin=${heightMin}&potentialMax=${potentialMax}&potentialMin=${potentialMin}&page=${page}&size=${size}&sort=${sort}&order=${order}`);
 }
 // &preferredFoot=${preferredFoot}

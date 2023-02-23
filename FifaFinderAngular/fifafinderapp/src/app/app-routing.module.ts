@@ -1,16 +1,19 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { StartComponent } from './start/start.component';
 import {AddPlayerComponent} from './add-player/add-player.component';
+import { VergleichComponent } from './vergleich/vergleich.component';
 
 const routes: Routes = [
   {path: '', component: StartComponent},
   {path: 'start', component: StartComponent},
-  {path: 'addPlayer', component: AddPlayerComponent}
+  {path: 'addPlayer', component: AddPlayerComponent},
+  {path: 'vergleich', component: VergleichComponent}
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

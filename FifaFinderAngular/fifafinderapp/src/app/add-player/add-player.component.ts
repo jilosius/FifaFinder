@@ -9,7 +9,10 @@ import { addPlayerService } from '../service/addPlayer.service';
 })
 export class AddPlayerComponent {
   private readonly addPlayerUrl: string = 'http://localhost:8080/playsFor/add';
-  constructor(private http: HttpClient){}
+  constructor(private http: HttpClient, private addPlayerService: addPlayerService){}
+
+  ngOnInit(): void {
+  }
 
   createPlayer(players: {knownName: string, fullName: string, age: number, weight: number,
      height: number, PhotoURL: string, DateOfBirth: Date, fifaVersion: number,
@@ -28,7 +31,8 @@ export class AddPlayerComponent {
   
   
       console.log(players);
-
+    
+    
     this.http.post(this.addPlayerUrl, players).subscribe((response) => {
       console.log(response); 
     }) 

@@ -27,6 +27,7 @@ public class SpielerRepositoryTest {
     public void testFindByFullNameFiltered() {
         // Create test data
         SpielerDTO player1 = new SpielerDTO(
+                1,
                 "https://example.com/player1.jpg",
                 "John Doe",
                 25,
@@ -46,6 +47,7 @@ public class SpielerRepositoryTest {
                 80,
                 70, 80, 75, 80, 70, 80, 75, 80, 70, 80, 75, 80, 80, 50000L);
         SpielerDTO player2 = new SpielerDTO(
+                2,
                 "https://example.com/player2.jpg",
                 "Jane Smith",
                 22,
