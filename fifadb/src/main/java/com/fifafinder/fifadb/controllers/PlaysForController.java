@@ -31,6 +31,11 @@ public class PlaysForController {
     public long count() {
         return playsForService.count();
     }
+
+    @GetMapping("/countUniquePlayerRecords")
+    public long countUniquePlayerRecords(@RequestParam int id){
+        return playsForService.countUniquePlayerRecords(id);
+    }
     @GetMapping("/all")
     public List<PlaysFor> getAll() {
         return playsForService.getAll();
@@ -42,4 +47,20 @@ public class PlaysForController {
         int spielerId = spieler.getId();
         return ResponseEntity.ok().body(playsForService.getDetails(spielerId, fifaVersion));
     }
+
+    @DeleteMapping("/delete{playerID}")
+    public void deleteAllbyId(@PathVariable("playerID") int playerID){
+        playsForService.deleteAllByPlayerID(playerID);
+    }
+
+    @DeleteMapping("/deleteInFifaVersion")
+    public void deleteAllByPlayerIDAndFifaVersion(@RequestParam int playerID, @RequestParam int fifaVersion){
+        playsForService.deleteAllByPlayerIDAndFifaVersion(playerID, fifaVersion);
+    }
+
+    @GetMapping("/listVersions")
+    public List<FifaVersion> listFifaVersions(){
+        return playsForService.listFifaVersions();
+    }
+
 }

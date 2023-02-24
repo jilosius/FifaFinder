@@ -9,6 +9,7 @@
 
 .my-button {
     margin-left: 10px; /* add 10px of space on the left */
+    margin-right: 10px;
   }
 
   .selected {
@@ -20,5 +21,6 @@
     cursor: pointer;
     background-color: #e0e0e0;
 }
+
 
 

@@ -22,7 +22,13 @@
             </button>
 
             <button [routerLink]="['/vergleich']" class="btn btn-secondary my-button" (click)="getSelectedPlayerIds()">Vergleichen</button>
-
+            <mat-form-field appearance="fill">
+              <mat-label>Delete In...</mat-label>
+              <mat-select [formControl]="delFifaVersion" multiple>
+                <mat-option *ngFor="let version of fifaVersionList" [value]="version.id">{{version.id}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <button [routerLink]="['/start']" mat-flat-button color="warn" (click)="deleteLogic(222)">Delete</button>
 
             <form class="dropdown-menu p-4" style="width: 700px;">
               <div class="row g-3">

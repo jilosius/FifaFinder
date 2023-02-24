@@ -5,10 +5,7 @@ import com.fifafinder.fifadb.HttpResponse;
 import com.fifafinder.fifadb.services.SpielerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -315,5 +312,10 @@ public class SpielerController {
                 player4Id.orElse(0),
                 player5Id.orElse(0),
                 fifaVersion.orElse(23));
+    }
+
+    @DeleteMapping("/delete")
+    public void deleteSpielerById(@RequestParam Integer playerID){
+        spielerService.deleteSpielerByID(playerID);
     }
 }

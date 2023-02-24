@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import {FormArray, FormControl} from "@angular/forms";
 import { Observable, BehaviorSubject, map, startWith, catchError, of } from 'rxjs';
 import { ApiResponse } from '../interface/api-response';
 import { Page } from '../interface/page';
@@ -7,6 +8,8 @@ import { SpielerService } from '../service/start.service';
 import { SortableColumn } from "../sorting/sortable-column";
 import { Spieler } from '../interface/spieler';
 import { SelectedPlayerService } from '../service/selected-player.service';
+import { DeletePlayerService } from "../service/delete-player.service";
+import { FifaVersion } from "../interface/fifaversion";
 
 
 @Component({
@@ -27,6 +30,13 @@ export class StartComponent implements OnInit {
   selectedPlayers: Spieler[] = [];
   selectedFifaVersion: number;
   pagesToDisplay: number = 10;
+
+  delFifaVersion = new FormControl('');
+  fifaVersionIds: number[] = [];
+  fifaVersionList: FifaVersion[] = [];
+
+  fifaVersion$: Observable<FifaVersion[]>;
+
 
   name: string;
   //defining variables that are used in the dropdown filter
@@ -118,7 +128,7 @@ export class StartComponent implements OnInit {
   //Array to set the "hidden" attribute of each column to either true or false
   condArray:boolean[] = [true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true];
 
-  constructor(private spielerService: SpielerService, private selectedPlayerService: SelectedPlayerService) { }
+  constructor(private spielerService: SpielerService, private selectedPlayerService: SelectedPlayerService, private deletePlayerService: DeletePlayerService) { }
 
   //on app initialisation: start with: 'APP LOADING', then 'APP_LOADED', and if error return 'APP_ERROR'
   ngOnInit(): void {
@@ -150,6 +160,7 @@ export class StartComponent implements OnInit {
       )
     );
 
+    this.listFifaVersions();
 
   }
 
@@ -484,8 +495,33 @@ export class StartComponent implements OnInit {
     return '';
   }
 
+  listFifaVersions(){
+    this.deletePlayerService.listFifaVersions().subscribe(
+      (res) => this.fifaVersionList = res,
+      (err) => console.log(err)
+    );
+  }
 
+  deleteLogic(id: number){
+    if(confirm("Wollen Sie den Spieler wirklich löschen?")) {
+      if (this.delFifaVersion.value != "") {
+        for (let i = 0; i < this.delFifaVersion.value.length; i++) {
+          let selectedVersion: number = Number(this.delFifaVersion.value[i]);
+          this.deletePlayerInFifaVersion(id, selectedVersion)
+        }
+      } else {
+        this.deletePlayer(id);
+      }
+    }
+  }
 
+  deletePlayer(id: number){
+    this.deletePlayerService.deletePlayer(id).subscribe();
+  }
+
+  deletePlayerInFifaVersion(id: number, fifaVersion: number){
+    this.deletePlayerService.deletePlayerInFifaVersion(id, fifaVersion).subscribe();
+  }
 
   onFifaVersionChange(fifaVersion: number) {
     this.selectedFifaVersion = fifaVersion;

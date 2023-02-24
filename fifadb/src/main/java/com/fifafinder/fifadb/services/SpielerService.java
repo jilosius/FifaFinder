@@ -48,6 +48,9 @@ public class SpielerService {
         return spielerRepository.findSpielerByFullName(fullName);
     }
 
+    public void deleteSpielerByID(int id){
+        spielerRepository.deleteById(id);
+    }
 
     public Page<SpielerDTO> findByFullNameFiltered(String name,
                                                    int fifaVersion,
