@@ -21,7 +21,7 @@
               </svg> Filter
             </button>
 
-            <button [routerLink]="['/vergleich']" class="btn btn-secondary my-button" (click)="getSelectedPlayerIds()">Vergleichen</button>
+            <button  class="btn btn-secondary my-button" (click)="getSelectedPlayerIds()">Vergleichen</button>
 
 
             <form class="dropdown-menu p-4" style="width: 700px;">
@@ -309,7 +309,6 @@
           </div>
         </ng-container>
         <ng-container *ngSwitchCase="'APP_LOADED'">
-          <h3>Spieler Liste</h3>
           <table class="table table-striped">
             <thead>
               <tr>
