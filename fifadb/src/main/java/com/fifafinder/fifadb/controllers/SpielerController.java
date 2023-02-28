@@ -142,7 +142,7 @@ public class SpielerController {
                                                    @RequestParam Optional<Integer> maxShortPassing,
                                                    @RequestParam Optional<Integer> page,
                                                    @RequestParam Optional<Integer> size,
-                                                   @RequestParam(name = "sort", required = false, defaultValue = "pf.overall") String sortAttribute,
+                                                   @RequestParam(name = "sort", required = false, defaultValue = "overall") String sortAttribute,
                                                    @RequestParam(name = "order", required = false, defaultValue = "desc") String sortDirection) {
         Sort sort = Sort.by(sortAttribute).descending();
         if (sortDirection.equalsIgnoreCase("asc")) {
