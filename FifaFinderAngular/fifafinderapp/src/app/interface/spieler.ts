@@ -1,4 +1,5 @@
 export interface Spieler {
+    playerId: number;
     photoURL: string;
     fifaVersion: number;
     knownName: string;
@@ -18,7 +19,7 @@ export interface Spieler {
     volleys: number;
     dribbling: number;
     curve: number;
-    fKAccuracy: number;
+    fkAccuracy: number;
     acceleration: number;
     sprintSpeed: number;
     agility: number;
@@ -33,4 +34,8 @@ export interface Spieler {
     finishing: number;
     shortPassing: number;
     wage: number;
+
+    selected: boolean;
+
 }
+

@@ -1,8 +1,7 @@
 package com.fifafinder.fifadb.services;
 
-import com.fifafinder.fifadb.DTOs.SpielerDTO;
 import com.fifafinder.fifadb.entities.Spieler;
-import com.fifafinder.fifadb.exceptionhandling.SpielerNotFoundException;
+import com.fifafinder.fifadb.DTOs.SpielerDTO;
 import com.fifafinder.fifadb.repositories.SpielerRepository;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +16,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
+import java.util.List;
+
+
 @Service
 @Transactional
 @Slf4j
@@ -29,9 +31,18 @@ public class SpielerService {
         this.spielerRepository = spielerRepository;
     }
 
-
     public long countSpieler() {
         return spielerRepository.count();
+    }
+
+    public List<Spieler> getAllSpieler() {
+        return spielerRepository.findAll();
+    }
+    public Spieler getSpieler(int id) {
+        return spielerRepository.findById(id);
+    }
+    public Spieler getSpieler(String fullName) {
+        return spielerRepository.findSpielerByFullName(fullName);
     }
 
 
@@ -87,7 +98,8 @@ public class SpielerService {
                                                    int minShortPassing,
                                                    int maxShortPassing,
                                                    int page, int size, Sort sort) {
-        return spielerRepository.findByFullNameFiltered(name,
+        return spielerRepository.findByFullNameFiltered(
+                name,
                 fifaVersion,
                 preferredFoot,
                 minAge,
@@ -142,6 +154,10 @@ public class SpielerService {
     }
 
 
+    public List<SpielerDTO> getSpielerToCompare(int player1Id, int player2Id, int player3Id, int player4Id, int player5Id, int fifaVersion){
+        return spielerRepository.getSpielerToCompare(player1Id, player2Id,player3Id,player4Id,player5Id, fifaVersion);
+    }
+
 
 //    public List<Spieler> spielerAnzeigen() {
 //        return spielerRepository.findAll();
@@ -168,17 +184,23 @@ public class SpielerService {
 
             return spielerRepository.save(spieler);
 
-    public long countSpieler() {
-        return spielerRepository.count();
-    }
+        }
 
-    public List<Spieler> getAllSpieler() {
-        return spielerRepository.findAll();
-    }
-    public Spieler getSpieler(int id) {
-        return spielerRepository.findById(id);
-    }
-    public Spieler getSpieler(String fullName) {
-        return spielerRepository.findSpielerByFullName(fullName);
-    }
+        public Spieler getSpielerById(Integer id){
+
+            return spielerRepository.findSpielerById(id).orElseThrow(()-> new SpielerNotFoundException("User by id"+id+" was not found"));
+
+        }
+
+        public Spieler getSpielerByfullname(String n){
+
+            return spielerRepository.findSpielerByfullname(n).orElseThrow(()->new SpielerNotFoundException("User by name"+n+" not found"));
+
+        }
+
+        public void deleteSpieler(Integer ID){
+
+            spielerRepository.deleteSpielerById(ID);
+        }
+    */
 }

@@ -37,12 +37,12 @@ public class SpielerServiceTest {
     public void setUp() {
         // Set up test data
         SpielerDTO player1 = new SpielerDTO(
-                "https://example.com/player1.jpg", "John Doe", 25, "https://example.com/flag.png", "https://example.com/club.png", 80, 85, "Forward", 1000000L,
+                1,"https://example.com/player1.jpg", "John Doe", 25, "https://example.com/flag.png", "https://example.com/club.png", 80, 85, "Forward", 1000000L,
                 185, 75, "right", 80, 70, 80, 75, 80,
                 70, 80, 75, 80, 70, 80, 75, 80, 70,
                 80, 75, 80, 80, 50000L);
         SpielerDTO player2 = new SpielerDTO(
-                "https://example.com/player2.jpg", "Jane Smith", 22, "https://example.com/flag.png", "https://example.com/club.png", 75, 90, "Midfielder", 500000L,
+                2,"https://example.com/player2.jpg", "Jane Smith", 22, "https://example.com/flag.png", "https://example.com/club.png", 75, 90, "Midfielder", 500000L,
                 180, 65, "left", 70, 80, 75, 80, 70,
                 80, 75, 80, 70, 80, 75, 80, 70, 80,
                 75, 80,50,70, 30000L);

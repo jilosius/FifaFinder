@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.ui.Model;
-import org.springframework.context.annotation.Bean;
+
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
@@ -22,6 +22,7 @@ public class FifadbApplication {
     public static void main(String[] args) {
         SpringApplication.run(FifadbApplication.class, args);
     }
+
 
 
     //Below code is for CORS Policy: to allow data flow from localhost8080 to localhost4200

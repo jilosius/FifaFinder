@@ -108,7 +108,7 @@ public class PlaysFor {
     private Integer curve;
 
     @Column(name = "FKAccuracy")
-    private Integer fKAccuracy;
+    private Integer fkAccuracy;
 
     @Column(name = "LongPassing")
     private Integer longPassing;
@@ -439,12 +439,12 @@ public class PlaysFor {
         this.curve = curve;
     }
 
-    public Integer getFKAccuracy() {
-        return fKAccuracy;
+    public Integer getFkAccuracy() {
+        return fkAccuracy;
     }
 
-    public void setFKAccuracy(Integer fKAccuracy) {
-        this.fKAccuracy = fKAccuracy;
+    public void setFkAccuracy(Integer fkAccuracy) {
+        this.fkAccuracy = fkAccuracy;
     }
 
     public Integer getLongPassing() {

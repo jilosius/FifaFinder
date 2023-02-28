@@ -1,26 +1,24 @@
 package com.fifafinder.fifadb.controllers;
 
-import com.fifafinder.fifadb.entities.Spieler;
 import com.fifafinder.fifadb.DTOs.SpielerDTO;
 import com.fifafinder.fifadb.HttpResponse;
 import com.fifafinder.fifadb.services.SpielerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.query.Param;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 import com.fifafinder.fifadb.entities.Spieler;
-
 import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
-import java.util.List;
-
 import static java.time.LocalTime.now;
 import static java.util.Map.of;
 import static org.springframework.http.HttpStatus.OK;
@@ -45,6 +43,14 @@ public class SpielerController {
     public List<Spieler> getAll() {
         return spielerService.getAllSpieler();
     }
+
+//    @GetMapping
+//    public long countSpieler()
+//    {
+//        return spielerService.countSpieler();
+//
+//    }
+
 
     // First implementation: how to list all players. Not dynamic
 //    @GetMapping
@@ -144,6 +150,88 @@ public class SpielerController {
                                                    @RequestParam Optional<Integer> size,
                                                    @RequestParam(name = "sort", required = false, defaultValue = "overall") String sortAttribute,
                                                    @RequestParam(name = "order", required = false, defaultValue = "desc") String sortDirection) {
+
+        switch(sortAttribute) {
+            case "overall":
+                sortAttribute = "pf.overall";
+                break;
+            case "potential":
+                sortAttribute = "pf.potential";
+                break;
+            case "age":
+                sortAttribute = "pf.age";
+                break;
+            case "value":
+                sortAttribute = "pf.valueEUR";
+                break;
+            case "height":
+                sortAttribute = "pf.height";
+                break;
+            case "weight":
+                sortAttribute = "pf.weight";
+                break;
+            case "wage":
+                sortAttribute = "pf.wage";
+                break;
+            case "headingAccuracy":
+                sortAttribute = "pf.headingAccuracy";
+                break;
+            case "volleys":
+                sortAttribute = "pf.volleys";
+                break;
+            case "dribbling":
+                sortAttribute = "pf.dribbling";
+                break;
+            case "curve":
+                sortAttribute = "pf.curve";
+                break;
+            case "fkAccuracy":
+                sortAttribute = "pf.fkAccuracy";
+                break;
+            case "acceleration":
+                sortAttribute = "pf.acceleration";
+                break;
+            case "sprintSpeed":
+                sortAttribute = "pf.sprintSpeed";
+                break;
+            case "agility":
+                sortAttribute = "pf.agility";
+                break;
+            case "reaction":
+                sortAttribute = "pf.reaction";
+                break;
+            case "balance":
+                sortAttribute = "pf.balance";
+                break;
+            case "shotPower":
+                sortAttribute = "pf.shotPower";
+                break;
+            case "jumping":
+                sortAttribute = "pf.jumping";
+                break;
+            case "stamina":
+                sortAttribute = "pf.stamina";
+                break;
+            case "aggression":
+                sortAttribute = "pf.aggression";
+                break;
+            case "longShots":
+                sortAttribute = "pf.longShots";
+                break;
+            case "crossing":
+                sortAttribute = "pf.crossing";
+                break;
+            case "finishing":
+                sortAttribute = "pf.finishing";
+                break;
+            case "shortPassing":
+                sortAttribute = "pf.shortPassing";
+                break;
+            default:
+                sortAttribute = "pf.overall";
+        }
+
+
         Sort sort = Sort.by(sortAttribute).descending();
         if (sortDirection.equalsIgnoreCase("asc")) {
             sort = sort.ascending();
@@ -165,9 +253,9 @@ public class SpielerController {
                                 minHeight.orElse(0),
                                 maxHeight.orElse(300),
                                 minValue.orElse(0L),
-                                maxValue.orElse(1000000000L),
+                                maxValue.orElse(100000000000L),
                                 minWage.orElse(0L),
-                                maxWage.orElse(1000000000L),
+                                maxWage.orElse(100000000000L),
                                 minHeadingAccuracy.orElse(0),
                                 maxHeadingAccuracy.orElse(100),
                                 minVolleys.orElse(0),
@@ -213,4 +301,19 @@ public class SpielerController {
                         .build());
     }
 
+    @GetMapping("/start/vergleich")
+    public List<SpielerDTO> getSpielerToCompare(@RequestParam Optional<Integer> player1Id,
+                                                @RequestParam Optional<Integer> player2Id,
+                                                @RequestParam Optional<Integer> player3Id,
+                                                @RequestParam Optional<Integer> player4Id,
+                                                @RequestParam Optional<Integer> player5Id,
+                                                @RequestParam Optional<Integer> fifaVersion) {
+        return spielerService.getSpielerToCompare(
+                player1Id.orElse(0),
+                player2Id.orElse(0),
+                player3Id.orElse(0),
+                player4Id.orElse(0),
+                player5Id.orElse(0),
+                fifaVersion.orElse(23));
+    }
 }

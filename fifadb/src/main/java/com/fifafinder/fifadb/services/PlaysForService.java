@@ -81,7 +81,7 @@ public class PlaysForService {
         details.setVolleys(updateDTO.getVolleys());
         details.setDribbling(updateDTO.getDribbling());
         details.setCurve(updateDTO.getCurve());
-        details.setFKAccuracy(updateDTO.getFKAccuracy());
+        details.setFkAccuracy(updateDTO.getFKAccuracy());
         details.setLongPassing(updateDTO.getLongPassing());
         details.setBallControl(updateDTO.getBallControl());
         details.setAcceleration(updateDTO.getAcceleration());

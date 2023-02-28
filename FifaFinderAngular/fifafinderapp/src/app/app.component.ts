@@ -1,5 +1,7 @@
+
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { map, startWith, catchError } from 'rxjs/operators';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { ApiResponse } from './interface/api-response';
@@ -12,5 +14,5 @@ import { SpielerService } from './service/start.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent  {
-  
+
 }
