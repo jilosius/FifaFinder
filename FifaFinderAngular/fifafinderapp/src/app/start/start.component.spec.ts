@@ -276,7 +276,7 @@ describe('ValuesControl', () => {
     }
   });
   
-  it('should call SpielerService.spieler$ method with correct parameters', () => {
+  it('should call SpielerService.spieler$ observable with correct parameters', () => {
     const sampleData: Page = {
       content: [],
       pageable: {

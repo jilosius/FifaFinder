@@ -7,7 +7,7 @@ import { SpielerService } from '../service/start.service';
 import { SortableColumn } from "../sorting/sortable-column";
 import { Spieler } from '../interface/spieler';
 import { SelectedPlayerService } from '../service/selected-player.service';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-start',
@@ -118,7 +118,7 @@ export class StartComponent implements OnInit {
   //Array to set the "hidden" attribute of each column to either true or false
   condArray:boolean[] = [true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true];
 
-  constructor(private spielerService: SpielerService, private selectedPlayerService: SelectedPlayerService) { }
+  constructor(private spielerService: SpielerService, private selectedPlayerService: SelectedPlayerService,private router: Router) { }
 
   //on app initialisation: start with: 'APP LOADING', then 'APP_LOADED', and if error return 'APP_ERROR'
   ngOnInit(): void {
@@ -322,26 +322,39 @@ export class StartComponent implements OnInit {
 
   toggleSelection(spieler: Spieler) {
     spieler.selected = !spieler.selected;
-    if (spieler.selected) {
+    const existingPlayer = this.selectedPlayers.find(s => s.playerId === spieler.playerId);
+    if (spieler.selected && !existingPlayer) {
       this.selectedPlayers.push(spieler);
-    } else {
+    } else if (!spieler.selected && existingPlayer) {
       this.selectedPlayers = this.selectedPlayers.filter(s => s.playerId !== spieler.playerId);
       this.selectedPlayerIds = this.selectedPlayerIds.filter(id => id !== spieler.playerId);
     }
     this.selectedPlayerService.setSelectedPlayerIds(this.selectedPlayerIds);
   }
-
-
-
+  
+  
   getSelectedPlayerIds() {
-    if(this.selectedPlayers.length > 0) {
+    if (this.selectedPlayers.length < 2) {
+      alert("Please select at least 2 players!");
+      return;
+    }
+    // else if(this.selectedPlayers.length > 5){
+    //   alert("You have reached the maximum number of selected players.");
+    //   return;
+    // }
+    else {
       this.selectedPlayerIds = this.selectedPlayers.map(spieler => spieler.playerId);
       this.selectedPlayerService.setSelectedPlayerIds(this.selectedPlayerIds);
+      this.selectedPlayerService.setSelectedFifaVersion(this.selectedFifaVersion);
+      this.router.navigate(['/vergleich']); // navigate programmatically only if at least 2 players are selected
     }
-    this.selectedPlayerService.setSelectedFifaVersion(this.selectedFifaVersion);
-    return this.selectedPlayerIds;
+  
+    
   }
+  
 
+  
+  
   sortByColumn(
     sort: SortableColumn
   ): void {
