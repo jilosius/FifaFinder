@@ -2,13 +2,23 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterModule } from "@angular/router";
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { StartComponent } from './start.component';
-import {FormsModule} from "@angular/forms";
-import {SortableColumn} from "../sorting/sortable-column";
-import {HttpClientModule} from "@angular/common/http";
-import {RouterTestingModule} from "@angular/router/testing";
-import {dirname} from "@angular/compiler-cli";
+import { FormsModule } from "@angular/forms";
+import { SortableColumn } from "../sorting/sortable-column";
+import { HttpClientModule } from "@angular/common/http";
+import { RouterTestingModule} from "@angular/router/testing";
+import { Router } from '@angular/router';
+import { dirname } from "@angular/compiler-cli";
+import { SpielerService } from '../service/start.service';
+import { of } from 'rxjs';
+import { Page } from '../interface/page';
+import { ApiResponse } from '../interface/api-response';
+import { fakeAsync, tick } from '@angular/core/testing';
+import { SelectedPlayerService } from '../service/selected-player.service';
 
-describe('StartComponent', () => {
+
+
+
+describe('Sorting', () => {
   let component: StartComponent;
   let fixture: ComponentFixture<StartComponent>;
 
@@ -81,19 +91,30 @@ describe('StartComponent', () => {
 });
 
 
-describe('resetValues', () => {
+describe('ValuesControl', () => {
   let component: StartComponent;
   let fixture: ComponentFixture<StartComponent>;
+  let spielerService: SpielerService;
+  let router: Router;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [
+        HttpClientTestingModule,
+        RouterTestingModule,
+        FormsModule
+      ],
       declarations: [ StartComponent ],
-      imports: [HttpClientTestingModule]
+      providers: [SpielerService
+        // {provide: SpielerService, useValue: spielerServiceSpy}
+      ]
     })
     .compileComponents();
 
     fixture = TestBed.createComponent(StartComponent);
     component = fixture.componentInstance;
+    spielerService = TestBed.inject(SpielerService);
+    router = TestBed.inject(Router);
     fixture.detectChanges();
   });
 
@@ -129,19 +150,23 @@ describe('resetValues', () => {
     component.minAgility = 0;
     component.maxAgility = 100;
     component.minReaction = 0;
-    component.maxReaction = 0;
+    component.maxReaction = 55;
     component.minBalance = 0;
-    component.maxBalance = 100;
+    component.maxBalance = 99;
     component.minJumping = 0;
-    component.maxJumping = 100;
+    component.maxJumping = 99;
     component.minStamina = 0;
-    component.maxStamina = 100;
-    component.minAggression = 0;
+    component.maxStamina = 80;
+    component.minAggression = 93;
     component.maxAggression = 100;
     component.minLongShots = 0;
-    component.maxLongShots = 100;
+    component.maxLongShots = 35;
     component.minCrossing = 0;
-    component.maxCrossing = 100;
+    component.maxCrossing = 33;
+    component.minFinishing=0;
+    component.maxFinishing=55;
+    component.minShortPassing=0;
+    component.maxShortPassing=100;
 
     component.resetValues();
 
@@ -191,14 +216,136 @@ describe('resetValues', () => {
     expect(component.maxLongShots).toEqual(100);
     expect(component.minCrossing).toEqual(0);
     expect(component.maxCrossing).toEqual(100);
-
+    expect(component.minFinishing).toEqual(0);
+    expect(component.maxFinishing).toEqual(100);
+    expect(component.minShortPassing).toEqual(0);
+    expect(component.maxShortPassing).toEqual(100);
   });
 
-  it('should call goToPage with name parameter if passed', () => {
-    spyOn(component, 'goToPage');
-    const name = 'page1';
-    component.resetValues(name);
-    expect(component.goToPage).toHaveBeenCalledWith(name);
+  it('should add a player to the selected players array when toggleSelection is called with a player that is not already selected', () => {
+    const testSpieler = {
+      playerId: 1,
+      photoURL: '',
+      fifaVersion: 23,
+      knownName: 'Test',
+      age: 25,
+      flag: 'JO',
+      clubLogo: '',
+      overall: 90,
+      potential: 90,
+      bestPos: 'FW',
+      valueEUR: 100000,
+      height: 200,
+      weight: 100,
+      preferredFoot: 'left',
+      headingAccuracy: 50,
+      volleys: 50,
+      dribbling: 50,
+      curve: 50,
+      fkAccuracy: 50,
+      acceleration: 100,
+      sprintSpeed: 100,
+      agility: 100,
+      reaction: 100,
+      balance: 100,
+      shotPower: 100,
+      jumping: 100,
+      stamina: 100,
+      aggression: 100,
+      longShots: 100,
+      crossing: 100,
+      finishing: 100,
+      shortPassing: 100,
+      wage: 1000000,
+      selected: false
+    };
+  
+    component.toggleSelection(testSpieler);
+  
+    expect(testSpieler.selected).toBe(true);
+    expect(component.selectedPlayers.length).toBe(1);
+    expect(component.selectedPlayers[0]).toEqual(testSpieler);
   });
+
+  it('should return true for pages within 5 pages of the current page', () => {
+    const currentPage = 10;
+    for (let i = 1; i <= 20; i++) {
+      const startPage = currentPage - 5;
+      const endPage = currentPage + 5;
+      expect(component.shouldShowPage(i, currentPage)).toEqual(i >= startPage && i <= endPage);
+    }
+  });
+  
+  it('should call SpielerService.spieler$ observable with correct parameters', () => {
+    const sampleData: Page = {
+      content: [],
+      pageable: {
+        sort: null,
+        offset: 0,
+        pageSize: 20,
+        pageNumber: 0,
+        paged: true,
+        unpaged: false
+      },
+      last: true,
+      totalPages: 1,
+      totalElements: 0,
+      size: 20,
+      number: 0,
+      sort: null,
+      numberOfElements: 0,
+      first: true,
+      empty: true
+    };
+    const sampleApiResponse: ApiResponse<Page> = {
+      timeStamp: '',
+      statusCode: 200,
+      status: 'OK',
+      message: 'Sample message',
+      data: { page: sampleData }
+    };
+
+    spyOn(spielerService, 'spieler$').and.returnValue(of(sampleApiResponse));
+    component.goToPage('test', 23, '', 0,100,0,100,0,100,0,150,0,5000,0,5,1,99,0,99,0,99,0,99,0,100,0,100,0,100,0,100,0,100,0,100,0,100,0,100,0,100,0,100,0,100,0,100,0,100,0,100,0,20,'overall','desc');
+  
+    expect(spielerService.spieler$).toHaveBeenCalledWith(
+      'test', 23, '', 0,100,0,100,0,100,0,150,0,5000,0,5,1,99,0,99,0,99,0,99,0,100,0,100,0,100,0,100,0,100,0,100,0,100,0,100,0,100,0,100,0,100,0,100,0,100,0,100,0,20,'overall','desc'
+    );
+  });
+
+  it('should set the selected FIFA version', () => {
+    const version = 21;
+    component.onFifaVersionChange(version);
+    expect(component.selectedFifaVersion).toBe(version);
+  });
+
+  
+
+  // it('should increment the current page when going to the next page', fakeAsync(() => {
+  //   component.currentPageSubject.next(0);
+  //   component.goToNextOrPreviousPage('forward');
+  //   tick();
+  //   component.currentPageSubject.subscribe(pageNumber => {
+  //     expect(pageNumber).toEqual(1);
+  //   });
+  // }));
+  
+  // it('should decrement the current page when going to the previous page', fakeAsync(() => {
+  //   component.currentPageSubject.next(6);
+  //   component.goToNextOrPreviousPage('backward');
+  //   tick();
+  //   component.currentPageSubject.subscribe(pageNumber => {
+  //     expect(pageNumber).toEqual(5);
+  //   });
+  // }));
+
+  
 });
+  
+  
+
+
+
+  
+
 

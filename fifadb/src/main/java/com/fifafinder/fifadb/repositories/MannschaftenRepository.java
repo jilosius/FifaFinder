@@ -8,6 +8,8 @@ import java.util.List;
 
 @Repository
 public interface MannschaftenRepository extends JpaRepository<Mannschaften, Integer> {
+
+    Mannschaften findById(int id);
     List<Mannschaften> findByOrderByClubNameAsc();
 
 

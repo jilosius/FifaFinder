@@ -24,4 +24,9 @@ public class MannschaftenController {
     public List<Mannschaften> getClubs(){
         return mannschaftenService.getClubs();
     }
+
+    public Mannschaften findMannschaftenByID(int id)
+    {
+        return mannschaftenService.getMannschaftenByID(id);
+    }
 }

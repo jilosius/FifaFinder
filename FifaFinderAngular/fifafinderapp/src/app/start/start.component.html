@@ -21,7 +21,7 @@
               </svg> Filter
             </button>
 
-            <button [routerLink]="['/vergleich']" class="btn btn-secondary my-button" (click)="getSelectedPlayerIds()">Vergleichen</button>
+            <button  class="btn btn-secondary my-button" (click)="getSelectedPlayerIds()">Vergleichen</button>
             <mat-form-field appearance="fill">
               <mat-label>Delete In...</mat-label>
               <mat-select [formControl]="delFifaVersion" multiple>
@@ -329,7 +329,6 @@
           </div>
         </ng-container>
         <ng-container *ngSwitchCase="'APP_LOADED'">
-          <h3>Spieler Liste</h3>
           <table class="table table-striped">
             <thead>
               <tr>
@@ -469,26 +468,12 @@
           <nav *ngIf="state.appData.data.page.content.length > 0" aria-label="Page navigation example">
             <ul class="pagination justify-content-end">
               <li class="page-item pointer" [ngClass]="0 == (currentPage$ | async) ? ' disabled' : ''">
-                <a (click)="goToNextOrPreviousPage('backward', searchForm.value.name)" class="page-link"
+                <a (click)="goToNextOrPreviousPage('backward')" class="page-link"
                   aria-label="Previous">
                   <span aria-hidden="true">&laquo; Previous</span>
                 </a>
               </li>
 
-              <!-- <li class="page-item pointer" [ngClass]="0 == (currentPage$ | async) ? ' disabled' : ''">
-                <a (click)="goToPage(searchForm.value.name,fifaVersion, preferredFoot,ageMin,ageMax,overallMin,overallMax,potentialMin,potentialMax,heightMin,heightMax,minValue,maxValue,minWage,maxWage,minHeadingAccuracy,maxHeadingAccuracy,minVolleys,maxVolleys,minDribbling,maxDribbling,minCurve,maxCurve,minFkAccuracy,maxFkAccuracy,minAcceleration,maxAcceleration,minSprintSpeed,maxSprintSpeed,minAgility,maxAgility,minReaction,maxReaction,minBalance,maxBalance,minShotPower,maxShotPower,minJumping,maxJumping,minStamina,maxStamina,minAggression,maxAggression,minLongShots,maxLongShots,minCrossing,maxCrossing,minFinishing,maxFinishing,minShortPassing,maxShortPassing, 0)" class="page-link">First</a>
-              </li> -->
-
-
-              <!-- <ng-container *ngIf="(currentPage$ | async) < 5">
-                <li *ngFor="let pageNumber of [].constructor(10); let i = index;" class="page-item pointer" [ngClass]="i == (currentPage$ | async) ? ' active' : ''">
-                  <a (click)="goToPage(searchForm.value.name,fifaVersion, preferredFoot,ageMin,ageMax,overallMin,overallMax,potentialMin,potentialMax,heightMin,heightMax,minValue,maxValue,minWage,maxWage,minHeadingAccuracy,maxHeadingAccuracy,minVolleys,maxVolleys,minDribbling,maxDribbling,minCurve,maxCurve,minFkAccuracy,maxFkAccuracy,minAcceleration,maxAcceleration,minSprintSpeed,maxSprintSpeed,minAgility,maxAgility,minReaction,maxReaction,minBalance,maxBalance,minShotPower,maxShotPower,minJumping,maxJumping,minStamina,maxStamina,minAggression,maxAggression,minLongShots,maxLongShots,minCrossing,maxCrossing,minFinishing,maxFinishing,minShortPassing,maxShortPassing, i)" class="page-link">
-                    {{ i == 0 ? 1 : i + 1 }}
-                  </a>
-                </li>
-              </ng-container> -->
-
-              <!-- <ng-container *ngIf="(currentPage$ | async) >= 5"> -->
               <ng-container *ngFor="let pageNumber of [].constructor(state.appData.data.page.totalPages); let i = index;">
                 <li *ngIf="shouldShowPage(i, currentPage$ | async)"
                     class="page-item pointer" [ngClass]="i == (currentPage$ | async) ? ' active' : ''">
@@ -498,20 +483,10 @@
                   </a>
                 </li>
               </ng-container>
-              <!-- </ng-container> -->
-
-              <!-- <li class="page-item pointer" [ngClass]="(state.appData.data.page.totalPages - 1) == (currentPage$ | async) ? ' disabled' : ''">
-                <a (click)="goToPage(searchForm.value.name,fifaVersion, preferredFoot,ageMin,ageMax,overallMin,overallMax,potentialMin,potentialMax,heightMin,heightMax,minValue,maxValue,minWage,maxWage,minHeadingAccuracy,maxHeadingAccuracy,minVolleys,maxVolleys,minDribbling,maxDribbling,minCurve,maxCurve,minFkAccuracy,maxFkAccuracy,minAcceleration,maxAcceleration,minSprintSpeed,maxSprintSpeed,minAgility,maxAgility,minReaction,maxReaction,minBalance,maxBalance,minShotPower,maxShotPower,minJumping,maxJumping,minStamina,maxStamina,minAggression,maxAggression,minLongShots,maxLongShots,minCrossing,maxCrossing,minFinishing,maxFinishing,minShortPassing,maxShortPassing, (state.appData.data.page.totalPages - 6))" class="page-link">Last</a>
-              </li> -->
-
-
-
-
-
 
               <li class="page-item pointer"
                 [ngClass]="(state.appData.data.page.totalPages - 1) == (currentPage$ | async) ? ' disabled' : ''">
-                <a (click)="goToNextOrPreviousPage('forward', searchForm.value.name)" class="page-link"
+                <a (click)="goToNextOrPreviousPage('forward')" class="page-link"
                   aria-label="Next">
                   <span aria-hidden="true">Next &raquo;</span>
                 </a>
