@@ -156,6 +156,11 @@ export class StartComponent implements OnInit {
 
 
 
+  gotoPage(pageName:string):void{
+
+    this.router.navigate([`${pageName}`]);
+  }
+
   //the method that does all the magic: boolean Array is checked to hide/unhide columns, then spielerService is used to return the data/page as required
   goToPage(name?: string,fifaVersion?:number,preferredFoot?:string,minAge?: number,maxAge?: number,minOverall?: number, maxOverall?: number, minPotential?: number,maxPotential?: number,minHeight?: number,maxHeight?: number,minValue?: number,maxValue?: number,minWage?: number,maxWage?: number,minHeadingAccuracy?: number,maxHeadingAccuracy?: number,minVolleys?: number,maxVolleys?: number,minDribbling?: number, maxDribbling?: number,minCurve?: number,maxCurve?: number, minFkAccuracy?: number,maxFkAccuracy?: number,minAcceleration?: number,maxAcceleration?: number, minSprintSpeed?: number,maxSprintSpeed?: number,minAgility?: number, maxAgility?: number,minReaction?: number,maxReaction?:number,minBalance?: number,maxBalance?: number,minShotPower?: number,maxShotPower?: number, minJumping?: number,maxJumping?: number,minStamina?: number,maxStamina?: number,minAggression?: number,maxAggression?: number,minLongShots?: number,maxLongShots?: number,minCrossing?: number,maxCrossing?: number,minFinishing?: number,maxFinishing?: number,minShortPassing?: number,maxShortPassing?: number,
             pageNumber: number = 0, size: number = 20, sort?: string, order?: string): void {
@@ -331,8 +336,8 @@ export class StartComponent implements OnInit {
     }
     this.selectedPlayerService.setSelectedPlayerIds(this.selectedPlayerIds);
   }
-  
-  
+
+
   getSelectedPlayerIds() {
     if (this.selectedPlayers.length < 2) {
       alert("Please select at least 2 players!");
@@ -348,13 +353,13 @@ export class StartComponent implements OnInit {
       this.selectedPlayerService.setSelectedFifaVersion(this.selectedFifaVersion);
       this.router.navigate(['/vergleich']); // navigate programmatically only if at least 2 players are selected
     }
-  
-    
-  }
-  
 
-  
-  
+
+  }
+
+
+
+
   sortByColumn(
     sort: SortableColumn
   ): void {
@@ -467,5 +472,5 @@ export class StartComponent implements OnInit {
     const end = currentPage + 5;
     return index >= start && index <= end && index <= (start + 10) && index >= (end - 10);
   }
-  
+
 }
