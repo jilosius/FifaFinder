@@ -1,4 +1,6 @@
+import { HttpClient, HttpHandler } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { VergleichComponent } from './vergleich.component';
 
@@ -8,7 +10,10 @@ describe('VergleichComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ VergleichComponent ]
+      imports:[RouterTestingModule,],
+      declarations: [ VergleichComponent],
+      providers: [{provide: HttpClient},
+                  {provide: HttpHandler}]
     })
     .compileComponents();
 

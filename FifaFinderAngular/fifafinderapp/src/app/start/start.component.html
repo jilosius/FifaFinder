@@ -287,9 +287,6 @@
             </form>
           </div>
         </ul>
-        <button type ="button"  (click)="gotoPage('addPlayer')" class="btn btn-secondary">
-          addPlayer
-        </button>
         <form #searchForm="ngForm"
           (ngSubmit)="goToPage(searchForm.value.name,fifaVersion,preferredFoot,ageMin,ageMax,overallMin,overallMax,potentialMin,potentialMax,heightMin,heightMax,minValue,maxValue,minWage,maxWage,minHeadingAccuracy,maxHeadingAccuracy,minVolleys,maxVolleys,minDribbling,maxDribbling,minCurve,maxCurve,minFkAccuracy,maxFkAccuracy,minAcceleration,maxAcceleration,minSprintSpeed,maxSprintSpeed,minAgility,maxAgility,minReaction,maxReaction,minBalance,maxBalance,minShotPower,maxShotPower,minJumping,maxJumping,minStamina,maxStamina,minAggression,maxAggression,minLongShots,maxLongShots,minCrossing,maxCrossing,minFinishing,maxFinishing,minShortPassing,maxShortPassing)"
           class="d-flex" role="search">
@@ -450,7 +447,7 @@
           <nav *ngIf="state.appData.data.page.content.length > 0" aria-label="Page navigation example">
             <ul class="pagination justify-content-end">
               <li class="page-item pointer" [ngClass]="0 == (currentPage$ | async) ? ' disabled' : ''">
-                <a (click)="goToNextOrPreviousPage('backward', searchForm.value.name)" class="page-link"
+                <a (click)="goToNextOrPreviousPage('backward')" class="page-link"
                   aria-label="Previous">
                   <span aria-hidden="true">&laquo; Previous</span>
                 </a>
@@ -492,7 +489,7 @@
 
               <li class="page-item pointer"
                 [ngClass]="(state.appData.data.page.totalPages - 1) == (currentPage$ | async) ? ' disabled' : ''">
-                <a (click)="goToNextOrPreviousPage('forward', searchForm.value.name)" class="page-link"
+                <a (click)="goToNextOrPreviousPage('forward')" class="page-link"
                   aria-label="Next">
                   <span aria-hidden="true">Next &raquo;</span>
                 </a>
