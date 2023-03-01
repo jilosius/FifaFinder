@@ -7,7 +7,7 @@ import {FifaVersion} from "../interface/fifaversion";
   providedIn: 'root'
 })
 export class DeletePlayerService {
-  private readonly serverUrl: string = 'http://localhost:8080/playsfor'
+  private readonly serverUrl: string = 'http://localhost:8080/playsFor'
   constructor(private http: HttpClient) { }
 
   public deletePlayer(id: number){
