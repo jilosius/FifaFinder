@@ -12,18 +12,19 @@
     </div>
 </nav>
 </ng-container>
+  <div class="font1">
     <div class="container">
       <div class="container">
         <div class="row">
           <div class="col-md-12 mt-3">
             <table class="table table-striped">
               <thead>
-                <tr>
+                <!-- <tr>
                   <td scope="col"></td>
                   <td  scope="col" *ngFor="let spieler of spieler">
                     {{ spieler.playerId }}
                   </td>
-                </tr>
+                </tr> -->
                 <tr>
                   <td scope="col"></td>
                   <td  scope="col" *ngFor="let spieler of spieler">
@@ -50,95 +51,182 @@
                 </tr>
                 <tr>
                   <td>Overall</td>
-                  <td *ngFor="let spieler of spieler">{{ spieler.overall }}</td>
+                  <td *ngFor="let spieler of spieler">
+                    <span *ngIf="highestOverall !== undefined" [ngClass]="{'highest-value': spieler.overall === highestOverall}">
+                      {{ spieler.overall }}
+                    </span>
+                  </td>
                 </tr>
                 <tr>
                   <td>Potential</td>
-                  <td *ngFor="let spieler of spieler">{{ spieler.potential }}</td>
+                  <td *ngFor="let spieler of spieler">
+                    <span *ngIf="highestPotential !== undefined" [ngClass]="{'highest-value': spieler.potential === highestPotential}">
+                      {{ spieler.potential }}
+                    </span>
+                  </td>
                 </tr>
                 <tr>
                   <td>Best Position</td>
-                  <td *ngFor="let spieler of spieler">{{ spieler.bestPos }}</td>
+                  <td *ngFor="let spieler of spieler">{{ spieler.bestPos }}
+                  </td>
                 </tr>
                 <tr>
-                  <td>ValueEUR</td>
-                  <td *ngFor="let spieler of spieler">{{ spieler.valueEUR }}</td>
+                  <td>Value (EUR)</td>
+                  <td *ngFor="let spieler of spieler">
+                    <span *ngIf="highestValueEUR !== undefined" [ngClass]="{'highest-value': spieler.valueEUR === highestValueEUR}">
+                      {{ spieler.valueEUR }}
+                    </span>
+                  </td>
                 </tr>
                 <tr>
                   <td>Height</td>
-                  <td *ngFor="let spieler of spieler">{{ spieler.height }}</td>
+                  <td *ngFor="let spieler of spieler">
+                    <span *ngIf="highestHeight !== undefined" [ngClass]="{'highest-value': spieler.height === highestHeight}">
+                      {{ spieler.height }}
+                    </span>
+                  </td>
                 </tr>
                 <tr>
-                  <td>Weight</td>
-                  <td *ngFor="let spieler of spieler">{{ spieler.weight }}</td>
+                  <td>Weight (KG)</td>
+                  <td *ngFor="let spieler of spieler">
+                    {{ spieler.weight }}
+                  </td>
                 </tr>
                 <tr>
                   <td>Heading Accuracy</td>
-                  <td *ngFor="let spieler of spieler">{{ spieler.headingAccuracy }}</td>
+                  <td *ngFor="let spieler of spieler">
+                    <span *ngIf="highestHeadingAccuracy !== undefined" [ngClass]="{'highest-value': spieler.headingAccuracy === highestHeadingAccuracy}">
+                      {{ spieler.headingAccuracy }}
+                    </span>
+                  </td>
                 </tr>
                 <tr>
                   <td>Volleys</td>
-                  <td *ngFor="let spieler of spieler">{{ spieler.volleys }}</td>
+                  <td *ngFor="let spieler of spieler">
+                    <span *ngIf="highestVolleys !== undefined" [ngClass]="{'highest-value': spieler.volleys === highestVolleys}">
+                      {{ spieler.volleys }}
+                    </span>
+                  </td>
                 </tr>
                 <tr>
                   <td>Dribbling</td>
-                  <td *ngFor="let spieler of spieler">{{ spieler.dribbling }}</td>
+                  <td *ngFor="let spieler of spieler">
+                    <span *ngIf="highestDribbling !== undefined" [ngClass]="{'highest-value': spieler.dribbling === highestDribbling}">
+                      {{ spieler.dribbling }}
+                    </span>
+                  </td>
                 </tr>
                 <tr>
                   <td>Curve</td>
-                  <td *ngFor="let spieler of spieler">{{ spieler.curve }}</td>
+                  <td *ngFor="let spieler of spieler">
+                    <span *ngIf="highestCurve !== undefined" [ngClass]="{'highest-value': spieler.curve === highestCurve}">
+                      {{ spieler.curve }}
+                    </span>
+                  </td>
                 </tr>
                 <tr>
                   <td>Acceleration</td>
-                  <td *ngFor="let spieler of spieler">{{ spieler.acceleration }}</td>
+                  <td *ngFor="let spieler of spieler">
+                    <span *ngIf="highestAcceleration !== undefined" [ngClass]="{'highest-value': spieler.acceleration === highestAcceleration}">
+                      {{ spieler.acceleration }}
+                    </span>
+                  </td>
                 </tr>
                 <tr>
                   <td>Sprint Speed</td>
-                  <td *ngFor="let spieler of spieler">{{ spieler.sprintSpeed }}</td>
+                  <td *ngFor="let spieler of spieler">
+                    <span *ngIf="highestSprintSpeed !== undefined" [ngClass]="{'highest-value': spieler.sprintSpeed === highestSprintSpeed}">
+                      {{ spieler.sprintSpeed }}
+                    </span>
+                  </td>
                 </tr>
                 <tr>
                   <td>Agility</td>
-                  <td *ngFor="let spieler of spieler">{{ spieler.agility }}</td>
+                  <td *ngFor="let spieler of spieler">
+                    <span *ngIf="highestAgility !== undefined" [ngClass]="{'highest-value': spieler.agility === highestAgility}">
+                      {{ spieler.agility }}
+                    </span>
+                  </td>
                 </tr>
                 <tr>
                   <td>Reaction</td>
-                  <td *ngFor="let spieler of spieler">{{ spieler.reaction }}</td>
+                  <td *ngFor="let spieler of spieler">
+                    <span *ngIf="highestReaction !== undefined" [ngClass]="{'highest-value': spieler.reaction === highestReaction}">
+                      {{ spieler.reaction }}
+                    </span>
+                  </td>
                 </tr>
                 <tr>
                   <td>Shot Power</td>
-                  <td *ngFor="let spieler of spieler">{{ spieler.shotPower }}</td>
+                  <td *ngFor="let spieler of spieler">
+                    <span *ngIf="highestShotPower !== undefined" [ngClass]="{'highest-value': spieler.shotPower === highestShotPower}">
+                      {{ spieler.shotPower }}
+                    </span>
+                  </td>
                 </tr>
                 <tr>
                   <td>Jumping</td>
-                  <td *ngFor="let spieler of spieler">{{ spieler.jumping }}</td>
+                  <td *ngFor="let spieler of spieler">
+                    <span *ngIf="highestJumping !== undefined" [ngClass]="{'highest-value': spieler.jumping === highestJumping}">
+                      {{ spieler.jumping }}
+                    </span>
+                  </td>
                 </tr>
                 <tr>
                   <td>Stamina</td>
-                  <td *ngFor="let spieler of spieler">{{ spieler.stamina }}</td>
+                  <td *ngFor="let spieler of spieler">
+                    <span *ngIf="highestStamina !== undefined" [ngClass]="{'highest-value': spieler.stamina === highestStamina}">
+                      {{ spieler.stamina }}
+                    </span>
+                  </td>
                 </tr>
                 <tr>
                   <td>Aggression</td>
-                  <td *ngFor="let spieler of spieler">{{ spieler.aggression }}</td>
+                  <td *ngFor="let spieler of spieler">
+                    <span *ngIf="highestAggression !== undefined" [ngClass]="{'highest-value': spieler.aggression === highestAggression}">
+                      {{ spieler.aggression }}
+                    </span>
+                  </td>
                 </tr>
                 <tr>
                   <td>Long Shots</td>
-                  <td *ngFor="let spieler of spieler">{{ spieler.longShots }}</td>
+                  <td *ngFor="let spieler of spieler">
+                    <span *ngIf="highestLongShots !== undefined" [ngClass]="{'highest-value': spieler.longShots === highestLongShots}">
+                      {{ spieler.longShots }}
+                    </span>
+                  </td>
                 </tr>
                 <tr>
                   <td>Crossing</td>
-                  <td *ngFor="let spieler of spieler">{{ spieler.crossing }}</td>
+                  <td *ngFor="let spieler of spieler">
+                    <span *ngIf="highestCrossing !== undefined" [ngClass]="{'highest-value': spieler.crossing === highestCrossing}">
+                      {{ spieler.crossing }}
+                    </span>
+                  </td>
                 </tr>
                 <tr>
                   <td>Finishing</td>
-                  <td *ngFor="let spieler of spieler">{{ spieler.finishing }}</td>
+                  <td *ngFor="let spieler of spieler">
+                    <span *ngIf="highestFinishing !== undefined" [ngClass]="{'highest-value': spieler.finishing === highestFinishing}">
+                      {{ spieler.finishing }}
+                    </span>
+                  </td>
                 </tr>
                 <tr>
                   <td>Short Passing</td>
-                  <td *ngFor="let spieler of spieler">{{ spieler.shortPassing }}</td>
+                  <td *ngFor="let spieler of spieler">
+                    <span *ngIf="highestShortPassing !== undefined" [ngClass]="{'highest-value': spieler.shortPassing === highestShortPassing}">
+                      {{ spieler.shortPassing }}
+                    </span>
+                  </td>
                 </tr>
                 <tr>
-                  <td>Wage</td>
-                  <td *ngFor="let spieler of spieler">{{ spieler.wage }}</td>
+                  <td>Wage (EUR)</td>
+                  <td *ngFor="let spieler of spieler">
+                    <span *ngIf="highestWage !== undefined" [ngClass]="{'highest-value': spieler.wage === highestWage}">
+                      {{ spieler.wage }}
+                    </span>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -146,4 +234,5 @@
         </div>
       </div>
     </div>
+  </div>
 
