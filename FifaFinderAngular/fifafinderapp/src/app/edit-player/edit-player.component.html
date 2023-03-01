@@ -9,14 +9,14 @@
 </nav>
  
 <div id = "box1"> 
-<form #editPlayerForm="ngForm" (ngSubmit)="onEditPlayer(editPlayerForm.value)" class="submission-form" novalidate>
-<form #addPlayerForm="ngForm" (ngSubmit)="onAddPlayer(addPlayerForm.value)" class="submission-form" novalidate>
+<form #editPlayerForm="ngForm" (ngSubmit)="onEditPlayer(editPlayerForm.value)" class="submission-form needs-validation" novalidate>
+<form #addPlayerForm="ngForm" (ngSubmit)="onAddPlayer(addPlayerForm.value)" class="submission-form needs-validation" novalidate>
   <pre></pre>
   <div class="row g-3 col-form-label"><label for="generalInformation"><h1>Player Details</h1></label></div>
   <div class="row g-3 needs-validation" novalidate>
     <div class="col-md-3" *ngIf="isAddMode()==true">
       <label for="validationCustom01" class="form-label">Full Name</label>
-      <input type="text" name="fullName" ngModel class="form-control" placeholder="" id="validationCustom01" required>
+      <input type="text" name="fullName" ngModel class="form-control" placeholder="" id="validationCustom01" value = text required>
    </div>
 
    <div class="col-md-3" *ngIf="isAddMode()==true">
@@ -85,7 +85,7 @@
 
      <div class="col-md-2">
       <label for="validationCustom10" class="form-label">Wage</label>
-      <input type="number" name="wage" ngModel class="form-control" placeholder="in €" id="validationCustom10" required>
+      <input type="number" name="wage" ngModel class="form-control" placeholder="in €" id="validationCustom10" min="0" required>
       <div class="invalid-feedback">
         Please choose a valid input.
       </div>
@@ -138,7 +138,7 @@
 
     <div class="col-md-2">
       <label for="validationCustom16" class="form-label">On loan</label>
-      <select name="onLoan" ngModel class="form-select" id="validationCustom16" required>
+      <select name="onLoan" ngModel class="form-select" id="validationCustom16" required aria-label="select example">
         <option selected disabled value="">Choose...</option>
         <option value="TRUE">Yes</option>
         <option value="FALSE">No</option>          

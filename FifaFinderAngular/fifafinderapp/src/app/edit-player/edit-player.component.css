@@ -1,5 +1,5 @@
 #box1 {
-    background-color: #747474e2;
+    background-color: #1189f15d;
     position: absolute;
     max-width: 92%;
     left: 4%;
@@ -13,3 +13,12 @@
     border-bottom-left-radius: 1%;
     border-bottom-right-radius: 1%;
 }
+
+:valid {
+    border-width: 2px;
+    border-color: green; 
+  }
+  :invalid {
+    border-width: 2px;
+    border-color: red;
+  }

@@ -14,7 +14,7 @@ export class EditPlayerService {
   }
 
   addPlayer(addPlayerForm: AddDto) {
-    this.http.put('http://localhost:8080/playsfor/add', addPlayerForm).subscribe();
+    this.http.post('http://localhost:8080/playsfor/add', addPlayerForm).subscribe();
   }
 
 }
