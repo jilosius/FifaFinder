@@ -207,8 +207,4 @@ public class SpielerService {
         System.out.println("Spieler nicht gefunden!");
         return null;
     }
-
-    public void deleteSpieler(){
-        spielerRepository.deleteSpielerById(100000);
-    }
 }

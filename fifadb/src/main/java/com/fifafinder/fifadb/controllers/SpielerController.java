@@ -314,13 +314,6 @@ public class SpielerController {
         return spielerService.findSpieler();
     }
 
-    @DeleteMapping("/delete")
-    public void deletePlayer()
-    {
-        spielerService.deleteSpieler();
-
-    }
-
     @GetMapping("/start/vergleich")
     public List<SpielerDTO> getSpielerToCompare(@RequestParam Optional<Integer> player1Id,
                                                 @RequestParam Optional<Integer> player2Id,
