@@ -44,12 +44,13 @@ public class PlaysForController {
         return ResponseEntity.ok().body(playsForService.getDetails(spielerId, fifaVersion));
     }
 
-    @PostMapping("/editdetails")
-    public void editDetails(int playerId, int fifaVersion, @RequestBody UpdateDTO updateDTO) {
+    @PutMapping("/editdetailsof{playerId}in{fifaVersion}")
+    public void editDetails(@PathVariable("playerId") int playerId, @PathVariable("fifaVersion") int fifaVersion, @RequestBody UpdateDTO updateDTO) {
         PlaysForId playsForId = new PlaysForId();
         playsForId.setPlayerID(playerId);
         playsForId.setFifaVersion(fifaVersion);
         playsForService.editDetails(playsForId, updateDTO);
     }
+
 
 }

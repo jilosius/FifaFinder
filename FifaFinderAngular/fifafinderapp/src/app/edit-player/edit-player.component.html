@@ -1,0 +1,521 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="http://localhost:4200">FifaFinder</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+</nav>
+ 
+<div id = "box1"> 
+<form #editPlayerForm="ngForm" (ngSubmit)="onEditPlayer(editPlayerForm.value)" class="submission-form" novalidate>
+<form #addPlayerForm="ngForm" (ngSubmit)="onAddPlayer(addPlayerForm.value)" class="submission-form" novalidate>
+  <pre></pre>
+  <div class="row g-3 col-form-label"><label for="generalInformation"><h1>Player Details</h1></label></div>
+  <div class="row g-3 needs-validation" novalidate>
+    <div class="col-md-3" *ngIf="isAddMode()==true">
+      <label for="validationCustom01" class="form-label">Full Name</label>
+      <input type="text" name="fullName" ngModel class="form-control" placeholder="" id="validationCustom01" required>
+   </div>
+
+   <div class="col-md-3" *ngIf="isAddMode()==true">
+    <label for="validationCustom02" class="form-label">Known Name</label>
+    <input type="text" name="knownName" ngModel class="form-control" placeholder="" id="validationCustom02" required>
+    <div class="invalid-feedback">
+      Please choose a valid input.
+    </div>
+   </div>
+
+   <div class="col-md-2" *ngIf="isAddMode()==true">
+    <label for="validationCustom03" class="form-label">Age</label>
+    <input type="number" name="age" ngModel class="form-control" placeholder="15-50" id="validationCustom03" required>
+    <div class="invalid-feedback">
+      Please choose a valid input.
+    </div>
+   </div>
+
+   <div class="col-md-2" *ngIf="isAddMode()==true">
+    <label for="validationCustom04" class="form-label">Date of Birth</label>
+    <input type="date" name="dateOfBirth" ngModel class="form-control" placeholder="DD-MM-YY" id="validationCustom04" required>
+    <div class="invalid-feedback">
+      Please choose a valid input.
+    </div>
+   </div>
+
+   <div class="col-md-2" *ngIf="isAddMode()==true">
+    <label for="validationCustom05" class="form-label">Fifa Version</label>
+    <input type="number" name="fifaVersion" ngModel class="form-control" placeholder="18-23" id="validationCustom05" required>
+    <div class="invalid-feedback">
+      Please choose a valid input.
+    </div>
+   </div>
+
+   <div class="col-md-3">
+      <label for="validationCustom06" class="form-label">Weight</label>
+      <input type="number" name="weight" ngModel class="form-control" placeholder="40-150" id="validationCustom06" min="40" max="150" required>
+      <div class="invalid-feedback">
+        Please choose a valid input.
+      </div>
+   </div>
+ 
+   <div class="col-md-3">
+     <label for="validationCustom07" class="form-label">Height</label>
+     <input type="number" name="height" ngModel class="form-control" placeholder="130-250" id="validationCustom07" min="130" max="250" required>
+     <div class="invalid-feedback">
+       Please choose a valid input.
+     </div>
+    </div>
+
+    <div class="col-md-3">
+      <label for="validationCustom08" class="form-label">Photo URL</label>
+      <input type="text" name="photoUrl" ngModel class="form-control" placeholder="" id="validationCustom08" required>
+      <div class="invalid-feedback">
+        Please choose a valid input.
+      </div>
+    </div>
+
+    <div class="col-md-2">
+      <label for="validationCustom09" class="form-label">Value</label>
+      <input type="number" name="valueEUR" ngModel class="form-control" placeholder="in €" id="validationCustom09" min="0" required>
+      <div class="invalid-feedback">
+        Please choose a valid input.
+      </div>
+    </div>
+
+     <div class="col-md-2">
+      <label for="validationCustom10" class="form-label">Wage</label>
+      <input type="number" name="wage" ngModel class="form-control" placeholder="in €" id="validationCustom10" required>
+      <div class="invalid-feedback">
+        Please choose a valid input.
+      </div>
+     </div>
+
+     <div class="col-md-3">
+      <label for="validationCustom11" class="form-label">Release clause</label>
+      <input type="number" name="releaseClause" ngModel class="form-control" placeholder="in €" id="validationCustom11" required>
+      <div class="invalid-feedback">
+        Please choose a valid input.
+      </div>
+    </div>
+  </div>
+  <pre></pre>
+  <pre></pre>
+
+    <div class="row g-3 col-form-label"><label for="ClubInformation"><h1>Club Information</h1></label></div>
+    <div class="row g-3 needs-validation" novalidate> 
+    <div class="col-auto">
+        <label for="validationCustom12" class="form-label">Position</label>
+        <input type="text" name="clubPosition" ngModel class="form-control" placeholder="" id="validationCustom12" required>
+        <div class="invalid-feedback">
+          Please choose a valid input.
+        </div>
+     </div>
+ 
+     <div class="col-auto">
+        <label for="validationCustom13" class="form-label">Trikot Number</label>
+        <input type="number" name="clubNumber" ngModel class="form-control" placeholder="" id="validationCustom13" required>
+        <div class="invalid-feedback">
+          Please choose a valid input.
+        </div>
+     </div>
+ 
+     <div class="col-auto">
+        <label for="validationCustom14" class="form-label">Club Name</label>
+        <input type="text" name="clubName" ngModel class="form-control" placeholder="" id="validationCustom14" required>
+        <div class="invalid-feedback">
+          Please choose a valid input.
+        </div>
+     </div>
+
+     <div class="col-md-2"> 
+      <label for="validationCustom15" class="form-label">End of contract</label>
+      <input type="number" name="contractUntil" ngModel class="form-control" placeholder="year" id="validationCustom15" required>
+      <div class="invalid-feedback">
+        Please choose a valid input.
+      </div>
+    </div>
+
+    <div class="col-md-2">
+      <label for="validationCustom16" class="form-label">On loan</label>
+      <select name="onLoan" ngModel class="form-select" id="validationCustom16" required>
+        <option selected disabled value="">Choose...</option>
+        <option value="TRUE">Yes</option>
+        <option value="FALSE">No</option>          
+      </select>
+      <div class="invalid-feedback">
+        Please choose an option
+      </div>
+    </div>
+   </div>  
+   <pre></pre>
+   <pre></pre>
+ 
+  <div class="row g-3 col-form-label"><label for="generalInformation"><h1>Nationalteam Information</h1></label></div>
+    <div class="row g-3 needs-validation" novalidate>
+      <div class="col-md-2">
+        <label for="validationCustom17" class="form-label">Position</label>
+        <input type="text" name="nationalPosition" ngModel class="form-control" placeholder="" id="validationCustom17" required>
+        <div class="invalid-feedback">
+          Please choose a valid input.
+        </div>
+      </div>
+ 
+      <div class="col-md-2">
+        <label for="validationCustom18" class="form-label">Number</label>
+        <input type="number" name="nationalNumber" ngModel class="form-control" placeholder="" id="validationCustom18" required>
+        <div class="invalid-feedback">
+          Please choose a valid input.
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <label for="validationCustom03" class="form-label">Team</label>
+        <input type="text" name="nationalTeam" ngModel class="form-control" placeholder="" id="validationNationalTeam" required>
+        <div class="invalid-feedback">
+          Please choose a valid input.
+        </div>
+      </div>
+    </div>
+    <pre></pre>
+    <pre></pre>
+ 
+ <div class="row g-3 col-form-label"><label for="AllStats"><h1>Player Attributes</h1></label></div>
+   <div class="row g-3 needs-validation" novalidate>
+      <div class="col-md-3">
+        <label for="validationCustom20" class="form-label">Overall</label>
+        <input type="number" name="overall" ngModel class="form-control" placeholder="1-99" id="validationCustom20" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a valid input.
+        </div>
+      </div>
+ 
+      <div class="col-md-3">
+        <label for="validationCustom20" class="form-label">Potential</label>
+        <input type="number" name="potential" ngModel class="form-control" placeholder="1-99" id="validationCustom20" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a valid input.
+        </div>
+      </div>
+ 
+      <div class="col-md-3">
+        <label for="validationCustom03" class="form-label">Best position</label>
+        <input type="text" name="bestPosition" ngModel class="form-control" placeholder="" id="validationBestPosition" required>
+        <div class="invalid-feedback">
+          Please choose a valid input.
+        </div>
+      </div>
+ 
+      <div class="col-md-3">
+        <label for="validationCustom20" class="form-label">International Reputation</label>
+        <input type="number" name="intReputation" ngModel class="form-control" placeholder="1-99" id="validationCustom20" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a valid input.
+        </div>
+      </div>
+ 
+      <div class="col-md-3">
+        <label for="validationCustom03" class="form-label">Preferred foot</label>
+        <select name="preferredFoot" ngModel class="form-select" required aria-label="select example">
+          <option value="Left">Left</option>
+          <option value="Right">Right</option>          
+        </select>
+        <div class="invalid-feedback">Example invalid select feedback</div>
+      </div>
+ 
+      <div class="col-md-3">
+        <label for="validationCustom03" class="form-label">Weak foot</label>
+        <input type="number" name="weakFoot" ngModel class="form-control" placeholder="1-5" id="validationWeakFoot" min="1" max="5" required>
+        <div class="invalid-feedback">
+          Please choose a valid input.
+        </div>
+      </div>
+ 
+      <div class="col-md-3">
+        <label for="validationCustom03" class="form-label">Skill moves</label>
+        <input type="number" name="skillMoves" ngModel class="form-control" placeholder="1-5" id="validationSkillMoves" min="1" max="5" required>
+        <div class="invalid-feedback">
+          Please choose a valid input.
+        </div>
+      </div>
+ 
+      <div class="col-md-3">
+        <label for="validationCustom20" class="form-label">Crossing</label>
+        <input type="number" name="crossing" ngModel class="form-control" placeholder="1-99" id="validationCustom20" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a valid input.
+        </div>
+      </div>
+ 
+      <div class="col-md-3">
+        <label for="validationCustom20" class="form-label">Finishing</label>
+        <input type="number" name="finishing" ngModel class="form-control" placeholder="1-99" id="validationCustom20" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a valid input.
+        </div>
+      </div>
+ 
+      <div class="col-md-3">
+        <label for="validationCustom20" class="form-label">Heading accuracy</label>
+        <input type="number" name="headingAccuracy" ngModel class="form-control" placeholder="1-99" id="validationCustom20" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a valid input.
+        </div>
+      </div>
+ 
+      <div class="col-md-3">
+        <label for="validationCustom20" class="form-label">Short passing</label>
+        <input type="number" name="shortPassing" ngModel class="form-control" placeholder="1-99" id="validationCustom20" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a valid input.
+        </div>
+      </div>
+ 
+      <div class="col-md-3">
+        <label for="validationCustom20" class="form-label">Volleys</label>
+        <input type="number" name="volleys" ngModel class="form-control" placeholder="1-99" id="validationCustom20" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a valid input.
+        </div>
+      </div>
+ 
+      <div class="col-md-3">
+        <label for="validationCustom20" class="form-label">Dribbling</label>
+        <input type="number" name="dribbling" ngModel class="form-control" placeholder="1-99" id="validationCustom20" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a valid input.
+        </div>
+      </div>
+ 
+      <div class="col-md-3">
+        <label for="validationCustom20" class="form-label">Curve</label>
+        <input type="number" name="curve" ngModel class="form-control" placeholder="1-99" id="validationCustom20" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a valid input.
+        </div>
+      </div>
+ 
+      <div class="col-md-3">
+        <label for="validationCustom20" class="form-label">Free Kick Accuracy</label>
+        <input type="number" name="fKAccuracy" ngModel class="form-control" placeholder="1-99" id="validationCustom20" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a valid input.
+        </div>
+      </div>
+ 
+      <div class="col-md-3">
+        <label for="validationCustom20" class="form-label">Long passing</label>
+        <input type="number" name="longPassing" ngModel class="form-control" placeholder="1-99" id="validationCustom20" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a valid input.
+        </div>
+      </div>
+ 
+      <div class="col-md-3">
+        <label for="validationCustom20" class="form-label">Ballcontrol</label>
+        <input type="number" name="ballControl" ngModel class="form-control" placeholder="1-99" id="validationCustom20" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a valid input.
+        </div>
+      </div>
+ 
+      <div class="col-md-3">
+        <label for="validationCustom20" class="form-label">Acceleration</label>
+        <input type="number" name="acceleration" ngModel class="form-control" placeholder="1-99" id="validationCustom20" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a valid input.
+        </div>
+      </div>
+ 
+      <div class="col-md-3">
+        <label for="validationCustom20" class="form-label">Sprintspeed</label>
+        <input type="number" name="sprintSpeed" ngModel class="form-control" placeholder="1-99" id="validationCustom20" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a valid input.
+        </div>
+      </div>
+ 
+      <div class="col-md-3">
+        <label for="validationCustom20" class="form-label">Agility</label>
+        <input type="number" name="agility" ngModel class="form-control" placeholder="1-99" id="validationCustom20" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a valid input.
+        </div>
+      </div>
+ 
+      <div class="col-md-3">
+        <label for="validationCustom20" class="form-label">Reaction</label>
+        <input type="number" name="reaction" ngModel class="form-control" placeholder="1-99" id="validationCustom20" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a valid input.
+        </div>
+      </div>
+ 
+      <div class="col-md-3">
+        <label for="validationCustom20" class="form-label">Balance</label>
+        <input type="number" name="balance" ngModel class="form-control" placeholder="1-99" id="validationCustom20" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a valid input.
+        </div>
+      </div>
+ 
+      <div class="col-md-3">
+        <label for="validationCustom20" class="form-label">Shotpower</label>
+        <input type="number" name="shotPower" ngModel class="form-control" placeholder="1-99" id="validationCustom20" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a valid input.
+        </div>
+      </div>
+ 
+      <div class="col-md-3">
+        <label for="validationCustom20" class="form-label">Jumping</label>
+        <input type="number" name="jumping" ngModel class="form-control" placeholder="1-99" id="validationCustom20" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a valid input.
+        </div>
+      </div>
+ 
+      <div class="col-md-3">
+        <label for="validationCustom20" class="form-label">Stamina</label>
+        <input type="number" name="stamina" ngModel class="form-control" placeholder="1-99" id="validationCustom20" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a valid input.
+        </div>
+      </div>
+ 
+      <div class="col-md-3">
+        <label for="validationCustom20" class="form-label">Strength</label>
+        <input type="number" name="strength" ngModel class="form-control" placeholder="1-99" id="validationCustom20" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a valid input.
+        </div>
+      </div>
+ 
+      <div class="col-md-3">
+        <label for="validationCustom20" class="form-label">Longshots</label>
+        <input type="number" name="longShots" ngModel class="form-control" placeholder="1-99" id="validationCustom20" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a valid input.
+        </div>
+      </div>
+ 
+      <div class="col-md-3">
+        <label for="validationCustom20" class="form-label">Aggression</label>
+        <input type="number" name="aggression" ngModel class="form-control" placeholder="1-99" id="validationCustom20" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a valid input.
+        </div>
+      </div>
+ 
+      <div class="col-md-3">
+        <label for="validationCustom20" class="form-label">Interceptions</label>
+        <input type="number" name="interceptions" ngModel class="form-control" placeholder="1-99" id="validationCustom20" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a valid input.
+        </div>
+      </div>
+ 
+      <div class="col-md-3">
+        <label for="validationCustom20" class="form-label">Positioning</label>
+        <input type="number" name="positioning" ngModel class="form-control" placeholder="1-99" id="validationCustom20" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a valid input.
+        </div>
+      </div>
+ 
+      <div class="col-md-3">
+        <label for="validationCustom20" class="form-label">Vision</label>
+        <input type="number" name="vision" ngModel class="form-control" placeholder="1-99" id="validationCustom20" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a valid input.
+        </div>
+      </div>
+ 
+      <div class="col-md-3">
+        <label for="validationCustom20" class="form-label">Penalties</label>
+        <input type="number" name="penalties" ngModel class="form-control" placeholder="1-99" id="validationCustom20" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a valid input.
+        </div>
+      </div>
+ 
+      <div class="col-md-3">
+        <label for="validationCustom20" class="form-label">Composure</label>
+        <input type="number" name="composure" ngModel class="form-control" placeholder="1-99" id="validationCustom20" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a valid input.
+        </div>
+      </div>
+ 
+      <div class="col-md-3">
+        <label for="validationCustom20" class="form-label">Marking</label>
+        <input type="number" name="marking" ngModel class="form-control" placeholder="1-99" id="validationCustom20" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a valid input.
+        </div>
+      </div>
+ 
+      <div class="col-md-3">
+        <label for="validationCustom20" class="form-label">Standing tackle</label>
+        <input type="number" name="standingTackle" ngModel class="form-control" placeholder="1-99" id="validationCustom20" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a valid input.
+        </div>
+      </div>
+ 
+      <div class="col-md-3">
+        <label for="validationCustom20" class="form-label">Sliding tackle</label>
+        <input type="number" name="slidingTackle" ngModel class="form-control" placeholder="1-99" id="validationCustom20" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a valid input.
+        </div>
+      </div>
+ 
+      <div class="col-md-3">
+        <label for="validationCustom20" class="form-label">GK diving</label>
+        <input type="number" name="gKDiving" ngModel class="form-control" placeholder="1-99" id="validationCustom20" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a valid input.
+        </div>
+      </div>
+ 
+      <div class="col-md-3">
+        <label for="validationCustom20" class="form-label">GK handling</label>
+        <input type="number" name="gKHandling" ngModel class="form-control" placeholder="1-99" id="validationCustom20" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a valid input.
+        </div>
+      </div>
+ 
+      <div class="col-md-3">
+        <label for="validationCustom20" class="form-label">GK kicking</label>
+        <input type="number" name="gKKicking" ngModel class="form-control" placeholder="1-99" id="validationCustom20" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a valid input.
+        </div>
+      </div>
+ 
+      <div class="col-md-3">
+        <label for="validationCustom20" class="form-label">GK positioning</label>
+        <input type="number" name="gKPositioning" ngModel class="form-control" placeholder="1-99" id="validationCustom20" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a valid input.
+        </div>
+      </div>
+ 
+      <div class="col-md-3">
+        <label for="validationCustom20" class="form-label">GK reflexes</label>
+        <input type="number" name="gKReflexes" ngModel class="form-control" placeholder="1-99" id="validationCustom20" min="1" max="99" required>
+        <div class="invalid-feedback">
+          Please choose a valid input.
+        </div>
+      </div>
+    </div>
+    <pre></pre>
+    <div class="col-12">
+      <button class="btn btn-primary" type="submit" (click)="isAddMode() ? onAddPlayer(addPlayerForm.value) : onEditPlayer(editPlayerForm.value)">{{isAddMode() ? 'Submit Player' : 'Submit Changes'}}</button>
+    </div>    
+  </form>   
+</form>
+</div>
+

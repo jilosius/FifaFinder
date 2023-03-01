@@ -1,23 +1,17 @@
 package com.fifafinder.fifadb.services;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fifafinder.fifadb.dto.SpielerDetailDTO;
 import com.fifafinder.fifadb.dto.UpdateDTO;
 import com.fifafinder.fifadb.entities.*;
 import com.fifafinder.fifadb.repositories.FifaVersionRepository;
+import com.fifafinder.fifadb.repositories.MannschaftenRepository;
 import com.fifafinder.fifadb.repositories.PlaysForRepository;
 import com.fifafinder.fifadb.repositories.SpielerRepository;
-import jakarta.persistence.Column;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class PlaysForService {
@@ -26,14 +20,16 @@ public class PlaysForService {
     private final SpielerRepository spielerRepository;
     private final FifaVersionRepository fifaVersionRepository;
     private final ModelMapper modelMapper;
+    private final MannschaftenRepository mannschaftenRepository;
 
 
     @Autowired
-    public PlaysForService(PlaysForRepository playsForRepository, SpielerRepository spielerRepository, FifaVersionRepository fifaVersionRepository, ModelMapper modelMapper) {
+    public PlaysForService(PlaysForRepository playsForRepository, SpielerRepository spielerRepository, FifaVersionRepository fifaVersionRepository, ModelMapper modelMapper, MannschaftenRepository mannschaftenRepository) {
         this.playsForRepository = playsForRepository;
         this.spielerRepository = spielerRepository;
         this.fifaVersionRepository = fifaVersionRepository;
         this.modelMapper = modelMapper;
+        this.mannschaftenRepository = mannschaftenRepository;
     }
 
     public long count() {
@@ -68,6 +64,7 @@ public class PlaysForService {
         details.setOverall(updateDTO.getOverall());
         details.setPotential(updateDTO.getPotential());
         details.setBestPosition(updateDTO.getBestPosition());
+        details.setClubID(mannschaftenRepository.findMannschaftenByClubName(updateDTO.getClubName()));
         details.setValueEUR(updateDTO.getValueEUR());
         details.setWage(updateDTO.getWage());
         details.setReleaseClause(updateDTO.getReleaseClause());
@@ -111,4 +108,5 @@ public class PlaysForService {
         details.setPhotoUrl(updateDTO.getPhotoUrl());
         playsForRepository.save(details);
     }
+
 }

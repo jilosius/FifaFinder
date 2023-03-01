@@ -4,7 +4,6 @@ import lombok.*;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 @Setter
 @Getter
 public class UpdateDTO {
@@ -21,6 +20,7 @@ public class UpdateDTO {
     private Integer overall;
     private Integer potential;
     private String bestPosition;
+    private String clubName;
     private Long valueEUR;
     private Long wage;
     private Long releaseClause;
@@ -63,3 +63,4 @@ public class UpdateDTO {
     private Integer gKReflexes;
     private String photoUrl;
 }
+

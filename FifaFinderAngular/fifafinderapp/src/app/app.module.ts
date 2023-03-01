@@ -11,13 +11,15 @@ import { MatSortModule } from '@angular/material/sort';
 import { VergleichComponent } from './vergleich/vergleich.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { RouterTestingModule } from "@angular/router/testing";
+import { EditPlayerComponent } from './edit-player/edit-player.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     StartComponent,
-    VergleichComponent
+    VergleichComponent,
+    EditPlayerComponent
   ],
   imports: [
     BrowserModule,
