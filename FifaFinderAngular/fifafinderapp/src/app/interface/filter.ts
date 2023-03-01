@@ -1,4 +1,5 @@
 export class Filter{
+  club: string;
   ageMin: number = 0;
   ageMax: number = 100;
   overallMin: number = 0;

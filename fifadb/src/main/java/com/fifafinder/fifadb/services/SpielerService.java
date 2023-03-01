@@ -54,6 +54,7 @@ public class SpielerService {
 
     public Page<SpielerDTO> findByFullNameFiltered(String name,
                                                    int fifaVersion,
+                                                   String clubName,
                                                    String preferredFoot,
                                                    int minAge,
                                                    int maxAge,
@@ -107,6 +108,7 @@ public class SpielerService {
         return spielerRepository.findByFullNameFiltered(
                 name,
                 fifaVersion,
+                clubName,
                 preferredFoot,
                 minAge,
                 maxAge,

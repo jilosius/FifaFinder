@@ -94,6 +94,7 @@ public class SpielerController {
     @GetMapping("/start/filtered")
     public ResponseEntity<HttpResponse> getSpieler(@RequestParam Optional<String> fullName,
                                                    @RequestParam Optional<Integer> fifaVersion,
+                                                   @RequestParam Optional<String> clubName,
                                                    @RequestParam Optional<String> preferredFoot,
                                                    @RequestParam Optional<Integer> minAge,
                                                    @RequestParam Optional<Integer> maxAge,
@@ -240,6 +241,7 @@ public class SpielerController {
                         .data(of("page", spielerService.findByFullNameFiltered(
                                 fullName.orElse(""),
                                 fifaVersion.orElse(23),
+                                clubName.orElse(""),
                                 preferredFoot.orElse(""),
                                 minAge.orElse(0),
                                 maxAge.orElse(100),
