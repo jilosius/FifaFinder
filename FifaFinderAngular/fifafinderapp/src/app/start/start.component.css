@@ -9,9 +9,10 @@
 
 .my-button {
     margin-left: 10px; /* add 10px of space on the left */
+    margin-right: 10px;
   }
 
-  .selected {
+.selected {
     background-color: #005438;
 }
 #component {
@@ -25,4 +26,28 @@
     background-color: #e0e0e0;
 }
 
+.nameinfo:hover{
+    cursor: help;
+}
 
+.clubFilterForm{
+
+}
+
+.deleteBin{
+    color: #52585f;
+}
+.deleteBin:hover{
+    color: red;
+    cursor: pointer;
+}
+
+.deleteBinSweep{
+    margin-left: 5px;
+    color: #52585f;
+}
+
+.deleteBinSweep:hover{
+    color: red;
+    cursor: pointer;
+}
