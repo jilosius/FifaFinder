@@ -4,14 +4,14 @@ import com.fifafinder.fifadb.entities.FifaVersion;
 import com.fifafinder.fifadb.entities.Mannschaften;
 import com.fifafinder.fifadb.entities.PlaysForId;
 import com.fifafinder.fifadb.entities.Spieler;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.Date;
 @Data
 @AllArgsConstructor
 @ToString
+@Setter
+@Getter
 public class AddPlaysForDTO {
 
     private String knownName;
@@ -24,7 +24,7 @@ public class AddPlaysForDTO {
     private Integer fifaVersion;
     private String clubPosition;
     private Integer clubNumber;
-    private Integer clubID;
+    private String clubName;
     private String nationalPosition;
     private Integer nationalNumber;
     private String nationalTeam;

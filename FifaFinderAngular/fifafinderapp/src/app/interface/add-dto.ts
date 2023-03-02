@@ -4,24 +4,24 @@ export interface AddDto {
     age: number;
     weight: number;
     height: number;
-    photoURL: String;
+    photoUrl: String;
     dateOfBirth: Date;
     fifaVersion: number;
     clubPosition: String;
     clubNumber: number;
-    clubID: number;
+    clubName: String;
     nationalPosition: String;
     nationalNumber: number;
     nationalTeam: String;
     contractUntil: number;
     onLoan: String;
-    valueEur: number;
+    valueEUR: number;
     wage: number;
     releaseClause: number;
     overall: number;
     potential: number;
     bestPosition: String;
-    reputation: number;
+    intReputation: number;
     preferredFoot: String;
     weakFoot: number;
     skillMoves: number;
@@ -59,5 +59,4 @@ export interface AddDto {
     gKKicking: number;
     gKPositioning: number;
     gKReflexes: number;
-
 }

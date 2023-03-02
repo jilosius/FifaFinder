@@ -407,7 +407,7 @@
                     (change)="toggleSelection(spieler)" />
                 </th>
                 <th scope="row">
-                  <mat-icon matTooltip="Edit Player" [routerLink]="['/editPlayer', false, spieler.playerId, 23]">edit</mat-icon>
+                  <mat-icon matTooltip="Edit Player" [routerLink]="['/editPlayer', false, spieler.playerId, spieler.fifaVersion]">edit</mat-icon>
                 </th>
                 <th scope="row"><img [src]="spieler.photoURL" width="42" height="42" class="rounded-circle" S></th>
                 <td>{{ spieler.knownName }}</td>

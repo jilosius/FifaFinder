@@ -33,18 +33,18 @@ export class EditPlayerComponent{
       this.playerId = Number(playerId);
       const fifaVersion = this.route.snapshot.paramMap.get('fifaVersion');
       this.fifaVersion = Number(fifaVersion);
-      console.log(this.editPlayerService.getCurrentDetails(this.playerId, this.fifaVersion));//.subscribe((data: UpdateDto)=> this.currentData = { ...data });
+      console.log(this.editPlayerService.getCurrentDetails(this.playerId, this.fifaVersion).subscribe((data: UpdateDto)=> this.currentData = { ...data }));
     }
   }
 
   onEditPlayer(data: UpdateDto) {
     console.log(data);
-    //this.editPlayerService.updatePlayerDetails(data, this.playerId, this.fifaVersion);
+    this.editPlayerService.updatePlayerDetails(data, this.playerId, this.fifaVersion);
   }
 
   onAddPlayer(data: AddDto) {
     console.log(data);
-    //this.editPlayerService.addPlayer(data);
+    this.editPlayerService.addPlayer(data);
   }
 }
 

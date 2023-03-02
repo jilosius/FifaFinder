@@ -11,12 +11,12 @@ import { catchError, retry } from 'rxjs/operators';
 export class EditPlayerService {
   constructor(private http: HttpClient) {}
 
-  updatePlayerDetails(editPlayerForm: UpdateDto, playerId: number, fifaVersion: number) {
-    this.http.put('http://localhost:8080/playsfor/editdetailsof'+playerId+'in'+fifaVersion, editPlayerForm).subscribe();
+  updatePlayerDetails(editPlayerDetails: UpdateDto, playerId: number, fifaVersion: number) {
+    this.http.put('http://localhost:8080/playsfor/editdetailsof'+playerId+'in'+fifaVersion, editPlayerDetails).subscribe();
   }
 
-  addPlayer(addPlayerForm: AddDto) {
-    this.http.post('http://localhost:8080/playsfor/add', addPlayerForm).subscribe();
+  addPlayer(addPlayerDetails: AddDto) {
+    this.http.post('http://localhost:8080/playsfor/add', addPlayerDetails).subscribe();
   }
 
   getCurrentDetails(playerId: number, fifaVersion: number) {
