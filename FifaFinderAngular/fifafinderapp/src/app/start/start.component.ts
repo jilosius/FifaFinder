@@ -14,7 +14,6 @@ import { FifaVersion } from "../interface/fifaversion";
 import { Club } from "../interface/club";
 import { ClubService } from "../service/club.service";
 
-
 @Component({
   selector: 'app-start',
   templateUrl: './start.component.html',
@@ -509,16 +508,29 @@ export class StartComponent implements OnInit {
     );
   }
 
-  deleteLogic(id: number){
+  refresh(){
+    window.location.reload();
+  }
+
+  deleteAllLogic(id: number){
     if(confirm("Wollen Sie den Spieler wirklich löschen?")) {
       if (this.delFifaVersion.value != "") {
         for (let i = 0; i < this.delFifaVersion.value.length; i++) {
           let selectedVersion: number = Number(this.delFifaVersion.value[i]);
-          this.deletePlayerInFifaVersion(id, selectedVersion)
+          this.deletePlayerInFifaVersion(id, selectedVersion);
+          this.refresh();
         }
       } else {
         this.deletePlayer(id);
+        this.refresh();
       }
+    }
+  }
+
+  deleteLogic(id:number, fifaVersion: number){
+    if(confirm("Wollen Sie den Spielereintrag zu FIFA " + fifaVersion + " wirklich löschen?")) {
+      this.deletePlayerInFifaVersion(id, fifaVersion);
+      this.refresh();
     }
   }
 
@@ -541,3 +553,5 @@ export class StartComponent implements OnInit {
   }
 
 }
+
+

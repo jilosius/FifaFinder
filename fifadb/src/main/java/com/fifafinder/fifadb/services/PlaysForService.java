@@ -153,7 +153,7 @@ public class PlaysForService {
 
 
     @Transactional
-    public void deleteAllByPlayerID(int id) throws SpielerNotFoundException {
+    public void deleteAllByPlayerID(int id) {
         playsForRepository.deleteAllById_PlayerID(id);
         spielerRepository.deleteById(id);
     }
@@ -161,7 +161,7 @@ public class PlaysForService {
     @Transactional
     public void deleteAllByPlayerIDAndFifaVersion(int id, int fifaVersion){
         playsForRepository.deleteAllById_PlayerIDAndId_FifaVersion(id, fifaVersion);
-        if(playsForRepository.countById_PlayerID(id)==0){ // Deletes Player record from Spieler Table when no entry left in PlaysFor Table
+        if(countUniquePlayerRecords(id)==0){ // Deletes Player record from Spieler Table when no entry left in PlaysFor Table
             spielerRepository.deleteById(id);
         }
     }

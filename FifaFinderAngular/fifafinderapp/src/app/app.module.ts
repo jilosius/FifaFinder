@@ -16,6 +16,8 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { MatInputModule } from "@angular/material/input";
 import { HideMissingDirective } from './directive/hide-missing.directive';
+import { MatIconModule } from "@angular/material/icon";
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -39,7 +41,9 @@ import { HideMissingDirective } from './directive/hide-missing.directive';
         MatButtonModule,
         MatSelectModule,
         MatAutocompleteModule,
-        MatInputModule
+        MatInputModule,
+        MatIconModule,
+        MatTooltipModule
         // MatMenuModule
     ],
   providers: [],

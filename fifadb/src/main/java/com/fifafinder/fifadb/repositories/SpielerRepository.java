@@ -39,7 +39,7 @@ public interface SpielerRepository extends JpaRepository<Spieler, Integer> {
 
     //     ----- final implementation: full search algorithm. Search by name, filter by below attributes.
 
-    @Query("SELECT NEW com.fifafinder.fifadb.DTOs.SpielerDTO(pf.id.playerID, pf.photoUrl, s.knownName, s.fullName, pf.age, nat.countryID.flag, pf.clubID.clubName, pf.clubID.clubLogo, pf.overall, pf.potential, pf.bestPosition, pf.valueEUR, pf.height, pf.weight,pf.preferredFoot,pf.headingAccuracy,pf.volleys,pf.dribbling, pf.curve,pf.fkAccuracy,pf.acceleration,pf.sprintSpeed,pf.agility,pf.reaction,pf.balance,pf.shotPower,pf.jumping,pf.stamina,pf.aggression,pf.longShots,pf.crossing,pf.finishing,pf.shortPassing,pf.wage) " +
+    @Query("SELECT NEW com.fifafinder.fifadb.DTOs.SpielerDTO(pf.id.playerID, pf.id.fifaVersion, pf.photoUrl, s.knownName, s.fullName, pf.age, nat.countryID.flag, pf.clubID.clubName, pf.clubID.clubLogo, pf.overall, pf.potential, pf.bestPosition, pf.valueEUR, pf.height, pf.weight,pf.preferredFoot,pf.headingAccuracy,pf.volleys,pf.dribbling, pf.curve,pf.fkAccuracy,pf.acceleration,pf.sprintSpeed,pf.agility,pf.reaction,pf.balance,pf.shotPower,pf.jumping,pf.stamina,pf.aggression,pf.longShots,pf.crossing,pf.finishing,pf.shortPassing,pf.wage) " +
             "FROM Spieler s INNER JOIN PlaysFor pf ON s.id = pf.id.playerID JOIN IsFrom nat ON s.id = nat.id.playerID " +
             "WHERE pf.id.fifaVersion = :fifaVersion " +
             "AND (s.fullName LIKE %:searchTerm% " +
@@ -127,7 +127,7 @@ public interface SpielerRepository extends JpaRepository<Spieler, Integer> {
                                             @Param("maxShortPassing") int maxShortPassing,
                                             Pageable pageable);
 
-    @Query("SELECT NEW com.fifafinder.fifadb.DTOs.SpielerDTO(pf.id.playerID,pf.photoUrl, s.knownName, s.fullName, pf.age, nat.countryID.flag,pf.clubID.clubName, pf.clubID.clubLogo, pf.overall, pf.potential, pf.bestPosition, pf.valueEUR, pf.height, pf.weight,pf.preferredFoot,pf.headingAccuracy,pf.volleys,pf.dribbling, pf.curve,pf.fkAccuracy,pf.acceleration,pf.sprintSpeed,pf.agility,pf.reaction,pf.balance,pf.shotPower,pf.jumping,pf.stamina,pf.aggression,pf.longShots,pf.crossing,pf.finishing,pf.shortPassing,pf.wage) " +
+    @Query("SELECT NEW com.fifafinder.fifadb.DTOs.SpielerDTO(pf.id.playerID,pf.id.fifaVersion,pf.photoUrl, s.knownName, s.fullName, pf.age, nat.countryID.flag,pf.clubID.clubName, pf.clubID.clubLogo, pf.overall, pf.potential, pf.bestPosition, pf.valueEUR, pf.height, pf.weight,pf.preferredFoot,pf.headingAccuracy,pf.volleys,pf.dribbling, pf.curve,pf.fkAccuracy,pf.acceleration,pf.sprintSpeed,pf.agility,pf.reaction,pf.balance,pf.shotPower,pf.jumping,pf.stamina,pf.aggression,pf.longShots,pf.crossing,pf.finishing,pf.shortPassing,pf.wage) " +
             "FROM Spieler s INNER JOIN PlaysFor pf ON s.id = pf.id.playerID JOIN IsFrom nat ON s.id = nat.id.playerID " +
             "WHERE pf.id.fifaVersion = :fifaVersion " +
             "AND (pf.id.playerID = :player1Id OR pf.id.playerID = :player2Id  OR pf.id.playerID = :player3Id OR pf.id.playerID = :player4Id OR pf.id.playerID = :player5Id)")
@@ -139,10 +139,6 @@ public interface SpielerRepository extends JpaRepository<Spieler, Integer> {
                                          @Param("fifaVersion") int fifaVersion);
 
 
-
-
-
-    void deleteSpielerById(Integer id);
 
 
     Spieler findById(int id);

@@ -15,8 +15,12 @@ export class DeletePlayerService {
     return this.http.delete(deleteUrl);
   }
 
-  public deletePlayerInFifaVersion(id: number, fifaVersion: number){
+  public deletePlayerInFifaVersion(id: number, fifaVersion: number) {
     return this.http.delete(`${this.serverUrl}/deleteInFifaVersion?playerID=${id}&fifaVersion=${fifaVersion}`);
+  }
+
+  public countPlayerEntries(id: number){
+    return this.http.get<number>(`${this.serverUrl}/countUniquePlayerRecords?playerID=${id}`);
   }
 
   public listFifaVersions(){

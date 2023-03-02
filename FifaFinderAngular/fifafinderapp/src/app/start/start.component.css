@@ -33,3 +33,21 @@
 .clubFilterForm{
 
 }
+
+.deleteBin{
+    color: #52585f;
+}
+.deleteBin:hover{
+    color: red;
+    cursor: pointer;
+}
+
+.deleteBinSweep{
+    margin-left: 5px;
+    color: #52585f;
+}
+
+.deleteBinSweep:hover{
+    color: red;
+    cursor: pointer;
+}

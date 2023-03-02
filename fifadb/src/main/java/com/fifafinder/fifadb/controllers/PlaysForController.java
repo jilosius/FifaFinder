@@ -52,8 +52,8 @@ public class PlaysForController {
     }
 
     @GetMapping("/countUniquePlayerRecords")
-    public long countUniquePlayerRecords(@RequestParam int id){
-        return playsForService.countUniquePlayerRecords(id);
+    public long countUniquePlayerRecords(@RequestParam int playerID){
+        return playsForService.countUniquePlayerRecords(playerID);
     }
     @GetMapping("/all")
     public List<PlaysFor> getAll() {

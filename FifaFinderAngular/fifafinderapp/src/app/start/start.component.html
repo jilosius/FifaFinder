@@ -28,7 +28,7 @@
                 <mat-option *ngFor="let version of fifaVersionList" [value]="version.id">{{version.id}}</mat-option>
               </mat-select>
             </mat-form-field>
-            <button [routerLink]="['/start']" mat-flat-button color="warn" (click)="deleteLogic(444)">Delete</button>
+            <button [routerLink]="['/start']" mat-flat-button color="warn" (click)="deleteAllLogic(444)">Delete</button>
 
             <form class="dropdown-menu p-4" style="width: 700px;">
               <div class="row g-3">
@@ -333,6 +333,7 @@
             <thead>
               <tr>
                 <th scope="col"></th>
+                <th scope="col"></th>
                 <th scope="col">Photo</th>
                 <th scope="col">Known Name</th>
                 <th scope="col"></th>
@@ -427,9 +428,13 @@
                     [value]="spieler.playerId"
                     (change)="toggleSelection(spieler)" />
                 </th>
+                <th scope="row">
+                  <mat-icon matTooltip="Delete for displayed Fifaversion" class="deleteBin" (click)="deleteLogic(spieler.playerId, spieler.fifaVersion)">delete</mat-icon>
+                  <mat-icon matTooltip="Delete for every Fifaversion" class="deleteBinSweep" (click)="deleteAllLogic(spieler.playerId)">delete_sweep</mat-icon>
+                </th>
                 <th scope="row"><img [src]="spieler.photoURL" width="42" height="42" class="rounded-circle" appHideMissing></th>
                 <td>{{ spieler.knownName }}</td>
-                <td><img src="assets/images/nameinfo.svg" [title]="spieler.fullName" [width]="20" [height]="20" class="nameinfo"></td>
+                <td><img src="assets/images/nameinfo.svg" [matTooltip]="spieler.fullName" [width]="20" [height]="20" class="nameinfo"></td>
                 <td>{{ spieler.age }}</td>
                 <td><img [src]="spieler.flag" [alt]="" width="56" height="42" class="rounded" appHideMissing></td>
                 <td><img [src]="spieler.clubLogo" [alt]="" [title]="spieler.clubName" [width]="42" height="42" class="rounded-circle" appHideMissing></td>
@@ -458,7 +463,7 @@
                 <td [hidden]="condArray[15]">{{ spieler.crossing }}</td>
                 <td [hidden]="condArray[16]">{{ spieler.finishing }}</td>
                 <td [hidden]="condArray[17]">{{ spieler.shortPassing }}</td>
-                <td [hidden]="condArray[18]">{{ spieler.wage }}</td>
+                <td [hidden]="condArray[18]">{{ formatter.format(spieler.wage) }}</td>
               </tr>
             </tbody>
           </table>
