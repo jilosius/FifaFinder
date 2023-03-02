@@ -12,4 +12,5 @@ export class HideMissingDirective {
     this.el.nativeElement.src = "/assets/images/imagenotfound.png"
     // this.el.nativeElement.style.display = "none";
   }
+
 }

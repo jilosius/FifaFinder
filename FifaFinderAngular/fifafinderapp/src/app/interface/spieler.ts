@@ -6,7 +6,7 @@ export interface Spieler {
     knownName: string;
     age: number;
     flag: string;
-    clubName: number;
+    clubName: string;
     clubLogo: string;
     overall: number;
     potential: number;

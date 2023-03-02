@@ -514,32 +514,16 @@ export class StartComponent implements OnInit {
 
   deleteAllLogic(id: number){
     if(confirm("Wollen Sie den Spieler wirklich löschen?")) {
-      if (this.delFifaVersion.value != "") {
-        for (let i = 0; i < this.delFifaVersion.value.length; i++) {
-          let selectedVersion: number = Number(this.delFifaVersion.value[i]);
-          this.deletePlayerInFifaVersion(id, selectedVersion);
-          this.refresh();
-        }
-      } else {
-        this.deletePlayer(id);
-        this.refresh();
-      }
-    }
-  }
-
-  deleteLogic(id:number, fifaVersion: number){
-    if(confirm("Wollen Sie den Spielereintrag zu FIFA " + fifaVersion + " wirklich löschen?")) {
-      this.deletePlayerInFifaVersion(id, fifaVersion);
+      this.deletePlayerService.deletePlayer(id).subscribe();
       this.refresh();
     }
   }
 
-  deletePlayer(id: number){
-    this.deletePlayerService.deletePlayer(id).subscribe();
-  }
-
-  deletePlayerInFifaVersion(id: number, fifaVersion: number){
-    this.deletePlayerService.deletePlayerInFifaVersion(id, fifaVersion).subscribe();
+  deletePerFifaVersionLogic(id:number, fifaVersion: number){
+    if(confirm("Wollen Sie den Spielereintrag zu FIFA " + fifaVersion + " wirklich löschen?")) {
+      this.deletePlayerService.deletePlayerInFifaVersion(id, fifaVersion).subscribe();
+      this.refresh();
+    }
   }
 
   onFifaVersionChange(fifaVersion: number) {

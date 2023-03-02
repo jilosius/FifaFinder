@@ -28,6 +28,7 @@ public class SpielerRepositoryTest {
         // Create test data
         SpielerDTO player1 = new SpielerDTO(
                 1,
+                23,
                 "https://example.com/player1.jpg",
                 "J. Doe",
                 "John Doe",
@@ -50,6 +51,7 @@ public class SpielerRepositoryTest {
                 70, 80, 75, 80, 70, 80, 75, 80, 70, 80, 75, 80, 80, 50000L);
         SpielerDTO player2 = new SpielerDTO(
                 2,
+                23,
                 "https://example.com/player2.jpg",
                 "J. Smith",
                 "Jane Smith",
@@ -77,7 +79,7 @@ public class SpielerRepositoryTest {
 
         // Configure mock repository
         when(spielerRepository.findByFullNameFiltered("Doe",
-                21,"","right",70,80,30,0,80,90,70, 100,
+                23,"","right",70,80,30,0,80,90,70, 100,
                 50,70,8000,50000000L,70,90,50,99,40,85,67,88,80,95,
                 45,99,55,98,65,70,88,99,10,100,40,99,50,
                 89,60,99,70,99,10,80,70,99,84,99,40,99,
@@ -86,7 +88,7 @@ public class SpielerRepositoryTest {
 
         // Test the repository method
         Page<SpielerDTO> result = spielerRepository.findByFullNameFiltered("Doe",
-                21,"","right",70,80,30,0,80,90,70, 100,
+                23,"","right",70,80,30,0,80,90,70, 100,
                 50,70,8000,50000000L,70,90,50,99,40,85,67,88,80,95,
                 45,99,55,98,65,70,88,99,10,100,40,99,50,
                 89,60,99,70,99,10,80,70,99,84,99,40,99,

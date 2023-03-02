@@ -18,6 +18,7 @@ import { MatInputModule } from "@angular/material/input";
 import { HideMissingDirective } from './directive/hide-missing.directive';
 import { MatIconModule } from "@angular/material/icon";
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatFormFieldModule } from "@angular/material/form-field";
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
         AppRoutingModule,
         HttpClientModule,
         FormsModule,
+        MatFormFieldModule,
         ReactiveFormsModule,
         BrowserAnimationsModule,
         RouterTestingModule,

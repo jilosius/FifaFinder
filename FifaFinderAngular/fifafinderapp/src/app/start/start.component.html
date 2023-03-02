@@ -424,15 +424,15 @@
                 <!-- <mat-checkbox (change)="toggleSelection(spieler)"></mat-checkbox> -->
               <tr *ngFor="let spieler of state.appData.data.page.content; let i = index;">
                 <th scope="row">
+                  <mat-icon matTooltip="Delete for displayed Fifaversion" class="deleteBin" (click)="deletePerFifaVersionLogic(spieler.playerId, spieler.fifaVersion)">delete</mat-icon>
+                  <mat-icon matTooltip="Delete for every Fifaversion" class="deleteBinSweep" (click)="deleteAllLogic(spieler.playerId)">delete_sweep</mat-icon>
+                </th>
+                <th scope="row">
                   <input
                     class="form-check-input"
                     type="checkbox"
                     [value]="spieler.playerId"
                     (change)="toggleSelection(spieler)" />
-                </th>
-                <th scope="row">
-                  <mat-icon matTooltip="Delete for displayed Fifaversion" class="deleteBin" (click)="deleteLogic(spieler.playerId, spieler.fifaVersion)">delete</mat-icon>
-                  <mat-icon matTooltip="Delete for every Fifaversion" class="deleteBinSweep" (click)="deleteAllLogic(spieler.playerId)">delete_sweep</mat-icon>
                 </th>
                 <th scope="row"><img [src]="spieler.photoURL" width="42" height="42" class="rounded-circle" appHideMissing></th>
                 <td>{{ spieler.knownName }}</td>
