@@ -24,7 +24,7 @@ public class AddPlaysForDTO {
     private Integer fifaVersion;
     private String clubPosition;
     private Integer clubNumber;
-    private Integer clubID;
+    private String clubName;
     private String nationalPosition;
     private Integer nationalNumber;
     private String nationalTeam;

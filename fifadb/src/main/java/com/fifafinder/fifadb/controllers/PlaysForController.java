@@ -77,7 +77,7 @@ public class PlaysForController {
     public void addPlayer(@RequestBody AddPlaysForDTO playsForDTO )
     {
 
-
+        System.out.println(playsForDTO);
         Spieler spieler = new Spieler();
         spieler.setKnownName(playsForDTO.getKnownName());
         spieler.setFullName(playsForDTO.getFullName());
@@ -94,7 +94,7 @@ public class PlaysForController {
 
         playsForService.addPlayer(spieler, fifaVersion,playsForId, playsForDTO.getHeight(), playsForDTO.getClubPosition(), playsForDTO.getClubNumber(), playsForDTO.getNationalPosition(), playsForDTO.getNationalNumber(),
                 playsForDTO.getPreferredFoot(), playsForDTO.getContractUntil(), playsForDTO.getOnLoan(), playsForDTO.getNationalTeam(), playsForDTO.getAge(), playsForDTO.getWeight(),
-                playsForDTO.getOverall(),playsForDTO.getPotential(),playsForDTO.getBestPosition(), manschaftenController.findManschaftenByID(playsForDTO.getClubID()), playsForDTO.getValueEur(), playsForDTO.getWage(),
+                playsForDTO.getOverall(),playsForDTO.getPotential(),playsForDTO.getBestPosition(), manschaftenController.findManschaftenByName(playsForDTO.getClubName()), playsForDTO.getValueEur(), playsForDTO.getWage(),
                 playsForDTO.getReleaseClause(),playsForDTO.getReputation(),playsForDTO.getWeakFoot(),playsForDTO.getSkillMoves(),playsForDTO.getCrossing(),playsForDTO.getFinishing(),
                 playsForDTO.getHeadingAccuracy(),playsForDTO.getShortPassing(),playsForDTO.getVolleys(),playsForDTO.getDribbling(),playsForDTO.getCurve(),playsForDTO.getFKAccuracy(),
                 playsForDTO.getLongPassing(), playsForDTO.getBallControl(),playsForDTO.getAcceleration(),playsForDTO.getBallControl(),playsForDTO.getAgility(),playsForDTO.getReaction(),

@@ -17,4 +17,6 @@ public class ManschaftenController {
     {
         return manschaftenService.getManschaftenByID(id);
     }
+
+    public Mannschaften findManschaftenByName(String name) {return manschaftenService.getManschaftenByName(name);}
 }
