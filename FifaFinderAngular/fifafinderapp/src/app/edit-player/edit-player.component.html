@@ -9,14 +9,13 @@
 </nav>
  
 <div id = "box1"> 
-<form #editPlayerForm="ngForm" (ngSubmit)="onEditPlayer(editPlayerForm.value)" class="submission-form" novalidate>
-<form #addPlayerForm="ngForm" (ngSubmit)="onAddPlayer(addPlayerForm.value)" class="submission-form" novalidate>
+<form #playerDetailsForm="ngForm" (ngSubmit)="onEditPlayer(playerDetailsForm.value)" class="needs-validation" novalidate>
   <pre></pre>
   <div class="row g-3 col-form-label"><label for="generalInformation"><h1>Player Details</h1></label></div>
   <div class="row g-3 needs-validation" novalidate>
     <div class="col-md-3" *ngIf="isAddMode()==true">
-      <label for="validationCustom01" class="form-label">Full Name</label>
-      <input type="text" name="fullName" ngModel class="form-control" placeholder="" id="validationCustom01" required>
+      <label for="validationDefault01" class="form-label">Full Name</label>
+      <input type="text" name="fullName" ngModel class="form-control" placeholder="" id="validationDefault01" required>
    </div>
 
    <div class="col-md-3" *ngIf="isAddMode()==true">
@@ -53,7 +52,7 @@
 
    <div class="col-md-3">
       <label for="validationCustom06" class="form-label">Weight</label>
-      <input type="number" name="weight" ngModel class="form-control" placeholder="40-150" id="validationCustom06" min="40" max="150" required>
+      <input type="number" name="weight" ngModel class="form-control" id="validationCustom06" min="40" max="150" required>
       <div class="invalid-feedback">
         Please choose a valid input.
       </div>
@@ -69,7 +68,7 @@
 
     <div class="col-md-3">
       <label for="validationCustom08" class="form-label">Photo URL</label>
-      <input type="text" name="photoUrl" ngModel class="form-control" placeholder="" id="validationCustom08" required>
+      <input type="text" name="photoUrl" ngModel class="form-control" id="validationCustom08" required>
       <div class="invalid-feedback">
         Please choose a valid input.
       </div>
@@ -511,11 +510,10 @@
         </div>
       </div>
     </div>
-    <pre></pre>
+    <pre></pre> 
     <div class="col-12">
-      <button class="btn btn-primary" type="submit" (click)="isAddMode() ? onAddPlayer(addPlayerForm.value) : onEditPlayer(editPlayerForm.value)">{{isAddMode() ? 'Submit Player' : 'Submit Changes'}}</button>
+      <button class="btn btn-primary" type="submit" (click)="isAddMode() ? onAddPlayer(playerDetailsForm.value) : onEditPlayer(playerDetailsForm.value)">{{isAddMode() ? 'Submit Player' : 'Submit Changes'}}</button>
     </div>    
   </form>   
-</form>
 </div>
 

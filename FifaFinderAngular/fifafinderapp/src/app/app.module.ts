@@ -12,6 +12,8 @@ import { VergleichComponent } from './vergleich/vergleich.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { RouterTestingModule } from "@angular/router/testing";
 import { EditPlayerComponent } from './edit-player/edit-player.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -32,6 +34,8 @@ import { EditPlayerComponent } from './edit-player/edit-player.component';
     MatSortModule,
     MatCheckboxModule,
     RouterModule,
+    MatIconModule,
+    MatTooltipModule
 
     // MatMenuModule
   ],

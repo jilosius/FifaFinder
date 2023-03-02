@@ -109,4 +109,18 @@ public class PlaysForService {
         playsForRepository.save(details);
     }
 
+    public UpdateDTO getDetailsForEdit(PlaysForId playsForId) {
+        PlaysFor playsFor = playsForRepository.findPlaysForById(playsForId);
+        UpdateDTO details = new UpdateDTO(playsFor.getHeight(), playsFor.getClubPosition(), playsFor.getClubNumber(), playsFor.getNationalPosition(), playsFor.getNationalNumber(),
+                playsFor.getPreferredFoot(), playsFor.getContractUntil(), playsFor.getOnLoan(), playsFor.getNationalTeam(), playsFor.getWeight(), playsFor.getOverall(),
+                playsFor.getPotential(), playsFor.getBestPosition(), playsFor.getClubID().getClubName(), playsFor.getValueEUR(), playsFor.getWage(), playsFor.getReleaseClause(),
+                playsFor.getIntReputation(), playsFor.getWeakFoot(), playsFor.getSkillMoves(), playsFor.getCrossing(), playsFor.getFinishing(), playsFor.getHeadingAccuracy(),
+                playsFor.getShortPassing(), playsFor.getVolleys(), playsFor.getDribbling(), playsFor.getCurve(), playsFor.getFkAccuracy(), playsFor.getLongPassing(), playsFor.getBallControl(),
+                playsFor.getAcceleration(), playsFor.getSprintSpeed(), playsFor.getAgility(), playsFor.getReaction(), playsFor.getBalance(), playsFor.getShotPower(), playsFor.getJumping(),
+                playsFor.getStamina(), playsFor.getStrength(), playsFor.getLongShots(), playsFor.getAggression(), playsFor.getInterceptions(), playsFor.getPositioning(), playsFor.getVision(),
+                playsFor.getPenalties(), playsFor.getComposure(), playsFor.getMarking(), playsFor.getStandingTackle(), playsFor.getSlidingTackle(), playsFor.getGKDiving(), playsFor.getGKHandling(),
+                playsFor.getGKKicking(), playsFor.getGKPositioning(), playsFor.getGKReflexes(), playsFor.getPhotoUrl());
+        return details;
+    }
+
 }

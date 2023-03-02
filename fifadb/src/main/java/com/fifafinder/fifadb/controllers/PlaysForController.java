@@ -52,5 +52,12 @@ public class PlaysForController {
         playsForService.editDetails(playsForId, updateDTO);
     }
 
+    @GetMapping("/detailsforedit/playerid={playerId}/fifaversion={fifaVersion}")
+    public UpdateDTO getDetailsForEdit(@PathVariable("playerId") int playerId, @PathVariable("fifaVersion") int fifaVersion) {
+        PlaysForId playsForId = new PlaysForId();
+        playsForId.setPlayerID(playerId);
+        playsForId.setFifaVersion(fifaVersion);
+        return playsForService.getDetailsForEdit(playsForId);
+    }
 
 }

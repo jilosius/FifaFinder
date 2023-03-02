@@ -22,8 +22,7 @@
             </button>
 
             <button [routerLink]="['/vergleich']" class="btn btn-secondary my-button" (click)="getSelectedPlayerIds()">Vergleichen</button>
-            <button [routerLink]="['/editPlayer', false]" class="btn btn-secondary my-button">Edit Player</button>
-            <button [routerLink]="['/editPlayer', true]" class="btn btn-secondary my-button">Add Player</button>
+            <button [routerLink]="['/editPlayer', true, 0, 0]" class="btn btn-secondary my-button">Add Player</button>
 
             <form class="dropdown-menu p-4" style="width: 700px;">
               <div class="row g-3">
@@ -407,6 +406,9 @@
                     type="checkbox"
                     [value]="spieler.playerId"
                     (change)="toggleSelection(spieler)" />
+                </th>
+                <th scope="row">
+                  <mat-icon matTooltip="Edit Player" [routerLink]="['/editPlayer', false, spieler.playerId, 23]">edit</mat-icon>
                 </th>
                 <th scope="row"><img [src]="spieler.photoURL" width="42" height="42" class="rounded-circle" S></th>
                 <td>{{ spieler.knownName }}</td>
