@@ -10,11 +10,11 @@ export class EditPlayerService {
   constructor(private http: HttpClient) {}
 
   updatePlayerDetails(editPlayerForm: UpdateDto, playerId: number, fifaVersion: number) {
-    this.http.put('http://localhost:8080/playsfor/editdetailsof'+playerId+'in'+fifaVersion, editPlayerForm).subscribe();
+    this.http.put('http://localhost:8080/playsFor/editdetailsof'+playerId+'in'+fifaVersion, editPlayerForm).subscribe();
   }
 
   addPlayer(addPlayerForm: AddDto) {
-    this.http.post('http://localhost:8080/playsfor/add', addPlayerForm).subscribe();
+    this.http.post('http://localhost:8080/playsFor/add', addPlayerForm).subscribe();
   }
 
 }

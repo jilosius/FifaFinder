@@ -2,6 +2,8 @@ package com.fifafinder.fifadb.services;
 
 import com.fifafinder.fifadb.entities.Spieler;
 import com.fifafinder.fifadb.DTOs.SpielerDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fifafinder.fifadb.exceptionhandling.SpielerNotFoundException;
 import com.fifafinder.fifadb.repositories.SpielerRepository;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
@@ -14,9 +16,9 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.Optional;
 
 
-import java.util.List;
 
 
 @Service
@@ -167,7 +169,7 @@ public class SpielerService {
 //        return spielerRepository.listAllSpieler(pageable);
 //    }
 
-    /*
+
         public Spieler addSpieler (Spieler spieler){
 
             return spielerRepository.save(spieler);
@@ -182,25 +184,23 @@ public class SpielerService {
 
         public Spieler updateSpieler(Spieler spieler){
 
-            return spielerRepository.save(spieler);
+            return spielerRepository.save(spieler); }
 
-        }
+    public void addPlayer(Spieler spieler) {
 
-        public Spieler getSpielerById(Integer id){
+        spieler.setFifaID(null);
+        spielerRepository.save(spieler);
+    }
 
-            return spielerRepository.findSpielerById(id).orElseThrow(()-> new SpielerNotFoundException("User by id"+id+" was not found"));
+    public Optional<Spieler> findSpieler() {
+        Optional<Spieler> spielerOptional = spielerRepository.findSpielerById(10000);
+        if(spielerOptional.isPresent())
+            return spielerOptional;
+        System.out.println("Spieler nicht gefunden!");
+        return null;
+    }
 
-        }
-
-        public Spieler getSpielerByfullname(String n){
-
-            return spielerRepository.findSpielerByfullname(n).orElseThrow(()->new SpielerNotFoundException("User by name"+n+" not found"));
-
-        }
-
-        public void deleteSpieler(Integer ID){
-
-            spielerRepository.deleteSpielerById(ID);
-        }
-    */
+    public void deleteSpieler(){
+        spielerRepository.deleteSpielerById(100000);
+    }
 }
