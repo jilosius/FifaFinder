@@ -33,6 +33,8 @@ public interface SpielerRepository extends JpaRepository<Spieler, Integer> {
 //    Page<SpielerDTO> findByFullName(@Param("searchTerm") String searchTerm, Pageable pageable);
 //
 
+    Optional<Spieler> findSpielerById(Integer id);
+
     //     ----- final implementation: full search algorithm. Search by name, filter by below attributes.
 
     @Query("SELECT NEW com.fifafinder.fifadb.DTOs.SpielerDTO(pf.id.playerID, pf.photoUrl, s.knownName, pf.age, nat.countryID.flag, pf.clubID.clubLogo, pf.overall, pf.potential, pf.bestPosition, pf.valueEUR, pf.height, pf.weight,pf.preferredFoot,pf.headingAccuracy,pf.volleys,pf.dribbling, pf.curve,pf.fkAccuracy,pf.acceleration,pf.sprintSpeed,pf.agility,pf.reaction,pf.balance,pf.shotPower,pf.jumping,pf.stamina,pf.aggression,pf.longShots,pf.crossing,pf.finishing,pf.shortPassing,pf.wage) " +
@@ -134,6 +136,9 @@ public interface SpielerRepository extends JpaRepository<Spieler, Integer> {
 
 
 
+
+
+    void deleteSpielerById(Integer id);
 
 
     Spieler findById(int id);

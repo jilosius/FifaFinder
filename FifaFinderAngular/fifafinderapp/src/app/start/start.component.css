@@ -14,6 +14,10 @@
   .selected {
     background-color: #005438;
 }
+#component {
+    right: 1000px;
+}
+
 
 
 .sortable:hover{

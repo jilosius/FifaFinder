@@ -6,5 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MannschaftenRepository extends JpaRepository<Mannschaften, Integer> {
+
+    Mannschaften findById(int id);
     Mannschaften findMannschaftenByClubName(String clubName);
 }

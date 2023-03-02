@@ -3,12 +3,14 @@ package com.fifafinder.fifadb.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "fifa_version")
 public class FifaVersion {
+
     @Id
     @Column(name = "FifaVersion", nullable = false)
     private Integer id;
