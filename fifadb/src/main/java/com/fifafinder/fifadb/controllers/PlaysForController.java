@@ -34,21 +34,26 @@ public class PlaysForController {
     private final SpielerService spielerService;
     private final FifaVersionRepository fifaVersionRepository;
     private final FifaController fifaController;
-    private final ManschaftenController manschaftenController;
+    private final MannschaftenController mannschaftenController;
     @Autowired
     public PlaysForController(PlaysForService playsForService, SpielerService spielerService,
                               FifaVersionRepository fifaVersionRepository, FifaController fifaController,
-                              ManschaftenController manschaftenController) {
+                              MannschaftenController mannschaftenController) {
         this.playsForService = playsForService;
         this.spielerService = spielerService;
         this.fifaVersionRepository = fifaVersionRepository;
         this.fifaController = fifaController;
-        this.manschaftenController = manschaftenController;
+        this.mannschaftenController = mannschaftenController;
     }
 
     @GetMapping("/count")
     public long count() {
         return playsForService.count();
+    }
+
+    @GetMapping("/countUniquePlayerRecords")
+    public long countUniquePlayerRecords(@RequestParam int playerID){
+        return playsForService.countUniquePlayerRecords(playerID);
     }
     @GetMapping("/all")
     public List<PlaysFor> getAll() {
@@ -83,7 +88,7 @@ public class PlaysForController {
 
         playsForService.addPlayer(spieler, fifaVersion,playsForId, playsForDTO.getHeight(), playsForDTO.getClubPosition(), playsForDTO.getClubNumber(), playsForDTO.getNationalPosition(), playsForDTO.getNationalNumber(),
                 playsForDTO.getPreferredFoot(), playsForDTO.getContractUntil(), playsForDTO.getOnLoan(), playsForDTO.getNationalTeam(), playsForDTO.getAge(), playsForDTO.getWeight(),
-                playsForDTO.getOverall(),playsForDTO.getPotential(),playsForDTO.getBestPosition(), manschaftenController.findManschaftenByID(playsForDTO.getClubID()), playsForDTO.getValueEur(), playsForDTO.getWage(),
+                playsForDTO.getOverall(),playsForDTO.getPotential(),playsForDTO.getBestPosition(), mannschaftenController.findMannschaftenByID(playsForDTO.getClubID()), playsForDTO.getValueEur(), playsForDTO.getWage(),
                 playsForDTO.getReleaseClause(),playsForDTO.getReputation(),playsForDTO.getWeakFoot(),playsForDTO.getSkillMoves(),playsForDTO.getCrossing(),playsForDTO.getFinishing(),
                 playsForDTO.getHeadingAccuracy(),playsForDTO.getShortPassing(),playsForDTO.getVolleys(),playsForDTO.getDribbling(),playsForDTO.getCurve(),playsForDTO.getFKAccuracy(),
                 playsForDTO.getLongPassing(), playsForDTO.getBallControl(),playsForDTO.getAcceleration(),playsForDTO.getBallControl(),playsForDTO.getAgility(),playsForDTO.getReaction(),
@@ -93,4 +98,20 @@ public class PlaysForController {
                 playsForDTO.getGKPositioning(),playsForDTO.getGKReflexes(),playsForDTO.getPhotoURL());
 
     }
+
+    @DeleteMapping("/delete{playerID}")
+    public void deleteAllbyId(@PathVariable("playerID") int playerID){
+        playsForService.deleteAllByPlayerID(playerID);
+    }
+
+    @DeleteMapping("/deleteInFifaVersion")
+    public void deleteAllByPlayerIDAndFifaVersion(@RequestParam int playerID, @RequestParam int fifaVersion){
+        playsForService.deleteAllByPlayerIDAndFifaVersion(playerID, fifaVersion);
+    }
+
+    @GetMapping("/listVersions")
+    public List<FifaVersion> listFifaVersions(){
+        return playsForService.listFifaVersions();
+    }
+
 }

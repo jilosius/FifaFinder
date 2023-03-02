@@ -11,10 +11,13 @@ import lombok.Data;
 @ToString
 public class SpielerDTO {
     private Integer playerId;
+    private Integer fifaVersion;
     private String photoURL;
     private String knownName;
+    private String fullName;
     private Integer age;
     private String flag;
+    private String clubName;
     private String clubLogo;
     private Integer overall;
     private Integer potential;

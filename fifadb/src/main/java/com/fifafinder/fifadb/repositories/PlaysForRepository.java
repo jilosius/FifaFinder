@@ -18,4 +18,7 @@ public interface PlaysForRepository extends JpaRepository<PlaysFor, PlaysForId> 
     SpielerDetailDTO findById(PlaysFor id);
     PlaysFor findByPlayerIDAndFifaVersion(Spieler spieler, FifaVersion fifaVersion);
     PlaysFor findPlaysForById(PlaysForId playsForId);
+    void deleteAllById_PlayerID(int id);
+    void deleteAllById_PlayerIDAndId_FifaVersion(int id, int fifaVersion);
+    int countById_PlayerID(int id);
 }

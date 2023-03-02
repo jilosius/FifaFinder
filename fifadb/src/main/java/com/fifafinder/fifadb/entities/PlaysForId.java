@@ -3,12 +3,16 @@ package com.fifafinder.fifadb.entities;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.Entity;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.hibernate.Hibernate;
 
 import java.io.Serializable;
 import java.util.Objects;
 
 @Embeddable
+@NoArgsConstructor
+@AllArgsConstructor
 public class PlaysForId implements Serializable {
     private static final long serialVersionUID = -3970872167199362146L;
     @Column(name = "PlayerID", nullable = false)
