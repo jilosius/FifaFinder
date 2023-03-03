@@ -29,4 +29,8 @@ public class MannschaftenController {
     {
         return mannschaftenService.getMannschaftenByID(id);
     }
+    public Mannschaften getMannschaftenByName(String name)
+    {
+        return mannschaftenService.getMannschaftenByName(name);
+    }
 }

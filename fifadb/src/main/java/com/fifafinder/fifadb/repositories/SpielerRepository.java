@@ -15,8 +15,6 @@ import javax.swing.text.html.Option;
 
 import java.util.List;
 import java.util.Optional;
-
-
 @Repository
 public interface SpielerRepository extends JpaRepository<Spieler, Integer> {
 //    Page<SpielerDTO> findByFullNameContaining(String fullName, Pageable pageable);
@@ -143,5 +141,4 @@ public interface SpielerRepository extends JpaRepository<Spieler, Integer> {
 
     Spieler findById(int id);
     Spieler findSpielerByFullName(String fullName);
-
 }

@@ -28,4 +28,6 @@ public class MannschaftenService {
     {
         return mannschaftenRepository.findById(id);
     }
+
+    public Mannschaften getMannschaftenByName(String name){return mannschaftenRepository.findMannschaftenByClubName(name);}
 }

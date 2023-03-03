@@ -1,6 +1,5 @@
 package com.fifafinder.fifadb.services;
 
-
 import com.fifafinder.fifadb.entities.Spieler;
 import com.fifafinder.fifadb.DTOs.SpielerDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -13,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,15 +37,12 @@ public class SpielerService {
         return spielerRepository.count();
     }
 
-
     public List<Spieler> getAllSpieler() {
         return spielerRepository.findAll();
     }
-
     public Spieler getSpieler(int id) {
         return spielerRepository.findById(id);
     }
-
     public Spieler getSpieler(String fullName) {
         return spielerRepository.findSpielerByFullName(fullName);
     }

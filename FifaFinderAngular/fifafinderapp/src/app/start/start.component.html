@@ -22,6 +22,11 @@
             </button>
 
             <button  class="btn btn-secondary my-button" (click)="getSelectedPlayerIds()">Vergleichen</button>
+            <!-- <button [routerLink]="['/vergleich']" class="btn btn-secondary my-button" (click)="getSelectedPlayerIds()">Vergleichen</button> -->
+            <button [routerLink]="['/editPlayer', false]" class="btn btn-secondary my-button">Edit Player</button>
+            <button [routerLink]="['/editPlayer', true]" class="btn btn-secondary my-button">Add Player</button>
+
+
 <!--            <mat-form-field appearance="fill">-->
 <!--              <mat-label>Delete In...</mat-label>-->
 <!--              <mat-select [formControl]="delFifaVersion" multiple>-->

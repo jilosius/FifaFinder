@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.fifafinder.fifadb.dto.SpielerDetailDTO;
+import com.fifafinder.fifadb.dto.UpdateDTO;
 import com.fifafinder.fifadb.entities.*;
 import com.fifafinder.fifadb.repositories.FifaVersionRepository;
 import com.fifafinder.fifadb.services.PlaysForService;
@@ -67,11 +68,21 @@ public class PlaysForController {
         return ResponseEntity.ok().body(playsForService.getDetails(spielerId, fifaVersion));
     }
 
+    @PutMapping("/editdetailsof{playerId}in{fifaVersion}")
+    public void editDetails(@PathVariable("playerId") int playerId, @PathVariable("fifaVersion") int fifaVersion, @RequestBody UpdateDTO updateDTO) {
+        PlaysForId playsForId = new PlaysForId();
+        playsForId.setPlayerID(playerId);
+        playsForId.setFifaVersion(fifaVersion);
+        playsForService.editDetails(playsForId, updateDTO);
+    }
+
+
+
     @PostMapping("/add")
     public void addPlayer(@RequestBody AddPlaysForDTO playsForDTO )
     {
 
-
+        System.out.println(playsForDTO);
         Spieler spieler = new Spieler();
         spieler.setKnownName(playsForDTO.getKnownName());
         spieler.setFullName(playsForDTO.getFullName());
@@ -88,7 +99,7 @@ public class PlaysForController {
 
         playsForService.addPlayer(spieler, fifaVersion,playsForId, playsForDTO.getHeight(), playsForDTO.getClubPosition(), playsForDTO.getClubNumber(), playsForDTO.getNationalPosition(), playsForDTO.getNationalNumber(),
                 playsForDTO.getPreferredFoot(), playsForDTO.getContractUntil(), playsForDTO.getOnLoan(), playsForDTO.getNationalTeam(), playsForDTO.getAge(), playsForDTO.getWeight(),
-                playsForDTO.getOverall(),playsForDTO.getPotential(),playsForDTO.getBestPosition(), mannschaftenController.findMannschaftenByID(playsForDTO.getClubID()), playsForDTO.getValueEur(), playsForDTO.getWage(),
+                playsForDTO.getOverall(),playsForDTO.getPotential(),playsForDTO.getBestPosition(), mannschaftenController.getMannschaftenByName(playsForDTO.getClubName()), playsForDTO.getValueEur(), playsForDTO.getWage(),
                 playsForDTO.getReleaseClause(),playsForDTO.getReputation(),playsForDTO.getWeakFoot(),playsForDTO.getSkillMoves(),playsForDTO.getCrossing(),playsForDTO.getFinishing(),
                 playsForDTO.getHeadingAccuracy(),playsForDTO.getShortPassing(),playsForDTO.getVolleys(),playsForDTO.getDribbling(),playsForDTO.getCurve(),playsForDTO.getFKAccuracy(),
                 playsForDTO.getLongPassing(), playsForDTO.getBallControl(),playsForDTO.getAcceleration(),playsForDTO.getBallControl(),playsForDTO.getAgility(),playsForDTO.getReaction(),

@@ -13,4 +13,5 @@ public interface MannschaftenRepository extends JpaRepository<Mannschaften, Inte
     List<Mannschaften> findByOrderByClubNameAsc();
 
 
+    Mannschaften findMannschaftenByClubName(String clubName);
 }
