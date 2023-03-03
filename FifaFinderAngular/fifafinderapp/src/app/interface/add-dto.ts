@@ -9,7 +9,7 @@ export interface AddDto {
     fifaVersion: number;
     clubPosition: String;
     clubNumber: number;
-    clubID: number;
+    clubName: String;
     nationalPosition: String;
     nationalNumber: number;
     nationalTeam: String;

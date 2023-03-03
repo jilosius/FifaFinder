@@ -103,6 +103,28 @@
 
     <div class="row g-3 col-form-label"><label for="ClubInformation"><h1>Club Information</h1></label></div>
     <div class="row g-3 needs-validation" novalidate> 
+
+      <div class="col-auto">
+        <label for="validationCustom14" class="form-label"></label>
+        <mat-form-field class="clubNameForm" appearance="outline">
+          <mat-label>Club Name</mat-label>
+        <input type="text" name="clubName"  ngModel matInput [formControl]="clubName"  [matAutocomplete]="auto"  class="form-control" placeholder="" id="validationCustom14" required>
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let club of filteredClubs | async" [value]="club.clubName">
+            <img [src]="club.clubLogo" [height]="24" [width]="24" appHideMissing> {{club.clubName}}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngFor="let validation of validation_msgs.clubName">
+          <div *ngIf="clubName.hasError(validation.type)">
+            {{validation.message}}
+          </div>
+        </mat-error>
+      </mat-form-field>
+        <div class="invalid-feedback">
+          Please choose a valid input.
+        </div>
+     </div>
+
     <div class="col-auto">
         <label for="validationCustom12" class="form-label">Position</label>
         <input type="text" name="clubPosition" formControlName="clubPosition" ngModel class="form-control" placeholder="" id="validationCustom12" required>
@@ -119,13 +141,7 @@
         </div>
      </div>
  
-     <div class="col-auto">
-        <label for="validationCustom14" class="form-label">Club Name</label>
-        <input type="text" name="clubName" formControlName="clubName" ngModel class="form-control" placeholder="" id="validationCustom14" required>
-        <div class="invalid-feedback">
-          Please choose a valid input.
-        </div>
-     </div>
+     
 
      <div class="col-md-2"> 
       <label for="validationCustom15" class="form-label">End of contract</label>
@@ -512,9 +528,10 @@
     </div>
     <pre></pre>
     <div class="col-12">
-      <button class="btn btn-primary" type="submit" [disabled]="!AddForm.valid" (click)="isAddMode() ? onAddPlayer(addPlayerForm.value) : onEditPlayer(addPlayerForm.value)">{{isAddMode() ? 'Submit Player' : 'Submit Changes'}}</button>
+       <button class="btn btn-primary" type="submit"  [disabled]="!AddForm.valid || !clubName.valid"    (click)="isAddMode() ? onAddPlayer(addPlayerForm.value) : onEditPlayer(addPlayerForm.value)">{{isAddMode() ? 'Submit Player' : 'Submit Changes'}}</button> 
     </div>
-    <p>Form Status: {{ AddForm.status }}</p>    
+    <!-- <p>Form Status: {{ AddForm.status }}</p> -->
+    <!-- <p>Form Status: {{ clubName.status }}</p>     -->
   </form>   
 
 </div>
