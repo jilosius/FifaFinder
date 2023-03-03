@@ -1,5 +1,5 @@
 export interface AddDto {
-    knownName: String; 
+    knownName: String;
     fullName: String;
     age: number;
     weight: number;

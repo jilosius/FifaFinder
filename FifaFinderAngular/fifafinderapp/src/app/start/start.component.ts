@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { FormArray, FormControl } from "@angular/forms";
 import { Observable, BehaviorSubject, map, startWith, catchError, of } from 'rxjs';
 import { ApiResponse } from '../interface/api-response';
 import { Page } from '../interface/page';
@@ -8,6 +9,10 @@ import { SortableColumn } from "../sorting/sortable-column";
 import { Spieler } from '../interface/spieler';
 import { SelectedPlayerService } from '../service/selected-player.service';
 import { Router } from '@angular/router';
+import { DeletePlayerService } from "../service/delete-player.service";
+import { FifaVersion } from "../interface/fifaversion";
+import { Club } from "../interface/club";
+import { ClubService } from "../service/club.service";
 
 @Component({
   selector: 'app-start',
@@ -28,10 +33,21 @@ export class StartComponent implements OnInit {
   selectedFifaVersion: number;
   pagesToDisplay: number = 10;
 
+  delFifaVersion = new FormControl('');
+  clubFilter = new FormControl('',{nonNullable: true});
+  fifaVersionIds: number[] = [];
+  fifaVersionList: FifaVersion[] = [];
+
+  fifaVersion$: Observable<FifaVersion[]>;
+
+  clubs: Club[] = [];
+  filteredClubs: Observable<Club[]>;
+
   name: string;
   //defining variables that are used in the dropdown filter
   playerId: number;
   fifaVersion: number =  23;
+  clubName: string;
   preferredFoot: string = "";
   ageMin: number= 0;
   ageMax: number= 100;
@@ -85,6 +101,15 @@ export class StartComponent implements OnInit {
   pageNumber: number= 0;
   size: number= 20;
 
+  formatter = new Intl.NumberFormat('de-DE', {
+    style: 'currency',
+    currency: 'EUR',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+    notation: 'compact'
+  });
+
+
   currentSort: SortableColumn = new SortableColumn('overall', 'desc');
 
   //Array to set names and default sort direction of columns
@@ -118,7 +143,7 @@ export class StartComponent implements OnInit {
   //Array to set the "hidden" attribute of each column to either true or false
   condArray:boolean[] = [true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true];
 
-  constructor(private spielerService: SpielerService, private selectedPlayerService: SelectedPlayerService,private router: Router) { }
+  constructor(private spielerService: SpielerService, private selectedPlayerService: SelectedPlayerService, private router: Router, private deletePlayerService: DeletePlayerService, private clubService: ClubService) { }
 
   //on app initialisation: start with: 'APP LOADING', then 'APP_LOADED', and if error return 'APP_ERROR'
   ngOnInit(): void {
@@ -149,10 +174,22 @@ export class StartComponent implements OnInit {
       }
       )
     );
-
+    this.clubService.clubs$().subscribe( clubs  => {
+      this.clubs = clubs;
+    });
+    this.filteredClubs = this.clubFilter.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filterClubs(value || '')),
+    );
+    this.listFifaVersions();
 
   }
 
+  private _filterClubs(value: string): Club[] {
+    const filterValue = value.toLowerCase();
+    return this.clubs.filter(club =>
+    club.clubName.toLowerCase().includes(filterValue));
+  }
 
 
 
@@ -162,10 +199,11 @@ export class StartComponent implements OnInit {
   }
 
   //the method that does all the magic: boolean Array is checked to hide/unhide columns, then spielerService is used to return the data/page as required
-  goToPage(name?: string,fifaVersion?:number,preferredFoot?:string,minAge?: number,maxAge?: number,minOverall?: number, maxOverall?: number, minPotential?: number,maxPotential?: number,minHeight?: number,maxHeight?: number,minValue?: number,maxValue?: number,minWage?: number,maxWage?: number,minHeadingAccuracy?: number,maxHeadingAccuracy?: number,minVolleys?: number,maxVolleys?: number,minDribbling?: number, maxDribbling?: number,minCurve?: number,maxCurve?: number, minFkAccuracy?: number,maxFkAccuracy?: number,minAcceleration?: number,maxAcceleration?: number, minSprintSpeed?: number,maxSprintSpeed?: number,minAgility?: number, maxAgility?: number,minReaction?: number,maxReaction?:number,minBalance?: number,maxBalance?: number,minShotPower?: number,maxShotPower?: number, minJumping?: number,maxJumping?: number,minStamina?: number,maxStamina?: number,minAggression?: number,maxAggression?: number,minLongShots?: number,maxLongShots?: number,minCrossing?: number,maxCrossing?: number,minFinishing?: number,maxFinishing?: number,minShortPassing?: number,maxShortPassing?: number,
+  goToPage(name?: string,fifaVersion?:number,clubName?:string,preferredFoot?:string,minAge?: number,maxAge?: number,minOverall?: number, maxOverall?: number, minPotential?: number,maxPotential?: number,minHeight?: number,maxHeight?: number,minValue?: number,maxValue?: number,minWage?: number,maxWage?: number,minHeadingAccuracy?: number,maxHeadingAccuracy?: number,minVolleys?: number,maxVolleys?: number,minDribbling?: number, maxDribbling?: number,minCurve?: number,maxCurve?: number, minFkAccuracy?: number,maxFkAccuracy?: number,minAcceleration?: number,maxAcceleration?: number, minSprintSpeed?: number,maxSprintSpeed?: number,minAgility?: number, maxAgility?: number,minReaction?: number,maxReaction?:number,minBalance?: number,maxBalance?: number,minShotPower?: number,maxShotPower?: number, minJumping?: number,maxJumping?: number,minStamina?: number,maxStamina?: number,minAggression?: number,maxAggression?: number,minLongShots?: number,maxLongShots?: number,minCrossing?: number,maxCrossing?: number,minFinishing?: number,maxFinishing?: number,minShortPassing?: number,maxShortPassing?: number,
             pageNumber: number = 0, size: number = 20, sort?: string, order?: string): void {
     this.name = name;
     this.fifaVersion = fifaVersion;
+    this.clubName = clubName;
     this.preferredFoot = preferredFoot;
     this.ageMin = minAge;
     this.ageMax =maxAge ;
@@ -237,7 +275,7 @@ export class StartComponent implements OnInit {
     }
 
 
-    this.spielerState$ = this.spielerService.spieler$(name, fifaVersion, preferredFoot, minAge, maxAge, minOverall, maxOverall, minPotential,maxPotential,minHeight,maxHeight,minValue,maxValue,minWage,maxWage,minHeadingAccuracy,maxHeadingAccuracy,minVolleys, maxVolleys,minDribbling,maxDribbling, minCurve, maxCurve,minFkAccuracy, maxFkAccuracy,minAcceleration,maxAcceleration,minSprintSpeed,maxSprintSpeed,minAgility, maxAgility, minReaction,maxReaction,minBalance,maxBalance,minShotPower,maxShotPower,minJumping,maxJumping,minStamina,maxStamina, minAggression,maxAggression, minLongShots, maxLongShots,minCrossing,maxCrossing,minFinishing,maxFinishing,minShortPassing, maxShortPassing, pageNumber, size, sort, order).pipe(
+    this.spielerState$ = this.spielerService.spieler$(name, fifaVersion, clubName, preferredFoot, minAge, maxAge, minOverall, maxOverall, minPotential,maxPotential,minHeight,maxHeight,minValue,maxValue,minWage,maxWage,minHeadingAccuracy,maxHeadingAccuracy,minVolleys, maxVolleys,minDribbling,maxDribbling, minCurve, maxCurve,minFkAccuracy, maxFkAccuracy,minAcceleration,maxAcceleration,minSprintSpeed,maxSprintSpeed,minAgility, maxAgility, minReaction,maxReaction,minBalance,maxBalance,minShotPower,maxShotPower,minJumping,maxJumping,minStamina,maxStamina, minAggression,maxAggression, minLongShots, maxLongShots,minCrossing,maxCrossing,minFinishing,maxFinishing,minShortPassing, maxShortPassing, pageNumber, size, sort, order).pipe(
       map((response: ApiResponse<Page>) => {
         // this.loadingService.loadingOff();
         this.responseSubject.next(response);
@@ -256,7 +294,7 @@ export class StartComponent implements OnInit {
   //Method responsible for next/prev page
   goToNextOrPreviousPage(direction?: string): void {
       // console.log(this.name);
-    this.goToPage(this.name,this.fifaVersion,this.preferredFoot,this.ageMin,this.ageMax,this.overallMin,this.overallMax,this.potentialMin,this.potentialMax,this.heightMin,this.heightMax,this.minValue,this.maxValue,
+    this.goToPage(this.name,this.fifaVersion,this.clubName,this.preferredFoot,this.ageMin,this.ageMax,this.overallMin,this.overallMax,this.potentialMin,this.potentialMax,this.heightMin,this.heightMax,this.minValue,this.maxValue,
       this.minWage,this.maxWage,this.minHeadingAccuracy,this.maxHeadingAccuracy,this.minVolleys,this.maxVolleys,this.minDribbling,this.maxDribbling,this.minCurve,this.maxCurve,this.minFkAccuracy,this.maxFkAccuracy,
       this.minAcceleration,this.maxAcceleration,this.minSprintSpeed,this.maxSprintSpeed,this.minAgility,this.maxAgility,this.minReaction,this.maxReaction,this.minBalance,this.maxBalance,this.minShotPower,
       this.maxShotPower,this.minJumping,this.maxJumping,this.minStamina,this.maxStamina,this.minAggression,this.maxAggression,this.minLongShots,this.maxLongShots,this.minCrossing,this.maxCrossing,this.minFinishing,
@@ -267,6 +305,8 @@ export class StartComponent implements OnInit {
 
   resetValues(name?:string):void{
     this.fifaVersion = 23;
+    this.clubName = '';
+    this.clubFilter.reset();
     this.preferredFoot = '';
     this.ageMin = 0;
     this.ageMax = 100;
@@ -316,7 +356,7 @@ export class StartComponent implements OnInit {
     this.maxFinishing= 100;
     this.minShortPassing= 0;
     this.maxShortPassing= 100;
-    this.goToPage(name,this.fifaVersion,this.preferredFoot,this.ageMin,this.ageMax,this.overallMin,this.overallMax,this.potentialMin,this.potentialMax,this.heightMin,this.heightMax,this.minValue,this.maxValue,
+    this.goToPage(name,this.fifaVersion,this.clubName,this.preferredFoot,this.ageMin,this.ageMax,this.overallMin,this.overallMax,this.potentialMin,this.potentialMax,this.heightMin,this.heightMax,this.minValue,this.maxValue,
       this.minWage,this.maxWage,this.minHeadingAccuracy,this.maxHeadingAccuracy,this.minVolleys,this.maxVolleys,this.minDribbling,this.maxDribbling,this.minCurve,this.maxCurve,this.minFkAccuracy,this.maxFkAccuracy,
       this.minAcceleration,this.maxAcceleration,this.minSprintSpeed,this.maxSprintSpeed,this.minAgility,this.maxAgility,this.minReaction,this.maxReaction,this.minBalance,this.maxBalance,this.minShotPower,
       this.maxShotPower,this.minJumping,this.maxJumping,this.minStamina,this.maxStamina,this.minAggression,this.maxAggression,this.minLongShots,this.maxLongShots,this.minCrossing,this.maxCrossing,this.minFinishing,
@@ -373,6 +413,7 @@ export class StartComponent implements OnInit {
     this.goToPage(
       this.name,
       this.fifaVersion,
+      this.clubName,
       this.preferredFoot,
       this.ageMin,
       this.ageMax,
@@ -460,8 +501,30 @@ export class StartComponent implements OnInit {
     return '';
   }
 
+  listFifaVersions(){
+    this.deletePlayerService.listFifaVersions().subscribe(
+      (res) => this.fifaVersionList = res,
+      (err) => console.log(err)
+    );
+  }
 
+  refresh(){
+    window.location.reload();
+  }
 
+  deleteAllLogic(id: number){
+    if(confirm("Wollen Sie den Spieler wirklich löschen?")) {
+      this.deletePlayerService.deletePlayer(id).subscribe();
+      this.refresh();
+    }
+  }
+
+  deletePerFifaVersionLogic(id:number, fifaVersion: number){
+    if(confirm("Wollen Sie den Spielereintrag zu FIFA " + fifaVersion + " wirklich löschen?")) {
+      this.deletePlayerService.deletePlayerInFifaVersion(id, fifaVersion).subscribe();
+      this.refresh();
+    }
+  }
 
   onFifaVersionChange(fifaVersion: number) {
     this.selectedFifaVersion = fifaVersion;
@@ -474,3 +537,5 @@ export class StartComponent implements OnInit {
   }
 
 }
+
+

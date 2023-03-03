@@ -15,7 +15,7 @@
 }
   :valid {
     border-width: 2px;
-    border-color: green; 
+    border-color: green;
   }
   :invalid {
     border-width: 2px;

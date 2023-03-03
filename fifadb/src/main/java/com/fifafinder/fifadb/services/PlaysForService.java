@@ -4,10 +4,16 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fifafinder.fifadb.dto.SpielerDetailDTO;
 import com.fifafinder.fifadb.dto.UpdateDTO;
 import com.fifafinder.fifadb.entities.*;
+import com.fifafinder.fifadb.exceptionhandling.SpielerNotFoundException;
 import com.fifafinder.fifadb.repositories.FifaVersionRepository;
 import com.fifafinder.fifadb.repositories.MannschaftenRepository;
 import com.fifafinder.fifadb.repositories.PlaysForRepository;
 import com.fifafinder.fifadb.repositories.SpielerRepository;
+import jakarta.persistence.Column;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.transaction.Transactional;
 import jakarta.persistence.Column;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
@@ -54,6 +60,9 @@ public class PlaysForService {
         return playsForRepository.count();
     }
 
+    public long countUniquePlayerRecords(int id){
+        return playsForRepository.countById_PlayerID(id);
+    }
     public List<PlaysFor> getAll() {
         return playsForRepository.findAll();
     }
@@ -224,4 +233,21 @@ public class PlaysForService {
     }
 
 
+
+    @Transactional
+    public void deleteAllByPlayerID(int id) {
+        playsForRepository.deleteAllById_PlayerID(id);
+        spielerRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void deleteAllByPlayerIDAndFifaVersion(int id, int fifaVersion){
+        playsForRepository.deleteAllById_PlayerIDAndId_FifaVersion(id, fifaVersion);
+        if(countUniquePlayerRecords(id)==0){ // Deletes Player record from Spieler Table when no entry left in PlaysFor Table
+            spielerRepository.deleteById(id);
+        }
+    }
+    public List<FifaVersion> listFifaVersions(){
+        return fifaVersionRepository.findAll();
+    }
 }

@@ -25,6 +25,21 @@
             <button [routerLink]="['/editPlayer', true, 0, 0]" class="btn btn-secondary my-button">Add Player</button>
 
             <form class="dropdown-menu p-4" style="width: 700px;">
+              <mat-form-field class="clubFilterForm" appearance="outline">
+                <mat-label>Club</mat-label>
+                <input type="text"
+                       placeholder="Pick one"
+                       aria-label="Number"
+                       matInput
+                       [formControl]="clubFilter"
+                       [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option *ngFor="let club of filteredClubs | async" [value]="club.clubName">
+                    <img [src]="club.clubLogo" [height]="24" [width]="24" appHideMissing> {{club.clubName}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+
               <div class="row g-3">
                 <div class="col-sm-3 col-form-label"><label for="fifaVersion">Fifa version</label></div>
                 <div class="col-auto"><input [(ngModel)]="fifaVersion" [ngModelOptions]="{standalone: true}"
@@ -279,7 +294,7 @@
 
               <div class="row g-2">
                 <div class="col-auto"><button type="submit" class="btn btn-primary"
-                    (click)="goToPage(searchForm.value.name,fifaVersion,preferredFoot,ageMin,ageMax,overallMin,overallMax,potentialMin,potentialMax,heightMin,heightMax,minValue,maxValue,minWage,maxWage,minHeadingAccuracy,maxHeadingAccuracy,minVolleys,maxVolleys,minDribbling,maxDribbling,minCurve,maxCurve,minFkAccuracy,maxFkAccuracy,minAcceleration,maxAcceleration,minSprintSpeed,maxSprintSpeed,minAgility,maxAgility,minReaction,maxReaction,minBalance,maxBalance,minShotPower,maxShotPower,minJumping,maxJumping,minStamina,maxStamina,minAggression,maxAggression,minLongShots,maxLongShots,minCrossing,maxCrossing,minFinishing,maxFinishing,minShortPassing,maxShortPassing)">Filter</button>
+                    (click)="goToPage(searchForm.value.name,fifaVersion,clubFilter.value,preferredFoot,ageMin,ageMax,overallMin,overallMax,potentialMin,potentialMax,heightMin,heightMax,minValue,maxValue,minWage,maxWage,minHeadingAccuracy,maxHeadingAccuracy,minVolleys,maxVolleys,minDribbling,maxDribbling,minCurve,maxCurve,minFkAccuracy,maxFkAccuracy,minAcceleration,maxAcceleration,minSprintSpeed,maxSprintSpeed,minAgility,maxAgility,minReaction,maxReaction,minBalance,maxBalance,minShotPower,maxShotPower,minJumping,maxJumping,minStamina,maxStamina,minAggression,maxAggression,minLongShots,maxLongShots,minCrossing,maxCrossing,minFinishing,maxFinishing,minShortPassing,maxShortPassing)">Filter</button>
                 </div>
                 <div class="col-auto"><button type="button" class="btn btn-primary"
                     (click)="resetValues(searchForm.value.name)">Clear filters</button></div>
@@ -288,7 +303,7 @@
           </div>
         </ul>
         <form #searchForm="ngForm"
-          (ngSubmit)="goToPage(searchForm.value.name,fifaVersion,preferredFoot,ageMin,ageMax,overallMin,overallMax,potentialMin,potentialMax,heightMin,heightMax,minValue,maxValue,minWage,maxWage,minHeadingAccuracy,maxHeadingAccuracy,minVolleys,maxVolleys,minDribbling,maxDribbling,minCurve,maxCurve,minFkAccuracy,maxFkAccuracy,minAcceleration,maxAcceleration,minSprintSpeed,maxSprintSpeed,minAgility,maxAgility,minReaction,maxReaction,minBalance,maxBalance,minShotPower,maxShotPower,minJumping,maxJumping,minStamina,maxStamina,minAggression,maxAggression,minLongShots,maxLongShots,minCrossing,maxCrossing,minFinishing,maxFinishing,minShortPassing,maxShortPassing)"
+          (ngSubmit)="goToPage(searchForm.value.name,fifaVersion,clubFilter.value,preferredFoot,ageMin,ageMax,overallMin,overallMax,potentialMin,potentialMax,heightMin,heightMax,minValue,maxValue,minWage,maxWage,minHeadingAccuracy,maxHeadingAccuracy,minVolleys,maxVolleys,minDribbling,maxDribbling,minCurve,maxCurve,minFkAccuracy,maxFkAccuracy,minAcceleration,maxAcceleration,minSprintSpeed,maxSprintSpeed,minAgility,maxAgility,minReaction,maxReaction,minBalance,maxBalance,minShotPower,maxShotPower,minJumping,maxJumping,minStamina,maxStamina,minAggression,maxAggression,minLongShots,maxLongShots,minCrossing,maxCrossing,minFinishing,maxFinishing,minShortPassing,maxShortPassing)"
           class="d-flex" role="search">
           <input type="search" name="name" ngModel class="form-control me-2" placeholder="Search players"
             aria-label="Search">
@@ -314,8 +329,10 @@
               <tr>
                 <th scope="col"></th>
                 <th scope="col"></th>
+                <th scope="col"></th>
                 <th scope="col">Photo</th>
                 <th scope="col">Known Name</th>
+                <th scope="col"></th>
                 <th class="sortable" scope="col" (click)="sortByColumn(sortableColumns[0])">Age
                   <span [innerHTML]="sortArrow(sortableColumns[0].column)"></span>
                 </th>
@@ -401,6 +418,10 @@
                 <!-- <mat-checkbox (change)="toggleSelection(spieler)"></mat-checkbox> -->
               <tr *ngFor="let spieler of state.appData.data.page.content; let i = index;">
                 <th scope="row">
+                  <mat-icon matTooltip="Delete for displayed Fifaversion" class="deleteBin" (click)="deletePerFifaVersionLogic(spieler.playerId, spieler.fifaVersion)">delete</mat-icon>
+                  <mat-icon matTooltip="Delete for every Fifaversion" class="deleteBinSweep" (click)="deleteAllLogic(spieler.playerId)">delete_sweep</mat-icon>
+                </th>
+                <th scope="row">
                   <input
                     class="form-check-input"
                     type="checkbox"
@@ -410,15 +431,16 @@
                 <th scope="row">
                   <mat-icon matTooltip="Edit Player" [routerLink]="['/editPlayer', false, spieler.playerId, spieler.fifaVersion]">edit</mat-icon>
                 </th>
-                <th scope="row"><img [src]="spieler.photoURL" width="42" height="42" class="rounded-circle" S></th>
+                <th scope="row"><img [src]="spieler.photoURL" width="42" height="42" class="rounded-circle" appHideMissing></th>
                 <td>{{ spieler.knownName }}</td>
+                <td><img src="assets/images/nameinfo.svg" [matTooltip]="spieler.fullName" [width]="20" [height]="20" class="nameinfo"></td>
                 <td>{{ spieler.age }}</td>
-                <td><img [src]="spieler.flag" width="42" height="42" class="rounded-circle"></td>
-                <td><img [src]="spieler.clubLogo" width="42" height="42" class="rounded-circle"></td>
+                <td><img [src]="spieler.flag" [alt]="" width="56" height="42" class="rounded" appHideMissing></td>
+                <td><img [src]="spieler.clubLogo" [alt]="" [title]="spieler.clubName" [width]="42" height="42" class="rounded-circle" appHideMissing></td>
                 <td>{{ spieler.overall }}</td>
                 <td>{{ spieler.potential }}</td>
                 <td>{{ spieler.bestPos }}</td>
-                <td>{{ spieler.valueEUR }}</td>
+                <td>{{ formatter.format(spieler.valueEUR) }}</td>
                 <td>{{ spieler.height }}</td>
                 <td>{{ spieler.weight }}</td>
                 <!-- -------------------- -->
@@ -440,7 +462,7 @@
                 <td [hidden]="condArray[15]">{{ spieler.crossing }}</td>
                 <td [hidden]="condArray[16]">{{ spieler.finishing }}</td>
                 <td [hidden]="condArray[17]">{{ spieler.shortPassing }}</td>
-                <td [hidden]="condArray[18]">{{ spieler.wage }}</td>
+                <td [hidden]="condArray[18]">{{ formatter.format(spieler.wage) }}</td>
               </tr>
             </tbody>
           </table>
@@ -459,7 +481,7 @@
               <ng-container *ngFor="let pageNumber of [].constructor(state.appData.data.page.totalPages); let i = index;">
                 <li *ngIf="shouldShowPage(i, currentPage$ | async)"
                     class="page-item pointer" [ngClass]="i == (currentPage$ | async) ? ' active' : ''">
-                  <a (click)="goToPage(searchForm.value.name,fifaVersion, preferredFoot,ageMin,ageMax,overallMin,overallMax,potentialMin,potentialMax,heightMin,heightMax,minValue,maxValue,minWage,maxWage,minHeadingAccuracy,maxHeadingAccuracy,minVolleys,maxVolleys,minDribbling,maxDribbling,minCurve,maxCurve,minFkAccuracy,maxFkAccuracy,minAcceleration,maxAcceleration,minSprintSpeed,maxSprintSpeed,minAgility,maxAgility,minReaction,maxReaction,minBalance,maxBalance,minShotPower,maxShotPower,minJumping,maxJumping,minStamina,maxStamina,minAggression,maxAggression,minLongShots,maxLongShots,minCrossing,maxCrossing,minFinishing,maxFinishing,minShortPassing,maxShortPassing, i)"
+                  <a (click)="goToPage(searchForm.value.name,fifaVersion,clubFilter.value,preferredFoot,ageMin,ageMax,overallMin,overallMax,potentialMin,potentialMax,heightMin,heightMax,minValue,maxValue,minWage,maxWage,minHeadingAccuracy,maxHeadingAccuracy,minVolleys,maxVolleys,minDribbling,maxDribbling,minCurve,maxCurve,minFkAccuracy,maxFkAccuracy,minAcceleration,maxAcceleration,minSprintSpeed,maxSprintSpeed,minAgility,maxAgility,minReaction,maxReaction,minBalance,maxBalance,minShotPower,maxShotPower,minJumping,maxJumping,minStamina,maxStamina,minAggression,maxAggression,minLongShots,maxLongShots,minCrossing,maxCrossing,minFinishing,maxFinishing,minShortPassing,maxShortPassing, i)"
                      class="page-link">
                     {{ i == 0 ? 1 : i + 1}}
                   </a>

@@ -47,9 +47,13 @@ public class SpielerService {
         return spielerRepository.findSpielerByFullName(fullName);
     }
 
+    public void deleteSpielerByID(int id){
+        spielerRepository.deleteById(id);
+    }
 
     public Page<SpielerDTO> findByFullNameFiltered(String name,
                                                    int fifaVersion,
+                                                   String clubName,
                                                    String preferredFoot,
                                                    int minAge,
                                                    int maxAge,
@@ -103,6 +107,7 @@ public class SpielerService {
         return spielerRepository.findByFullNameFiltered(
                 name,
                 fifaVersion,
+                clubName,
                 preferredFoot,
                 minAge,
                 maxAge,
@@ -198,9 +203,5 @@ public class SpielerService {
             return spielerOptional;
         System.out.println("Spieler nicht gefunden!");
         return null;
-    }
-
-    public void deleteSpieler(){
-        spielerRepository.deleteSpielerById(100000);
     }
 }

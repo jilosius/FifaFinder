@@ -6,10 +6,6 @@ import com.fifafinder.fifadb.services.SpielerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -100,6 +96,7 @@ public class SpielerController {
     @GetMapping("/start/filtered")
     public ResponseEntity<HttpResponse> getSpieler(@RequestParam Optional<String> fullName,
                                                    @RequestParam Optional<Integer> fifaVersion,
+                                                   @RequestParam Optional<String> clubName,
                                                    @RequestParam Optional<String> preferredFoot,
                                                    @RequestParam Optional<Integer> minAge,
                                                    @RequestParam Optional<Integer> maxAge,
@@ -245,6 +242,7 @@ public class SpielerController {
                         .data(of("page", spielerService.findByFullNameFiltered(
                                 fullName.orElse(""),
                                 fifaVersion.orElse(23),
+                                clubName.orElse(""),
                                 preferredFoot.orElse(""),
                                 minAge.orElse(0),
                                 maxAge.orElse(100),
@@ -316,13 +314,6 @@ public class SpielerController {
         return spielerService.findSpieler();
     }
 
-    @DeleteMapping("/delete")
-    public void deletePlayer()
-    {
-        spielerService.deleteSpieler();
-
-    }
-
     @GetMapping("/start/vergleich")
     public List<SpielerDTO> getSpielerToCompare(@RequestParam Optional<Integer> player1Id,
                                                 @RequestParam Optional<Integer> player2Id,
@@ -337,5 +328,10 @@ public class SpielerController {
                 player4Id.orElse(0),
                 player5Id.orElse(0),
                 fifaVersion.orElse(23));
+    }
+
+    @DeleteMapping("/delete")
+    public void deleteSpielerById(@RequestParam Integer playerID){
+        spielerService.deleteSpielerByID(playerID);
     }
 }

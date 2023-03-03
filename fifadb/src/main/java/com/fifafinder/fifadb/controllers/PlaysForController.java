@@ -2,6 +2,7 @@ package com.fifafinder.fifadb.controllers;
 
 import com.fifafinder.fifadb.DTOs.AddPlaysForDTO;
 import com.fifafinder.fifadb.entities.FifaVersion;
+import com.fifafinder.fifadb.entities.Mannschaften;
 import com.fifafinder.fifadb.entities.Spieler;
 import com.fifafinder.fifadb.repositories.MannschaftenRepository;
 import com.fifafinder.fifadb.services.PlaysForService;
@@ -15,6 +16,9 @@ import com.fifafinder.fifadb.dto.SpielerDetailDTO;
 import com.fifafinder.fifadb.dto.UpdateDTO;
 import com.fifafinder.fifadb.entities.*;
 import com.fifafinder.fifadb.repositories.FifaVersionRepository;
+import com.fifafinder.fifadb.services.PlaysForService;
+import com.fifafinder.fifadb.services.SpielerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,21 +33,29 @@ public class PlaysForController {
     private final SpielerService spielerService;
     private final FifaVersionRepository fifaVersionRepository;
     private final FifaController fifaController;
+    private final MannschaftenController mannschaftenController;
     private final MannschaftenRepository mannschaftenRepository;
     @Autowired
     public PlaysForController(PlaysForService playsForService, SpielerService spielerService,
                               FifaVersionRepository fifaVersionRepository, FifaController fifaController,
                               MannschaftenRepository mannschaftenRepository) {
+                              MannschaftenController mannschaftenController) {
         this.playsForService = playsForService;
         this.spielerService = spielerService;
         this.fifaVersionRepository = fifaVersionRepository;
         this.fifaController = fifaController;
+        this.mannschaftenController = mannschaftenController;
         this.mannschaftenRepository = mannschaftenRepository;
     }
 
     @GetMapping("/count")
     public long count() {
         return playsForService.count();
+    }
+
+    @GetMapping("/countUniquePlayerRecords")
+    public long countUniquePlayerRecords(@RequestParam int playerID){
+        return playsForService.countUniquePlayerRecords(playerID);
     }
     @GetMapping("/all")
     public List<PlaysFor> getAll() {
@@ -78,7 +90,7 @@ public class PlaysForController {
     public void addPlayer(@RequestBody AddPlaysForDTO playsForDTO )
     {
 
-
+        System.out.println(playsForDTO);
         Spieler spieler = new Spieler();
         spieler.setKnownName(playsForDTO.getKnownName());
         spieler.setFullName(playsForDTO.getFullName());
@@ -97,6 +109,8 @@ public class PlaysForController {
                 playsForDTO.getPreferredFoot(), playsForDTO.getContractUntil(), playsForDTO.getOnLoan(), playsForDTO.getNationalTeam(), playsForDTO.getAge(), playsForDTO.getWeight(),
                 playsForDTO.getOverall(),playsForDTO.getPotential(),playsForDTO.getBestPosition(), playsForDTO.getClubName(), playsForDTO.getValueEUR(), playsForDTO.getWage(),
                 playsForDTO.getReleaseClause(),playsForDTO.getIntReputation(),playsForDTO.getWeakFoot(),playsForDTO.getSkillMoves(),playsForDTO.getCrossing(),playsForDTO.getFinishing(),
+                playsForDTO.getOverall(),playsForDTO.getPotential(),playsForDTO.getBestPosition(), mannschaftenController.getMannschaftenByName(playsForDTO.getClubName()), playsForDTO.getValueEur(), playsForDTO.getWage(),
+                playsForDTO.getReleaseClause(),playsForDTO.getReputation(),playsForDTO.getWeakFoot(),playsForDTO.getSkillMoves(),playsForDTO.getCrossing(),playsForDTO.getFinishing(),
                 playsForDTO.getHeadingAccuracy(),playsForDTO.getShortPassing(),playsForDTO.getVolleys(),playsForDTO.getDribbling(),playsForDTO.getCurve(),playsForDTO.getFKAccuracy(),
                 playsForDTO.getLongPassing(), playsForDTO.getBallControl(),playsForDTO.getAcceleration(),playsForDTO.getBallControl(),playsForDTO.getAgility(),playsForDTO.getReaction(),
                 playsForDTO.getBalance(),playsForDTO.getShotPower(),playsForDTO.getJumping(), playsForDTO.getStamina(),playsForDTO.getStrength(),playsForDTO.getLongShots(),
@@ -105,4 +119,20 @@ public class PlaysForController {
                 playsForDTO.getGKPositioning(),playsForDTO.getGKReflexes(),playsForDTO.getPhotoUrl());
 
     }
+
+    @DeleteMapping("/delete{playerID}")
+    public void deleteAllbyId(@PathVariable("playerID") int playerID){
+        playsForService.deleteAllByPlayerID(playerID);
+    }
+
+    @DeleteMapping("/deleteInFifaVersion")
+    public void deleteAllByPlayerIDAndFifaVersion(@RequestParam int playerID, @RequestParam int fifaVersion){
+        playsForService.deleteAllByPlayerIDAndFifaVersion(playerID, fifaVersion);
+    }
+
+    @GetMapping("/listVersions")
+    public List<FifaVersion> listFifaVersions(){
+        return playsForService.listFifaVersions();
+    }
+
 }

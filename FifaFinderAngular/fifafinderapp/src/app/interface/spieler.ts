@@ -2,9 +2,11 @@ export interface Spieler {
     playerId: number;
     photoURL: string;
     fifaVersion: number;
+    fullName: string;
     knownName: string;
     age: number;
     flag: string;
+    clubName: string;
     clubLogo: string;
     overall: number;
     potential: number;

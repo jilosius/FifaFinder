@@ -32,6 +32,7 @@ public class SpielerControllerTest {
     public void testGetSpieler() {
         String fullName = "";
         int fifaVersion = 23;
+        String clubName = "";
         String preferredFoot = "";
         int minAge = 0;
         int maxAge = 100;
@@ -93,6 +94,7 @@ public class SpielerControllerTest {
         when(spielerService.findByFullNameFiltered(
                 fullName,
                 fifaVersion,
+                clubName,
                 preferredFoot,
                 minAge,
                 maxAge,
@@ -148,7 +150,7 @@ public class SpielerControllerTest {
         )).thenReturn(spielerDTOPage);
 
         ResponseEntity<HttpResponse> responseEntity = spielerController.getSpieler(Optional.of(fullName),
-                Optional.of(fifaVersion), Optional.of(preferredFoot),
+                Optional.of(fifaVersion), Optional.of(clubName), Optional.of(preferredFoot),
                 Optional.of(minAge), Optional.of(maxAge),
                 Optional.of(minOverall), Optional.of(maxOverall),
                 Optional.of(minPotential),
