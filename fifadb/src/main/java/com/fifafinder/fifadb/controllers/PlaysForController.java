@@ -2,7 +2,6 @@ package com.fifafinder.fifadb.controllers;
 
 import com.fifafinder.fifadb.DTOs.AddPlaysForDTO;
 import com.fifafinder.fifadb.entities.FifaVersion;
-import com.fifafinder.fifadb.entities.Mannschaften;
 import com.fifafinder.fifadb.entities.Spieler;
 import com.fifafinder.fifadb.repositories.MannschaftenRepository;
 import com.fifafinder.fifadb.services.PlaysForService;
@@ -16,17 +15,11 @@ import com.fifafinder.fifadb.dto.SpielerDetailDTO;
 import com.fifafinder.fifadb.dto.UpdateDTO;
 import com.fifafinder.fifadb.entities.*;
 import com.fifafinder.fifadb.repositories.FifaVersionRepository;
-import com.fifafinder.fifadb.services.PlaysForService;
-import com.fifafinder.fifadb.services.SpielerService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.ZoneId;
 import java.util.List;
-
-import java.time.LocalDate;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/playsfor")
@@ -102,14 +95,14 @@ public class PlaysForController {
 
         playsForService.addPlayer(spieler, fifaVersion,playsForId, playsForDTO.getHeight(), playsForDTO.getClubPosition(), playsForDTO.getClubNumber(), playsForDTO.getNationalPosition(), playsForDTO.getNationalNumber(),
                 playsForDTO.getPreferredFoot(), playsForDTO.getContractUntil(), playsForDTO.getOnLoan(), playsForDTO.getNationalTeam(), playsForDTO.getAge(), playsForDTO.getWeight(),
-                playsForDTO.getOverall(),playsForDTO.getPotential(),playsForDTO.getBestPosition(), mannschaftenRepository.findMannschaftenByClubName(playsForDTO.getClubName()), playsForDTO.getValueEur(), playsForDTO.getWage(),
-                playsForDTO.getReleaseClause(),playsForDTO.getReputation(),playsForDTO.getWeakFoot(),playsForDTO.getSkillMoves(),playsForDTO.getCrossing(),playsForDTO.getFinishing(),
+                playsForDTO.getOverall(),playsForDTO.getPotential(),playsForDTO.getBestPosition(), playsForDTO.getClubName(), playsForDTO.getValueEUR(), playsForDTO.getWage(),
+                playsForDTO.getReleaseClause(),playsForDTO.getIntReputation(),playsForDTO.getWeakFoot(),playsForDTO.getSkillMoves(),playsForDTO.getCrossing(),playsForDTO.getFinishing(),
                 playsForDTO.getHeadingAccuracy(),playsForDTO.getShortPassing(),playsForDTO.getVolleys(),playsForDTO.getDribbling(),playsForDTO.getCurve(),playsForDTO.getFKAccuracy(),
                 playsForDTO.getLongPassing(), playsForDTO.getBallControl(),playsForDTO.getAcceleration(),playsForDTO.getBallControl(),playsForDTO.getAgility(),playsForDTO.getReaction(),
                 playsForDTO.getBalance(),playsForDTO.getShotPower(),playsForDTO.getJumping(), playsForDTO.getStamina(),playsForDTO.getStrength(),playsForDTO.getLongShots(),
                 playsForDTO.getAggression(),playsForDTO.getAggression(),playsForDTO.getPositioning(),playsForDTO.getVision(),playsForDTO.getPenalties(),playsForDTO.getComposure(),
                 playsForDTO.getMarking(),playsForDTO.getStandingTackle(),playsForDTO.getSlidingTackle(),playsForDTO.getGKDiving(),playsForDTO.getGKHandling(),playsForDTO.getGKKicking(),
-                playsForDTO.getGKPositioning(),playsForDTO.getGKReflexes(),playsForDTO.getPhotoURL());
+                playsForDTO.getGKPositioning(),playsForDTO.getGKReflexes(),playsForDTO.getPhotoUrl());
 
     }
 }

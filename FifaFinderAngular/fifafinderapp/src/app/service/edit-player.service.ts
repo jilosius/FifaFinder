@@ -19,8 +19,6 @@ export class EditPlayerService {
     this.http.post('http://localhost:8080/playsfor/add', addPlayerDetails).subscribe();
   }
 
-  getCurrentDetails(playerId: number, fifaVersion: number) {
-    return this.http.get<UpdateDto>('http://localhost:8080/playsfor/detailsforedit/playerid='+playerId+'/fifaversion='+fifaVersion);
-  }
-
+  details$ = (playerId:number, fifaVersion:number): Observable<UpdateDto> =>
+    this.http.get<UpdateDto>('http://localhost:8080/playsfor/detailsforedit/playerid='+playerId+'/fifaversion='+fifaVersion);
 }
