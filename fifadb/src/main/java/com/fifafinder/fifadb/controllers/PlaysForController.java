@@ -38,7 +38,7 @@ public class PlaysForController {
     @Autowired
     public PlaysForController(PlaysForService playsForService, SpielerService spielerService,
                               FifaVersionRepository fifaVersionRepository, FifaController fifaController,
-                              MannschaftenRepository mannschaftenRepository) {
+                              MannschaftenRepository mannschaftenRepository,
                               MannschaftenController mannschaftenController) {
         this.playsForService = playsForService;
         this.spielerService = spielerService;
@@ -109,8 +109,6 @@ public class PlaysForController {
                 playsForDTO.getPreferredFoot(), playsForDTO.getContractUntil(), playsForDTO.getOnLoan(), playsForDTO.getNationalTeam(), playsForDTO.getAge(), playsForDTO.getWeight(),
                 playsForDTO.getOverall(),playsForDTO.getPotential(),playsForDTO.getBestPosition(), playsForDTO.getClubName(), playsForDTO.getValueEUR(), playsForDTO.getWage(),
                 playsForDTO.getReleaseClause(),playsForDTO.getIntReputation(),playsForDTO.getWeakFoot(),playsForDTO.getSkillMoves(),playsForDTO.getCrossing(),playsForDTO.getFinishing(),
-                playsForDTO.getOverall(),playsForDTO.getPotential(),playsForDTO.getBestPosition(), mannschaftenController.getMannschaftenByName(playsForDTO.getClubName()), playsForDTO.getValueEur(), playsForDTO.getWage(),
-                playsForDTO.getReleaseClause(),playsForDTO.getReputation(),playsForDTO.getWeakFoot(),playsForDTO.getSkillMoves(),playsForDTO.getCrossing(),playsForDTO.getFinishing(),
                 playsForDTO.getHeadingAccuracy(),playsForDTO.getShortPassing(),playsForDTO.getVolleys(),playsForDTO.getDribbling(),playsForDTO.getCurve(),playsForDTO.getFKAccuracy(),
                 playsForDTO.getLongPassing(), playsForDTO.getBallControl(),playsForDTO.getAcceleration(),playsForDTO.getBallControl(),playsForDTO.getAgility(),playsForDTO.getReaction(),
                 playsForDTO.getBalance(),playsForDTO.getShotPower(),playsForDTO.getJumping(), playsForDTO.getStamina(),playsForDTO.getStrength(),playsForDTO.getLongShots(),

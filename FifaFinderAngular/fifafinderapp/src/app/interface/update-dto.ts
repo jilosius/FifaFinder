@@ -1,18 +1,18 @@
 export interface UpdateDto {
     height: number;
-    clubPosition: String;
+    clubPosition: string;
     clubNumber: number;
-    nationalPosition: String;
+    nationalPosition: string;
     nationalNumber: number;
-    preferredFoot: String;
+    preferredFoot: string;
     contractUntil: number;
-    onLoan: String;
-    nationalTeam: String;
+    onLoan: string;
+    nationalTeam: string;
     weight: number;
     overall: number;
     potential: number;
-    bestPosition: String;
-    clubName: String;
+    bestPosition: string;
+    clubName: string;
     valueEUR: number;
     wage: number;
     releaseClause: number;
@@ -26,7 +26,7 @@ export interface UpdateDto {
     volleys: number;
     dribbling: number;
     curve: number;
-    fKAccuracy: number;
+    fkaccuracy: number;
     longPassing: number;
     ballControl: number;
     acceleration: number;
@@ -48,11 +48,11 @@ export interface UpdateDto {
     marking: number;
     standingTackle: number;
     slidingTackle: number;
-    gKDiving: number;
-    gKHandling: number;
-    gKKicking: number;
-    gKPositioning: number;
-    gKReflexes: number;
-    photoUrl: String;
+    gkdiving: number;
+    gkhandling: number;
+    gkkicking: number;
+    gkpositioning: number;
+    gkreflexes: number;
+    photoUrl: string;
 
 }

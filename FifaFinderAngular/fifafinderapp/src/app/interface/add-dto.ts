@@ -32,11 +32,11 @@ export interface AddDto {
     volleys: number;
     dribbling: number;
     curve: number;
-    fKAccuracy: number;
+    fkaccuracy: number;
     longPassing: number;
     ballControl: number;
     acceleration: number;
-    sprintspeed: number;
+    sprintSpeed: number;
     agility: number;
     reaction: number;
     balance: number;
@@ -46,7 +46,7 @@ export interface AddDto {
     strength: number;
     longShots: number;
     aggression: number;
-    interception: number;
+    interceptions: number;
     positioning: number;
     vision: number;
     penalties: number;
@@ -54,9 +54,9 @@ export interface AddDto {
     marking: number;
     standingTackle: number;
     slidingTackle: number;
-    gKDiving: number;
-    gKHandling: number;
-    gKKicking: number;
-    gKPositioning: number;
-    gKReflexes: number;
+    gkdiving: number;
+    gkhandling: number;
+    gkkicking: number;
+    gkpositioning: number;
+    gkreflexes: number;
 }

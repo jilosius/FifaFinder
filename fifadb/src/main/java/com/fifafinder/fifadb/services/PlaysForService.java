@@ -228,7 +228,6 @@ public class PlaysForService {
         playsFor.setGKReflexes(gKReflexes);
         playsFor.setPhotoUrl(photoUrl);
 
-        System.out.println(playsFor.getFifaVersion());
         playsForRepository.save(playsFor);
     }
 

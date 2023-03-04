@@ -9,7 +9,6 @@
 
 .my-button {
     margin-left: 10px; /* add 10px of space on the left */
-    margin-right: 10px;
   }
 
 .selected {
@@ -50,4 +49,19 @@
 .deleteBinSweep:hover{
     color: red;
     cursor: pointer;
+}
+
+.editIcon {
+    color: #52585f;
+    margin-left: 5px;
+}
+
+.editIcon:hover {
+    background-color: #dadada;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    cursor: pointer;
+    color: red;
 }

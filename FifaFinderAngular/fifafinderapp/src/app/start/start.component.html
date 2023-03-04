@@ -329,7 +329,6 @@
               <tr>
                 <th scope="col"></th>
                 <th scope="col"></th>
-                <th scope="col"></th>
                 <th scope="col">Photo</th>
                 <th scope="col">Known Name</th>
                 <th scope="col"></th>
@@ -420,6 +419,7 @@
                 <th scope="row">
                   <mat-icon matTooltip="Delete for displayed Fifaversion" class="deleteBin" (click)="deletePerFifaVersionLogic(spieler.playerId, spieler.fifaVersion)">delete</mat-icon>
                   <mat-icon matTooltip="Delete for every Fifaversion" class="deleteBinSweep" (click)="deleteAllLogic(spieler.playerId)">delete_sweep</mat-icon>
+                  <mat-icon matTooltip="Edit Player" class="editIcon" [routerLink]="['/editPlayer', false, spieler.playerId, spieler.fifaVersion]">edit</mat-icon>
                 </th>
                 <th scope="row">
                   <input
@@ -427,9 +427,6 @@
                     type="checkbox"
                     [value]="spieler.playerId"
                     (change)="toggleSelection(spieler)" />
-                </th>
-                <th scope="row">
-                  <mat-icon matTooltip="Edit Player" [routerLink]="['/editPlayer', false, spieler.playerId, spieler.fifaVersion]">edit</mat-icon>
                 </th>
                 <th scope="row"><img [src]="spieler.photoURL" width="42" height="42" class="rounded-circle" appHideMissing></th>
                 <td>{{ spieler.knownName }}</td>
