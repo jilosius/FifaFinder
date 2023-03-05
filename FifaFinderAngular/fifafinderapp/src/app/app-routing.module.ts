@@ -9,7 +9,7 @@ const routes: Routes = [
   {path: '', component: StartComponent},
   {path: 'start', component: StartComponent},
   {path: 'vergleich', component: VergleichComponent},
-  {path: 'editPlayer/:mode', component: EditPlayerComponent}
+  {path: 'editPlayer/:mode/:playerId/:fifaVersion', component: EditPlayerComponent}
 ];
 
 @NgModule({

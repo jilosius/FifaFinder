@@ -1,5 +1,6 @@
 package com.fifafinder.fifadb.services;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fifafinder.fifadb.dto.SpielerDetailDTO;
 import com.fifafinder.fifadb.dto.UpdateDTO;
 import com.fifafinder.fifadb.entities.*;
@@ -13,6 +14,10 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.transaction.Transactional;
+import jakarta.persistence.Column;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -131,11 +136,25 @@ public class PlaysForService {
         playsForRepository.save(details);
     }
 
+    public UpdateDTO getDetailsForEdit(PlaysForId playsForId) {
+        PlaysFor playsFor = playsForRepository.findPlaysForById(playsForId);
+        UpdateDTO details = new UpdateDTO(playsFor.getHeight(), playsFor.getClubPosition(), playsFor.getClubNumber(), playsFor.getNationalPosition(), playsFor.getNationalNumber(),
+                playsFor.getPreferredFoot(), playsFor.getContractUntil(), playsFor.getOnLoan(), playsFor.getNationalTeam(), playsFor.getWeight(), playsFor.getOverall(),
+                playsFor.getPotential(), playsFor.getBestPosition(), playsFor.getClubID().getClubName(), playsFor.getValueEUR(), playsFor.getWage(), playsFor.getReleaseClause(),
+                playsFor.getIntReputation(), playsFor.getWeakFoot(), playsFor.getSkillMoves(), playsFor.getCrossing(), playsFor.getFinishing(), playsFor.getHeadingAccuracy(),
+                playsFor.getShortPassing(), playsFor.getVolleys(), playsFor.getDribbling(), playsFor.getCurve(), playsFor.getFkAccuracy(), playsFor.getLongPassing(), playsFor.getBallControl(),
+                playsFor.getAcceleration(), playsFor.getSprintSpeed(), playsFor.getAgility(), playsFor.getReaction(), playsFor.getBalance(), playsFor.getShotPower(), playsFor.getJumping(),
+                playsFor.getStamina(), playsFor.getStrength(), playsFor.getLongShots(), playsFor.getAggression(), playsFor.getInterceptions(), playsFor.getPositioning(), playsFor.getVision(),
+                playsFor.getPenalties(), playsFor.getComposure(), playsFor.getMarking(), playsFor.getStandingTackle(), playsFor.getSlidingTackle(), playsFor.getGKDiving(), playsFor.getGKHandling(),
+                playsFor.getGKKicking(), playsFor.getGKPositioning(), playsFor.getGKReflexes(), playsFor.getPhotoUrl());
+        return details;
+    }
+
 
 
     public void addPlayer(Spieler spieler, FifaVersion fifaversion,PlaysForId playsForId, Integer height, String clubPosition, Integer clubNumber, String nationalPosition,
                 Integer nationalNumber, String preferredFoot, Integer contractUntil, String onLoan, String nationalTeam, Integer age,
-                Integer weight, Integer overall, Integer potential, String bestPosition, Mannschaften clubID, Long valueEUR, Long wage,
+                Integer weight, Integer overall, Integer potential, String bestPosition, String clubName, Long valueEUR, Long wage,
                 Long releaseClause, Integer intReputation, Integer weakFoot, Integer skillMoves, Integer crossing, Integer finishing,
                 Integer headingAccuracy, Integer shortPassing, Integer volleys, Integer dribbling, Integer curve, Integer fKAccuracy,
                 Integer longPassing, Integer ballControl, Integer acceleration, Integer sprintSpeed, Integer agility, Integer reaction,
@@ -166,7 +185,7 @@ public class PlaysForService {
         playsFor.setOverall(overall);
         playsFor.setPotential(potential);
         playsFor.setBestPosition(bestPosition);
-        playsFor.setClubID(clubID);
+        playsFor.setClubID(mannschaftenRepository.findMannschaftenByClubName(clubName));
         playsFor.setValueEUR(valueEUR);
         playsFor.setWage(wage);
         playsFor.setReleaseClause(releaseClause);
@@ -203,14 +222,12 @@ public class PlaysForService {
         playsFor.setStandingTackle(standingTackle);
         playsFor.setSlidingTackle(slidingTackle);
         playsFor.setGKDiving(gKDiving);
-        playsFor.setGKDiving(gKDiving);
         playsFor.setGKHandling(gKHandling);
         playsFor.setGKKicking(gKKicking);
         playsFor.setGKPositioning(gKPositioning);
         playsFor.setGKReflexes(gKReflexes);
         playsFor.setPhotoUrl(photoUrl);
 
-        System.out.println(playsFor.getFifaVersion());
         playsForRepository.save(playsFor);
     }
 

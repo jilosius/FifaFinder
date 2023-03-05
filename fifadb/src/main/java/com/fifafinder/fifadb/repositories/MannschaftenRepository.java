@@ -10,8 +10,6 @@ import java.util.List;
 public interface MannschaftenRepository extends JpaRepository<Mannschaften, Integer> {
 
     Mannschaften findById(int id);
-    List<Mannschaften> findByOrderByClubNameAsc();
-
-
     Mannschaften findMannschaftenByClubName(String clubName);
+    List<Mannschaften> findByOrderByClubNameAsc();
 }

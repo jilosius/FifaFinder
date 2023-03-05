@@ -1,17 +1,13 @@
 package com.fifafinder.fifadb.DTOs;
 
-import com.fifafinder.fifadb.entities.FifaVersion;
-import com.fifafinder.fifadb.entities.Mannschaften;
-import com.fifafinder.fifadb.entities.PlaysForId;
-import com.fifafinder.fifadb.entities.Spieler;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.Date;
 @Data
 @AllArgsConstructor
 @ToString
+@Setter
+@Getter
 public class AddPlaysForDTO {
 
     private String knownName;
@@ -19,8 +15,8 @@ public class AddPlaysForDTO {
     private Integer age;
     private Integer weight;
     private Integer height;
-    private String PhotoURL;
-    private Date DateOfBirth;
+    private String photoUrl;
+    private Date dateOfBirth;
     private Integer fifaVersion;
     private String clubPosition;
     private Integer clubNumber;
@@ -30,13 +26,13 @@ public class AddPlaysForDTO {
     private String nationalTeam;
     private Integer contractUntil;
     private String onLoan;
-    private Long valueEur;
+    private Long valueEUR;
     private Long wage;
     private Long releaseClause;
-    private Integer Overall;
-    private Integer Potential;
+    private Integer overall;
+    private Integer potential;
     private String bestPosition;
-    private Integer Reputation;
+    private Integer intReputation;
     private String preferredFoot;
     private Integer weakFoot;
     private Integer skillMoves;
@@ -47,7 +43,7 @@ public class AddPlaysForDTO {
     private Integer Volleys;
     private Integer Dribbling;
     private Integer Curve;
-    private Integer FKAccuracy;
+    private Integer fKAccuracy;
     private Integer LongPassing;
     private Integer BallControl;
     private Integer Acceleration;
@@ -69,10 +65,10 @@ public class AddPlaysForDTO {
     private Integer Marking;
     private Integer StandingTackle;
     private Integer SlidingTackle;
-    private Integer GKDiving;
-    private Integer GKHandling;
-    private Integer GKKicking;
-    private Integer GKPositioning;
-    private Integer GKReflexes;
+    private Integer gKDiving;
+    private Integer gKHandling;
+    private Integer gKKicking;
+    private Integer gKPositioning;
+    private Integer gKReflexes;
 
 }
