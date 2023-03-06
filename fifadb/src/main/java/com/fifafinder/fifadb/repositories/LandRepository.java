@@ -8,4 +8,5 @@ import java.util.List;
 
 @Repository
 public interface LandRepository extends JpaRepository<Land, Integer> {
+    Land findByCountryName(String name);
 }

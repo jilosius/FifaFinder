@@ -5,8 +5,7 @@ import com.fifafinder.fifadb.entities.FifaVersion;
 import com.fifafinder.fifadb.entities.Mannschaften;
 import com.fifafinder.fifadb.entities.Spieler;
 import com.fifafinder.fifadb.repositories.MannschaftenRepository;
-import com.fifafinder.fifadb.services.PlaysForService;
-import com.fifafinder.fifadb.services.SpielerService;
+import com.fifafinder.fifadb.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,6 +30,7 @@ public class PlaysForController {
 
     private final PlaysForService playsForService;
     private final SpielerService spielerService;
+    private final LandService landService;
     private final FifaVersionRepository fifaVersionRepository;
     private final FifaController fifaController;
     private final MannschaftenController mannschaftenController;
@@ -39,13 +39,14 @@ public class PlaysForController {
     public PlaysForController(PlaysForService playsForService, SpielerService spielerService,
                               FifaVersionRepository fifaVersionRepository, FifaController fifaController,
                               MannschaftenRepository mannschaftenRepository,
-                              MannschaftenController mannschaftenController) {
+                              MannschaftenController mannschaftenController, LandService landService) {
         this.playsForService = playsForService;
         this.spielerService = spielerService;
         this.fifaVersionRepository = fifaVersionRepository;
         this.fifaController = fifaController;
         this.mannschaftenController = mannschaftenController;
         this.mannschaftenRepository = mannschaftenRepository;
+        this.landService = landService;
     }
 
     @GetMapping("/count")
