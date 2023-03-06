@@ -1,6 +1,7 @@
 package com.fifafinder.fifadb.controllers;
 
 import com.fifafinder.fifadb.DTOs.SpielerDTO;
+import com.fifafinder.fifadb.dto.spielerDTO;
 import com.fifafinder.fifadb.HttpResponse;
 import com.fifafinder.fifadb.services.SpielerService;
 import lombok.RequiredArgsConstructor;
@@ -42,6 +43,22 @@ public class SpielerController {
     public List<Spieler> getAll() {
         return spielerService.getAllSpieler();
     }
+
+
+
+    @GetMapping("/knownName/{knownName}")
+    public Optional<spielerDTO> getSpielerByKnownName(@PathVariable("knownName") String knownName) {
+        return spielerService.getSpielerByKnownName(knownName);
+
+    }
+
+
+    @GetMapping("/search")
+    public Optional<Spieler[]> getSpielerByFullNameContaining(@RequestParam String n) {
+        return spielerService.findSpielerByFullNameContainingOrderByFullNameAsc(n);
+    }
+
+
 
 //    @GetMapping
 //    public long countSpieler()

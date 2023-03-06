@@ -2,7 +2,6 @@ package com.fifafinder.fifadb.controllers;
 
 import com.fifafinder.fifadb.DTOs.AddPlaysForDTO;
 import com.fifafinder.fifadb.entities.FifaVersion;
-import com.fifafinder.fifadb.entities.Mannschaften;
 import com.fifafinder.fifadb.entities.Spieler;
 import com.fifafinder.fifadb.repositories.MannschaftenRepository;
 import com.fifafinder.fifadb.services.PlaysForService;
@@ -12,18 +11,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.fifafinder.fifadb.dto.SpielerDetailDTO;
 import com.fifafinder.fifadb.dto.UpdateDTO;
 import com.fifafinder.fifadb.entities.*;
 import com.fifafinder.fifadb.repositories.FifaVersionRepository;
-import com.fifafinder.fifadb.services.PlaysForService;
-import com.fifafinder.fifadb.services.SpielerService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.ZoneId;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/playsfor")
@@ -62,12 +57,7 @@ public class PlaysForController {
         return playsForService.getAll();
     }
 
-    @GetMapping("/detailsof{name}in{fifaVersion}")
-    public ResponseEntity<SpielerDetailDTO> getDetails(@PathVariable("name") String name, @PathVariable("fifaVersion") int fifaVersion) {
-        Spieler spieler = spielerService.getSpieler(name);
-        int spielerId = spieler.getId();
-        return ResponseEntity.ok().body(playsForService.getDetails(spielerId, fifaVersion));
-    }
+
 
     @PutMapping("/editdetailsof{playerId}in{fifaVersion}")
     public void editDetails(@PathVariable("playerId") int playerId, @PathVariable("fifaVersion") int fifaVersion, @RequestBody UpdateDTO updateDTO) {
@@ -132,5 +122,11 @@ public class PlaysForController {
     public List<FifaVersion> listFifaVersions(){
         return playsForService.listFifaVersions();
     }
+
+    @GetMapping("/player/{playerID}")
+    public Optional<PlaysFor[]> getPlaysForByPlayerIDId(@PathVariable("playerID") Integer id ) {
+        return playsForService.findPlaysForByPlayerIDId(id);
+    }
+
 
 }

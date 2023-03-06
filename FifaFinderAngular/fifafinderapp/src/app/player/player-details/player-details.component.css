@@ -1,0 +1,65 @@
+.container {
+  display: flex;
+  margin-left: 0;
+  margin-right: 0;
+
+}
+.mat-tab-group {
+  margin-bottom: 48px;
+}
+.tab{
+  width: 100%;
+  margin-left: 20px;
+}
+.app-player-card {
+  flex: 1;
+}
+
+.mat-expansion-panel {
+  flex: 1;
+
+}
+.mdc-linear-progress__bar-inner {
+  border-color: var(--mdc-linear-progress-active-indicator-color, green);
+}
+.playerinfo{
+  margin-top: 10px;
+	font-size: 16px;
+	font-style: italic;
+	cursor: pointer;
+	user-select: none;
+
+}
+
+h4 {  
+  margin-top: 10px;
+	font-size: 16px;
+	font-style: italic;
+	
+
+  }
+.title{
+  font-size: 20px;
+
+}
+.player-card{
+  margin-top: 10 px;
+  border:1cap;
+  border-color: black;
+}
+.player_overview{
+    flex: 1;
+  
+
+}
+.player_overview_container{
+  display: flex;
+  margin-top: 20px;
+
+}
+
+
+.fontawesomesvg {width: 1em;
+  height: 1em;
+  vertical-align: -.125em;
+}

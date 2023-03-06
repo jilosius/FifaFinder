@@ -20,15 +20,22 @@ import { HideMissingDirective } from './directive/hide-missing.directive';
 import { MatIconModule } from "@angular/material/icon";
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatFormFieldModule } from "@angular/material/form-field";
-
-
+import { PlayerModule } from './player/player.module';
+import { NgStyle } from '@angular/common';
+import { HomeComponent } from './home/home.component';
+import { SearchBarComponent } from './search-bar/search-bar.component';
 @NgModule({
   declarations: [
     AppComponent,
     StartComponent,
     VergleichComponent,
     EditPlayerComponent,
-    HideMissingDirective
+    HideMissingDirective,
+    VergleichComponent,AppComponent,
+    HomeComponent,
+    StartComponent,
+    SearchBarComponent,
+
   ],
     imports: [
         BrowserModule,
@@ -47,11 +54,35 @@ import { MatFormFieldModule } from "@angular/material/form-field";
         MatAutocompleteModule,
         MatInputModule,
         MatIconModule,
-        MatTooltipModule
+        MatTooltipModule,
+        NgStyle,
+        MatAutocompleteModule,ReactiveFormsModule,MatInputModule,
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        RouterTestingModule,
+        MatSortModule,
+        MatCheckboxModule,
+        RouterModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatSortModule,
+        FormsModule,
+        HttpClientModule,
+        NgStyle,
+        MatAutocompleteModule,ReactiveFormsModule,MatInputModule,
+        
+
+    
+        PlayerModule,
         // MatMenuModule
     ],
   providers: [],
   schemas:[CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
+

@@ -71,7 +71,6 @@ public class PlaysFor {
     @Column(name = "BestPosition")
     private String bestPosition;
 
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ClubID")
     private Mannschaften clubID;

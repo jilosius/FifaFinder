@@ -1,5 +1,6 @@
 package com.fifafinder.fifadb.services;
 
+import com.fifafinder.fifadb.dto.spielerDTO;
 import com.fifafinder.fifadb.entities.Spieler;
 import com.fifafinder.fifadb.DTOs.SpielerDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -204,4 +205,17 @@ public class SpielerService {
         System.out.println("Spieler nicht gefunden!");
         return null;
     }
-}
+    public Optional<spielerDTO> getSpielerByKnownName(String knownName) {
+        return spielerRepository.findByKnownName(knownName);
+    }
+
+    public Optional<Spieler> getSpielerById(Integer id) {
+        return spielerRepository.findById(id);
+    }
+
+
+    public Optional<Spieler[]> findSpielerByFullNameContainingOrderByFullNameAsc(String n) {
+        return spielerRepository.findSpielerByFullNameContainingAndPlaysFors_FifaVersionOrderByOverallAsc(n);
+
+
+    }}

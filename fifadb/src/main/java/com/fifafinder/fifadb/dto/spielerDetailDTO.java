@@ -13,7 +13,7 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SpielerDetailDTO {
+public class spielerDetailDTO {
     private PlaysForId id;
     private Spieler playerID;
     private FifaVersion fifaVersion;

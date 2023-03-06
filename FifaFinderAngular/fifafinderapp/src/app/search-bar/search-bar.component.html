@@ -1,0 +1,13 @@
+<form class="searchbar">
+<mat-form-field  appearance="fill">
+    <mat-label>Search Player</mat-label>
+    <input matInput
+           aria-label="player"
+           [matAutocomplete]="auto"
+           [formControl]="PlayyersControl">
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="optionSelected($event)">
+      <mat-option *ngFor="let player of filteredPlayers | async" [value]="player.knownName">
+        <span>{{player.knownName}}</span> 
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field></form>
