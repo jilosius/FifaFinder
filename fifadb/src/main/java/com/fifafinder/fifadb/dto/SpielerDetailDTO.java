@@ -4,11 +4,6 @@ import com.fifafinder.fifadb.entities.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
-
-import java.io.Serializable;
-import java.time.LocalDate;
-import java.util.Set;
 
 @Data
 @AllArgsConstructor

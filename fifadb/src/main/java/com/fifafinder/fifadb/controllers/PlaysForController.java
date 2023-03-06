@@ -2,7 +2,6 @@ package com.fifafinder.fifadb.controllers;
 
 import com.fifafinder.fifadb.DTOs.AddPlaysForDTO;
 import com.fifafinder.fifadb.entities.FifaVersion;
-import com.fifafinder.fifadb.entities.Mannschaften;
 import com.fifafinder.fifadb.entities.Spieler;
 import com.fifafinder.fifadb.repositories.MannschaftenRepository;
 import com.fifafinder.fifadb.services.*;
@@ -17,10 +16,8 @@ import com.fifafinder.fifadb.entities.*;
 import com.fifafinder.fifadb.repositories.FifaVersionRepository;
 import com.fifafinder.fifadb.services.PlaysForService;
 import com.fifafinder.fifadb.services.SpielerService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.time.ZoneId;
 import java.util.List;
 
@@ -31,6 +28,7 @@ public class PlaysForController {
     private final PlaysForService playsForService;
     private final SpielerService spielerService;
     private final LandService landService;
+    private final IsFromService isFromService;
     private final FifaVersionRepository fifaVersionRepository;
     private final FifaController fifaController;
     private final MannschaftenController mannschaftenController;
@@ -39,7 +37,8 @@ public class PlaysForController {
     public PlaysForController(PlaysForService playsForService, SpielerService spielerService,
                               FifaVersionRepository fifaVersionRepository, FifaController fifaController,
                               MannschaftenRepository mannschaftenRepository,
-                              MannschaftenController mannschaftenController, LandService landService) {
+                              MannschaftenController mannschaftenController, LandService landService,
+                              IsFromService isFromService) {
         this.playsForService = playsForService;
         this.spielerService = spielerService;
         this.fifaVersionRepository = fifaVersionRepository;
@@ -47,6 +46,7 @@ public class PlaysForController {
         this.mannschaftenController = mannschaftenController;
         this.mannschaftenRepository = mannschaftenRepository;
         this.landService = landService;
+        this.isFromService = isFromService;
     }
 
     @GetMapping("/count")
@@ -101,6 +101,13 @@ public class PlaysForController {
         FifaVersion fifaVersion;
         fifaVersion =  fifaController.getVersionByID(playsForDTO.getFifaVersion());
 
+        Land land = landService.findByCountryName(playsForDTO.getNationalTeam());
+
+        IsFromId isFromId = new IsFromId();
+        isFromId.setPlayerID(spieler.getId());
+        isFromId.setCountryID(land.getId());
+
+        isFromService.saveIsFrom(isFromId,land,spieler);
 
         PlaysForId playsForId = new PlaysForId();
         playsForId.setFifaVersion(playsForDTO.getFifaVersion());

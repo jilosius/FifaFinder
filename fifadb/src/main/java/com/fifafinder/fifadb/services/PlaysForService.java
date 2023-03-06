@@ -1,41 +1,20 @@
 package com.fifafinder.fifadb.services;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fifafinder.fifadb.dto.SpielerDetailDTO;
 import com.fifafinder.fifadb.dto.UpdateDTO;
 import com.fifafinder.fifadb.entities.*;
-import com.fifafinder.fifadb.exceptionhandling.SpielerNotFoundException;
 import com.fifafinder.fifadb.repositories.FifaVersionRepository;
 import com.fifafinder.fifadb.repositories.MannschaftenRepository;
 import com.fifafinder.fifadb.repositories.PlaysForRepository;
 import com.fifafinder.fifadb.repositories.SpielerRepository;
-import jakarta.persistence.Column;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.transaction.Transactional;
-import jakarta.persistence.Column;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 import com.fifafinder.fifadb.entities.FifaVersion;
-import com.fifafinder.fifadb.entities.Mannschaften;
 import com.fifafinder.fifadb.entities.PlaysFor;
 import com.fifafinder.fifadb.entities.Spieler;
-import com.fifafinder.fifadb.repositories.PlaysForRepository;
-import com.fifafinder.fifadb.repositories.SpielerRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
-import java.util.Optional;
 
 @Service
 public class PlaysForService {

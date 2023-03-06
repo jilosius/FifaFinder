@@ -2,7 +2,6 @@ package com.fifafinder.fifadb.services;
 
 import com.fifafinder.fifadb.entities.Land;
 import com.fifafinder.fifadb.repositories.LandRepository;
-import com.fifafinder.fifadb.repositories.MannschaftenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
