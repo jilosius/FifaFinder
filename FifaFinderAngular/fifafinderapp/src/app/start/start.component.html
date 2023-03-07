@@ -21,7 +21,7 @@
               </svg> Filter
             </button>
 
-            <button [routerLink]="['/vergleich']" class="btn btn-secondary my-button" (click)="getSelectedPlayerIds()">Vergleichen</button>
+            <button class="btn btn-secondary my-button" (click)="getSelectedPlayerIds()">Vergleichen</button>
             <button [routerLink]="['/editPlayer', true, 0, 0]" class="btn btn-secondary my-button">Add Player</button>
 
             <form class="dropdown-menu p-4" style="width: 700px;">
@@ -148,11 +148,11 @@
                   (ngModelChange)="maxCurve = maxCurve || 100" name="maxCurve" type="number" id="maxCurve"
                   placeholder="Maximum Curve"></div>
               </div>
-              <!-- <div class="row g-3">
+               <div class="row g-3">
                   <div class="col-sm-3 col-form-label"><label for="fkAccuracy">FK Accuracy</label></div>
                   <div class="col-auto"><input [(ngModel)]="minFkAccuracy" name="minFkAccuracy" type="number" id="minFkAccuracy" placeholder="Minimum fkAccuracy"></div>
                   <div class="col-auto"><input [(ngModel)]="maxFkAccuracy" name="maxFkAccuracy" type="number" id="maxFkAccuracy" placeholder="Maximum fkAccuracy"></div>
-                </div> -->
+                </div> 
               <div class="row g-3">
                 <div class="col-sm-3 col-form-label"><label for="acceleration">Acceleration</label></div>
                 <div class="col-auto"><input [(ngModel)]="minAcceleration" [ngModelOptions]="{standalone: true}"
@@ -287,11 +287,6 @@
                   <label class="form-check-label" for="left">Left</label>
                 </div>
               </div>
-
-
-
-
-
               <div class="row g-2">
                 <div class="col-auto"><button type="submit" class="btn btn-primary"
                     (click)="goToPage(searchForm.value.name,fifaVersion,clubFilter.value,preferredFoot,ageMin,ageMax,overallMin,overallMax,potentialMin,potentialMax,heightMin,heightMax,minValue,maxValue,minWage,maxWage,minHeadingAccuracy,maxHeadingAccuracy,minVolleys,maxVolleys,minDribbling,maxDribbling,minCurve,maxCurve,minFkAccuracy,maxFkAccuracy,minAcceleration,maxAcceleration,minSprintSpeed,maxSprintSpeed,minAgility,maxAgility,minReaction,maxReaction,minBalance,maxBalance,minShotPower,maxShotPower,minJumping,maxJumping,minStamina,maxStamina,minAggression,maxAggression,minLongShots,maxLongShots,minCrossing,maxCrossing,minFinishing,maxFinishing,minShortPassing,maxShortPassing)">Filter</button>
@@ -414,7 +409,6 @@
             </thead>
             <tbody>
               <tr *ngFor="let spieler of state.appData.data.page.content; let i = index;">
-                <!-- <mat-checkbox (change)="toggleSelection(spieler)"></mat-checkbox> -->
               <tr *ngFor="let spieler of state.appData.data.page.content; let i = index;">
                 <th scope="row">
                   <mat-icon matTooltip="Delete for displayed Fifaversion" class="deleteBin" (click)="deletePerFifaVersionLogic(spieler.playerId, spieler.fifaVersion)">delete</mat-icon>
@@ -433,7 +427,7 @@
                 <td><img src="assets/images/nameinfo.svg" [matTooltip]="spieler.fullName" [width]="20" [height]="20" class="nameinfo"></td>
                 <td>{{ spieler.age }}</td>
                 <td><img [src]="spieler.flag" [alt]="" width="56" height="42" class="rounded" appHideMissing></td>
-                <td><img [src]="spieler.clubLogo" [alt]="" [title]="spieler.clubName" [width]="42" height="42" class="rounded-circle" appHideMissing></td>
+                <td><img [src]="spieler.clubLogo" [alt]="" [title]="spieler.clubName" [width]="42" [height]="42" class="rounded-circle" appHideMissing></td>
                 <td>{{ spieler.overall }}</td>
                 <td>{{ spieler.potential }}</td>
                 <td>{{ spieler.bestPos }}</td>

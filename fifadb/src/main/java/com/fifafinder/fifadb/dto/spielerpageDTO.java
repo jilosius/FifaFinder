@@ -15,8 +15,9 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Builder
 
-public class spielerDTO {
+public class spielerpageDTO {
     private Integer id;
+
     private Integer fifaID;
     private String knownName;
     private String fullName;

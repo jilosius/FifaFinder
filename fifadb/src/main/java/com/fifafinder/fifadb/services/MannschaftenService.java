@@ -27,10 +27,12 @@ public class MannschaftenService {
         return mannschaftenRepository.findMannschaftenWithDetails(id);
     }
 
+    //Author: Levi
     public List<Mannschaften> getClubs(){
         return mannschaftenRepository.findByOrderByClubNameAsc();
     }
 
+    //Author: Enes
     public Mannschaften getMannschaftenByID(int id)
     {
         return mannschaftenRepository.findById(id);

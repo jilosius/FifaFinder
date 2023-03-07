@@ -351,7 +351,7 @@
     </div>
     <pre></pre>
     <div class="col-12">
-       <button class="btn btn-primary" type="submit"  [disabled]="!AddForm.valid || !clubName.valid"    (click)="isAddMode() ? onAddPlayer(playerDetailsForm.value) : onEditPlayer(playerDetailsForm.value)">{{isAddMode() ? 'Submit Player' : 'Submit Changes'}}</button>
+       <button class="btn btn-primary" type="submit" [routerLink]="['/start']" [disabled]="!AddForm.valid || !clubName.valid"    (click)="isAddMode() ? onAddPlayer(playerDetailsForm.value) : onEditPlayer(playerDetailsForm.value)">{{isAddMode() ? 'Submit Player' : 'Submit Changes'}}</button>
     </div>
   </form>
 </div>

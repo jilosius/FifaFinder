@@ -1,7 +1,7 @@
 package com.fifafinder.fifadb.repositories;
 
 import ch.qos.logback.core.pattern.PatternLayoutEncoderBase;
-import com.fifafinder.fifadb.dto.spielerDetailDTO;
+
 
 import com.fifafinder.fifadb.entities.FifaVersion;
 import com.fifafinder.fifadb.entities.PlaysFor;
@@ -16,7 +16,7 @@ import java.util.List;
 public interface PlaysForRepository extends JpaRepository<PlaysFor, PlaysForId> {
     List<PlaysFor> findByFifaVersion(FifaVersion fifaVersion);
     Optional<PlaysFor[]> findPlaysForByPlayerIDId(Integer playerID);
-    spielerDetailDTO findById(PlaysFor id);
+
     PlaysFor findByPlayerIDAndFifaVersion(Spieler spieler, FifaVersion fifaVersion);
     PlaysFor findPlaysForById(PlaysForId playsForId);
     void deleteAllById_PlayerID(int id);

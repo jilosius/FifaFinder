@@ -1,8 +1,7 @@
 package com.fifafinder.fifadb.repositories;
 
-
 import com.fifafinder.fifadb.DTOs.SpielerDTO;
-import com.fifafinder.fifadb.dto.spielerDTO;
+import com.fifafinder.fifadb.dto.spielerpageDTO;
 import com.fifafinder.fifadb.entities.Spieler;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,31 +10,13 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import javax.swing.text.html.Option;
-
 import java.util.List;
 import java.util.Optional;
 @Repository
 public interface SpielerRepository extends JpaRepository<Spieler, Integer> {
-//    Page<SpielerDTO> findByFullNameContaining(String fullName, Pageable pageable);
-
-//     ----- first implementation: not dynamic
-//    @Query("SELECT NEW com.fifafinder.fifadb.DTOs.SpielerDTO(pf.photoUrl, s.knownName, pf.age, nat.countryID.flag, pf.clubID.clubLogo, pf.overall, pf.potential, pf.bestPosition, pf.valueEUR, pf.height, pf.weight) " +
-//            "FROM Spieler s INNER JOIN PlaysFor pf ON s.id = pf.id.playerID JOIN IsFrom nat ON s.id = nat.id.playerID " +
-//            "WHERE pf.id.fifaVersion = 23")
-////    AND s.knownName LIKE '%messi%'
-//    Page<SpielerDTO> listAllSpieler(Pageable pageable);
-//
-//     ----- second implementation: with below query we can search for players by Name
-//    @Query("SELECT NEW com.fifafinder.fifadb.DTOs.SpielerDTO(pf.photoUrl, s.knownName, pf.age, nat.countryID.flag, pf.clubID.clubLogo, pf.overall, pf.potential, pf.bestPosition, pf.valueEUR, pf.height, pf.weight) " +
-//            "FROM Spieler s INNER JOIN PlaysFor pf ON s.id = pf.id.playerID JOIN IsFrom nat ON s.id = nat.id.playerID " +
-//            "WHERE pf.id.fifaVersion = 23 AND s.fullName LIKE %:searchTerm%")
-//    Page<SpielerDTO> findByFullName(@Param("searchTerm") String searchTerm, Pageable pageable);
-//
 
     Optional<Spieler> findSpielerById(Integer id);
 
-    //     ----- final implementation: full search algorithm. Search by name, filter by below attributes.
 
     @Query("SELECT NEW com.fifafinder.fifadb.DTOs.SpielerDTO(pf.id.playerID, pf.id.fifaVersion, pf.photoUrl, s.knownName, s.fullName, pf.age, nat.countryID.flag, pf.clubID.clubName, pf.clubID.clubLogo, pf.overall, pf.potential, pf.bestPosition, pf.valueEUR, pf.height, pf.weight,pf.preferredFoot,pf.headingAccuracy,pf.volleys,pf.dribbling, pf.curve,pf.fkAccuracy,pf.acceleration,pf.sprintSpeed,pf.agility,pf.reaction,pf.balance,pf.shotPower,pf.jumping,pf.stamina,pf.aggression,pf.longShots,pf.crossing,pf.finishing,pf.shortPassing,pf.wage) " +
             "FROM Spieler s INNER JOIN PlaysFor pf ON s.id = pf.id.playerID JOIN IsFrom nat ON s.id = nat.id.playerID " +
@@ -143,12 +124,12 @@ public interface SpielerRepository extends JpaRepository<Spieler, Integer> {
     Spieler findSpielerByFullName(String fullName);
 
 
- @Query("SELECT NEW com.fifafinder.fifadb.dto.spielerDTO(s.id, s.fifaID, s.knownName, s.fullName,s.birthDate, l.countryName, l.flag) " +
+ @Query("SELECT NEW com.fifafinder.fifadb.dto.spielerpageDTO(s.id, s.fifaID, s.knownName, s.fullName,s.birthDate, l.countryName, l.flag) " +
             "FROM Spieler s " +
             "JOIN IsFrom f ON s.id = f.id.playerID " +
             "JOIN Land l ON f.countryID.id = l.id " +
             "WHERE s.knownName = :knownName")
-    Optional<spielerDTO> findByKnownName(@Param("knownName") String knownName);
+    Optional<spielerpageDTO> findByKnownName(@Param("knownName") String knownName);
 
 
     Optional<Spieler> findSpielerByfullName(String n);

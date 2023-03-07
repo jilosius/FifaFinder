@@ -1,3 +1,5 @@
+//Autor: Levi
+//Defines a SortableColumn; every column that has sorting enabled is to be defined as a SortableColumn
 export class SortableColumn{
   column: string;
   direction: string = null;
@@ -8,6 +10,7 @@ export class SortableColumn{
     this.direction = direction;
   }
 
+  // cycles through the directions of the sort 
   public toggleDirection() {
     if(this.direction == 'asc') {
       this.direction = null;
