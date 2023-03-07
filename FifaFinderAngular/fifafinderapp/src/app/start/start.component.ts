@@ -13,6 +13,7 @@ import { DeletePlayerService } from "../service/delete-player.service";
 import { SelectedPlayerService } from '../service/selected-player.service';
 import { SpielerService } from '../service/start.service';
 import { SortableColumn } from "../sorting/sortable-column";
+import { PlaysForService } from '../service/PlaysFor.service';
 
 @Component({
   selector: 'app-start',
@@ -143,7 +144,7 @@ export class StartComponent implements OnInit {
   //Array to set the "hidden" attribute of each column to either true or false
   condArray:boolean[] = [true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true];
 
-  constructor(private spielerService: SpielerService, private selectedPlayerService: SelectedPlayerService, private router: Router, private deletePlayerService: DeletePlayerService, private clubService: ClubService) { }
+  constructor(private spielerService: SpielerService, private selectedPlayerService: SelectedPlayerService, private router: Router, private deletePlayerService: DeletePlayerService, private clubService: ClubService,private playsforservice:PlaysForService) { }
 
   //Autor: Saif, Levi
   //on app initialisation: start with: 'APP LOADING', then 'APP_LOADED', and if error return 'APP_ERROR'
@@ -191,10 +192,13 @@ export class StartComponent implements OnInit {
     return this.clubs.filter(club =>
     club.clubName.toLowerCase().includes(filterValue));
   }
+  onNameClick(knownName: string) {
+    this.router.navigate(['/PlayerComponent', knownName]);
+  }
 
 
 
-  
+
   //Autor: Saif, Levi
   //the method that does all the magic: boolean Array is checked to hide/unhide columns, then spielerService is used to return the data/page as required
   goToPage(name?: string,fifaVersion?:number,clubName?:string,preferredFoot?:string,minAge?: number,maxAge?: number,minOverall?: number, maxOverall?: number, minPotential?: number,maxPotential?: number,minHeight?: number,maxHeight?: number,minValue?: number,maxValue?: number,minWage?: number,maxWage?: number,minHeadingAccuracy?: number,maxHeadingAccuracy?: number,minVolleys?: number,maxVolleys?: number,minDribbling?: number, maxDribbling?: number,minCurve?: number,maxCurve?: number, minFkAccuracy?: number,maxFkAccuracy?: number,minAcceleration?: number,maxAcceleration?: number, minSprintSpeed?: number,maxSprintSpeed?: number,minAgility?: number, maxAgility?: number,minReaction?: number,maxReaction?:number,minBalance?: number,maxBalance?: number,minShotPower?: number,maxShotPower?: number, minJumping?: number,maxJumping?: number,minStamina?: number,maxStamina?: number,minAggression?: number,maxAggression?: number,minLongShots?: number,maxLongShots?: number,minCrossing?: number,maxCrossing?: number,minFinishing?: number,maxFinishing?: number,minShortPassing?: number,maxShortPassing?: number,
@@ -383,7 +387,7 @@ export class StartComponent implements OnInit {
       alert("Please select at least 2 players!");
       return;
     }
-    
+
     else {
       this.selectedPlayerIds = this.selectedPlayers.map(spieler => spieler.playerId);
       this.selectedPlayerService.setSelectedPlayerIds(this.selectedPlayerIds);

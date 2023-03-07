@@ -20,6 +20,8 @@ import { HideMissingDirective } from './directive/hide-missing.directive';
 import { MatIconModule } from "@angular/material/icon";
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatFormFieldModule } from "@angular/material/form-field";
+import { NgStyle } from '@angular/common';
+import { PlayerModule } from './player/player.module';
 
 
 @NgModule({
@@ -30,24 +32,26 @@ import { MatFormFieldModule } from "@angular/material/form-field";
     EditPlayerComponent,
     HideMissingDirective
   ],
-  imports: [
-      BrowserModule,
-      AppRoutingModule,
-      HttpClientModule,
-      FormsModule,
-      MatFormFieldModule,
-      ReactiveFormsModule,
-      BrowserAnimationsModule,
-      RouterTestingModule,
-      MatSortModule,
-      MatCheckboxModule,
-      RouterModule,
-      MatButtonModule,
-      MatSelectModule,
-      MatAutocompleteModule,
-      MatInputModule,
-      MatIconModule,
-      MatTooltipModule
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule,
+        MatFormFieldModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        RouterTestingModule,
+        MatSortModule,
+        MatCheckboxModule,
+        RouterModule,
+        MatButtonModule,
+        MatSelectModule,
+        MatAutocompleteModule,
+        MatInputModule,
+        MatIconModule,
+        MatTooltipModule,
+        NgStyle,
+        PlayerModule
     ],
   providers: [],
   schemas:[

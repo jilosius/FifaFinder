@@ -1,0 +1,64 @@
+<div class="player_overview_container">
+    <div class ="player_overview">
+        <mat-card class="theplayer">
+            <mat-card-header>
+              <div mat-card-avatar class="example-header-image"></div>
+              <mat-card-title>{{theplayer?.fullName}} </mat-card-title>
+              <mat-card-subtitle>{{theplayer?.knownName}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <h4 class="playerinfo" >
+                    <svg class='fontawesomesvg' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M96 32V64H48C21.5 64 0 85.5 0 112v48H448V112c0-26.5-21.5-48-48-48H352V32c0-17.7-14.3-32-32-32s-32 14.3-32 32V64H160V32c0-17.7-14.3-32-32-32S96 14.3 96 32zM448 192H0V464c0 26.5 21.5 48 48 48H400c26.5 0 48-21.5 48-48V192z"/></svg>
+                    birthDate = {{theplayer?.birthDate}} </h4>
+                <h4 class="playerinfo" >age : {{player?.age}} </h4>
+                <h4 class="playerinfo" >Heigh : {{player?.height}}</h4>
+                <h4 class="playerinfo" >preferredFoot= {{player?.preferredFoot}}</h4>
+            </mat-card-content>
+    
+          </mat-card>
+          <mat-card class="Club">
+            <mat-card-header>
+              <div mat-card-avatar class="example-header-image"></div>
+              <mat-card-title>Club</mat-card-title>
+              <mat-card-subtitle>{{player?.clubID.clubName}}</mat-card-subtitle>
+              <img mat-card-avatar [src]="player.clubID.clubLogo" alt="Club Logo" style="background-size: cover;">
+            </mat-card-header>
+          
+          </mat-card>
+  <mat-card class="national team">
+        <mat-card-header>
+          <img mat-card-avatar [src]="theplayer?.flag" alt="Club Logo" style="background-size: cover;">
+          <mat-card-title>national team</mat-card-title>
+            <mat-card-subtitle>{{theplayer?.countryName}}</mat-card-subtitle>
+          </mat-card-header>
+        <mat-card-content>
+      
+    <h4 >nationalTeam= {{theplayer?.countryName}} </h4>
+    <h4 >National Number : {{player?.nationalNumber}}</h4>
+    <h4 >National Position : {{player?.nationalPosition}}</h4>
+          </mat-card-content>
+      
+      </mat-card>
+   
+    <mat-card class="contract">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>Contract infomation  </mat-card-title>
+          <svg  mat-card-avatar class='contract' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18,16.5V22H2V8L8,2H18V3.5" fill="none" stroke="#000" stroke-miterlimit="10"/><polyline points="8 2 8 8 2 8" fill="none" stroke="#000" stroke-miterlimit="10"/><polygon points="8.5 18.5 9 15.5 19.5 5 20.5 5 22 6.5 22 7.5 11.5 18 8.5 18.5" fill="none" stroke="#000" stroke-miterlimit="10"/><line x1="17.5" y1="6.5" x2="20.5" y2="9.5" fill="none" stroke="#000" stroke-miterlimit="10"/></svg>
+        </mat-card-header>
+        <mat-card-content>
+            <h4>Contract Until : {{player?.contractUntil}}</h4>
+    <h4>On Loan : {{player?.onLoan}}</h4>
+    <h4 >ValueEUR : {{player?.valueEUR}} €</h4>
+    <h4 >Wage {{player?.wage}}</h4>
+    <h4 class="" >Release Claus : {{player?.releaseClause}} €</h4>
+        </mat-card-content>
+    
+      </mat-card>
+    </div>
+</div>
+      
+      
+
+
+      

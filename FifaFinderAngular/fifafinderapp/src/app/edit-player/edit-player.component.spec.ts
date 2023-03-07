@@ -12,6 +12,8 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { MatAutocomplete, MatAutocompleteModule } from '@angular/material/autocomplete';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { MatInputModule } from '@angular/material/input';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 //Author:Jannik
 describe('EditPlayerComponent', () => {
@@ -30,7 +32,9 @@ describe('EditPlayerComponent', () => {
         FormsModule,
         ReactiveFormsModule,
         MatFormFieldModule,
-        MatAutocompleteModule
+        MatAutocompleteModule,
+        MatInputModule,
+        BrowserAnimationsModule
       ], 
       declarations: [ EditPlayerComponent ],
       providers: [
@@ -84,7 +88,9 @@ describe('isAddMode', () => {
       imports: [
         ReactiveFormsModule,
         MatFormFieldModule,
-        MatAutocompleteModule
+        MatAutocompleteModule,
+        MatInputModule,
+        BrowserAnimationsModule
       ],
       providers: [
         EditPlayerService,
@@ -143,7 +149,11 @@ describe('onEditPlayer/onAddPlayer', () => {
         HttpClientTestingModule,
         HttpClient,
         HttpHandler,
-        { provide: ActivatedRoute, useValue: activatedRouteStub }
+        { provide: ActivatedRoute, useValue: {
+              snapshot:
+            {
+            url: ['fifafinder/:mode']
+             }}}
       ]
     })
 
@@ -154,7 +164,8 @@ describe('onEditPlayer/onAddPlayer', () => {
   });
 
   it('should update the club name and call service.updatePlayerDetails(UpdateDto, playerId, fifaVersion)', () => {
-    spyOn(component, 'isAddMode').and.returnValue(false);
+    spyOn(component, 'ngOnInit');
+    spyOn(component, 'isAddMode');
     const playerId = 1;
     const fifaVersion = 23;
     const dataInput: UpdateDto = {
@@ -228,7 +239,6 @@ describe('onEditPlayer/onAddPlayer', () => {
   });
 
   it('should update the club name and call service.addPlayer(AddDto)', () => {
-    spyOn(component, 'isAddMode').and.returnValue(true);
     const dataInput: AddDto = {
       fullName: 'Lionel Messi',
       knownName: 'L. Messi',

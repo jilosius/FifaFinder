@@ -1,6 +1,7 @@
 package com.fifafinder.fifadb.controllers;
 
 import com.fifafinder.fifadb.DTOs.AddPlaysForDTO;
+import com.fifafinder.fifadb.dto.SpielerDetailDTO;
 import com.fifafinder.fifadb.entities.FifaVersion;
 import com.fifafinder.fifadb.entities.Spieler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,14 +9,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.fifafinder.fifadb.dto.SpielerDetailDTO;
 import com.fifafinder.fifadb.dto.UpdateDTO;
 import com.fifafinder.fifadb.entities.*;
 import com.fifafinder.fifadb.services.PlaysForService;
 import com.fifafinder.fifadb.services.SpielerService;
 import org.springframework.http.ResponseEntity;
+import com.fifafinder.fifadb.repositories.FifaVersionRepository;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Optional;
 
 //Author: Saif,Levi,Enes,Jannik,Wafi
 @RestController
@@ -36,8 +38,6 @@ public class PlaysForController {
         return playsForService.count();
     }
 
-
-    //Author: Levi
     @GetMapping("/countUniquePlayerRecords")
     public long countUniquePlayerRecords(@RequestParam int playerID){
         return playsForService.countUniquePlayerRecords(playerID);
@@ -75,10 +75,11 @@ public class PlaysForController {
         return playsForService.getDetailsForEdit(playsForId);
     }
 
-    // Author: Enes
+
     @PostMapping("/add")
     public void addPlayer(@RequestBody AddPlaysForDTO playsForDTO )
     {
+
         System.out.println(playsForDTO);
         playsForService.addPlayer(playsForDTO);
 
@@ -103,5 +104,11 @@ public class PlaysForController {
     public List<FifaVersion> listFifaVersions(){
         return playsForService.listFifaVersions();
     }
+
+    @GetMapping("/player/{playerID}")
+    public Optional<PlaysFor[]> getPlaysForByPlayerIDId(@PathVariable("playerID") Integer id ) {
+        return playsForService.findPlaysForByPlayerIDId(id);
+    }
+
 
 }
