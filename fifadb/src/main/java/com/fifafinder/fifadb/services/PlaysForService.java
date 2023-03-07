@@ -1,41 +1,23 @@
 package com.fifafinder.fifadb.services;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fifafinder.fifadb.DTOs.AddPlaysForDTO;
 import com.fifafinder.fifadb.dto.SpielerDetailDTO;
 import com.fifafinder.fifadb.dto.UpdateDTO;
 import com.fifafinder.fifadb.entities.*;
-import com.fifafinder.fifadb.exceptionhandling.SpielerNotFoundException;
 import com.fifafinder.fifadb.repositories.FifaVersionRepository;
 import com.fifafinder.fifadb.repositories.MannschaftenRepository;
 import com.fifafinder.fifadb.repositories.PlaysForRepository;
 import com.fifafinder.fifadb.repositories.SpielerRepository;
-import jakarta.persistence.Column;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.transaction.Transactional;
-import jakarta.persistence.Column;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.ZoneId;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 import com.fifafinder.fifadb.entities.FifaVersion;
-import com.fifafinder.fifadb.entities.Mannschaften;
 import com.fifafinder.fifadb.entities.PlaysFor;
 import com.fifafinder.fifadb.entities.Spieler;
-import com.fifafinder.fifadb.repositories.PlaysForRepository;
-import com.fifafinder.fifadb.repositories.SpielerRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
-import java.util.Optional;
 
 @Service
 public class PlaysForService {
@@ -45,21 +27,29 @@ public class PlaysForService {
     private final FifaVersionRepository fifaVersionRepository;
     private final ModelMapper modelMapper;
     private final MannschaftenRepository mannschaftenRepository;
+    private final FifaService fifaService;
+    private final IsFromService isFromService;
+    private final LandService landService;
 
 
     @Autowired
-    public PlaysForService(PlaysForRepository playsForRepository, SpielerRepository spielerRepository, FifaVersionRepository fifaVersionRepository, ModelMapper modelMapper, MannschaftenRepository mannschaftenRepository) {
+    public PlaysForService(PlaysForRepository playsForRepository, SpielerRepository spielerRepository, FifaVersionRepository fifaVersionRepository,
+                           ModelMapper modelMapper, MannschaftenRepository mannschaftenRepository, FifaService fifaService, IsFromService isFromService, LandService landService) {
         this.playsForRepository = playsForRepository;
         this.spielerRepository = spielerRepository;
         this.fifaVersionRepository = fifaVersionRepository;
         this.modelMapper = modelMapper;
         this.mannschaftenRepository = mannschaftenRepository;
+        this.fifaService = fifaService;
+        this.isFromService = isFromService;
+        this.landService = landService;
     }
 
     public long count() {
         return playsForRepository.count();
     }
 
+    //Author: Enes
     public long countUniquePlayerRecords(int id){
         return playsForRepository.countById_PlayerID(id);
     }
@@ -67,6 +57,7 @@ public class PlaysForService {
         return playsForRepository.findAll();
     }
 
+    //Author: Jannik
     public SpielerDetailDTO getDetails(int playerId, int fifaVersion) {
         PlaysForId playsForId = new PlaysForId();
         playsForId.setPlayerID(playerId);
@@ -76,6 +67,7 @@ public class PlaysForService {
         return details;
     }
 
+    //Author: Jannik
     public void editDetails(PlaysForId playsForId, UpdateDTO updateDTO) {
         PlaysFor details = playsForRepository.findPlaysForById(playsForId);
         details.setHeight(updateDTO.getHeight());
@@ -136,6 +128,7 @@ public class PlaysForService {
         playsForRepository.save(details);
     }
 
+    //Author: Jannik
     public UpdateDTO getDetailsForEdit(PlaysForId playsForId) {
         PlaysFor playsFor = playsForRepository.findPlaysForById(playsForId);
         UpdateDTO details = new UpdateDTO(playsFor.getHeight(), playsFor.getClubPosition(), playsFor.getClubNumber(), playsFor.getNationalPosition(), playsFor.getNationalNumber(),
@@ -151,19 +144,28 @@ public class PlaysForService {
     }
 
 
+    //Author: Enes
+    public void addPlayer(AddPlaysForDTO playsForDTO) {
 
-    public void addPlayer(Spieler spieler, FifaVersion fifaversion,PlaysForId playsForId, Integer height, String clubPosition, Integer clubNumber, String nationalPosition,
-                Integer nationalNumber, String preferredFoot, Integer contractUntil, String onLoan, String nationalTeam, Integer age,
-                Integer weight, Integer overall, Integer potential, String bestPosition, String clubName, Long valueEUR, Long wage,
-                Long releaseClause, Integer intReputation, Integer weakFoot, Integer skillMoves, Integer crossing, Integer finishing,
-                Integer headingAccuracy, Integer shortPassing, Integer volleys, Integer dribbling, Integer curve, Integer fKAccuracy,
-                Integer longPassing, Integer ballControl, Integer acceleration, Integer sprintSpeed, Integer agility, Integer reaction,
-                Integer balance, Integer shotPower, Integer jumping, Integer stamina, Integer strength, Integer longShots, Integer aggression,
-                Integer interceptions, Integer positioning, Integer vision, Integer penalties, Integer composure, Integer marking,
-                Integer standingTackle, Integer slidingTackle, Integer gKDiving, Integer gKHandling,
-                Integer gKKicking, Integer gKPositioning, Integer gKReflexes, String photoUrl) {
+        Spieler spieler = new Spieler();
+        spieler.setKnownName(playsForDTO.getKnownName());
+        spieler.setFullName(playsForDTO.getFullName());
+        spieler.setBirthDate(playsForDTO.getDateOfBirth().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        spielerRepository.save(spieler);
 
+        FifaVersion fifaversion = fifaService.getVersionByID(playsForDTO.getFifaVersion());
 
+        Land land = landService.findByCountryName(playsForDTO.getNationalTeam());
+
+        IsFromId isFromId = new IsFromId();
+        isFromId.setPlayerID(spieler.getId());
+        isFromId.setCountryID(land.getId());
+
+        isFromService.saveIsFrom(isFromId,land,spieler);
+
+        PlaysForId playsForId = new PlaysForId();
+        playsForId.setFifaVersion(playsForDTO.getFifaVersion());
+        playsForId.setPlayerID(spieler.getId());
 
         PlaysFor playsFor = new PlaysFor();
         playsFor.setPlayerID(spieler);
@@ -171,74 +173,74 @@ public class PlaysForService {
         playsFor.setId(playsForId);
 
 
-        playsFor.setHeight(height);
-        playsFor.setClubPosition(clubPosition);
-        playsFor.setClubNumber(clubNumber);
-        playsFor.setNationalPosition(nationalPosition);
-        playsFor.setNationalNumber(nationalNumber);
-        playsFor.setPreferredFoot(preferredFoot);
-        playsFor.setContractUntil(contractUntil);
-        playsFor.setOnLoan(onLoan);
-        playsFor.setNationalTeam(nationalTeam);
-        playsFor.setAge(age);
-        playsFor.setWeight(weight);
-        playsFor.setOverall(overall);
-        playsFor.setPotential(potential);
-        playsFor.setBestPosition(bestPosition);
-        playsFor.setClubID(mannschaftenRepository.findMannschaftenByClubName(clubName));
-        playsFor.setValueEUR(valueEUR);
-        playsFor.setWage(wage);
-        playsFor.setReleaseClause(releaseClause);
-        playsFor.setIntReputation(intReputation);
-        playsFor.setWeakFoot(weakFoot);
-        playsFor.setSkillMoves(skillMoves);
-        playsFor.setCrossing(crossing);
-        playsFor.setFinishing(finishing);
-        playsFor.setHeadingAccuracy(headingAccuracy);
-        playsFor.setShortPassing(shortPassing);
-        playsFor.setVolleys(volleys);
-        playsFor.setDribbling(dribbling);
-        playsFor.setCurve(curve);
-        playsFor.setFkAccuracy(fKAccuracy);
-        playsFor.setLongPassing(longPassing);
-        playsFor.setBallControl(ballControl);
-        playsFor.setAcceleration(acceleration);
-        playsFor.setSprintSpeed(sprintSpeed);
-        playsFor.setAgility(agility);
-        playsFor.setReaction(reaction);
-        playsFor.setBalance(balance);
-        playsFor.setShotPower(shotPower);
-        playsFor.setJumping(jumping);
-        playsFor.setStamina(stamina);
-        playsFor.setStrength(strength);
-        playsFor.setLongShots(longShots);
-        playsFor.setAggression(aggression);
-        playsFor.setInterceptions(interceptions);
-        playsFor.setPositioning(positioning);
-        playsFor.setVision(vision);
-        playsFor.setPenalties(penalties);
-        playsFor.setComposure(composure);
-        playsFor.setMarking(marking);
-        playsFor.setStandingTackle(standingTackle);
-        playsFor.setSlidingTackle(slidingTackle);
-        playsFor.setGKDiving(gKDiving);
-        playsFor.setGKHandling(gKHandling);
-        playsFor.setGKKicking(gKKicking);
-        playsFor.setGKPositioning(gKPositioning);
-        playsFor.setGKReflexes(gKReflexes);
-        playsFor.setPhotoUrl(photoUrl);
+        playsFor.setHeight(playsForDTO.getHeight());
+        playsFor.setClubPosition(playsForDTO.getClubPosition());
+        playsFor.setClubNumber(playsForDTO.getClubNumber());
+        playsFor.setNationalPosition(playsForDTO.getNationalPosition());
+        playsFor.setNationalNumber(playsForDTO.getNationalNumber());
+        playsFor.setPreferredFoot(playsForDTO.getPreferredFoot());
+        playsFor.setContractUntil(playsForDTO.getContractUntil());
+        playsFor.setOnLoan(playsForDTO.getOnLoan());
+        playsFor.setNationalTeam(playsForDTO.getNationalTeam());
+        playsFor.setAge(playsForDTO.getAge());
+        playsFor.setWeight(playsForDTO.getWeight());
+        playsFor.setOverall(playsForDTO.getOverall());
+        playsFor.setPotential(playsForDTO.getPotential());
+        playsFor.setBestPosition(playsForDTO.getBestPosition());
+        playsFor.setClubID(mannschaftenRepository.findMannschaftenByClubName(playsForDTO.getClubName()));
+        playsFor.setValueEUR(playsForDTO.getValueEUR());
+        playsFor.setWage(playsForDTO.getWage());
+        playsFor.setReleaseClause(playsForDTO.getReleaseClause());
+        playsFor.setIntReputation(playsForDTO.getIntReputation());
+        playsFor.setWeakFoot(playsForDTO.getWeakFoot());
+        playsFor.setSkillMoves(playsForDTO.getSkillMoves());
+        playsFor.setCrossing(playsForDTO.getCrossing());
+        playsFor.setFinishing(playsForDTO.getFinishing());
+        playsFor.setHeadingAccuracy(playsForDTO.getHeadingAccuracy());
+        playsFor.setShortPassing(playsForDTO.getShortPassing());
+        playsFor.setVolleys(playsForDTO.getVolleys());
+        playsFor.setDribbling(playsForDTO.getDribbling());
+        playsFor.setCurve(playsForDTO.getCurve());
+        playsFor.setFkAccuracy(playsForDTO.getFKAccuracy());
+        playsFor.setLongPassing(playsForDTO.getLongPassing());
+        playsFor.setBallControl(playsForDTO.getBallControl());
+        playsFor.setAcceleration(playsForDTO.getAcceleration());
+        playsFor.setSprintSpeed(playsForDTO.getAge());
+        playsFor.setAgility(playsForDTO.getAgility());
+        playsFor.setReaction(playsForDTO.getReaction());
+        playsFor.setBalance(playsForDTO.getBalance());
+        playsFor.setShotPower(playsForDTO.getShotPower());
+        playsFor.setJumping(playsForDTO.getJumping());
+        playsFor.setStamina(playsForDTO.getStamina());
+        playsFor.setStrength(playsForDTO.getStrength());
+        playsFor.setLongShots(playsForDTO.getLongShots());
+        playsFor.setAggression(playsForDTO.getAggression());
+        playsFor.setInterceptions(playsForDTO.getInterception());
+        playsFor.setPositioning(playsForDTO.getPositioning());
+        playsFor.setVision(playsForDTO.getVision());
+        playsFor.setPenalties(playsForDTO.getPenalties());
+        playsFor.setComposure(playsForDTO.getComposure());
+        playsFor.setMarking(playsForDTO.getMarking());
+        playsFor.setStandingTackle(playsForDTO.getStandingTackle());
+        playsFor.setSlidingTackle(playsForDTO.getSlidingTackle());
+        playsFor.setGKDiving(playsForDTO.getGKDiving());
+        playsFor.setGKHandling(playsForDTO.getGKHandling());
+        playsFor.setGKKicking(playsForDTO.getGKKicking());
+        playsFor.setGKPositioning(playsForDTO.getGKPositioning());
+        playsFor.setGKReflexes(playsForDTO.getGKReflexes());
+        playsFor.setPhotoUrl(playsForDTO.getPhotoUrl());
 
         playsForRepository.save(playsFor);
     }
 
-
-
+    //Author: Levi
     @Transactional
     public void deleteAllByPlayerID(int id) {
         playsForRepository.deleteAllById_PlayerID(id);
         spielerRepository.deleteById(id);
     }
 
+    //Author: Levi
     @Transactional
     public void deleteAllByPlayerIDAndFifaVersion(int id, int fifaVersion){
         playsForRepository.deleteAllById_PlayerIDAndId_FifaVersion(id, fifaVersion);
@@ -246,6 +248,8 @@ public class PlaysForService {
             spielerRepository.deleteById(id);
         }
     }
+
+    //Author: Levi
     public List<FifaVersion> listFifaVersions(){
         return fifaVersionRepository.findAll();
     }

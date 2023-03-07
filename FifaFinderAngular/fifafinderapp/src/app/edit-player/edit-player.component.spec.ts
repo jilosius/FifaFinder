@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EditPlayerComponent } from './edit-player.component';
 
+//Author:Jannik
 describe('EditPlayerComponent', () => {
   let component: EditPlayerComponent;
   let fixture: ComponentFixture<EditPlayerComponent>;

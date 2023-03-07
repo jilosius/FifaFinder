@@ -133,23 +133,6 @@ describe('DeletePlayer',() => {
     fixture.detectChanges();
   });
 
-  it('should set a correct fifaVersionList', () => {
-    let fakeList: FifaVersion[] = [];
-    let fakeFifa1: FifaVersion = {
-      id: 23
-    };
-    let fakeFifa2: FifaVersion = {
-      id: 22
-    };
-    fakeList.push(fakeFifa1);
-    fakeList.push(fakeFifa2);
-    component.fifaVersionList = [];
-    spyOn(deletePlayerService, "listFifaVersions").and.returnValue(of(fakeList));
-    component.listFifaVersions();
-    expect(deletePlayerService.listFifaVersions).toHaveBeenCalledTimes(1);
-    expect(component.fifaVersionList).not.toEqual([]);
-    expect(component.fifaVersionList).toEqual([fakeFifa1, fakeFifa2]);
-  });
 
   it('should utilize the service to delete a player', () =>{
     spyOn(window, "confirm").and.returnValue(true);

@@ -3,25 +3,19 @@ package com.fifafinder.fifadb.controllers;
 import com.fifafinder.fifadb.DTOs.SpielerDTO;
 import com.fifafinder.fifadb.HttpResponse;
 import com.fifafinder.fifadb.services.SpielerService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import com.fifafinder.fifadb.entities.Spieler;
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
-
-
 import static java.time.LocalTime.now;
 import static java.util.Map.of;
 import static org.springframework.http.HttpStatus.OK;
 
+
+//Author:Saif,Enes,Levi,Jannik,Wafi
 @RestController
 @RequestMapping("/players")
 public class SpielerController {
@@ -43,56 +37,9 @@ public class SpielerController {
         return spielerService.getAllSpieler();
     }
 
-//    @GetMapping
-//    public long countSpieler()
-//    {
-//        return spielerService.countSpieler();
-//
-//    }
 
 
-    // First implementation: how to list all players. Not dynamic
-//    @GetMapping
-//    public Page<SpielerDTO> listAllSpieler(@RequestParam(name = "page", required = false, defaultValue = "0") int pageNumber,
-//                                           @RequestParam(name = "sort", required = false, defaultValue = "pf.overall") String sortAttribute,
-//                                           @RequestParam(name = "order", required = false, defaultValue = "desc") String sortDirection) {
-//        int pageSize = 20;
-//        Sort sort = Sort.by(sortAttribute).descending();
-//        if (sortDirection.equalsIgnoreCase("asc")) {
-//            sort = sort.ascending();
-//        }
-//        Pageable pageable = PageRequest.of(pageNumber, pageSize, sort);
-//        return spielerService.listAllSpieler(pageable);
-//    }
-
-    //---------------------------------------------------------------------
-    //Second implementation: trying to search for players by name.
-//    @GetMapping("/start")
-//    public ResponseEntity<HttpResponse> getSpieler(@RequestParam Optional<String> fullName,
-//                                                   @RequestParam Optional<Integer> page,
-//                                                   @RequestParam Optional<Integer> size,
-//                                                   @RequestParam(name = "sort", required = false, defaultValue = "pf.overall") String sortAttribute,
-//                                                   @RequestParam(name = "order", required = false, defaultValue = "desc") String sortDirection) {
-//        Sort sort = Sort.by(sortAttribute).descending();
-//        if (sortDirection.equalsIgnoreCase("asc")) {
-//            sort = sort.ascending();
-//        }
-//
-//        return ResponseEntity.ok().body(
-//                HttpResponse.builder()
-//                        .timeStamp(now().toString())
-//                        .data(of("page", spielerService.findByFullName(
-//                                fullName.orElse(""),
-//                                page.orElse(0),
-//                                size.orElse(20), sort)))
-//                        .message("Spieler abgerufen")
-//                        .status(OK)
-//                        .statusCode(OK.value())
-//                        .build());
-//    }
-
-    //*-----------------------------------
-        //Final implementation: We get all the attributes that we want to show on the starting page, also the attributes that may be used for filtering.
+    //Author:Saif,Levi
     @GetMapping("/start/filtered")
     public ResponseEntity<HttpResponse> getSpieler(@RequestParam Optional<String> fullName,
                                                    @RequestParam Optional<Integer> fifaVersion,
@@ -308,12 +255,8 @@ public class SpielerController {
         spielerService.addPlayer(spieler);
     }
 
-    @GetMapping("/findTest")
-    public Optional<Spieler> findSpieler()
-    {
-        return spielerService.findSpieler();
-    }
 
+    //Author:Saif
     @GetMapping("/start/vergleich")
     public List<SpielerDTO> getSpielerToCompare(@RequestParam Optional<Integer> player1Id,
                                                 @RequestParam Optional<Integer> player2Id,

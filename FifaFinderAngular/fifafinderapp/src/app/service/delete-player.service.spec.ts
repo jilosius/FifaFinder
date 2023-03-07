@@ -1,9 +1,7 @@
-import {inject, TestBed} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
+import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing";
 import { DeletePlayerService } from './delete-player.service';
-import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
-import {ClubService} from "./club.service";
-import {response} from "express";
 
 
 describe('DeletePlayerService', () => {
@@ -43,14 +41,5 @@ describe('DeletePlayerService', () => {
     expect(actual).toEqual([false,false,true]);
   });
 
-  it('should make a GET call to the Backend to request a list of all the Fifaversions', () => {
-    let actual: any;
-    service.listFifaVersions().subscribe(response => (actual = response));
-    const req = httpMock.expectOne('http://localhost:8080/playsFor/listVersions');
-    expect(req.request.method).toEqual('GET');
-    req.flush([true,false,true]);
-    httpMock.verify();
-    expect(actual).toEqual([true,false,true]);
-  });
 
 });
