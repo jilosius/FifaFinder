@@ -1,5 +1,6 @@
 package com.fifafinder.fifadb.services;
 
+import com.fifafinder.fifadb.dto.MannschaftenDto;
 import com.fifafinder.fifadb.entities.Mannschaften;
 import com.fifafinder.fifadb.repositories.MannschaftenRepository;
 import jakarta.transaction.Transactional;
@@ -18,6 +19,12 @@ public class MannschaftenService {
     @Autowired
     public MannschaftenService(MannschaftenRepository mannschaftenRepository){
         this.mannschaftenRepository = mannschaftenRepository;
+    }
+
+    public MannschaftenDto findMannschaftenWithDetails(int id){
+
+
+        return mannschaftenRepository.findMannschaftenWithDetails(id);
     }
 
     //Author: Levi

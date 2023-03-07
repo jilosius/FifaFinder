@@ -64,3 +64,8 @@
     border-bottom-right-radius: 5px;
     cursor: pointer;
 }
+.detailbuton{
+
+    cursor: pointer;
+	user-select: none;
+}

@@ -1,6 +1,7 @@
 package com.fifafinder.fifadb.repositories;
 
 import com.fifafinder.fifadb.DTOs.SpielerDTO;
+import com.fifafinder.fifadb.dto.spielerpageDTO;
 import com.fifafinder.fifadb.entities.Spieler;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -121,4 +122,20 @@ public interface SpielerRepository extends JpaRepository<Spieler, Integer> {
 
     Spieler findById(int id);
     Spieler findSpielerByFullName(String fullName);
+
+
+ @Query("SELECT NEW com.fifafinder.fifadb.dto.spielerpageDTO(s.id, s.fifaID, s.knownName, s.fullName,s.birthDate, l.countryName, l.flag) " +
+            "FROM Spieler s " +
+            "JOIN IsFrom f ON s.id = f.id.playerID " +
+            "JOIN Land l ON f.countryID.id = l.id " +
+            "WHERE s.knownName = :knownName")
+    Optional<spielerpageDTO> findByKnownName(@Param("knownName") String knownName);
+
+
+    Optional<Spieler> findSpielerByfullName(String n);
+    @Query("SELECT s FROM Spieler s INNER JOIN s.playsFors pf WHERE s.fullName LIKE %:name% AND pf.id.fifaVersion = 20 ORDER BY pf.overall DESC ")
+    Optional<Spieler[]> findSpielerByFullNameContainingAndPlaysFors_FifaVersionOrderByOverallAsc(
+            @Param("name") String fullName);
+
+
 }

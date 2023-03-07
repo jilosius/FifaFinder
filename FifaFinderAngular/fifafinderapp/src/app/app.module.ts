@@ -47,7 +47,8 @@ import { MatFormFieldModule } from "@angular/material/form-field";
         MatAutocompleteModule,
         MatInputModule,
         MatIconModule,
-        MatTooltipModule
+        MatTooltipModule,NgStyle,
+        PlayerModule,
     ],
   providers: [],
   schemas:[CUSTOM_ELEMENTS_SCHEMA],

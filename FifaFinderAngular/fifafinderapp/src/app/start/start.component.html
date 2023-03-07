@@ -423,7 +423,7 @@
                     (change)="toggleSelection(spieler)" />
                 </th>
                 <th scope="row"><img [src]="spieler.photoURL" width="42" height="42" class="rounded-circle" appHideMissing></th>
-                <td>{{ spieler.knownName }}</td>
+                <td class="detailbuton" (click)="onNameClick(spieler.knownName)">{{ spieler.knownName }}</td>
                 <td><img src="assets/images/nameinfo.svg" [matTooltip]="spieler.fullName" [width]="20" [height]="20" class="nameinfo"></td>
                 <td>{{ spieler.age }}</td>
                 <td><img [src]="spieler.flag" [alt]="" width="56" height="42" class="rounded" appHideMissing></td>

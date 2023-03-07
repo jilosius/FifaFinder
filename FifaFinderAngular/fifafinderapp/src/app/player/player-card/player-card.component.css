@@ -1,0 +1,617 @@
+/*code source https://bootsnipp.com/snippets/jOWMO 
++ some personlised modifications*/
+
+/* Style the tab group container */
+.tab-group {
+    background-color: black;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height:100%;
+
+}
+.tab-container
+
+/* Style the individual tabs */
+.mat-tab-label {
+    color: gray;
+}
+.mat-ink-bar {
+    background-color: yourColor !important;
+}
+* {
+	margin: 0;
+	padding: 0;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+*
+body {
+	font-family: 'Saira Semi Condensed', sans-serif;
+	font-weight: 400;
+	position: relative;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	width: 100%;
+	height: 100vh;
+    
+	
+}
+
+body:after {
+	cursor: pointer;
+	user-select: none;
+    font-size: 1rem;
+	color: #aaa;
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	z-index: 2;
+}
+
+
+/*
+  *** fut-player-card styles ***
+*/
+
+.fut-player-card {
+	position:relative ;
+	width: 300px;
+	height: 485px;
+	background-image: url("./card.png");
+	background-position: center center;
+    background-size: cover; 
+	padding: 3.8rem 0;
+	z-index: 2;
+	-webkit-transition: 200ms ease-in;
+	-o-transition: 200ms ease-in;
+	transition: 200ms ease-in;
+}
+
+	
+
+
+.fut-player-card .player-card-top {
+	position: relative;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	color: #111;
+	padding: 0 1.5rem;
+}
+
+.fut-player-card .player-card-top .player-master-info {
+	position: absolute;
+	line-height: 2.2rem;
+	font-weight: 300;
+	padding: 1.5rem 0;
+	text-transform: uppercase;
+    cursor: pointer;
+	user-select: none;
+}
+
+.fut-player-card .player-card-top .player-master-info .player-rating {
+	cursor: pointer;
+	user-select: none;
+    font-size: 2rem;
+}
+
+.fut-player-card .player-card-top .player-master-info .player-position {
+	cursor: pointer;
+	user-select: none;
+    font-size: 1.4rem;
+}
+
+.fut-player-card .player-card-top .player-master-info .player-nation {
+	display: block;
+	width: 2rem;
+	height: 25px;
+	margin: 0.3rem 0;
+}
+
+.fut-player-card .player-card-top .player-master-info .player-nation img {
+	width: 100%;
+	height: 100%;
+	-o-object-fit: contain;
+	object-fit: contain;
+}
+
+.fut-player-card .player-card-top .player-master-info .player-club {
+	display: block;
+	width: 2.1rem;
+	height: 40px;
+}
+
+.fut-player-card .player-card-top .player-master-info .player-club img {
+	width: 100%;
+	height: 100%;
+	-o-object-fit: contain;
+	object-fit: contain;
+}
+
+.fut-player-card .player-card-top .player-picture {
+	width: 200px;
+	height: 200px;
+	margin: 0 auto;
+	overflow: hidden;
+}
+
+.fut-player-card .player-card-top .player-picture img {
+	width: 100%;
+	height: 100%;
+	-o-object-fit: contain;
+	object-fit: contain;
+	position: relative;
+	right: -1.5rem;
+	bottom: 0;
+}
+
+.fut-player-card .player-card-top .player-picture .player-extra {
+	position: absolute;
+	right: 0;
+	bottom: -0.5rem;
+	overflow: hidden;
+	cursor: pointer;
+	user-select: none;
+    font-size: 1rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	width: 100%;
+	height: 2rem;
+	padding: 0 1.5rem;
+	text-align: right;
+	background: none;
+}
+
+.fut-player-card .player-card-top .player-picture .player-extra span {
+	margin-left: 0.6rem;
+	text-shadow: 2px 2px #333;
+}
+
+.fut-player-card .player-card-bottom {
+	position: relative;
+}
+
+.fut-player-card .player-card-bottom .player-info {
+	display: block;
+	padding: 0.3rem 0;
+	color: #333;
+	width: 90%;
+	margin: 0 auto;
+	height: auto;
+	position: relative;
+	z-index: 2;
+}
+
+.fut-player-card .player-card-bottom .player-info .player-name {
+	width: 100%;
+	display: block;
+	text-align: center;
+	cursor: pointer;
+	user-select: none;
+    font-size: 1.6rem;
+	text-transform: uppercase;
+	border-bottom: 2px solid rgba(233, 204, 116, 0.1);
+	padding-bottom: 0.3rem;
+	overflow: hidden;
+}
+
+.fut-player-card .player-card-bottom .player-info .player-name span {
+	display: block;
+	text-shadow: 2px 2px #111;
+}
+
+.fut-player-card .player-card-bottom .player-info .player-features {
+	margin: 0.5rem auto;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+}
+
+.fut-player-card .player-card-bottom .player-info .player-features .player-features-col {
+	border-right: 2px solid rgba(233, 204, 116, 0.1);
+	padding: 0 2.3rem;
+}
+
+.fut-player-card .player-card-bottom .player-info .player-features .player-features-col span {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	cursor: pointer;
+	user-select: none;
+    font-size: 1.2rem;
+	text-transform: uppercase;
+}
+
+.fut-player-card .player-card-bottom .player-info .player-features .player-features-col span .player-feature-value {
+	margin-right: 0.3rem;
+	font-weight: 700;
+}
+
+.fut-player-card .player-card-bottom .player-info .player-features .player-features-col span .player-feature-title {
+	font-weight: 300;
+}
+
+.fut-player-card .player-card-bottom .player-info .player-features .player-features-col:last-child {
+	border: 0;
+}
+.bar{
+	width: 50%;
+}
+.container {
+  margin-top: 20px;
+}
+
+.card {
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px #ddd;
+  margin-bottom: 20px;
+}
+.wrapper {
+	width:40%;
+	margin-top:40px;
+	padding:5px 10px;
+	background-color:#17191F;
+	border-radius:5px;
+  }
+  
+  .campo {
+	position: relative;
+	display: inline-block;
+	vertical-align: middle;
+	width: 100%;
+	height: 0;
+	margin: 10px auto;
+	padding: 0 0 60% 0;
+	/*background: green;*/
+	/*background-color: rgb(27,31,38);*/
+	background-color: #17191F;
+  }
+  
+  .interior, .divisoria,
+  .semi1, .semi2,
+  .corner {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	height: 100%;
+	margin: auto;
+	border: 1px solid #323642;
+  }
+  
+  .divisoria:after, .divisoria:before {
+	content: "";
+	position: absolute;
+	left: 50%;
+	display: block;
+	width: 0;
+	height: 100%;
+	margin-left: .5px;
+	border: 0.5px solid #323642;
+  }
+  .divisoria:before {
+	top: 50%;
+	width: 17%;
+	height: 0;
+	margin: -8% 0 0 -8%;
+	margin-top: calc(-8% - 4px);
+	margin-left: calc(-8% - .5px);
+	padding-bottom: 17%;
+	border-radius: 50%;
+	border: 1px solid #323642;
+  }
+  
+  .campo:before, .campo:after {
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 1px;
+	margin: -8% 0 0 -1px;
+	display: block;
+	width: 8%;
+	height: 30%;
+	border: 1px solid #323642;
+	z-index: 2;
+  }
+  
+  .campo:after {
+	left: auto;
+	right: -2px;
+  }
+  
+  .interior:before, .interior:after {
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 0;
+	margin: -16% 0 0 -1px;
+	display: block;
+	width: 16%;
+	height: 55%;
+	/*background: rgb(27,31,38);*/
+	background-color: #17191F;
+	border: 1px solid #323642;
+  }
+  
+  .interior:after {
+	left: auto;
+	right: 0;
+	margin: -16% -1px 0 0;
+  }
+  
+  .semi2:before {
+	left: auto;
+	right: 12%;
+  }
+  
+  .semi1:after, .semi2:after {
+	content: "";
+	position: absolute;
+	top: 50%;
+	left: 5%;
+	width: 16%;
+	height: 0;
+	margin: -8% 0 0 0;
+	padding-bottom: 16%;
+	border: 1px solid #323642;
+	border-radius: 50%;
+  }
+  .semi2:after {
+	left: auto;
+	right: 5%;
+  }
+  
+  .gk{
+	content: "";
+	position: absolute;
+	top: 48%;
+	left: 2%;
+	display: block;
+	width: 3%;
+	height: 5%;
+	background-color: #4F7EDC;
+	border: 1px solid #324978;
+	border-radius: 50%;
+	z-index: 2;
+  }
+  
+  .lb{
+	content: "";
+	position: absolute;
+	top: 10%;
+	left: 14%;
+	display: block;
+	width: 3%;
+	height: 5%;
+	background-color: #4F7EDC;
+	border: 1px solid #324978;
+	border-radius: 50%;
+	z-index: 2;
+  }
+  
+  .cb{
+	content: "";
+	position: absolute;
+	top: 48%;
+	left: 14%;
+	display: block;
+	width: 3%;
+	height: 5%;
+	background-color: #4F7EDC;
+	border: 1px solid #324978;
+	border-radius: 50%;
+	z-index: 2;
+  }
+  
+  .rb{
+	content: "";
+	position: absolute;
+	top: 85%;
+	left: 14%;
+	display: block;
+	width: 3%;
+	height: 5%;
+	background-color: #4F7EDC;
+	border: 1px solid #324978;
+	border-radius: 50%;
+	z-index: 2;
+  }
+  
+  .lwb{
+	content: "";
+	position: absolute;
+	top: 10%;
+	left: 30%;
+	display: block;
+	width: 3%;
+	height: 5%;
+	background-color: #4F7EDC;
+	border: 1px solid #324978;
+	border-radius: 50%;
+	z-index: 2;
+  }
+  
+  .dm{
+	content: "";
+	position: absolute;
+	top: 48%;
+	left: 30%;
+	display: block;
+	width: 3%;
+	height: 5%;
+	background-color: #4F7EDC;
+	border: 1px solid #324978;
+	border-radius: 50%;
+	z-index: 2;
+  }
+  
+  .rwb{
+	content: "";
+	position: absolute;
+	top: 85%;
+	left: 30%;
+	display: block;
+	width: 3%;
+	height: 5%;
+	background-color: #4F7EDC;
+	border: 1px solid #324978;
+	border-radius: 50%;
+	z-index: 2;
+  }
+  
+  .lm{
+	content: "";
+	position: absolute;
+	top: 10%;
+	left: 49%;
+	display: block;
+	width: 3%;
+	height: 5%;
+	background-color: #4F7EDC;
+	border: 1px solid #324978;
+	border-radius: 50%;
+	z-index: 2;
+  }
+  
+  .cm{
+	content: "";
+	position: absolute;
+	top: 48%;
+	left: 49%;
+	display: block;
+	width: 3%;
+	height: 5%;
+	background-color: #4F7EDC;
+	border: 1px solid #324978;
+	border-radius: 50%;
+	z-index: 2;
+  }
+  
+  .rm{
+	content: "";
+	position: absolute;
+	top: 85%;
+	left: 49%;
+	display: block;
+	width: 3%;
+	height: 5%;
+	background-color: #4F7EDC;
+	border: 1px solid #324978;
+	border-radius: 50%;
+	z-index: 2;
+  }
+  
+  .amr{
+	content: "";
+	position: absolute;
+	top: 10%;
+	left: 67%;
+	display: block;
+	width: 3%;
+	height: 5%;
+	background-color: #4F7EDC;
+	border: 1px solid #324978;
+	border-radius: 50%;
+	z-index: 2;
+  }
+  
+  .am{
+	content: "";
+	position: absolute;
+	top: 48%;
+	left: 67%;
+	display: block;
+	width: 3%;
+	height: 5%;
+	background-color: #4F7EDC;
+	border: 1px solid #324978;
+	border-radius: 50%;
+	z-index: 2;
+  }
+  
+  .aml{
+	content: "";
+	position: absolute;
+	top: 85%;
+	left: 67%;
+	display: block;
+	width: 3%;
+	height: 5%;
+	background-color: #4F7EDC;
+	border: 1px solid #324978;
+	border-radius: 50%;
+	z-index: 2;
+  }
+  
+  .wl{
+	content: "";
+	position: absolute;
+	top: 10%;
+	left: 83%;
+	display: block;
+	width: 3%;
+	height: 5%;
+	background-color: #4F7EDC;
+	border: 1px solid #324978;
+	border-radius: 50%;
+	z-index: 2;
+  }
+  
+  .cf{
+	content: "";
+	position: absolute;
+	top: 48%;
+	left: 83%;
+	display: block;
+	width: 3%;
+	height: 5%;
+	background-color: #4F7EDC;
+	border: 1px solid #324978;
+	border-radius: 50%;
+	z-index: 2;
+  }
+  
+  .wr{
+	content: "";
+	position: absolute;
+	top: 85%;
+	left: 83%;
+	display: block;
+	width: 3%;
+	height: 5%;
+	background-color: #4F7EDC;
+	border: 1px solid #324978;
+	border-radius: 50%;
+	z-index: 2;
+  }
+  
+  .st{
+	content: "";
+	position: absolute;
+	top: 48%;
+	left: 95%;
+	display: block;
+	width: 3%;
+	height: 5%;
+	background-color: #4F7EDC;
+	border: 1px solid #324978;
+	border-radius: 50%;
+	z-index: 2;
+  }
