@@ -215,13 +215,11 @@ export class EditPlayerComponent{
 
   onEditPlayer(data: UpdateDto) {
     data.clubName = this.clubName.value;
-    console.log(data);
     this.editPlayerService.updatePlayerDetails(data, this.playerId, this.fifaVersion);
   }
 
   onAddPlayer(data: AddDto) {
     data.clubName = this.clubName.value;
-    console.log(data);
     this.editPlayerService.addPlayer(data);
   }
 

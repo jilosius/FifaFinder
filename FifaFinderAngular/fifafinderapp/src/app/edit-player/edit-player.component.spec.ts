@@ -1,9 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { FormBuilder } from '@angular/forms';
+import { ActivatedRoute, ActivatedRouteSnapshot, convertToParamMap } from '@angular/router';
+import { AddDto } from '../interface/add-dto';
+import { UpdateDto } from '../interface/update-dto';
+import { ClubService } from '../service/club.service';
+import { EditPlayerService } from '../service/edit-player.service';
 import { EditPlayerComponent } from './edit-player.component';
 
 describe('EditPlayerComponent', () => {
   let component: EditPlayerComponent;
+  let activatedRouteSnapshot: ActivatedRouteSnapshot;
   let fixture: ComponentFixture<EditPlayerComponent>;
 
   beforeEach(async () => {
@@ -19,5 +25,219 @@ describe('EditPlayerComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+});
+
+
+describe('isAddMode', () => {
+  let component: EditPlayerComponent;
+  let fixture: ComponentFixture<EditPlayerComponent>;
+  let activatedRouteStub: any;
+
+  beforeEach(async () => {
+    activatedRouteStub = {
+      snapshot: {
+        paramMap: {
+          get: (param: string) => {
+            if (param === 'mode') {
+              return 'true';
+            }
+            return null;
+          }
+        }
+      }
+    };
+
+    await TestBed.configureTestingModule({
+      declarations: [ EditPlayerComponent ],
+      providers: [
+        EditPlayerService,
+        FormBuilder,
+        ClubService,
+        { provide: ActivatedRoute, useValue: activatedRouteStub }
+      ]
+    })
+    .compileComponents();
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(EditPlayerComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should return true in add mode', () => {
+    expect(component.isAddMode()).toBeTrue();
+  });
+
+  it('should return false in edit mode', () => {
+    activatedRouteStub.snapshot.paramMap.get = (param: string) => {
+      if (param === 'mode') {
+        return 'false';
+      }
+      return null;
+    };
+    expect(component.isAddMode()).toBeFalse();
+  });
+});
+
+
+describe('onEditPlayer/onAddPlayer', () => {
+  let editPlayerServiceSpy: jasmine.SpyObj<EditPlayerService>;
+  let component: EditPlayerComponent;
+  let fixture: ComponentFixture<EditPlayerComponent>;
+
+  beforeEach(() => {
+    editPlayerServiceSpy = jasmine.createSpyObj('EditPlayerService', ['updatePlayerDetails']);
+    fixture = TestBed.createComponent(EditPlayerComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should update the club name and call service.updatePlayerDetails(UpdateDto, playerId, fifaVersion)', () => {
+    const playerId = 1;
+    const fifaVersion = 23;
+    const dataInput: UpdateDto = {
+      height: 188,
+      clubPosition: 'LW',
+      clubNumber: 2,
+      nationalPosition: 'LW', 
+      nationalNumber: 2,
+      preferredFoot: 'Left',
+      contractUntil: 2024,
+      onLoan: 'TRUE',
+      nationalTeam: 'Argentina',  
+      weight: 80,
+      overall: 80,
+      potential: 80,
+      bestPosition: 'LW', 
+      clubName: 'FC Barcelona',
+      valueEUR: 1000000,
+      wage: 10000,
+      releaseClause: 1000000, 
+      intReputation: 80, 
+      weakFoot: 2,
+      skillMoves: 2,
+      crossing: 80,
+      finishing: 80,
+      headingAccuracy: 80, 
+      shortPassing: 80,
+      volleys: 80,
+      dribbling: 80,
+      curve: 80,
+      fkaccuracy: 80,
+      longPassing: 80,
+      ballControl: 80,
+      acceleration: 80,
+      sprintSpeed: 80,
+      agility: 80,
+      reaction: 80,
+      balance: 80,
+      shotPower: 80,
+      jumping: 80,
+      stamina: 80,
+      strength: 80,
+      longShots: 80,
+      aggression: 80,
+      interceptions: 80,
+      positioning: 80,
+      vision: 80,
+      penalties: 80,
+      composure: 80,
+      marking: 80,
+      standingTackle: 80,
+      slidingTackle: 80,
+      gkdiving: 80,
+      gkhandling: 80,
+      gkkicking: 80,
+      gkpositioning: 80, 
+      gkreflexes: 80,
+      photoUrl: 'url'
+    };
+
+    const serviceCallData: UpdateDto = dataInput;
+    serviceCallData.clubName = 'Paris-Saint Germain';
+
+    component.clubName.setValue('Paris-Saint Germain');
+    component.playerId = playerId;
+    component.fifaVersion = fifaVersion;
+    component.onEditPlayer(dataInput);
+
+    expect(dataInput.clubName).toEqual('Paris-Saint Germain');
+    expect(editPlayerServiceSpy.updatePlayerDetails).toHaveBeenCalledWith(serviceCallData, playerId, fifaVersion);
+  });
+
+  it('should update the club name and call service.addPlayer(AddDto)', () => {
+    const dataInput: AddDto = {
+      fullName: 'Lionel Messi',
+      knownName: 'L. Messi',
+      age: 35,
+      dateOfBirth: new Date(1977),
+      fifaVersion: 23,
+      height: 188,
+      clubPosition: 'LW',
+      clubNumber: 2,
+      nationalPosition: 'LW', 
+      nationalNumber: 2,
+      preferredFoot: 'Left',
+      contractUntil: 2024,
+      onLoan: 'TRUE',
+      nationalTeam: 'Argentina',  
+      weight: 80,
+      overall: 80,
+      potential: 80,
+      bestPosition: 'LW', 
+      clubName: 'FC Barcelona',
+      valueEUR: 1000000,
+      wage: 10000,
+      releaseClause: 1000000, 
+      intReputation: 80, 
+      weakFoot: 2,
+      skillMoves: 2,
+      crossing: 80,
+      finishing: 80,
+      headingAccuracy: 80, 
+      shortPassing: 80,
+      volleys: 80,
+      dribbling: 80,
+      curve: 80,
+      fkaccuracy: 80,
+      longPassing: 80,
+      ballControl: 80,
+      acceleration: 80,
+      sprintSpeed: 80,
+      agility: 80,
+      reaction: 80,
+      balance: 80,
+      shotPower: 80,
+      jumping: 80,
+      stamina: 80,
+      strength: 80,
+      longShots: 80,
+      aggression: 80,
+      interceptions: 80,
+      positioning: 80,
+      vision: 80,
+      penalties: 80,
+      composure: 80,
+      marking: 80,
+      standingTackle: 80,
+      slidingTackle: 80,
+      gkdiving: 80,
+      gkhandling: 80,
+      gkkicking: 80,
+      gkpositioning: 80, 
+      gkreflexes: 80,
+      photoUrl: 'url'
+    };
+
+    const serviceCallData: AddDto = dataInput;
+    serviceCallData.clubName = "Paris-Saint Germain";
+
+    component.clubName.setValue("Paris-Saint Germain");
+    component.onAddPlayer(dataInput);
+
+    expect(dataInput.clubName).toEqual('Paris-Saint Germain');
+    expect(editPlayerServiceSpy.addPlayer).toHaveBeenCalledWith(serviceCallData);
   });
 });

@@ -12,7 +12,6 @@ import java.util.Set;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 public class SpielerDetailDTO {
     private PlaysForId id;
     private Spieler playerID;
