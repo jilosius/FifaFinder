@@ -1,5 +1,6 @@
 export interface PlaysFor{
-    yProperty: any;
+
+  
     height: number ;
     id: {
     playerID:number ;

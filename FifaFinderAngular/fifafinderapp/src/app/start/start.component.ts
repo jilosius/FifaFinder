@@ -13,6 +13,7 @@ import { DeletePlayerService } from "../service/delete-player.service";
 import { FifaVersion } from "../interface/fifaversion";
 import { Club } from "../interface/club";
 import { ClubService } from "../service/club.service";
+import { PlaysForService } from '../service/PlaysFor.service';
 
 @Component({
   selector: 'app-start',
@@ -143,7 +144,7 @@ export class StartComponent implements OnInit {
   //Array to set the "hidden" attribute of each column to either true or false
   condArray:boolean[] = [true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true];
 
-  constructor(private spielerService: SpielerService, private selectedPlayerService: SelectedPlayerService, private router: Router, private deletePlayerService: DeletePlayerService, private clubService: ClubService) { }
+  constructor(private spielerService: SpielerService, private selectedPlayerService: SelectedPlayerService, private router: Router, private deletePlayerService: DeletePlayerService, private clubService: ClubService,private playsforservice:PlaysForService) { }
 
   //on app initialisation: start with: 'APP LOADING', then 'APP_LOADED', and if error return 'APP_ERROR'
   ngOnInit(): void {
@@ -190,8 +191,10 @@ export class StartComponent implements OnInit {
     return this.clubs.filter(club =>
     club.clubName.toLowerCase().includes(filterValue));
   }
-
-
+  onNameClick(knownName: string) {
+    this.router.navigate(['/PlayerComponent', knownName]);
+  }
+  
 
   gotoPage(pageName:string):void{
 

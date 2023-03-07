@@ -11,25 +11,19 @@ export class PlayerCardComponent implements OnInit{
   constructor(private playsForService:PlaysForService){
     
   };
-  ngOnInit() { console.log(this.player.acceleration*0.45+this.player.sprintSpeed*0.55)
-              console.log(this.player.gkdiving)
-              console.log(this.player)
+  ngOnInit() { (this.player.acceleration*0.45+this.player.sprintSpeed*0.55)
          }
 
 
   @Input() player : PlaysFor;
   @Input()theplayer: Spieler;
-
-
+  
 
 
   public calculate_pace():number{
 
     let val=  Math.round(this.player.acceleration*0.45+this.player.sprintSpeed*0.55);
 
-    
-    if (Number.isNaN(val))
-    return 0;
     
     return val;
   }
@@ -46,12 +40,11 @@ export class PlayerCardComponent implements OnInit{
   }
   public  calculate_passing():number{
     let val= Math.round( this.player.vision*0.05+this.player.crossing*0.45
-          +this.player.curve*0.05+this.player.fKAccuracy*0.05
-          +this.player.numberPassing*0.2+this.player.shortPassing*0.05
+          +this.player.curve*0.05+
+          +this.player.shortPassing*0.05
     );
     
-    if (Number.isNaN(val))
-    return 0;
+   
     
     return val;
   }
@@ -60,8 +53,7 @@ export class PlayerCardComponent implements OnInit{
           +this.player.reaction*0.05+this.player.ballControl*0.3
           +this.player.dribbling*0.5);
           
-          if (Number.isNaN(val))
-          return 0;
+         
           
           return val;
   }
@@ -70,8 +62,7 @@ export class PlayerCardComponent implements OnInit{
           +this.player.marking*0.3+this.player.slidingTackle*0.1
           +this.player.standingTackle*0.3);
           
-          if (Number.isNaN(val))
-          return 0;
+       
           
           return val;
   }
@@ -79,8 +70,7 @@ export class PlayerCardComponent implements OnInit{
     let val=  Math.round( this.player.aggression*0.2+this.player.jumping*0.1
           +this.player.stamina*0.3+this.player.strength*0.1);
           
-          if (Number.isNaN(val))
-          return 0;
+        
           
           return val;
   }

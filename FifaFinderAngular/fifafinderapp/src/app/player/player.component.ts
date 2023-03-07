@@ -4,6 +4,8 @@ import { Component, OnInit  } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CanvasJS } from 'src/assets/canvasjs.angular.component';
 import { PlaysForService } from '../service/PlaysFor.service';
+import { Router, ParamMap  } from '@angular/router';
+import { switchMap, take } from 'rxjs/operators';
 @Component({
   selector: 'app-player',
   templateUrl: './player.component.html',
@@ -16,7 +18,11 @@ export class PlayerComponent implements OnInit   {
   chart: any;
   ngOnInit() {
       console.log(this.playername);
-    this.route.queryParams.subscribe(params => {
+      this.playername  = this.route.snapshot.paramMap.get('knownName');
+      this.getSpielerByFullName(this.playername);
+      this.chart = new CanvasJS.Chart('chartContainer', this.chartOptions);
+      
+      /*this.route.queryParams.subscribe(params => {
       this.selectedOption = params['selectedOption'];
       console.log('Selected option:', this.selectedOption);
       if(this.selectedOption){this.playername=this.selectedOption;}
@@ -24,7 +30,7 @@ export class PlayerComponent implements OnInit   {
       this.getSpielerByFullName(this.playername);
       this.chart = new CanvasJS.Chart('chartContainer', this.chartOptions);
 
-    });
+    });*/
     
 }
 
@@ -65,5 +71,6 @@ export class PlayerComponent implements OnInit   {
       }
       );   
   }
+  
 
 }

@@ -23,19 +23,7 @@
               <mat-card-subtitle>{{player?.clubID.clubName}}</mat-card-subtitle>
               <img mat-card-avatar [src]="player.clubID.clubLogo" alt="Club Logo" style="background-size: cover;">
             </mat-card-header>
-            <mat-card-content>
-                <h4 class="playerinfo" >Liga: {{mannschaften.countryName}}</h4>
-                <h4 class="playerinfo" >overall : {{mannschaften.overall}} </h4>
-                <mat-progress-bar class="bar" mode="determinate" [value]="mannschaften.overall"  *ngIf="mannschaften.overall !== null"></mat-progress-bar>
-                <h4 class="playerinfo" >attack : {{mannschaften.attack}}</h4>
-                <mat-progress-bar class="bar" mode="determinate" [value]="mannschaften.attack"  *ngIf="mannschaften.attack !== null"></mat-progress-bar>
-                <h4 class="playerinfo" >midfield : {{mannschaften.midfield}}</h4>
-                <mat-progress-bar class="bar" mode="determinate" [value]="mannschaften.midfield"  *ngIf="mannschaften.midfield !== null"></mat-progress-bar>
-                <h4 class="playerinfo" >defence : {{mannschaften.defence}}</h4>
-                <mat-progress-bar class="bar" mode="determinate" [value]="mannschaften.defence"  *ngIf="mannschaften.defence !== null"></mat-progress-bar>
-            
-            </mat-card-content>
-       
+          
           </mat-card>
   <mat-card class="national team">
         <mat-card-header>

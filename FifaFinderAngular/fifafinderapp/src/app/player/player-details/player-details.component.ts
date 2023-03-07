@@ -23,12 +23,13 @@ export class PlayerDetailsComponent  implements OnInit  {
     
       this.chart = new CanvasJS.Chart('chartContainer', this.chartOptions);
       this.selectedSecondTabIndices = new Array(this.Players.length).fill(0);
-      console.log()
     };
     
   playerId : number;
   chartOptions = {};
   pacDataPoints: DataPoint[]=[]
+  clubid:number ;
+  
 
 public getDataPoints(Players: PlaysFor[], yProperty: keyof PlaysFor): void {
   this.pacDataPoints = [];
@@ -40,47 +41,46 @@ public getDataPoints(Players: PlaysFor[], yProperty: keyof PlaysFor): void {
       this.chart.render();
 }
  
-  public plot(data:DataPoint[],yProperty: keyof PlaysFor):any{
-    console.log(yProperty);
-    console.log(data);
-    console.log(data);
+public plot(data: DataPoint[], yProperty: keyof PlaysFor): void {
   this.chartOptions = {
     animationEnabled: true,
     theme: "light2",
-    title:{
-    text: "Playerstats"
+    title: {
+      text: "Playerstats"
     },
     axisX: {
       interval: 1
     },
     axisY: {
-    title: yProperty
+      title: yProperty
     },
     toolTip: {
-    shared: true
+      shared: true
     },
     legend: {
-    cursor: "pointer",
-    itemclick: function (e: any) {
-      if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-        e.dataSeries.visible = false;
-      } else {
-        e.dataSeries.visible = true;
-      } 
-      e.chart.render();
-    }
+      cursor: "pointer",
+      itemclick: function (e: any) {
+        if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+          e.dataSeries.visible = false;
+        } else {
+          e.dataSeries.visible = true;
+        }
+        e.chart.render();
+      }
     },
-    data: [{
-    type: "line",
-    showInLegend: true,
-    name: "Projected Sales",
-    dataPoints: data
-    },]
-  }
-  this.chart.data[0].addTo("dataPoints",data);
+    data: [
+      {
+        type: "line",
+        showInLegend: true,
+        name: yProperty,
+        dataPoints: data
+      }
+    ]
+  };
+  this.chart.render();
 };
+
   getYPlot(yProperty: keyof PlaysFor): void {
-    console.log(`Clicked on ${yProperty}`);
     this.getDataPoints(this.Players, yProperty);
     this.chart.render();
 

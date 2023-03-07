@@ -35,7 +35,8 @@ h4 {
   margin-top: 10px;
 	font-size: 16px;
 	font-style: italic;
-	
+  cursor: pointer;
+	user-select: none;
 
   }
 .title{

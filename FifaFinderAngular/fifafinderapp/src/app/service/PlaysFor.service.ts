@@ -31,6 +31,9 @@ export class PlaysForService{
     public getMannschaftenWithDetails(id: Number): Observable<Mannschaften> {
         return this.http.get<Mannschaften>(`${this.apiServerurl}/clubs/mannschaften/${id}`);
     }
+
+    mannschaften$ = (id:number): Observable<Mannschaften> =>
+    this.getMannschaftenWithDetails(id);
     
     }
     
