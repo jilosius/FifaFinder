@@ -3,8 +3,6 @@ package com.fifafinder.fifadb.controllers;
 import com.fifafinder.fifadb.DTOs.AddPlaysForDTO;
 import com.fifafinder.fifadb.entities.FifaVersion;
 import com.fifafinder.fifadb.entities.Spieler;
-import com.fifafinder.fifadb.repositories.MannschaftenRepository;
-import com.fifafinder.fifadb.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,12 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fifafinder.fifadb.dto.SpielerDetailDTO;
 import com.fifafinder.fifadb.dto.UpdateDTO;
 import com.fifafinder.fifadb.entities.*;
-import com.fifafinder.fifadb.repositories.FifaVersionRepository;
 import com.fifafinder.fifadb.services.PlaysForService;
 import com.fifafinder.fifadb.services.SpielerService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.time.ZoneId;
 import java.util.List;
 
 //Author: Saif,Levi,Enes,Jannik,Wafi
@@ -28,26 +24,10 @@ public class PlaysForController {
 
     private final PlaysForService playsForService;
     private final SpielerService spielerService;
-    private final LandService landService;
-    private final IsFromService isFromService;
-    private final FifaVersionRepository fifaVersionRepository;
-    private final FifaController fifaController;
-    private final MannschaftenController mannschaftenController;
-    private final MannschaftenRepository mannschaftenRepository;
     @Autowired
-    public PlaysForController(PlaysForService playsForService, SpielerService spielerService,
-                              FifaVersionRepository fifaVersionRepository, FifaController fifaController,
-                              MannschaftenRepository mannschaftenRepository,
-                              MannschaftenController mannschaftenController, LandService landService,
-                              IsFromService isFromService) {
+    public PlaysForController(PlaysForService playsForService, SpielerService spielerService) {
         this.playsForService = playsForService;
         this.spielerService = spielerService;
-        this.fifaVersionRepository = fifaVersionRepository;
-        this.fifaController = fifaController;
-        this.mannschaftenController = mannschaftenController;
-        this.mannschaftenRepository = mannschaftenRepository;
-        this.landService = landService;
-        this.isFromService = isFromService;
     }
 
 
@@ -94,7 +74,7 @@ public class PlaysForController {
         playsForId.setFifaVersion(fifaVersion);
         return playsForService.getDetailsForEdit(playsForId);
     }
-    
+
     // Author: Enes
     @PostMapping("/add")
     public void addPlayer(@RequestBody AddPlaysForDTO playsForDTO )
