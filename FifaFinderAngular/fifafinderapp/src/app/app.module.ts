@@ -1,5 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
@@ -20,6 +20,8 @@ import { HideMissingDirective } from './directive/hide-missing.directive';
 import { MatIconModule } from "@angular/material/icon";
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatFormFieldModule } from "@angular/material/form-field";
+import { NgStyle } from '@angular/common';
+import { PlayerModule } from './player/player.module';
 
 
 @NgModule({
@@ -47,11 +49,14 @@ import { MatFormFieldModule } from "@angular/material/form-field";
         MatAutocompleteModule,
         MatInputModule,
         MatIconModule,
-        MatTooltipModule,NgStyle,
-        PlayerModule,
+        MatTooltipModule,
+        NgStyle,
+        PlayerModule
     ],
   providers: [],
-  schemas:[CUSTOM_ELEMENTS_SCHEMA],
+  schemas:[
+    CUSTOM_ELEMENTS_SCHEMA,
+    NO_ERRORS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

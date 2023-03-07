@@ -70,7 +70,7 @@ public class PlaysForService {
     }
 
     //Author: Jannik
-    public void editDetails(PlaysForId playsForId, UpdateDTO updateDTO) {
+    public PlaysFor editDetails(PlaysForId playsForId, UpdateDTO updateDTO) {
         PlaysFor details = playsForRepository.findPlaysForById(playsForId);
         details.setHeight(updateDTO.getHeight());
         details.setClubPosition(updateDTO.getClubPosition());
@@ -128,6 +128,7 @@ public class PlaysForService {
         details.setGKReflexes(updateDTO.getGKReflexes());
         details.setPhotoUrl(updateDTO.getPhotoUrl());
         playsForRepository.save(details);
+        return details;
     }
 
     //Author: Jannik
