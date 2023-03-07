@@ -35,7 +35,7 @@ describe('EditPlayerComponent', () => {
         MatAutocompleteModule,
         MatInputModule,
         BrowserAnimationsModule
-      ], 
+      ],
       declarations: [ EditPlayerComponent ],
       providers: [
         HttpClient,
@@ -81,7 +81,7 @@ describe('isAddMode', () => {
           }
         }
       }
-    }; 
+    };
 
     await TestBed.configureTestingModule({
       declarations: [ EditPlayerComponent ],
@@ -137,7 +137,7 @@ describe('onEditPlayer/onAddPlayer', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ EditPlayerComponent ],
-      imports: [  
+      imports: [
         ReactiveFormsModule,
         MatFormFieldModule,
         MatAutocompleteModule,
@@ -170,26 +170,26 @@ describe('onEditPlayer/onAddPlayer', () => {
       height: 188,
       clubPosition: 'LW',
       clubNumber: 2,
-      nationalPosition: 'LW', 
+      nationalPosition: 'LW',
       nationalNumber: 2,
       preferredFoot: 'Left',
       contractUntil: 2024,
       onLoan: 'TRUE',
-      nationalTeam: 'Argentina',  
+      nationalTeam: 'Argentina',
       weight: 80,
       overall: 80,
       potential: 80,
-      bestPosition: 'LW', 
+      bestPosition: 'LW',
       clubName: 'FC Barcelona',
       valueEUR: 1000000,
       wage: 10000,
-      releaseClause: 1000000, 
-      intReputation: 80, 
+      releaseClause: 1000000,
+      intReputation: 80,
       weakFoot: 2,
       skillMoves: 2,
       crossing: 80,
       finishing: 80,
-      headingAccuracy: 80, 
+      headingAccuracy: 80,
       shortPassing: 80,
       volleys: 80,
       dribbling: 80,
@@ -219,7 +219,7 @@ describe('onEditPlayer/onAddPlayer', () => {
       gkdiving: 80,
       gkhandling: 80,
       gkkicking: 80,
-      gkpositioning: 80, 
+      gkpositioning: 80,
       gkreflexes: 80,
       photoUrl: 'url'
     };
@@ -246,26 +246,26 @@ describe('onEditPlayer/onAddPlayer', () => {
       height: 188,
       clubPosition: 'LW',
       clubNumber: 2,
-      nationalPosition: 'LW', 
+      nationalPosition: 'LW',
       nationalNumber: 2,
       preferredFoot: 'Left',
       contractUntil: 2024,
       onLoan: 'TRUE',
-      nationalTeam: 'Argentina',  
+      nationalTeam: 'Argentina',
       weight: 80,
       overall: 80,
       potential: 80,
-      bestPosition: 'LW', 
+      bestPosition: 'LW',
       clubName: 'FC Barcelona',
       valueEUR: 1000000,
       wage: 10000,
-      releaseClause: 1000000, 
-      intReputation: 80, 
+      releaseClause: 1000000,
+      intReputation: 80,
       weakFoot: 2,
       skillMoves: 2,
       crossing: 80,
       finishing: 80,
-      headingAccuracy: 80, 
+      headingAccuracy: 80,
       shortPassing: 80,
       volleys: 80,
       dribbling: 80,
@@ -295,7 +295,7 @@ describe('onEditPlayer/onAddPlayer', () => {
       gkdiving: 80,
       gkhandling: 80,
       gkkicking: 80,
-      gkpositioning: 80, 
+      gkpositioning: 80,
       gkreflexes: 80,
       photoUrl: 'url'
     };
