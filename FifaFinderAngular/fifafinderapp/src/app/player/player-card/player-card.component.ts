@@ -22,7 +22,7 @@ export class PlayerCardComponent implements OnInit{
 
   public calculate_pace():number{
 
-    let val=  Math.round(this.player.acceleration*0.45+this.player.sprintSpeed*0.55);
+    let val=  Math.round(this.player.acceleration*0.5+this.player.sprintSpeed*0.55);
 
     
     return val;
@@ -30,18 +30,16 @@ export class PlayerCardComponent implements OnInit{
   public  calculate_shouting():number{
     let val=  Math.round( this.player.positioning*0.05+this.player.finishing*0.45
           +this.player.penalties*0.2+this.player.shotPower*0.05
-          +this.player.shotPower*0.2+this.player.volleys*0.005)
+          +this.player.shotPower*0.2+this.player.volleys*0.05)
            ;
-           
-           if (Number.isNaN(val))
-           return 0;
+          
            
            return val;
   }
   public  calculate_passing():number{
     let val= Math.round( this.player.vision*0.05+this.player.crossing*0.45
           +this.player.curve*0.05+
-          +this.player.shortPassing*0.05
+          +this.player.shortPassing*0.5
     );
     
    
