@@ -6,3 +6,56 @@
 .pointer {
     cursor: pointer;
 }
+.disabled {
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.pointer {
+    cursor: pointer;
+}
+/* Set the background color to black */
+.navbar {
+    background-color: black;
+  }
+  
+  /* Align the navbar items to the right */
+  .navbar-nav {
+    justify-content: flex-end;
+  }
+  
+  /* Set the color of the links to white */
+  .navbar a {
+    color: white !important;
+  }
+  
+  /* Set the font size of the links */
+  .navbar a {
+    font-size: 16px;
+  }
+  
+  /* Set the font weight of the brand to bold */
+  .navbar-brand {
+    font-weight: bold;
+  }
+  
+  /* Set the padding of the navbar items */
+  .navbar-nav li {
+    padding: 0 10px;
+  }
+  
+  /* Align the search bar to the right */
+  .app-search-bar {
+    margin-left: auto;
+  }
+  
+  /* Set the font size of the search bar */
+  .app-search-bar input {
+    font-size: 16px;
+  }
+  
+  /* Center the router-outlet */
+  router-outlet {
+    display: flex;
+    justify-content: center;
+  }

@@ -1,0 +1,182 @@
+<mat-tab-group [color]="'primary'" animationDuration="0ms" mat-stretch-tabs="true" mat-align-tabs="start" >
+	<ng-container *ngFor="let player of Players; let i = index;">
+	  <mat-tab *ngIf="player.overall !== null" class="tabs" [label]="player.id.fifaVersion.toString()" [attr.data-index]="i" >
+		<ng-template mat-tab-label>
+		  {{player.id.fifaVersion}}
+		</ng-template>
+	  <div class="container">
+		<app-player-card class="player-card" [player]="player" ></app-player-card>
+  
+		<mat-tab-group class="tab" [color]="'primary'" [color]="'primary'" [(selectedIndex)]="selectedFirstTabIndex" mat-stretch-tabs="false" mat-align-tabs="center">
+			  <mat-tab label="Player Bio" >
+		  <app-player-overview [player]="player" [theplayer]="theplayer" ></app-player-overview>
+			  </mat-tab>   	 
+				  <mat-tab label="Attributes">
+					  <h4 (click)="getYPlot('overall')">overall : {{player.overall}}</h4>
+					  <mat-progress-bar class="bar" mode="determinate" [value]="player.overall" *ngIf="player.overall !== null"></mat-progress-bar>
+					  <mat-progress-bar class="bar" mode="determinate" [value]="0" *ngIf="player.overall == null">Unavailable</mat-progress-bar>
+					  <h4 (click)="getYPlot('potential')" *ngIf="player.potential !== null">Potential  : {{player.potential}} </h4>
+					  <mat-progress-bar class="bar" mode="determinate" [value]="player.potential" *ngIf="player.potential !== null"></mat-progress-bar>		
+  
+				  <mat-expansion-panel>
+					  <mat-expansion-panel-header>
+					  <mat-panel-title class="title">
+						  deffending
+					  </mat-panel-title>
+					  </mat-expansion-panel-header>
+					  
+					  <mat-card class="deffending">
+					  <ng-container *ngIf="player">
+	  <h4 (click)="getYPlot('headingAccuracy')" *ngIf="player.headingAccuracy !== null">Heading Accuracy : {{player.headingAccuracy}} </h4>
+	  <mat-progress-bar class="bar" mode="determinate" [value]="player.headingAccuracy"  *ngIf="player.headingAccuracy !== null"></mat-progress-bar>
+	  <h4 (click)="getYPlot('interceptions')" *ngIf="player.interceptions !== null">Interceptions = {{player.interceptions}}</h4>
+	  <mat-progress-bar class="bar" mode="determinate" [value]="player.interceptions"  *ngIf="player.interceptions !== null"></mat-progress-bar>
+	  <h4 (click)="getYPlot('marking')" *ngIf="player.marking !== null">Marking = {{player.marking}}</h4>
+	  <mat-progress-bar class="bar" mode="determinate" [value]="player.marking"  *ngIf="player.marking !== null"></mat-progress-bar>
+	  <h4 (click)="getYPlot('standingTackle')" *ngIf="player.standingTackle !== null">Standing Tackle = {{player.standingTackle}}</h4>
+	  <mat-progress-bar class="bar" mode="determinate" [value]="player.standingTackle"  *ngIf="player.standingTackle !== null"></mat-progress-bar>
+	  <h4 (click)="getYPlot('slidingTackle')" *ngIf="player.slidingTackle !== null">Sliding Tackle = {{player.slidingTackle}} </h4>
+	  <mat-progress-bar class="bar" mode="determinate" [value]="player.slidingTackle"  *ngIf="player.slidingTackle !== null"></mat-progress-bar>
+	  </ng-container>
+					  </mat-card>				
+				  </mat-expansion-panel>
+				  <mat-expansion-panel>
+					  <mat-expansion-panel-header>
+					  <mat-panel-title class="title">
+						  passing
+					  </mat-panel-title>
+					  </mat-expansion-panel-header>
+					  <mat-card class="passing">
+						  <h4 (click)="getYPlot('shortPassing')">Short Passing :{{player.shortPassing}}</h4>
+						  <mat-progress-bar class="bar" mode="determinate" [value]="player.shortPassing" *ngIf="player.shortPassing !== null"></mat-progress-bar>
+						  <mat-progress-bar class="bar" mode="determinate" [value]="0" *ngIf="player.shortPassing  === null">Unavailable</mat-progress-bar>
+						  
+						  <h4 (click)="getYPlot('crossing')">Crossing :{{player.crossing}}</h4>
+						  <mat-progress-bar class="bar" mode="determinate" [value]="player.crossing" *ngIf="player.crossing !== null"></mat-progress-bar>
+						  <mat-progress-bar class="bar" mode="determinate" [value]="0" *ngIf="player.crossing  === null">Unavailable</mat-progress-bar>
+						  
+						  <h4 (click)="getYPlot('vision')">Vision :{{player.vision}}</h4>
+						  <mat-progress-bar class="bar" mode="determinate" [value]="player.vision" *ngIf="player.vision !== null"></mat-progress-bar>
+						  <mat-progress-bar class="bar" mode="determinate" [value]="0" *ngIf="player.vision === null">Unavailable</mat-progress-bar>
+						  
+						  
+						  
+						  <h4 (click)="getYPlot('curve')">Curv :{{player.curve}}</h4>
+						  <mat-progress-bar class="bar" mode="determinate" [value]="player.curve" *ngIf="player.curve !== null"></mat-progress-bar>
+						  <mat-progress-bar class="bar" mode="determinate" [value]="0" *ngIf="player.curve === null">Unavailable</mat-progress-bar>
+						  
+					  </mat-card>
+					  
+				  </mat-expansion-panel>
+				  
+				  <mat-expansion-panel>
+					  <mat-expansion-panel-header>
+					  <mat-panel-title class="title">
+						  dribbling
+					  </mat-panel-title>
+					  </mat-expansion-panel-header>
+					  
+						  <mat-card class="dribbling">
+							  <h4 (click)="getYPlot('agility')">Agility :{{player.agility}}</h4>
+							  <mat-progress-bar class="bar" mode="determinate" [value]="player.agility"></mat-progress-bar>
+							  <h4 (click)="getYPlot('reaction')">Reaction :{{player.reaction}}</h4>
+							  <mat-progress-bar class="bar" mode="determinate" [value]="player.reaction"></mat-progress-bar>
+							  <h4 (click)="getYPlot('balance')">Balance :{{player.balance}}</h4>
+							  <mat-progress-bar class="bar" mode="determinate" [value]="player.balance"></mat-progress-bar>
+							  <h4 (click)="getYPlot('ballControl')">Ball Controol: {{player.ballControl}}=</h4>
+							  <mat-progress-bar class="bar" mode="determinate" [value]="player.ballControl"></mat-progress-bar>
+							  <h4 (click)="getYPlot('dribbling')">Dribbling :{{player.dribbling}}</h4>
+							  <mat-progress-bar class="bar" mode="determinate" [value]="player.dribbling"></mat-progress-bar>
+									  
+						  </mat-card>				
+				  </mat-expansion-panel>
+				  <mat-expansion-panel>
+				  
+					  
+						  <mat-card class ="player info">
+						  
+							  <h4> {{player.preferredFoot}}</h4>
+							  <h4>National Team :{{player.nationalTeam}}</h4>
+							  <h4 (click)="getYPlot('intReputation')">Int Reputation :{{player.intReputation}}</h4>
+							  <h4 (click)="getYPlot('Mannschaften')">Mannschaften :{{player.Mannschaften}}</h4>
+							  <h4 (click)="getYPlot('skillMoves')">Skill Moves :{{player.skillMoves }}</h4>
+							  <mat-progress-bar class="bar" mode="determinate" [value]="player.potential"></mat-progress-bar>
+							  <h4 (click)="getYPlot('composure')">Composure :{{player.composure}}</h4>
+						  <mat-progress-bar class="bar" mode="determinate" [value]="player.composure"></mat-progress-bar>
+		  
+						  </mat-card>				
+				  </mat-expansion-panel>
+				  <mat-expansion-panel>
+				  <mat-expansion-panel-header>
+					  <mat-panel-title class="title">
+						  shouting
+					  </mat-panel-title>
+				  </mat-expansion-panel-header>
+				  <p>
+  
+					  <mat-card class="shouting"> 
+						  <h4 (click)="getYPlot('volleys')">Volleys {{player.volleys}}</h4>
+						  <mat-progress-bar class="bar" mode="determinate" [value]="player.volleys"></mat-progress-bar>
+						  <h4 (click)="getYPlot('shotPower')">Shot Power :{{player.shotPower}}</h4>
+						  <mat-progress-bar class="bar" mode="determinate" [value]="player.shotPower"></mat-progress-bar>
+						  <h4 (click)="getYPlot('finishing')">Finishing :{{player.finishing}}</h4>
+						  <mat-progress-bar class="bar" mode="determinate" [value]="player.finishing"></mat-progress-bar>
+						  <h4 (click)="getYPlot('positioning')">Positioning :{{player.positioning}} </h4>
+						  <mat-progress-bar class="bar" mode="determinate" [value]="player.positioning"></mat-progress-bar>
+						  <h4 (click)="getYPlot('penalties')">Penalties :{{player.penalties}}</h4>
+						  <mat-progress-bar class="bar" mode="determinate" [value]="player.penalties"></mat-progress-bar>
+								  
+					  </mat-card>			  
+				  </mat-expansion-panel>
+				  <mat-expansion-panel>
+				  <mat-expansion-panel-header>
+					  <mat-panel-title class="title">
+						  physical
+					  </mat-panel-title>
+				  </mat-expansion-panel-header>
+				  <p>
+					  <mat-card class="physical">
+						  <h4 (click)="getYPlot('jumping')">Jumping :{{player.jumping}}</h4>
+						  <mat-progress-bar class="bar" mode="determinate" [value]="player.jumping"></mat-progress-bar>
+						  <h4 (click)="getYPlot('stamina')">Stamina :{{player.stamina}}</h4>
+						  <mat-progress-bar class="bar" mode="determinate" [value]="player.stamina"></mat-progress-bar>
+						  <h4 (click)="getYPlot('aggression')">Aggression :{{player.aggression}}</h4>
+						  <mat-progress-bar class="bar" mode="determinate" [value]="player.aggression"></mat-progress-bar>
+						  <h4 (click)="getYPlot('strength')">Strength :{{player.strength}}</h4>
+						  <mat-progress-bar class="bar" mode="determinate" [value]="player.strength"></mat-progress-bar>
+								  
+							  
+						  </mat-card >			  
+				  </mat-expansion-panel>
+			  <div *ngIf="player.bestPosition === 'GK'">
+				  <mat-expansion-panel>
+				  <mat-expansion-panel-header>
+					  <mat-panel-title class="title">
+						  GK
+					  </mat-panel-title>
+				  </mat-expansion-panel-header>
+				  <p>
+					  <mat-card class ="GK">
+					  <h4 (click)="getYPlot('gkdiving')">GK Diving = {{player.gkdiving}}</h4>
+					  <mat-progress-bar class="bar" mode="determinate" [value]="player.gkdiving"></mat-progress-bar>
+					  <h4 (click)="getYPlot('gkhandling')">GK Handling = {{player.gkhandling}} </h4>
+					  <mat-progress-bar class="bar" mode="determinate" [value]="player.gkhandling"></mat-progress-bar>
+					  <h4 (click)="getYPlot('gkkicking')">GK Kicking = {{player.gkkicking}}</h4>
+					  <mat-progress-bar class="bar" mode="determinate" [value]="player.gkkicking"></mat-progress-bar>
+					  <h4 (click)="getYPlot('gkpositioning')">GK Positioning = {{player.gkpositioning}}</h4>
+					  <mat-progress-bar class="bar" mode="determinate" [value]="player.gkpositioning"></mat-progress-bar>
+					  <h4 (click)="getYPlot('gkreflexes')">GK Reflexes = {{player.gkreflexes}} </h4>
+					  <mat-progress-bar class="bar" mode="determinate" [value]="player.gkreflexes"></mat-progress-bar>
+					  </mat-card>			  
+				  </mat-expansion-panel>
+			  </div>
+			  </mat-tab>
+		  </mat-tab-group>
+		  </div>
+		  </mat-tab>
+	  </ng-container>
+	  </mat-tab-group>
+	  <div>
+	  <canvasjs-chart [options]="chartOptions" [styles]="{width: '100%', height:'360px'}"></canvasjs-chart>    
+	  </div>  
+  

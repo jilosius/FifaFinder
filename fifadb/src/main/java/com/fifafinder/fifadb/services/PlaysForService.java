@@ -1,7 +1,8 @@
 package com.fifafinder.fifadb.services;
 
-import com.fifafinder.fifadb.DTOs.AddPlaysForDTO;
 import com.fifafinder.fifadb.dto.SpielerDetailDTO;
+import com.fifafinder.fifadb.DTOs.AddPlaysForDTO;
+
 import com.fifafinder.fifadb.dto.UpdateDTO;
 import com.fifafinder.fifadb.entities.*;
 import com.fifafinder.fifadb.repositories.FifaVersionRepository;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.ZoneId;
 import java.util.List;
+import java.util.Optional;
 import com.fifafinder.fifadb.entities.FifaVersion;
 import com.fifafinder.fifadb.entities.PlaysFor;
 import com.fifafinder.fifadb.entities.Spieler;
@@ -253,4 +255,12 @@ public class PlaysForService {
     public List<FifaVersion> listFifaVersions(){
         return fifaVersionRepository.findAll();
     }
+
+    public Optional<PlaysFor> findPlaysForByFifaVersionIdAndPlayerIDId(Integer FifaVersion, Integer playerID){
+        return playsForRepository.findPlaysForByFifaVersionIdAndPlayerIDId(FifaVersion, playerID);
+    }
+    public Optional<PlaysFor[]> findPlaysForByPlayerIDId(Integer playerID){
+        return playsForRepository.findPlaysForByPlayerIDId(playerID);
+    }
+
 }
