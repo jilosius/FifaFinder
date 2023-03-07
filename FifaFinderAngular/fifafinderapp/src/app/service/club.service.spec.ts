@@ -1,11 +1,8 @@
-import {inject, TestBed} from '@angular/core/testing';
+import { inject, TestBed } from '@angular/core/testing';
 
+import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing";
+import { Club } from "../interface/club";
 import { ClubService } from './club.service';
-import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
-import {SpielerService} from "./start.service";
-import {Club} from "../interface/club";
-import {ApiResponse} from "../interface/api-response";
-import {Page} from "../interface/page";
 
 describe('ClubService', () => {
   let service: ClubService;

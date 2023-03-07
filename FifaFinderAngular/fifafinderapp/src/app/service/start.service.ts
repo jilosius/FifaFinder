@@ -14,6 +14,7 @@ export class SpielerService {
   constructor(private http: HttpClient) {
   }
 
+  //Autor: Saif, Levi(club and sort)
   // Make call to the back end API to retrieve page of spieler
   spieler$ = (
     name: string = '',
@@ -76,4 +77,4 @@ export class SpielerService {
     this.http.get<ApiResponse<Page>>(
       `${this.serverUrl}?fullName=${name}&fifaVersion=${fifaVersion}&clubName=${clubName}&preferredFoot=${preferredFoot}&minAge=${minAge}&maxAge=${maxAge}&minOverall=${minOverall}&maxOverall=${maxOverall}&maxShortPassing=${maxShortPassing}&minShortPassing=${minShortPassing}&maxFinishing=${maxFinishing}&minFinishing=${minFinishing}&maxCrossing=${maxCrossing}&minCrossing=${minCrossing}&maxLongShots=${maxLongShots}&minLongShots=${minLongShots}&maxAggression=${maxAggression}&minAggression=${minAggression}&maxStamina=${maxStamina}&minStamina=${minStamina}&maxJumping=${maxJumping}&minJumping=${minJumping}&maxShotPower=${maxShotPower}&minShotPower=${minShotPower}&maxBalance=${maxBalance}&minBalance=${minBalance}&maxReaction=${maxReaction}&minReaction=${minReaction}&maxAgility=${maxAgility}&minAgility=${minAgility}&maxSprintSpeed=${maxSprintSpeed}&minSprintSpeed=${minSprintSpeed}&maxAcceleration=${maxAcceleration}&minAcceleration=${minAcceleration}&maxFkAccuracy=${maxFkAccuracy}&minFkAccuracy=${minFkAccuracy}&maxCurve=${maxCurve}&minCurve=${minCurve}&maxDribbling=${maxDribbling}&minDribbling=${minDribbling}&maxVolleys=${maxVolleys}&minVolleys=${minVolleys}&maxHeadingAccuracy=${maxHeadingAccuracy}&minHeadingAccuracy=${minHeadingAccuracy}&maxWage=${maxWage}&minWage=${minWage}&maxValue=${maxValue}&minValue=${minValue}&heightMax=${heightMax}&heightMin=${heightMin}&potentialMax=${potentialMax}&potentialMin=${potentialMin}&page=${page}&size=${size}&sort=${sort}&order=${order}`);
 }
-// &preferredFoot=${preferredFoot}
+

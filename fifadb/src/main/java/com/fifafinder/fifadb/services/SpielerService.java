@@ -2,8 +2,6 @@ package com.fifafinder.fifadb.services;
 
 import com.fifafinder.fifadb.entities.Spieler;
 import com.fifafinder.fifadb.DTOs.SpielerDTO;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fifafinder.fifadb.exceptionhandling.SpielerNotFoundException;
 import com.fifafinder.fifadb.repositories.SpielerRepository;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
@@ -12,10 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.Optional;
 
 
@@ -51,6 +46,7 @@ public class SpielerService {
         spielerRepository.deleteById(id);
     }
 
+    //Author:Saif
     public Page<SpielerDTO> findByFullNameFiltered(String name,
                                                    int fifaVersion,
                                                    String clubName,
@@ -161,19 +157,10 @@ public class SpielerService {
     }
 
 
+    //Author:Saif
     public List<SpielerDTO> getSpielerToCompare(int player1Id, int player2Id, int player3Id, int player4Id, int player5Id, int fifaVersion){
         return spielerRepository.getSpielerToCompare(player1Id, player2Id,player3Id,player4Id,player5Id, fifaVersion);
     }
-
-
-//    public List<Spieler> spielerAnzeigen() {
-//        return spielerRepository.findAll();
-//    }
-
-//    public Page<SpielerDTO> listAllSpieler(Pageable pageable){
-//        return spielerRepository.listAllSpieler(pageable);
-//    }
-
 
         public Spieler addSpieler (Spieler spieler){
 
@@ -181,27 +168,10 @@ public class SpielerService {
 
         }
 
-        public List<Spieler> findAllSpieler(){
-
-            return spielerRepository.findAll();
-
-        }
-
-        public Spieler updateSpieler(Spieler spieler){
-
-            return spielerRepository.save(spieler); }
-
+    //Author:Enes
     public void addPlayer(Spieler spieler) {
 
         spieler.setFifaID(null);
         spielerRepository.save(spieler);
-    }
-
-    public Optional<Spieler> findSpieler() {
-        Optional<Spieler> spielerOptional = spielerRepository.findSpielerById(10000);
-        if(spielerOptional.isPresent())
-            return spielerOptional;
-        System.out.println("Spieler nicht gefunden!");
-        return null;
     }
 }

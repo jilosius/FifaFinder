@@ -1,25 +1,25 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormControl } from "@angular/forms";
-import { Observable, BehaviorSubject, map, startWith, catchError, of } from 'rxjs';
+import { FormControl } from "@angular/forms";
+import { Router } from '@angular/router';
+import { BehaviorSubject, catchError, map, Observable, of, startWith } from 'rxjs';
 import { ApiResponse } from '../interface/api-response';
+import { Club } from "../interface/club";
+import { FifaVersion } from "../interface/fifaversion";
 import { Page } from '../interface/page';
+import { Spieler } from '../interface/spieler';
+import { ClubService } from "../service/club.service";
+import { DeletePlayerService } from "../service/delete-player.service";
+import { SelectedPlayerService } from '../service/selected-player.service';
 import { SpielerService } from '../service/start.service';
 import { SortableColumn } from "../sorting/sortable-column";
-import { Spieler } from '../interface/spieler';
-import { SelectedPlayerService } from '../service/selected-player.service';
-import { Router } from '@angular/router';
-import { DeletePlayerService } from "../service/delete-player.service";
-import { FifaVersion } from "../interface/fifaversion";
-import { Club } from "../interface/club";
-import { ClubService } from "../service/club.service";
 
 @Component({
   selector: 'app-start',
   templateUrl: './start.component.html',
   styleUrls: ['./start.component.css']
 })
-
+//Autor: Saif, Levi
 //We are working with states: this means when the appState == 'APP_LOADING', the html elements and functions used are different to when it is 'APP_LOADED' or 'APP_ERROR'
 export class StartComponent implements OnInit {
   spielerState$: Observable<{ appState: string, appData?: ApiResponse<Page>, error?: HttpErrorResponse }>; //Example: {'APP_LOADED', ApiResponse<Spieler>, error(optional}
@@ -33,18 +33,13 @@ export class StartComponent implements OnInit {
   selectedFifaVersion: number;
   pagesToDisplay: number = 10;
 
-  delFifaVersion = new FormControl('');
   clubFilter = new FormControl('',{nonNullable: true});
-  fifaVersionIds: number[] = [];
-  fifaVersionList: FifaVersion[] = [];
-
-  fifaVersion$: Observable<FifaVersion[]>;
 
   clubs: Club[] = [];
   filteredClubs: Observable<Club[]>;
 
   name: string;
-  //defining variables that are used in the dropdown filter
+  //defining variables that are used in the dropdown filter, Autor: Saif, Levi
   playerId: number;
   fifaVersion: number =  23;
   clubName: string;
@@ -101,6 +96,8 @@ export class StartComponent implements OnInit {
   pageNumber: number= 0;
   size: number= 20;
 
+  //Autor: Levi
+  //does the currency formatting on Value,Wage,etc. Columns
   formatter = new Intl.NumberFormat('de-DE', {
     style: 'currency',
     currency: 'EUR',
@@ -109,9 +106,11 @@ export class StartComponent implements OnInit {
     notation: 'compact'
   });
 
-
+  //Autor: Levi
+  //saves the currently selected Sort
   currentSort: SortableColumn = new SortableColumn('overall', 'desc');
 
+  //Autor: Levi
   //Array to set names and default sort direction of columns
   sortableColumns: Array<SortableColumn> = [
     new SortableColumn('age'),
@@ -140,11 +139,13 @@ export class StartComponent implements OnInit {
     new SortableColumn('shortPassing'),
     new SortableColumn('wage')
   ];
+  //Autor: Saif
   //Array to set the "hidden" attribute of each column to either true or false
   condArray:boolean[] = [true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true];
 
   constructor(private spielerService: SpielerService, private selectedPlayerService: SelectedPlayerService, private router: Router, private deletePlayerService: DeletePlayerService, private clubService: ClubService) { }
 
+  //Autor: Saif, Levi
   //on app initialisation: start with: 'APP LOADING', then 'APP_LOADED', and if error return 'APP_ERROR'
   ngOnInit(): void {
     this.selectedPlayerService.selectedPlayerIds$.subscribe(
@@ -181,10 +182,10 @@ export class StartComponent implements OnInit {
       startWith(''),
       map(value => this._filterClubs(value || '')),
     );
-    this.listFifaVersions();
 
   }
-
+  //Autor: Levi
+  //filters array of clubs by name
   private _filterClubs(value: string): Club[] {
     const filterValue = value.toLowerCase();
     return this.clubs.filter(club =>
@@ -193,11 +194,8 @@ export class StartComponent implements OnInit {
 
 
 
-  gotoPage(pageName:string):void{
-
-    this.router.navigate([`${pageName}`]);
-  }
-
+  
+  //Autor: Saif, Levi
   //the method that does all the magic: boolean Array is checked to hide/unhide columns, then spielerService is used to return the data/page as required
   goToPage(name?: string,fifaVersion?:number,clubName?:string,preferredFoot?:string,minAge?: number,maxAge?: number,minOverall?: number, maxOverall?: number, minPotential?: number,maxPotential?: number,minHeight?: number,maxHeight?: number,minValue?: number,maxValue?: number,minWage?: number,maxWage?: number,minHeadingAccuracy?: number,maxHeadingAccuracy?: number,minVolleys?: number,maxVolleys?: number,minDribbling?: number, maxDribbling?: number,minCurve?: number,maxCurve?: number, minFkAccuracy?: number,maxFkAccuracy?: number,minAcceleration?: number,maxAcceleration?: number, minSprintSpeed?: number,maxSprintSpeed?: number,minAgility?: number, maxAgility?: number,minReaction?: number,maxReaction?:number,minBalance?: number,maxBalance?: number,minShotPower?: number,maxShotPower?: number, minJumping?: number,maxJumping?: number,minStamina?: number,maxStamina?: number,minAggression?: number,maxAggression?: number,minLongShots?: number,maxLongShots?: number,minCrossing?: number,maxCrossing?: number,minFinishing?: number,maxFinishing?: number,minShortPassing?: number,maxShortPassing?: number,
             pageNumber: number = 0, size: number = 20, sort?: string, order?: string): void {
@@ -277,13 +275,12 @@ export class StartComponent implements OnInit {
 
     this.spielerState$ = this.spielerService.spieler$(name, fifaVersion, clubName, preferredFoot, minAge, maxAge, minOverall, maxOverall, minPotential,maxPotential,minHeight,maxHeight,minValue,maxValue,minWage,maxWage,minHeadingAccuracy,maxHeadingAccuracy,minVolleys, maxVolleys,minDribbling,maxDribbling, minCurve, maxCurve,minFkAccuracy, maxFkAccuracy,minAcceleration,maxAcceleration,minSprintSpeed,maxSprintSpeed,minAgility, maxAgility, minReaction,maxReaction,minBalance,maxBalance,minShotPower,maxShotPower,minJumping,maxJumping,minStamina,maxStamina, minAggression,maxAggression, minLongShots, maxLongShots,minCrossing,maxCrossing,minFinishing,maxFinishing,minShortPassing, maxShortPassing, pageNumber, size, sort, order).pipe(
       map((response: ApiResponse<Page>) => {
-        // this.loadingService.loadingOff();
         this.responseSubject.next(response);
         this.currentPageSubject.next(pageNumber);
         console.log(response);
         return ({ appState: 'APP_LOADED', appData: response });
       }),
-      startWith({ appState: 'APP_LOADED', appData: this.responseSubject.value }),  //start with current reponse value
+      startWith({ appState: 'APP_LOADED', appData: this.responseSubject.value }),  //start with current reponse value, Autor: Saif
       catchError((error: HttpErrorResponse) => {
         return of({ appState: 'APP_ERROR', error })
       }
@@ -291,9 +288,9 @@ export class StartComponent implements OnInit {
     )
   }
 
+  //Autor: Saif
   //Method responsible for next/prev page
   goToNextOrPreviousPage(direction?: string): void {
-      // console.log(this.name);
     this.goToPage(this.name,this.fifaVersion,this.clubName,this.preferredFoot,this.ageMin,this.ageMax,this.overallMin,this.overallMax,this.potentialMin,this.potentialMax,this.heightMin,this.heightMax,this.minValue,this.maxValue,
       this.minWage,this.maxWage,this.minHeadingAccuracy,this.maxHeadingAccuracy,this.minVolleys,this.maxVolleys,this.minDribbling,this.maxDribbling,this.minCurve,this.maxCurve,this.minFkAccuracy,this.maxFkAccuracy,
       this.minAcceleration,this.maxAcceleration,this.minSprintSpeed,this.maxSprintSpeed,this.minAgility,this.maxAgility,this.minReaction,this.maxReaction,this.minBalance,this.maxBalance,this.minShotPower,
@@ -303,6 +300,8 @@ export class StartComponent implements OnInit {
                   console.log(this.currentPageSubject.value);
   }
 
+  //Autor: Saif, Levi
+  //reset values in filter
   resetValues(name?:string):void{
     this.fifaVersion = 23;
     this.clubName = '';
@@ -363,8 +362,8 @@ export class StartComponent implements OnInit {
       this.maxFinishing,this.minShortPassing,this.maxShortPassing);
   }
 
-
-
+  //Autor: Saif
+  //responsible for selecting players in der Startseite and adding them to an array
   toggleSelection(spieler: Spieler) {
     spieler.selected = !spieler.selected;
     const existingPlayer = this.selectedPlayers.find(s => s.playerId === spieler.playerId);
@@ -377,16 +376,14 @@ export class StartComponent implements OnInit {
     this.selectedPlayerService.setSelectedPlayerIds(this.selectedPlayerIds);
   }
 
-
+  //Autor: Saif
+  //go to Vergleich with the selected players array
   getSelectedPlayerIds() {
     if (this.selectedPlayers.length < 2) {
       alert("Please select at least 2 players!");
       return;
     }
-    // else if(this.selectedPlayers.length > 5){
-    //   alert("You have reached the maximum number of selected players.");
-    //   return;
-    // }
+    
     else {
       this.selectedPlayerIds = this.selectedPlayers.map(spieler => spieler.playerId);
       this.selectedPlayerService.setSelectedPlayerIds(this.selectedPlayerIds);
@@ -399,7 +396,8 @@ export class StartComponent implements OnInit {
 
 
 
-
+//Autor: Levi
+//Holds the sorting logic and calls the goToPage function to load the sorted list of players
   sortByColumn(
     sort: SortableColumn
   ): void {
@@ -468,6 +466,8 @@ export class StartComponent implements OnInit {
     );
   }
 
+  //Autor: Levi
+  //filters the sortableColumns array for the columns not chosen to be sorted by and resets their direction to null
   clearPreviousSorting(chosenColumn: SortableColumn) {
     this.sortableColumns.filter(
       column => column != chosenColumn
@@ -476,6 +476,8 @@ export class StartComponent implements OnInit {
     );
   }
 
+  //Autor: Levi
+  //needed for cycling through the sorting options back to the default sort (overall)
   resetSort(){
     this.sortableColumns.filter(
       checkColumn => checkColumn.column != 'overall'
@@ -485,15 +487,15 @@ export class StartComponent implements OnInit {
     this.sortableColumns[1].direction = 'desc';
   }
 
+  //Autor: Levi
+  //returns an arrow(or not) corresponding to whether the column has been selected as the current sort
   sortArrow(columnName: string) {
     if (this.currentSort.column === columnName) {
       switch (this.currentSort.direction) {
         case 'desc':
-          return '&#9660;';
-          break;
+          return '&#9660;'; // downarrow
         case 'asc':
-          return '&#9650;';
-          break;
+          return '&#9650;'; // uparrow
         default:
           break;
       }
@@ -501,17 +503,14 @@ export class StartComponent implements OnInit {
     return '';
   }
 
-  listFifaVersions(){
-    this.deletePlayerService.listFifaVersions().subscribe(
-      (res) => this.fifaVersionList = res,
-      (err) => console.log(err)
-    );
-  }
-
+  //Autor: Levi
+  //Simply reloads the page
   refresh(){
     window.location.reload();
   }
 
+  //Autor: Levi
+  //Delete for every Fifaversion
   deleteAllLogic(id: number){
     if(confirm("Wollen Sie den Spieler wirklich löschen?")) {
       this.deletePlayerService.deletePlayer(id).subscribe();
@@ -519,6 +518,8 @@ export class StartComponent implements OnInit {
     }
   }
 
+  //Autor: Levi
+  //Delete for only one FifaVersion
   deletePerFifaVersionLogic(id:number, fifaVersion: number){
     if(confirm("Wollen Sie den Spielereintrag zu FIFA " + fifaVersion + " wirklich löschen?")) {
       this.deletePlayerService.deletePlayerInFifaVersion(id, fifaVersion).subscribe();
@@ -530,6 +531,8 @@ export class StartComponent implements OnInit {
     this.selectedFifaVersion = fifaVersion;
   }
 
+  //Autor: Saif
+  //responsible for pagination and page numbers
   shouldShowPage(index:number, currentPage:number) {
     const start = currentPage - 5;
     const end = currentPage + 5;

@@ -91,7 +91,7 @@ describe('EditPlayerService', () => {
 
     service.updatePlayerDetails(editPlayerDetails, playerId, fifaVersion);
 
-    const req = httpTestingController.expectOne(`http://localhost:8080/playsfor/editdetailsof${playerId}in${fifaVersion}`);
+    const req = httpTestingController.expectOne(`http://localhost:8080/playsfor/editdetailsof1in23`);
     expect(req.request.method).toEqual('PUT');
     expect(req.request.body).toEqual(editPlayerDetails);
 
@@ -171,7 +171,7 @@ describe('EditPlayerService', () => {
     req.flush({});
   });
 
-  it('should get player details', () => {
+  it('should get player details by sending a GET request', () => {
     const playerId = 1;
     const fifaVersion = 23;
     const expectedDetails: UpdateDto = {
@@ -236,7 +236,7 @@ describe('EditPlayerService', () => {
       expect(details).toEqual(expectedDetails);
      });
 
-     const req = httpTestingController.expectOne('http://localhost:8080/playsfor/detailsforedit/playerid=${playerId}/fifaversion=${fifaVersion}`');
+     const req = httpTestingController.expectOne('http://localhost:8080/playsfor/detailsforedit/playerid=1/fifaversion=23');
      expect(req.request.method).toEqual('GET');
      req.flush(expectedDetails);
     })

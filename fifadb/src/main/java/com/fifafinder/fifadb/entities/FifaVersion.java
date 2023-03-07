@@ -2,8 +2,6 @@ package com.fifafinder.fifadb.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-
-
 import java.util.LinkedHashSet;
 import java.util.Set;
 

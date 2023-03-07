@@ -1,5 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
@@ -30,28 +30,29 @@ import { MatFormFieldModule } from "@angular/material/form-field";
     EditPlayerComponent,
     HideMissingDirective
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        FormsModule,
-        MatFormFieldModule,
-        ReactiveFormsModule,
-        BrowserAnimationsModule,
-        RouterTestingModule,
-        MatSortModule,
-        MatCheckboxModule,
-        RouterModule,
-        MatButtonModule,
-        MatSelectModule,
-        MatAutocompleteModule,
-        MatInputModule,
-        MatIconModule,
-        MatTooltipModule
-        // MatMenuModule
+  imports: [
+      BrowserModule,
+      AppRoutingModule,
+      HttpClientModule,
+      FormsModule,
+      MatFormFieldModule,
+      ReactiveFormsModule,
+      BrowserAnimationsModule,
+      RouterTestingModule,
+      MatSortModule,
+      MatCheckboxModule,
+      RouterModule,
+      MatButtonModule,
+      MatSelectModule,
+      MatAutocompleteModule,
+      MatInputModule,
+      MatIconModule,
+      MatTooltipModule
     ],
   providers: [],
-  schemas:[CUSTOM_ELEMENTS_SCHEMA],
+  schemas:[
+    CUSTOM_ELEMENTS_SCHEMA,
+    NO_ERRORS_SCHEMA],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,23 +1,54 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute, ActivatedRouteSnapshot, convertToParamMap } from '@angular/router';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AddDto } from '../interface/add-dto';
 import { UpdateDto } from '../interface/update-dto';
 import { ClubService } from '../service/club.service';
 import { EditPlayerService } from '../service/edit-player.service';
 import { EditPlayerComponent } from './edit-player.component';
+import { HttpClient, HttpHandler } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
+import { MatAutocomplete, MatAutocompleteModule } from '@angular/material/autocomplete';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
+//Author:Jannik
 describe('EditPlayerComponent', () => {
   let component: EditPlayerComponent;
-  let activatedRouteSnapshot: ActivatedRouteSnapshot;
   let fixture: ComponentFixture<EditPlayerComponent>;
+
+  const mockActivatedRoute = {
+    snapshot: {
+      paramMap: new Map([['id', '1']])
+    }
+  };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EditPlayerComponent ]
+      imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatAutocompleteModule
+      ], 
+      declarations: [ EditPlayerComponent ],
+      providers: [
+        HttpClient,
+        HttpHandler,
+        FormBuilder,
+        EditPlayerService,
+        ClubService,
+        HttpClientTestingModule,
+        { provide: ActivatedRoute, useValue: mockActivatedRoute },
+        { provide: Router, useClass: class { navigate = jasmine.createSpy('navigate'); } }
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
+  });
 
+  beforeEach(() => {
     fixture = TestBed.createComponent(EditPlayerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -46,16 +77,25 @@ describe('isAddMode', () => {
           }
         }
       }
-    };
+    }; 
 
     await TestBed.configureTestingModule({
       declarations: [ EditPlayerComponent ],
+      imports: [
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatAutocompleteModule
+      ],
       providers: [
         EditPlayerService,
         FormBuilder,
         ClubService,
+        HttpClientTestingModule,
+        HttpClient,
+        HttpHandler,
         { provide: ActivatedRoute, useValue: activatedRouteStub }
-      ]
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
   });
@@ -86,8 +126,27 @@ describe('onEditPlayer/onAddPlayer', () => {
   let editPlayerServiceSpy: jasmine.SpyObj<EditPlayerService>;
   let component: EditPlayerComponent;
   let fixture: ComponentFixture<EditPlayerComponent>;
+  let activatedRouteStub: any;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [ EditPlayerComponent ],
+      imports: [  
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatAutocompleteModule
+      ],
+      providers: [
+        EditPlayerService,
+        FormBuilder,
+        ClubService,
+        HttpClientTestingModule,
+        HttpClient,
+        HttpHandler,
+        { provide: ActivatedRoute, useValue: activatedRouteStub }
+      ]
+    })
+
     editPlayerServiceSpy = jasmine.createSpyObj('EditPlayerService', ['updatePlayerDetails']);
     fixture = TestBed.createComponent(EditPlayerComponent);
     component = fixture.componentInstance;
@@ -95,6 +154,7 @@ describe('onEditPlayer/onAddPlayer', () => {
   });
 
   it('should update the club name and call service.updatePlayerDetails(UpdateDto, playerId, fifaVersion)', () => {
+    spyOn(component, 'isAddMode').and.returnValue(false);
     const playerId = 1;
     const fifaVersion = 23;
     const dataInput: UpdateDto = {
@@ -168,6 +228,7 @@ describe('onEditPlayer/onAddPlayer', () => {
   });
 
   it('should update the club name and call service.addPlayer(AddDto)', () => {
+    spyOn(component, 'isAddMode').and.returnValue(true);
     const dataInput: AddDto = {
       fullName: 'Lionel Messi',
       knownName: 'L. Messi',

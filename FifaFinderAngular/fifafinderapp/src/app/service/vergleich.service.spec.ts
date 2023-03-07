@@ -1,8 +1,8 @@
-import { TestBed, inject } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { TestBed } from '@angular/core/testing';
 
-import { VergleichService } from './vergleich.service';
 import { Spieler } from '../interface/spieler';
+import { VergleichService } from './vergleich.service';
 
 describe('VergleichService', () => {
   let service: VergleichService;

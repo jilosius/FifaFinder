@@ -1,27 +1,14 @@
-import { Component, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { UpdateDto } from '../interface/update-dto';
-import { EditPlayerService } from '../service/edit-player.service';
-import { Router, ActivatedRoute, ParamMap  } from '@angular/router';
-import { switchMap, take } from 'rxjs/operators';
+import { Component } from '@angular/core';
+import { AbstractControl, FormBuilder, FormControl, ValidatorFn, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { map, Observable, startWith } from 'rxjs';
 import { AddDto } from '../interface/add-dto';
-import { FormBuilder } from '@angular/forms';
-import { Validators } from '@angular/forms';
 import { Club } from "../interface/club";
+import { UpdateDto } from '../interface/update-dto';
 import { ClubService } from "../service/club.service";
-import { FormArray, FormControl } from "@angular/forms";
-import { Observable, BehaviorSubject, map, startWith, catchError, of } from 'rxjs';
-import { FifaVersion } from "../interface/fifaversion";
-import { ValidatorFn, AbstractControl } from '@angular/forms';
-import { ValidationErrors } from '@angular/forms';
+import { EditPlayerService } from '../service/edit-player.service';
 
-function ownerIdValidator(): ValidatorFn {
-  return (control: AbstractControl): { [key: string]: any } | null => {
-
-    return null;  /* valid option selected */
-  };
-}
-
+//Author: Enes
 function autocompleteObjectValidator(): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {
     if (typeof control.value.clubName === 'string') {
@@ -35,7 +22,8 @@ function autocompleteObjectValidator(): ValidatorFn {
   selector: 'app-edit-player',
   templateUrl: './edit-player.component.html',
   styleUrls: ['./edit-player.component.css']
-})
+})  
+//Author: Enes
 export class EditPlayerComponent{
   playerId: number;
   fifaVersion: number;
@@ -43,10 +31,10 @@ export class EditPlayerComponent{
 
 
     AddForm = this.fb.group({
-    knownName: ['Mustermann', Validators.required],
-    fullName: ['Max', Validators.required],
+    knownName: ['default', Validators.required],
+    fullName: ['default', Validators.required],
     age: [0, Validators.required],
-    dateOfBirth: ['2020.01.01', Validators.required],
+    dateOfBirth: ['2000.01.01', Validators.required],
     fifaVersion: [0, Validators.required],
     weight: [0, Validators.required],
     height: [0, Validators.required],
@@ -56,7 +44,6 @@ export class EditPlayerComponent{
     releaseClause: [0, Validators.required],
     clubPosition: ['', Validators.required],
     clubNumber: [0, Validators.required],
-    /*clubName: ['', [Validators.required,autocompleteObjectValidator()]], */
     contractUntil: [0, Validators.required],
     onLoan: ['', Validators.required],
     nationalPosition: ['', Validators.required],
@@ -110,18 +97,21 @@ export class EditPlayerComponent{
 
   constructor(private editPlayerService: EditPlayerService,   private route: ActivatedRoute, private router: Router,private fb: FormBuilder, private clubService: ClubService) {};
 
+  //Author:Enes
   public validation_msgs = {
     'clubName': [
       { type: 'invalidAutocompleteObject', message: 'Contact name not recognized. Click one of the autocomplete options.' },
       { type: 'required', message: 'Contact is required.' }
     ]}
 
+  //Author:Enes
   private _filterClubs(value: string): Club[] {
     const filterValue = value.toLowerCase();
     return this.clubs.filter(club =>
     club.clubName.toLowerCase().includes(filterValue));
   }
 
+  //Author: Jannik
   isAddMode(): boolean {
     const addMode = this.route.snapshot.paramMap.get('mode');
     if (addMode=="true") {
@@ -130,6 +120,7 @@ export class EditPlayerComponent{
     return false;
   }
 
+  //Author: Enes
   ngOnInit() {
     this.clubService.clubs$().subscribe( clubs  => {
       this.clubs = clubs;
@@ -138,7 +129,7 @@ export class EditPlayerComponent{
       startWith(''),
       map(value => this._filterClubs(value || '')),
     );
-
+    //Author:Jannik
     if(this.isAddMode()==false) {
       const playerId = this.route.snapshot.paramMap.get('playerId');
       this.playerId = Number(playerId);
@@ -212,12 +203,12 @@ export class EditPlayerComponent{
       });
     }
   }
-
+  //Author:Jannik
   onEditPlayer(data: UpdateDto) {
     data.clubName = this.clubName.value;
     this.editPlayerService.updatePlayerDetails(data, this.playerId, this.fifaVersion);
   }
-
+  //Author:Jannik
   onAddPlayer(data: AddDto) {
     data.clubName = this.clubName.value;
     this.editPlayerService.addPlayer(data);
