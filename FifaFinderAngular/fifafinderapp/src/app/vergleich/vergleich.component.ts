@@ -4,7 +4,6 @@ import { Component, OnInit } from '@angular/core';
 import { Spieler } from '../interface/spieler';
 import { SelectedPlayerService } from '../service/selected-player.service';
 import { VergleichService } from '../service/vergleich.service';
-import { StartComponent } from '../start/start.component';
 
 @Component({
   selector: 'app-vergleich',
@@ -78,6 +77,7 @@ export class VergleichComponent implements OnInit {
           ).subscribe(
           (data: Spieler[]) => {
             this.spieler = data;
+            //Check highest value of every row to highlight in green
             this.highestOverall = Math.max(...this.spieler.map(s => s.overall));
             this.highestPotential = Math.max(...this.spieler.map(s => s.potential));
             this.highestValueEUR = Math.max(...this.spieler.map(s => s.valueEUR));
@@ -99,27 +99,7 @@ export class VergleichComponent implements OnInit {
             this.highestFinishing = Math.max(...this.spieler.map(s => s.fifaVersion));
             this.highestShortPassing = Math.max(...this.spieler.map(s => s.shortPassing));
             this.highestWage = Math.max(...this.spieler.map(s => s.wage));
-            this.lowestOverall = Math.min(...this.spieler.map(s => s.overall));
-            this.lowestPotential = Math.min(...this.spieler.map(s => s.potential));
-            this.lowestValueEUR = Math.min(...this.spieler.map(s => s.valueEUR));
-            this.lowestHeight = Math.min(...this.spieler.map(s => s.height));
-            this.lowestHeadingAccuracy = Math.min(...this.spieler.map(s => s.headingAccuracy));
-            this.lowestVolleys = Math.min(...this.spieler.map(s => s.volleys));
-            this.lowestDribbling = Math.min(...this.spieler.map(s => s.dribbling));
-            this.lowestCurve = Math.min(...this.spieler.map(s => s.curve));
-            this.lowestAcceleration = Math.min(...this.spieler.map(s => s.acceleration));
-            this.lowestSprintSpeed = Math.min(...this.spieler.map(s => s.sprintSpeed));
-            this.lowestAgility = Math.min(...this.spieler.map(s => s.agility));
-            this.lowestReaction = Math.min(...this.spieler.map(s => s.reaction));
-            this.lowestShotPower = Math.min(...this.spieler.map(s => s.shotPower));
-            this.lowestJumping = Math.min(...this.spieler.map(s => s.jumping));
-            this.lowestStamina = Math.min(...this.spieler.map(s => s.stamina));
-            this.lowestAggression = Math.min(...this.spieler.map(s => s.aggression));
-            this.lowestLongShots = Math.min(...this.spieler.map(s => s.longShots));
-            this.lowestCrossing = Math.min(...this.spieler.map(s => s.crossing));
-            this.lowestFinishing = Math.min(...this.spieler.map(s => s.fifaVersion));
-            this.lowestShortPassing = Math.min(...this.spieler.map(s => s.shortPassing));
-            this.lowestWage = Math.min(...this.spieler.map(s => s.wage));
+
           },
           (error) => {
             console.log(error);

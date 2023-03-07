@@ -1,7 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
 import { SelectedPlayerService } from './selected-player.service';
-import { RouterTestingModule } from '@angular/router/testing';
 
 describe('SelectedPlayerService', () => {
   let service: SelectedPlayerService;

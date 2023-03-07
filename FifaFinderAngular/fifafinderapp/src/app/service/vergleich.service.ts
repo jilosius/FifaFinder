@@ -1,9 +1,7 @@
-import { Injectable, Optional } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Spieler } from '../interface/spieler';
-import { SpielerService } from './start.service';
-import { StartComponent } from '../start/start.component';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Spieler } from '../interface/spieler';
 
 @Injectable({
   providedIn: 'root'
@@ -23,10 +21,5 @@ export class VergleichService {
   ) : Observable<Spieler[]> => this.http.get<Spieler[]>(`${this.serverUrl}?player1Id=${player1Id}&player2Id=${player2Id}&player3Id=${player3Id}&player4Id=${player4Id}&player5Id=${player5Id}&fifaVersion=${fifaVersion}`);
 
   constructor(private http: HttpClient) { }
-
-
-  // getSpielerToCompare(){
-  //   return this.http.get<Spieler[]>(this.serverUrl);
-  // }
 
 }

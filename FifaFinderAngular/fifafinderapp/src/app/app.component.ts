@@ -1,12 +1,5 @@
 
-import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { map, startWith, catchError } from 'rxjs/operators';
-import { BehaviorSubject, Observable, of } from 'rxjs';
-import { ApiResponse } from './interface/api-response';
-import { Page } from './interface/page';
-import { SpielerService } from './service/start.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',

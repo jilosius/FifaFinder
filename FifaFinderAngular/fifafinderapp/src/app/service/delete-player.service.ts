@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from "rxjs";
-import {FifaVersion} from "../interface/fifaversion";
 
+//Autor: Levi
+//does the communication with the backend related to the delete functionality
 @Injectable({
   providedIn: 'root'
 })
@@ -17,14 +17,6 @@ export class DeletePlayerService {
 
   public deletePlayerInFifaVersion(id: number, fifaVersion: number) {
     return this.http.delete(`${this.serverUrl}/deleteInFifaVersion?playerID=${id}&fifaVersion=${fifaVersion}`);
-  }
-
-  public countPlayerEntries(id: number){
-    return this.http.get<number>(`${this.serverUrl}/countUniquePlayerRecords?playerID=${id}`);
-  }
-
-  public listFifaVersions(){
-    return this.http.get<FifaVersion[]>(this.serverUrl+'/listVersions');
   }
 
 }

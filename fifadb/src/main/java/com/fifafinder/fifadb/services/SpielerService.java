@@ -166,15 +166,6 @@ public class SpielerService {
 
         }
 
-        public List<Spieler> findAllSpieler(){
-
-            return spielerRepository.findAll();
-
-        }
-
-        public Spieler updateSpieler(Spieler spieler){
-
-            return spielerRepository.save(spieler); }
 
     public void addPlayer(Spieler spieler) {
 
