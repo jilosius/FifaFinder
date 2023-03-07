@@ -38,7 +38,7 @@ public class SpielerController {
         return spielerService.getAllSpieler();
     }
 
-
+//@Aurthor wafi
 
     @GetMapping("/knownName/{knownName}")
     public Optional<spielerpageDTO> getSpielerByKnownName(@PathVariable("knownName") String knownName) {

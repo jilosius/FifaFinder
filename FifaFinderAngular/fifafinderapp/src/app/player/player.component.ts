@@ -11,9 +11,10 @@ import { switchMap, take } from 'rxjs/operators';
   templateUrl: './player.component.html',
   styleUrls: ['./player.component.css'],
 })
+//@Author wafi for page details
 export class PlayerComponent implements OnInit   {
- 
-  
+
+
   playername: String;
   chart: any;
   ngOnInit() {
@@ -21,17 +22,9 @@ export class PlayerComponent implements OnInit   {
       this.playername  = this.route.snapshot.paramMap.get('knownName');
       this.getSpielerByFullName(this.playername);
       this.chart = new CanvasJS.Chart('chartContainer', this.chartOptions);
-      
-      /*this.route.queryParams.subscribe(params => {
-      this.selectedOption = params['selectedOption'];
-      console.log('Selected option:', this.selectedOption);
-      if(this.selectedOption){this.playername=this.selectedOption;}
-      console.log(this.playername);
-      this.getSpielerByFullName(this.playername);
-      this.chart = new CanvasJS.Chart('chartContainer', this.chartOptions);
 
-    });*/
-    
+
+
 }
 
   playerId : number;
@@ -42,7 +35,7 @@ export class PlayerComponent implements OnInit   {
   pacDataPoints: DataPoint[]=[]
   map = new Map<string, number>();
 
-  constructor(private playsForService:PlaysForService,private route: ActivatedRoute,){ 
+  constructor(private playsForService:PlaysForService,private route: ActivatedRoute,){
     this.playername="L. Messi"
   }
   private getSpielerByFullName(name: String) {
@@ -56,21 +49,21 @@ export class PlayerComponent implements OnInit   {
 
       },
       (error:HttpErrorResponse)=>{alert(error.message);
-      });   
+      });
     }
 
   public getPlaysForByPlayerIDId(id:number):void{
     this.playsForService.getPlaysForByPlayerIDId(id).subscribe(
       (response:PlaysFor[])=>{
         this.Players=response;
-        console.log(this.Players); 
+        console.log(this.Players);
 
       },
       (error:HttpErrorResponse)=>{alert(error.message);
 
       }
-      );   
+      );
   }
-  
+
 
 }

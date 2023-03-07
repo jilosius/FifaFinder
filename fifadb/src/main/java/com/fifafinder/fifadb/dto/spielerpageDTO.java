@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-
+//@Author wafi
 public class spielerpageDTO {
     private Integer id;
 

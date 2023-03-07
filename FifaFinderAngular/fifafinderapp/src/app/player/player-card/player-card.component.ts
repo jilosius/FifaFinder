@@ -7,24 +7,25 @@ import { Mannschaften, PlaysFor, Spieler } from '../PlaysFor';
   templateUrl: './player-card.component.html',
   styleUrls: ['./player-card.component.css']
 })
+//@Author wafi
 export class PlayerCardComponent implements OnInit{
   constructor(private playsForService:PlaysForService){
-    
+
   };
-  ngOnInit() { (this.player.acceleration*0.45+this.player.sprintSpeed*0.55)
+  ngOnInit() {
          }
 
 
   @Input() player : PlaysFor;
   @Input()theplayer: Spieler;
-  
+
 
 
   public calculate_pace():number{
 
     let val=  Math.round(this.player.acceleration*0.5+this.player.sprintSpeed*0.55);
 
-    
+
     return val;
   }
   public  calculate_shouting():number{
@@ -32,8 +33,8 @@ export class PlayerCardComponent implements OnInit{
           +this.player.penalties*0.2+this.player.shotPower*0.05
           +this.player.shotPower*0.2+this.player.volleys*0.05)
            ;
-          
-           
+
+
            return val;
   }
   public  calculate_passing():number{
@@ -41,38 +42,38 @@ export class PlayerCardComponent implements OnInit{
           +this.player.curve*0.05+
           +this.player.shortPassing*0.5
     );
-    
-   
-    
+
+
+
     return val;
   }
   public  calculate_dribling():number{
     let val=  Math.round( this.player.agility*0.1+this.player.balance*0.05
           +this.player.reaction*0.05+this.player.ballControl*0.3
           +this.player.dribbling*0.5);
-          
-         
-          
+
+
+
           return val;
   }
   public  calculate_deffending():number{
     let val= Math.round(  this.player.intReputation*0.2+this.player.headingAccuracy*0.1
           +this.player.marking*0.3+this.player.slidingTackle*0.1
           +this.player.standingTackle*0.3);
-          
-       
-          
+
+
+
           return val;
   }
   public  calculate_physical():number{
     let val=  Math.round( this.player.aggression*0.2+this.player.jumping*0.1
           +this.player.stamina*0.3+this.player.strength*0.1);
-          
-        
-          
+
+
+
           return val;
   }
- 
- 
+
+
 
 }

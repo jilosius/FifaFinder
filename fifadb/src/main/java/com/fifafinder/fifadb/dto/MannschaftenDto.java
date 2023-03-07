@@ -9,6 +9,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+//@Author Wafi
 public class MannschaftenDto {
 
 
