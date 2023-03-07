@@ -39,6 +39,7 @@ public class PlaysForService {
         return playsForRepository.count();
     }
 
+    //Author: Enes
     public long countUniquePlayerRecords(int id){
         return playsForRepository.countById_PlayerID(id);
     }
@@ -46,6 +47,7 @@ public class PlaysForService {
         return playsForRepository.findAll();
     }
 
+    //Author: Jannik
     public SpielerDetailDTO getDetails(int playerId, int fifaVersion) {
         PlaysForId playsForId = new PlaysForId();
         playsForId.setPlayerID(playerId);
@@ -55,6 +57,7 @@ public class PlaysForService {
         return details;
     }
 
+    //Author: Jannik
     public void editDetails(PlaysForId playsForId, UpdateDTO updateDTO) {
         PlaysFor details = playsForRepository.findPlaysForById(playsForId);
         details.setHeight(updateDTO.getHeight());
@@ -115,6 +118,7 @@ public class PlaysForService {
         playsForRepository.save(details);
     }
 
+    //Author: Jannik
     public UpdateDTO getDetailsForEdit(PlaysForId playsForId) {
         PlaysFor playsFor = playsForRepository.findPlaysForById(playsForId);
         UpdateDTO details = new UpdateDTO(playsFor.getHeight(), playsFor.getClubPosition(), playsFor.getClubNumber(), playsFor.getNationalPosition(), playsFor.getNationalNumber(),
@@ -130,7 +134,7 @@ public class PlaysForService {
     }
 
 
-
+    //Author: Enes
     public void addPlayer(Spieler spieler, FifaVersion fifaversion,PlaysForId playsForId, Integer height, String clubPosition, Integer clubNumber, String nationalPosition,
                 Integer nationalNumber, String preferredFoot, Integer contractUntil, String onLoan, String nationalTeam, Integer age,
                 Integer weight, Integer overall, Integer potential, String bestPosition, String clubName, Long valueEUR, Long wage,
@@ -211,13 +215,14 @@ public class PlaysForService {
     }
 
 
-
+    //Author: Levi
     @Transactional
     public void deleteAllByPlayerID(int id) {
         playsForRepository.deleteAllById_PlayerID(id);
         spielerRepository.deleteById(id);
     }
 
+    //Author: Levi
     @Transactional
     public void deleteAllByPlayerIDAndFifaVersion(int id, int fifaVersion){
         playsForRepository.deleteAllById_PlayerIDAndId_FifaVersion(id, fifaVersion);
@@ -225,6 +230,8 @@ public class PlaysForService {
             spielerRepository.deleteById(id);
         }
     }
+
+    //Author: Levi
     public List<FifaVersion> listFifaVersions(){
         return fifaVersionRepository.findAll();
     }

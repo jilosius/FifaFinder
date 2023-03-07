@@ -46,6 +46,7 @@ public class SpielerService {
         spielerRepository.deleteById(id);
     }
 
+    //Author:Saif
     public Page<SpielerDTO> findByFullNameFiltered(String name,
                                                    int fifaVersion,
                                                    String clubName,
@@ -156,6 +157,7 @@ public class SpielerService {
     }
 
 
+    //Author:Saif
     public List<SpielerDTO> getSpielerToCompare(int player1Id, int player2Id, int player3Id, int player4Id, int player5Id, int fifaVersion){
         return spielerRepository.getSpielerToCompare(player1Id, player2Id,player3Id,player4Id,player5Id, fifaVersion);
     }
@@ -166,18 +168,10 @@ public class SpielerService {
 
         }
 
-
+    //Author:Enes
     public void addPlayer(Spieler spieler) {
 
         spieler.setFifaID(null);
         spielerRepository.save(spieler);
-    }
-
-    public Optional<Spieler> findSpieler() {
-        Optional<Spieler> spielerOptional = spielerRepository.findSpielerById(10000);
-        if(spielerOptional.isPresent())
-            return spielerOptional;
-        System.out.println("Spieler nicht gefunden!");
-        return null;
     }
 }

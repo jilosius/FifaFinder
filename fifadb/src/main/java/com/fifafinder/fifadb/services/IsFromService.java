@@ -7,6 +7,7 @@ import com.fifafinder.fifadb.repositories.IsFromRepository;
 import com.fifafinder.fifadb.entities.IsFromId;
 import org.springframework.stereotype.Service;
 
+//Author: Enes
 @Service
 public class IsFromService {
 

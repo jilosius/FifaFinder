@@ -14,6 +14,8 @@ import static java.time.LocalTime.now;
 import static java.util.Map.of;
 import static org.springframework.http.HttpStatus.OK;
 
+
+//Author:Saif,Enes,Levi,Jannik,Wafi
 @RestController
 @RequestMapping("/players")
 public class SpielerController {
@@ -36,6 +38,8 @@ public class SpielerController {
     }
 
 
+
+    //Author:Saif,Levi
     @GetMapping("/start/filtered")
     public ResponseEntity<HttpResponse> getSpieler(@RequestParam Optional<String> fullName,
                                                    @RequestParam Optional<Integer> fifaVersion,
@@ -250,13 +254,9 @@ public class SpielerController {
     {
         spielerService.addPlayer(spieler);
     }
+    
 
-    @GetMapping("/findTest")
-    public Optional<Spieler> findSpieler()
-    {
-        return spielerService.findSpieler();
-    }
-
+    //Author:Saif
     @GetMapping("/start/vergleich")
     public List<SpielerDTO> getSpielerToCompare(@RequestParam Optional<Integer> player1Id,
                                                 @RequestParam Optional<Integer> player2Id,

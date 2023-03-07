@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.ZoneId;
 import java.util.List;
 
+//Author: Saif,Levi,Enes,Jannik,Wafi
 @RestController
 @RequestMapping("/playsfor")
 public class PlaysForController {
@@ -49,11 +50,14 @@ public class PlaysForController {
         this.isFromService = isFromService;
     }
 
+
     @GetMapping("/count")
     public long count() {
         return playsForService.count();
     }
 
+
+    //Author: Levi
     @GetMapping("/countUniquePlayerRecords")
     public long countUniquePlayerRecords(@RequestParam int playerID){
         return playsForService.countUniquePlayerRecords(playerID);
@@ -63,6 +67,7 @@ public class PlaysForController {
         return playsForService.getAll();
     }
 
+    //Author:Jannik
     @GetMapping("/detailsof{name}in{fifaVersion}")
     public ResponseEntity<SpielerDetailDTO> getDetails(@PathVariable("name") String name, @PathVariable("fifaVersion") int fifaVersion) {
         Spieler spieler = spielerService.getSpieler(name);
@@ -70,6 +75,8 @@ public class PlaysForController {
         return ResponseEntity.ok().body(playsForService.getDetails(spielerId, fifaVersion));
     }
 
+
+    //Author:Jannik
     @PutMapping("/editdetailsof{playerId}in{fifaVersion}")
     public void editDetails(@PathVariable("playerId") int playerId, @PathVariable("fifaVersion") int fifaVersion, @RequestBody UpdateDTO updateDTO) {
         PlaysForId playsForId = new PlaysForId();
@@ -78,6 +85,8 @@ public class PlaysForController {
         playsForService.editDetails(playsForId, updateDTO);
     }
 
+
+    //Author: Jannik
     @GetMapping("/detailsforedit/playerid={playerId}/fifaversion={fifaVersion}")
     public UpdateDTO getDetailsForEdit(@PathVariable("playerId") int playerId, @PathVariable("fifaVersion") int fifaVersion) {
         PlaysForId playsForId = new PlaysForId();
@@ -87,6 +96,8 @@ public class PlaysForController {
     }
 
 
+
+    //Author:Enes
     @PostMapping("/add")
     public void addPlayer(@RequestBody AddPlaysForDTO playsForDTO )
     {
@@ -126,16 +137,22 @@ public class PlaysForController {
 
     }
 
+
+    //Author:Levi
     @DeleteMapping("/delete{playerID}")
     public void deleteAllbyId(@PathVariable("playerID") int playerID){
         playsForService.deleteAllByPlayerID(playerID);
     }
 
+
+    //Author:Levi
     @DeleteMapping("/deleteInFifaVersion")
     public void deleteAllByPlayerIDAndFifaVersion(@RequestParam int playerID, @RequestParam int fifaVersion){
         playsForService.deleteAllByPlayerIDAndFifaVersion(playerID, fifaVersion);
     }
 
+
+    //Author:Levi
     @GetMapping("/listVersions")
     public List<FifaVersion> listFifaVersions(){
         return playsForService.listFifaVersions();
