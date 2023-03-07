@@ -38,6 +38,7 @@ public class PlaysForController {
         return playsForService.count();
     }
 
+    //Author: Levi
     @GetMapping("/countUniquePlayerRecords")
     public long countUniquePlayerRecords(@RequestParam int playerID){
         return playsForService.countUniquePlayerRecords(playerID);
@@ -75,7 +76,7 @@ public class PlaysForController {
         return playsForService.getDetailsForEdit(playsForId);
     }
 
-
+    //Author: Enes
     @PostMapping("/add")
     public void addPlayer(@RequestBody AddPlaysForDTO playsForDTO )
     {

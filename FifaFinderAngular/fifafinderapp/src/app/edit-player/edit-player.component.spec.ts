@@ -140,7 +140,9 @@ describe('onEditPlayer/onAddPlayer', () => {
       imports: [  
         ReactiveFormsModule,
         MatFormFieldModule,
-        MatAutocompleteModule
+        MatAutocompleteModule,
+        MatInputModule,
+        BrowserAnimationsModule
       ],
       providers: [
         EditPlayerService,
@@ -149,23 +151,19 @@ describe('onEditPlayer/onAddPlayer', () => {
         HttpClientTestingModule,
         HttpClient,
         HttpHandler,
-        { provide: ActivatedRoute, useValue: {
-              snapshot:
-            {
-            url: ['fifafinder/:mode']
-             }}}
-      ]
+        { provide: ActivatedRoute, useValue: activatedRouteStub}
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
     })
 
     editPlayerServiceSpy = jasmine.createSpyObj('EditPlayerService', ['updatePlayerDetails']);
     fixture = TestBed.createComponent(EditPlayerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    spyOn(component, 'ngOnInit').and.stub();
   });
 
   it('should update the club name and call service.updatePlayerDetails(UpdateDto, playerId, fifaVersion)', () => {
-    spyOn(component, 'ngOnInit');
-    spyOn(component, 'isAddMode');
     const playerId = 1;
     const fifaVersion = 23;
     const dataInput: UpdateDto = {
@@ -229,7 +227,7 @@ describe('onEditPlayer/onAddPlayer', () => {
     const serviceCallData: UpdateDto = dataInput;
     serviceCallData.clubName = 'Paris-Saint Germain';
 
-    component.clubName.setValue('Paris-Saint Germain');
+    component.clubName.setValue(dataInput.clubName);
     component.playerId = playerId;
     component.fifaVersion = fifaVersion;
     component.onEditPlayer(dataInput);
