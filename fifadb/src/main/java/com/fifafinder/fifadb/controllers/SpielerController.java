@@ -254,7 +254,7 @@ public class SpielerController {
     {
         spielerService.addPlayer(spieler);
     }
-    
+
 
     //Author:Saif
     @GetMapping("/start/vergleich")

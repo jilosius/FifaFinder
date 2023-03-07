@@ -94,49 +94,15 @@ public class PlaysForController {
         playsForId.setFifaVersion(fifaVersion);
         return playsForService.getDetailsForEdit(playsForId);
     }
-
-
-
-    //Author:Enes
+    
+    // Author: Enes
     @PostMapping("/add")
     public void addPlayer(@RequestBody AddPlaysForDTO playsForDTO )
     {
-
         System.out.println(playsForDTO);
-        Spieler spieler = new Spieler();
-        spieler.setKnownName(playsForDTO.getKnownName());
-        spieler.setFullName(playsForDTO.getFullName());
-        spieler.setBirthDate(playsForDTO.getDateOfBirth().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-        spielerService.addPlayer(spieler);
-
-        FifaVersion fifaVersion;
-        fifaVersion =  fifaController.getVersionByID(playsForDTO.getFifaVersion());
-
-        Land land = landService.findByCountryName(playsForDTO.getNationalTeam());
-
-        IsFromId isFromId = new IsFromId();
-        isFromId.setPlayerID(spieler.getId());
-        isFromId.setCountryID(land.getId());
-
-        isFromService.saveIsFrom(isFromId,land,spieler);
-
-        PlaysForId playsForId = new PlaysForId();
-        playsForId.setFifaVersion(playsForDTO.getFifaVersion());
-        playsForId.setPlayerID(spieler.getId());
-
-        playsForService.addPlayer(spieler, fifaVersion,playsForId, playsForDTO.getHeight(), playsForDTO.getClubPosition(), playsForDTO.getClubNumber(), playsForDTO.getNationalPosition(), playsForDTO.getNationalNumber(),
-                playsForDTO.getPreferredFoot(), playsForDTO.getContractUntil(), playsForDTO.getOnLoan(), playsForDTO.getNationalTeam(), playsForDTO.getAge(), playsForDTO.getWeight(),
-                playsForDTO.getOverall(),playsForDTO.getPotential(),playsForDTO.getBestPosition(), playsForDTO.getClubName(), playsForDTO.getValueEUR(), playsForDTO.getWage(),
-                playsForDTO.getReleaseClause(),playsForDTO.getIntReputation(),playsForDTO.getWeakFoot(),playsForDTO.getSkillMoves(),playsForDTO.getCrossing(),playsForDTO.getFinishing(),
-                playsForDTO.getHeadingAccuracy(),playsForDTO.getShortPassing(),playsForDTO.getVolleys(),playsForDTO.getDribbling(),playsForDTO.getCurve(),playsForDTO.getFKAccuracy(),
-                playsForDTO.getLongPassing(), playsForDTO.getBallControl(),playsForDTO.getAcceleration(),playsForDTO.getBallControl(),playsForDTO.getAgility(),playsForDTO.getReaction(),
-                playsForDTO.getBalance(),playsForDTO.getShotPower(),playsForDTO.getJumping(), playsForDTO.getStamina(),playsForDTO.getStrength(),playsForDTO.getLongShots(),
-                playsForDTO.getAggression(),playsForDTO.getAggression(),playsForDTO.getPositioning(),playsForDTO.getVision(),playsForDTO.getPenalties(),playsForDTO.getComposure(),
-                playsForDTO.getMarking(),playsForDTO.getStandingTackle(),playsForDTO.getSlidingTackle(),playsForDTO.getGKDiving(),playsForDTO.getGKHandling(),playsForDTO.getGKKicking(),
-                playsForDTO.getGKPositioning(),playsForDTO.getGKReflexes(),playsForDTO.getPhotoUrl());
+        playsForService.addPlayer(playsForDTO);
 
     }
-
 
     //Author:Levi
     @DeleteMapping("/delete{playerID}")
