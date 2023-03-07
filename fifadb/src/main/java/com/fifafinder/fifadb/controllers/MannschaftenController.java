@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-//Author: Levi, Enes
+//Author: Levi, Enes , wafi
 @RestController
 @RequestMapping("/clubs")
 public class MannschaftenController {

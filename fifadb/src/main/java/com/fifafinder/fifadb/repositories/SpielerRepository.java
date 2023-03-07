@@ -123,7 +123,7 @@ public interface SpielerRepository extends JpaRepository<Spieler, Integer> {
     Spieler findById(int id);
     Spieler findSpielerByFullName(String fullName);
 
-
+    //@Author Wafi
  @Query("SELECT NEW com.fifafinder.fifadb.dto.spielerpageDTO(s.id, s.fifaID, s.knownName, s.fullName,s.birthDate, l.countryName, l.flag) " +
             "FROM Spieler s " +
             "JOIN IsFrom f ON s.id = f.id.playerID " +

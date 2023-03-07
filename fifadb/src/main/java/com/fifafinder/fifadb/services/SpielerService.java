@@ -176,7 +176,7 @@ public class SpielerService {
         spieler.setFifaID(null);
         spielerRepository.save(spieler);
     }
-
+    //@Author Wafi
     public Optional<Spieler> findSpieler() {
         Optional<Spieler> spielerOptional = spielerRepository.findSpielerById(10000);
         if(spielerOptional.isPresent())
@@ -191,8 +191,7 @@ public class SpielerService {
     public Optional<Spieler> getSpielerById(Integer id) {
         return spielerRepository.findById(id);
     }
-
-
+    //@ Author , this is for app search bar but we changed it
     public Optional<Spieler[]> findSpielerByFullNameContainingOrderByFullNameAsc(String n) {
         return spielerRepository.findSpielerByFullNameContainingAndPlaysFors_FifaVersionOrderByOverallAsc(n);
 

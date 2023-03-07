@@ -15,15 +15,15 @@ import java.util.List;
 @Repository
 public interface PlaysForRepository extends JpaRepository<PlaysFor, PlaysForId> {
     List<PlaysFor> findByFifaVersion(FifaVersion fifaVersion);
-    Optional<PlaysFor[]> findPlaysForByPlayerIDId(Integer playerID);
 
     PlaysFor findByPlayerIDAndFifaVersion(Spieler spieler, FifaVersion fifaVersion);
     PlaysFor findPlaysForById(PlaysForId playsForId);
     void deleteAllById_PlayerID(int id);
     void deleteAllById_PlayerIDAndId_FifaVersion(int id, int fifaVersion);
     int countById_PlayerID(int id);
-
+    //@Author wafi
     Optional<PlaysFor> findPlaysForByFifaVersionIdAndPlayerIDId(Integer FifaVersion,Integer playerID);
+    Optional<PlaysFor[]> findPlaysForByPlayerIDId(Integer playerID);
 
 
 
